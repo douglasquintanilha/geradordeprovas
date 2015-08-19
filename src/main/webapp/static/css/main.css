@@ -1,0 +1,13 @@
+#logo-header{
+	width: 192px;
+	padding: 1.4em 20px;
+	
+}
+
+header{
+	border-bottom: 2px solid black;
+}
+
+.container{
+	padding: 20px;
+}

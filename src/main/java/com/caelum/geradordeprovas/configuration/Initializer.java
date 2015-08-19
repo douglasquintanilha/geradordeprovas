@@ -6,12 +6,12 @@ public class Initializer extends AbstractAnnotationConfigDispatcherServletInitia
 	 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[] { Configurator.class };
+        return null;
     }
   
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return null;
+    	return new Class[] { Configurator.class,JpaConfigurator.class };
     }
   
     @Override
