@@ -33,5 +33,6 @@ pageEncoding="UTF-8"%>
 			<label for="alternativaE">Alternativa E:</label>
 			<input type="text" name="alternativaE" class="form-control" id="alternativaE">
 		</div>
+		<button type="submit" class="btn btn-default">Cadastrar</button
 	</form>		
 	<c:import url="footer.jsp"></c:import>
