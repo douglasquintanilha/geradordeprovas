@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 public class Questao {
@@ -13,10 +13,19 @@ public class Questao {
 	@GeneratedValue
 	private Long Id;
 	
-	@NotEmpty
+	@NotBlank
 	private String titulo;
 
-	@NotEmpty
-	private String alternativaCorreta;
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public Long getId() {
+		return Id;
+	}
 }
 

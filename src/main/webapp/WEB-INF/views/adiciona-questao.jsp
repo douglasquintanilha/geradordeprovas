@@ -2,37 +2,64 @@
 pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-	<c:import url="header.jsp"></c:import>
-	<form action="adiciona">
-		<div class="form-group">
-			<label for="titulo">Titulo da Questão:</label>
-			<input type="text" name="titulo" class="form-control" id="titulo">
-		</div>
+<c:import url="header.jsp"></c:import>
+<form action="salva-questao" method="POST">
+	<div class="form-group">
+		<label for="titulo">Titulo da Questão:</label>
+		<input type="text" name="titulo" class="form-control" id="titulo">
+	</div>
 
-		<div class ="form-group">
-			<label for="alternativaE">Alternativa A:</label>
-			<input type="text" name="alternativaA" class="form-control" id="alternativaA">
+	<div class="form-group">
+		<label for="alternativa">Alternativa A:</label>
+		<div class="input-group">
+			<span class="input-group-addon">
+				<input type="radio" name="alternativaCorreta" value="0">
+			</span>
+			<input type="text" name="alternativa" class="form-control" id="alternativa">
 		</div>
+	</div>			
 
-		<div class="form-group">
-			<label for="alternativaE">Alternativa B:</label>
-			<input type="text" name="alternativaB" class="form-control" id="alternativaB">
+	<div class="form-group">
+		<label for="alternativa">Alternativa B:</label>
+		<div class="input-group">
+			<span class="input-group-addon">
+				<input type="radio" name="alternativaCorreta" value="1">
+			</span>
+			<input type="text" name="alternativa" class="form-control" id="alternativa">
 		</div>
+	</div>			
 
-		<div class="form-group">
-			<label for="alternativaE">Alternativa C:</label>
-			<input type="text" name="alternativaC" class="form-control" id="alternativaC">
-		</div>			
-
-		<div class="form-group">	
-			<label for="alternativaE">Alternativa D:</label>
-			<input type="text" name="alternativaD" class="form-control" id="alternativaD">
+	<div class="form-group">
+		<label for="alternativa">Alternativa C:</label>
+		<div class="input-group">
+			<span class="input-group-addon">
+				<input type="radio" name="alternativaCorreta" value="2">
+			</span>
+			<input type="text" name="alternativa" class="form-control" id="alternativa">
 		</div>
+	</div>			
 
-		<div class="form-group">	
-			<label for="alternativaE">Alternativa E:</label>
-			<input type="text" name="alternativaE" class="form-control" id="alternativaE">
+	<div class="form-group">
+		<label for="alternativa">Alternativa D:</label>
+		<div class="input-group">
+			<span class="input-group-addon">
+				<input type="radio" name="alternativaCorreta" value="3">
+			</span>
+			<input type="text" name="alternativa" class="form-control" id="alternativa">
 		</div>
-		<button type="submit" class="btn btn-default">Cadastrar</button
-	</form>		
-	<c:import url="footer.jsp"></c:import>
+	</div>	
+
+	<div class="form-group">
+		<label for="alternativa">Alternativa E:</label>
+		<div class="input-group">
+			<span class="input-group-addon">
+				<input type="radio" name="alternativaCorreta" value="4">
+			</span>
+			<input type="text" name="alternativa" class="form-control" id="alternativa">
+		</div>
+	</div>			
+
+	<button type="submit" class="btn btn-default">Adicionar</button>
+</form>		
+<c:import url="footer.jsp"></c:import>
+

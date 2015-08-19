@@ -1,12 +1,19 @@
 package com.caelum.geradordeprovas.controllers;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
+
+
+
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.caelum.geradordeprovas.DAO.AlternativaDao;
 import com.caelum.geradordeprovas.DAO.QuestaoDao;
 import com.caelum.geradordeprovas.models.Alternativa;
 import com.caelum.geradordeprovas.models.Questao;
@@ -17,20 +24,34 @@ public class QuestoesController {
 	@Autowired
 	private QuestaoDao questaoDao;
 	
-	
-	@PersistenceContext
-	EntityManager em;
-	
+	@Autowired
+	private AlternativaDao alternativaDao;
+
 	
 	@RequestMapping("adiciona-questao")
-	public String adiciona(){
+	public String mostraAdicionaQuestaoForm(){
 		return "adiciona-questao";
 	}
 	
-	
-	@RequestMapping("questoes")
-	public String salva(Questao questao, Alternativa alternativa){
-		return "questoes/ok/";
+	@RequestMapping("salva-questao")
+	@Transactional(propagation=Propagation.REQUIRED)
+	public String salva(Questao questao,@RequestParam("alternativa") ArrayList<Alternativa> alternativa,@RequestParam("alternativaCorreta") String alternativaCorreta){
+		questaoDao.save(questao);
+		
+		int alternativaCorretaInt = Integer.parseInt(alternativaCorreta);
+		for (int i = 0; i < 5; i++) {
+			if(alternativaCorretaInt == i){
+				alternativa.get(i).setAlternativaCorreta(true);
+				alternativa.get(i).setQuestao(questao);
+				alternativaDao.save(alternativa.get(i));
+				
+			}else{
+				alternativa.get(i).setQuestao(questao);
+				alternativaDao.save(alternativa.get(i));
+			}
+		}
+		
+		return "ok";
 	}
 	
 }
