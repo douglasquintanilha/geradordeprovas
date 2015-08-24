@@ -1,7 +1,7 @@
 package com.caelum.geradordeprovas.models;
 
-import java.util.List;
 
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,7 +15,7 @@ public class Questao {
 	@Id
 	@GeneratedValue
 	private Long Id;
-	
+
 	@NotBlank
 	private String titulo;
 	
@@ -30,18 +30,6 @@ public class Questao {
 		return alternativa;
 	}
 
-	public void setAlternativa(List<String> alternativa) {
-		this.alternativa = alternativa;
-	}
-
-	public String getAlternativaCorreta() {
-		return alternativaCorreta;
-	}
-
-	public void setAlternativaCorreta(String alternativaCorreta) {
-		this.alternativaCorreta = alternativaCorreta;
-	}
-
 	public String getTitulo() {
 		return titulo;
 	}
@@ -54,4 +42,3 @@ public class Questao {
 		return Id;
 	}
 }
-
