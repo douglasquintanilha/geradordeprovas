@@ -16,7 +16,7 @@ public class Questao {
 
 	@Id
 	@GeneratedValue
-	private Long Id;
+	private Long id;
 
 	@NotBlank
 	private String titulo;
@@ -55,6 +55,6 @@ public class Questao {
 	}
 
 	public Long getId() {
-		return Id;
+		return id;
 	}
 }
