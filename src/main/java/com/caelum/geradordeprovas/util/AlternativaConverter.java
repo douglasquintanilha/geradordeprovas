@@ -12,7 +12,6 @@ public class AlternativaConverter implements
 	@Override
 	public ArrayList<Alternativa> convert(String[] alternativas) {
 		ArrayList<Alternativa> alternativasList = new ArrayList<>();
-		System.out.println("Silvio Gatao");
 		for (String alternativa : alternativas) {
 			Alternativa novaAlternativa = new Alternativa();
 			novaAlternativa.setDescricao(alternativa);
