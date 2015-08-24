@@ -33,9 +33,11 @@ public class QuestoesController {
 	}
 
 	@RequestMapping("salva-questao")
-	@Transactional(propagation = Propagation.REQUIRED)
-	public String salva(@ModelAttribute("questao") Questao questao) {
-		
+	@Transactional()
+	public String salva(@ModelAttribute("questao") @Valid Questao questao, BindingResult result) {
+		if(result.hasErrors()){
+			return "adiciona-questao";
+		}
 		
 		return "ok";
 	}
