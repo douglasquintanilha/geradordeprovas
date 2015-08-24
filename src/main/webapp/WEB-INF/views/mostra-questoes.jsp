@@ -8,13 +8,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<table>
-		<c:forEach items="${listaQuestoes}" var="questao">
-			<tr>
-				<td>${questao.id}</td>
-				<td>${questao.titulo}</td>
-			</tr>
+	<c:forEach items="${listaQuestoes}" var="questao">
+				${questao.id} ${questao.titulo} <br />
+		<c:forEach items="${listaAlternativas}" var="alternativa">
+				${alternativa.descricao}
+				<br />
 		</c:forEach>
-	</table>
+		<br />
+	</c:forEach>
 </body>
 </html>
