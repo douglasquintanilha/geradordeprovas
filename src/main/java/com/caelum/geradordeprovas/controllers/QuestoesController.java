@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -27,38 +28,15 @@ public class QuestoesController {
 	private AlternativaDao alternativaDao;
 
 	@RequestMapping("adiciona-questao")
-	public String mostraAdicionaQuestaoForm() {
+	public String mostraAdicionaQuestaoForm(Questao questao) {
 		return "adiciona-questao";
 	}
 
 	@RequestMapping("salva-questao")
 	@Transactional(propagation = Propagation.REQUIRED)
-	public String salva(
-			@Valid Questao questao,
-			BindingResult result,
-			@RequestParam("alternativa") ArrayList<Alternativa> alternativa,
-			@RequestParam("alternativaCorreta") String alternativaCorreta) {
+	public String salva(@ModelAttribute("questao") Questao questao) {
 		
-		 if(result.hasErrors()) {
-			 System.out.println("Entrou");
-		      return "adiciona-questao";
-		    } 
-
-		questaoDao.save(questao);
-
-		int alternativaCorretaInt = Integer.parseInt(alternativaCorreta);
-		for (int i = 0; i < 5; i++) {
-			if (alternativaCorretaInt == i) {
-				alternativa.get(i).setAlternativaCorreta(true);
-				alternativa.get(i).setQuestao(questao);
-				alternativaDao.save(alternativa.get(i));
-
-			} else {
-				alternativa.get(i).setQuestao(questao);
-				alternativaDao.save(alternativa.get(i));
-			}
-		}
-
+		
 		return "ok";
 	}
 
