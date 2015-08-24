@@ -1,8 +1,11 @@
 package com.caelum.geradordeprovas.models;
 
+
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -15,6 +18,17 @@ public class Questao {
 
 	@NotBlank
 	private String titulo;
+	
+	@Transient
+	private List<String> alternativa;
+
+	@Transient
+	private String alternativaCorreta;
+	
+
+	public List<String> getAlternativa() {
+		return alternativa;
+	}
 
 	public String getTitulo() {
 		return titulo;
