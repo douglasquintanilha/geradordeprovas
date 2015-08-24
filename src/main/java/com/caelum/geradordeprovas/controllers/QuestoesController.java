@@ -1,6 +1,7 @@
 package com.caelum.geradordeprovas.controllers;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.caelum.geradordeprovas.DAO.AlternativaDao;
 import com.caelum.geradordeprovas.DAO.QuestaoDao;
@@ -26,6 +28,18 @@ public class QuestoesController {
 	@Autowired
 	private AlternativaDao alternativaDao;
 
+	@RequestMapping("mostra-questoes")
+	public ModelAndView mostraQuestoes() {
+
+		List<Questao> questoes = questaoDao.list();
+		List<Alternativa> alternativas = alternativaDao.list();
+
+		ModelAndView mv = new ModelAndView("mostra-questoes");
+		mv.addObject("listaQuestoes", questoes);
+		mv.addObject("listaAlternativas", alternativas);
+		return mv;
+	}
+
 	@RequestMapping("adiciona-questao")
 	public String mostraAdicionaQuestaoForm() {
 		return "adiciona-questao";
@@ -33,16 +47,14 @@ public class QuestoesController {
 
 	@RequestMapping("salva-questao")
 	@Transactional(propagation = Propagation.REQUIRED)
-	public String salva(
-			@Valid Questao questao,
-			BindingResult result,
+	public String salva(@Valid Questao questao, BindingResult result,
 			@RequestParam("alternativa") ArrayList<Alternativa> alternativa,
 			@RequestParam("alternativaCorreta") String alternativaCorreta) {
-		
-		 if(result.hasErrors()) {
-			 System.out.println("Entrou");
-		      return "adiciona-questao";
-		    } 
+
+		if (result.hasErrors()) {
+			System.out.println("Entrou");
+			return "adiciona-questao";
+		}
 
 		questaoDao.save(questao);
 
