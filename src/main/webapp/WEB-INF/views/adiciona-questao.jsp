@@ -19,7 +19,8 @@ pageEncoding="UTF-8"%>
 			<span class="input-group-addon">
 				<form:radiobutton path="alternativaCorreta" value="0"/>
 			</span>
-			<form:input path="alternativa" cssClass="form-control" id="alternativa"/>
+			<form:input path="alternativa" cssClass="form-control" id="alternativa1"/>
+			<form:errors path="alternativa" cssClass="alert alert-danger" element="div"/>
 		</div>
 	</div>
  
@@ -29,7 +30,41 @@ pageEncoding="UTF-8"%>
 			<span class="input-group-addon">
 				<form:radiobutton path="alternativaCorreta" value="1"/>
 			</span>
-			<form:input path="alternativa" cssClass="form-control" id="alternativa"/>
+			<form:input path="alternativa" cssClass="form-control" id="alternativa2"/>
+			<form:errors path="alternativa" cssClass="alert alert-danger" element="div"/>
+		</div>
+	</div>			
+	
+	<div class="form-group">
+		<label for="alternativa">Alternativa C:</label>
+		<div class="input-group">
+			<span class="input-group-addon">
+				<form:radiobutton path="alternativaCorreta" value="2"/>
+			</span>
+			<form:input path="alternativa" cssClass="form-control" id="alternativa3"/>
+			<form:errors path="alternativa" cssClass="alert alert-danger" element="div"/>
+		</div>
+	</div>			
+	
+	<div class="form-group">
+		<label for="alternativa">Alternativa D:</label>
+		<div class="input-group">
+			<span class="input-group-addon">
+				<form:radiobutton path="alternativaCorreta" value="3"/>
+			</span>
+			<form:input path="alternativa" cssClass="form-control" id="alternativa4"/>
+			<form:errors path="alternativa" cssClass="alert alert-danger" element="div"/>
+		</div>
+	</div>			
+	
+	<div class="form-group">
+		<label for="alternativa">Alternativa E:</label>
+		<div class="input-group">
+			<span class="input-group-addon">
+				<form:radiobutton path="alternativaCorreta" value="4"/>
+			</span>
+			<form:input path="alternativa" cssClass="form-control" id="alternativa5"/>
+			<form:errors path="alternativa" cssClass="alert alert-danger" element="div"/>
 		</div>
 	</div>			
 	
