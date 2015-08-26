@@ -7,6 +7,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,8 +47,10 @@ public class QuestoesController {
 
 	@RequestMapping("salva-questao")
 	@Transactional()
-	public String salva(@ModelAttribute("questao") @Valid Questao questao, BindingResult result) {
+	public String salva(@ModelAttribute("questao") @Valid Questao questao, BindingResult result,Model model) {
 		if(result.hasErrors()){
+			
+			model.addAttribute("alternativa", questao.getAlternativa());
 			return "adiciona-questao";
 		}
 		return "ok";
