@@ -17,8 +17,7 @@ public class Alternativa {
 	@NotBlank
 	private String descricao;
 	
-	
-	private boolean alternativaCorreta = false;
+	private boolean alternativaCorreta;
 	
 	@ManyToOne()
 	private Questao questao;
