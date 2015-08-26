@@ -28,18 +28,6 @@ public class QuestoesController {
 	@Autowired
 	private AlternativaDao alternativaDao;
 
-	@RequestMapping("mostra-questoes")
-	public ModelAndView mostraQuestoes() {
-
-		List<Questao> questoes = questaoDao.list();
-		List<Alternativa> alternativas = alternativaDao.list();
-
-		ModelAndView mv = new ModelAndView("mostra-questoes");
-		mv.addObject("listaQuestoes", questoes);
-		mv.addObject("listaAlternativas", alternativas);
-		return mv;
-	}
-
 	@RequestMapping("adiciona-questao")
 	public String mostraAdicionaQuestaoForm(Questao questao) {
 		return "adiciona-questao";

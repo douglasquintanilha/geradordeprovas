@@ -1,8 +1,5 @@
 package com.caelum.geradordeprovas.util;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.core.convert.converter.Converter;
 
 import com.caelum.geradordeprovas.models.Alternativa;
