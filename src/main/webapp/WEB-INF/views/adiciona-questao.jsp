@@ -27,7 +27,7 @@ ${requestScope['org.springframework.validation.BindingResult.questao'].allErrors
 				<input type="radio" name="alternativaCorreta" value="0"/>
 			</span>
 			<input type="text" value="${alternativa[0].descricao}" class="form-control" name="alternativa">
-		</div>
+		</div>		
 	</div>			
 
 	<div class="form-group">

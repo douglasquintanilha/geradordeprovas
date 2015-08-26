@@ -49,7 +49,6 @@ public class QuestoesController {
 	@Transactional()
 	public String salva(@ModelAttribute("questao") @Valid Questao questao, BindingResult result,Model model) {
 		if(result.hasErrors()){
-			
 			model.addAttribute("alternativa", questao.getAlternativa());
 			return "adiciona-questao";
 		}
