@@ -7,8 +7,6 @@ pageEncoding="UTF-8"%>
 <c:url var="urlPost" value='salva-questao'/>
 
 
-${requestScope['org.springframework.validation.BindingResult.questao'].allErrors}
-
 <form:form action="${urlPost}" method="POST" commandName="questao">
 
 
@@ -18,7 +16,7 @@ ${requestScope['org.springframework.validation.BindingResult.questao'].allErrors
 		<form:errors path="titulo" cssClass="alert alert-danger" element="div"/>
 		<input type="text" value="${questao.titulo}" name="titulo" class="form-control" id="titulo" />
 	</div>
-
+	<span>Escolha qual será a alternativa correta:</span>
 	<div class="form-group">
 		<label for="alternativa">Alternativa A:</label>
 		<form:errors path="alternativa[0].descricao" cssClass="alert alert-danger" element="div"/>
@@ -27,7 +25,7 @@ ${requestScope['org.springframework.validation.BindingResult.questao'].allErrors
 				<input type="radio" name="alternativaCorreta" value="0"/>
 			</span>
 			<input type="text" value="${alternativa[0].descricao}" class="form-control" name="alternativa">
-		</div>
+		</div>		
 	</div>			
 
 	<div class="form-group">

@@ -27,16 +27,31 @@ public class QuestoesController {
 	public String mostraAdicionaQuestaoForm(Questao questao) {
 		return "adiciona-questao";
 	}
+	
+	@RequestMapping("ok")
+	public String ok(){
+		return "ok";
+	}
 
 	@RequestMapping("salva-questao")
 	@Transactional()
 	public String salva(@ModelAttribute("questao") @Valid Questao questao, BindingResult result,Model model) {
 		if(result.hasErrors()){
-			
 			model.addAttribute("alternativa", questao.getAlternativa());
 			return "adiciona-questao";
 		}
-		return "ok";
+		questaoDao.save(questao);
+		int alternativaCorreta = Integer.parseInt(questao.getAlternativaCorreta());
+		List<Alternativa> alternativas = questao.getAlternativa();
+		
+		for (int i = 0; i < alternativas.size(); i++) {
+			alternativas.get(i).setQuestao(questao);
+			if( i == alternativaCorreta){
+				alternativas.get(i).setAlternativaCorreta(true);
+			}
+			alternativaDao.save(alternativas.get(i));
+		}
+		return "redirect:ok";
 	}
 
 }
