@@ -9,25 +9,25 @@
 <title>Mostra todas as Questões</title>
 </head>
 <body>
-	<%-- <c:url var="urlPost" value='salva-questao'/> --%>
-	<form:form action="${correcao-prova}" method="POST"
+	<c:url var="urlPost" value='correcao-prova'/>
+	<form:form action="correcao-prova" method="GET"
 		commandName="questao">
 		<c:forEach items="${listaQuestoes}" var="questao" varStatus="i">
 				${questao.id} ${questao.titulo} <br />
 				<%-- agr vai acessar a lista de alternativas, index/index. Multiplica por 5 e depois vai somando, pra pegar a resposta correspondente a questao--%>
-				<input type="radio" name="alternativaQuestao+${i.index}">
+			<input type="radio" name="alternativas[${i.index}]" value="${listaAlternativas[i.index*5].descricao}">
 				${listaAlternativas[i.index*5].descricao}<br />
-				<input type="radio" name="alternativaQuestao+${i.index}">
+				<input type="radio" name="alternativas[${i.index}]" value="${listaAlternativas[i.index*5+1].descricao}">
 				${listaAlternativas[i.index*5+1].descricao}<br />
-				<input type="radio" name="alternativaQuestao+${i.index}">
+				<input type="radio" name="alternativas[${i.index}]" value="${listaAlternativas[i.index*5+2].descricao}">
 				${listaAlternativas[i.index*5+2].descricao}<br />
-				<input type="radio" name="alternativaQuestao+${i.index}">
+				<input type="radio" name="alternativas[${i.index}]" value="${listaAlternativas[i.index*5+3].descricao}">
 				${listaAlternativas[i.index*5+3].descricao}<br />
-				<input type="radio" name="alternativaQuestao+${i.index}">
+				<input type="radio" name="alternativas[${i.index}]" value="${listaAlternativas[i.index*5+4].descricao}">
 				${listaAlternativas[i.index*5+4].descricao}<br />
 		<br />
 		</c:forEach>
-		<button type="submit" class="btn btn-default">Adicionar</button>
+		<button type="submit" class="btn btn-default">Enviar</button>
 	</form:form>
 </body>
 </html>
