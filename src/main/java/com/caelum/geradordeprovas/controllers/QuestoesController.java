@@ -8,11 +8,9 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.caelum.geradordeprovas.DAO.AlternativaDao;
 import com.caelum.geradordeprovas.DAO.QuestaoDao;
@@ -32,6 +30,11 @@ public class QuestoesController {
 	public String mostraAdicionaQuestaoForm(Questao questao) {
 		return "adiciona-questao";
 	}
+	
+	@RequestMapping("ok")
+	public String ok(){
+		return "ok";
+	}
 
 	@RequestMapping("salva-questao")
 	@Transactional()
@@ -40,7 +43,18 @@ public class QuestoesController {
 			model.addAttribute("alternativa", questao.getAlternativa());
 			return "adiciona-questao";
 		}
-		return "ok";
+		questaoDao.save(questao);
+		int alternativaCorreta = Integer.parseInt(questao.getAlternativaCorreta());
+		List<Alternativa> alternativas = questao.getAlternativa();
+		
+		for (int i = 0; i < alternativas.size(); i++) {
+			alternativas.get(i).setQuestao(questao);
+			if( i == alternativaCorreta){
+				alternativas.get(i).setAlternativaCorreta(true);
+			}
+			alternativaDao.save(alternativas.get(i));
+		}
+		return "redirect:ok";
 	}
 
 }

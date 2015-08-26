@@ -12,7 +12,7 @@ public class Alternativa {
 
 	@Id
 	@GeneratedValue
-	private Long Id;
+	private Long id;
 	
 	@NotBlank
 	private String descricao;
@@ -31,7 +31,7 @@ public class Alternativa {
 	}
 
 	public Long getId() {
-		return Id;
+		return id;
 	}
 
 	public boolean isAlternativaCorreta() {
