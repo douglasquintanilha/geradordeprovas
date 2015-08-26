@@ -7,8 +7,6 @@ pageEncoding="UTF-8"%>
 <c:url var="urlPost" value='salva-questao'/>
 
 
-${requestScope['org.springframework.validation.BindingResult.questao'].allErrors}
-
 <form:form action="${urlPost}" method="POST" commandName="questao">
 
 

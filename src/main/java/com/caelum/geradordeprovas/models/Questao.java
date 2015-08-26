@@ -26,7 +26,7 @@ public class Questao {
 	@Transient
 	private List<Alternativa> alternativa;
 
-	@NotBlank( message = "Por favor preencha uma alternativa")
+	@NotBlank( message = "Por favor assinale qual é a alternativa correta")
 	@Transient
 	private String alternativaCorreta;
 	
