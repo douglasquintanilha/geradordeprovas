@@ -12,9 +12,9 @@ pageEncoding="UTF-8"%>
 
 	</head>
 	<body>
+		<c:import url="header.jsp"></c:import>
 		<div class="container">	
 
-			<c:import url="header.jsp"></c:import>
 			
 			<c:url var="urlPost" value='salva-questao' />
 			<form:form action="${urlPost}" method="POST" commandName="questao">
