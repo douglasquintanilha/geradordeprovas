@@ -12,14 +12,14 @@
 
 	</head>
 	<body>
+		<c:import url="header.jsp"></c:import>
 		<div class="container">	
-			<c:import url="header.jsp"></c:import>
 
 			<h1>Questão adicionada com sucesso!</h1>
 			<a href="/GeradorDeProvas/adiciona-questao">Adicionar nova questão</a>
 
-			<c:import url="footer.jsp"></c:import>
 		</div>
+		<c:import url="footer.jsp"></c:import>
 	</body>
 </html>	
 			

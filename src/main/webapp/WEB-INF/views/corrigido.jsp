@@ -9,13 +9,16 @@
 <title>Resultado da Prova</title>
 </head>
 <body>
+	<c:import url="header.jsp"></c:import>
+	<div class="container">
+		<h1>Sua nota foi:</h1>
+		<h3>${nota}/${total}</h3>
 
-	<h1>Sua nota foi:</h1>
-	<h3>${nota}/${total}</h3>
-
-	<h3>Você errou a(s) questão(ões):</h3>
-	<c:forEach items="${erradas}" var="errou">
-			${errou.questao.titulo}
+		<h3>Você errou a(s) questão(ões):</h3>
+		<c:forEach items="${erradas}" var="errou">
+				${errou.questao.titulo}
 		</c:forEach>
+	</div>
+	<c:import url="footer.jsp"></c:import>
 </body>
 </html>
