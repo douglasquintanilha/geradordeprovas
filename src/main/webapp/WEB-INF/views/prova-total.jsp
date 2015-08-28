@@ -10,7 +10,7 @@
 </head>
 <body>
 	<c:url var="urlPost" value='correcao-prova' />
-	<form:form action="correcao-prova" method="GET" commandName="resposta">
+	<form:form action="correcao-prova" method="POST" commandName="resposta">
 		<c:forEach items="${listaQuestoes}" var="questao" varStatus="i">
 				${questao.id} ${questao.titulo} <br />
 			<%-- agr vai acessar a lista de alternativas, index/index. Multiplica por 5 e depois vai somando, pra pegar a resposta correspondente a questao--%>
