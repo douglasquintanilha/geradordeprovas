@@ -23,12 +23,12 @@ pageEncoding="UTF-8"%>
 				<div class="form-group">
 					<label for="titulo">Titulo da Questão:</label>
 					<form:errors path="titulo" cssClass="alert alert-danger" element="div" />
-					<input type="text" value="${questao.titulo}" name="titulo"class="form-control" id="titulo" />
+					<input type="text" value="${questao.titulo}" name="titulo" class="form-control" id="titulo" />
 				</div>
 
 				<div class="form-group">
 					<label for="tags">Escolha as tags da questão:</label> 
-					<input type="text" name="tags" id="tags">
+					<input type="text" name="tags" id="tags" class="form-control">
 				</div>
 
 				<span>Escolha qual será a alternativa correta:</span>
@@ -97,9 +97,9 @@ pageEncoding="UTF-8"%>
 
 			</form:form>
 
-			<script src="jquery-2.1.4.min.js"></script>
-			<script src="jquery-ui.min.js"></script>
-			<script src="autocomplete-tags.js"></script>
+			<script src="static/js/jquery-2.1.4.min.js"></script>
+			<script src="static/js/jquery-ui.min.js"></script>
+			<script src="static/js/autocomplete-tags.js"></script>
 
 			<c:import url="footer.jsp"></c:import>
 
