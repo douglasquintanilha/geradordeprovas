@@ -15,12 +15,12 @@
 	<div class="container">
 		<h1>Sua nota foi:</h1>
 		<h3>${nota}/${total}</h3>
-		<c:if test="${erradas eq null}">
+<%-- 		<c:if test="${erradas eq null}"> --%>
 			<h3>Você errou a(s) questão(ões):</h3>
 			<c:forEach items="${erradas}" var="errou">
 				${errou.questao.titulo}
 		</c:forEach>
-		</c:if>
+<%-- 		</c:if> --%>
 	</div>
 	<c:import url="footer.jsp"></c:import>
 </body>
