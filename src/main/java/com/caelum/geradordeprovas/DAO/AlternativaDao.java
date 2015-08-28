@@ -19,7 +19,7 @@ public class AlternativaDao {
 		manager.persist(alternativa);
 	}
 
-	public Alternativa getAlternativaPorId(int id){
+	public Alternativa getAlternativaPorId(long id){
 		return manager.find(Alternativa.class, id);
 	}
 	

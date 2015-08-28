@@ -1,5 +1,7 @@
 package com.caelum.geradordeprovas.controllers;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.caelum.geradordeprovas.DAO.AlternativaDao;
 import com.caelum.geradordeprovas.DAO.QuestaoDao;
+import com.caelum.geradordeprovas.models.Alternativa;
 import com.caelum.geradordeprovas.models.Questao;
 
 @Controller

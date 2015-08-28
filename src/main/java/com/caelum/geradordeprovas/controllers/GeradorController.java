@@ -5,14 +5,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.caelum.geradordeprovas.DAO.AlternativaDao;
 import com.caelum.geradordeprovas.DAO.QuestaoDao;
 import com.caelum.geradordeprovas.models.Alternativa;
 import com.caelum.geradordeprovas.models.Questao;
+import com.caelum.geradordeprovas.models.Resposta;
 
 @Controller
 public class GeradorController {
@@ -22,7 +23,7 @@ public class GeradorController {
 
 	@Autowired
 	private AlternativaDao alternativaDao;
-	
+
 	@RequestMapping("prova-total")
 	public ModelAndView mostraQuestoes() {
 
@@ -36,9 +37,30 @@ public class GeradorController {
 	}
 
 	@RequestMapping("correcao-prova")
-	public String corrigeProvas(@RequestParam(value="alternativas", required=false) String[] alternativas){
-		System.out.println(alternativas);
-		return "corrigido";
+	public ModelAndView corrigeProvas(@ModelAttribute("resposta") Resposta marcadas) {
+
+		System.out.println(marcadas.getAlternativas().size());
+		
+		List<Long> respostas = marcadas.getAlternativas();
+		List<Alternativa> acertou = new ArrayList<>();
+		List<Alternativa> errou = new ArrayList<>();
+
+		for (int i = 0; i < respostas.size(); i++) {
+			if (alternativaDao.getAlternativaPorId(respostas.get(i))
+					.isAlternativaCorreta() == true) {
+				acertou.add(alternativaDao.getAlternativaPorId(respostas.get(i)));
+			} else {
+				errou.add(alternativaDao.getAlternativaPorId(respostas.get(i)));
+			}
+		}
+
+		ModelAndView mv = new ModelAndView("corrigido");
+		mv.addObject("nota", acertou.size());
+		mv.addObject("total", marcadas.getAlternativas().size());
+		mv.addObject("certas", acertou);
+		mv.addObject("erradas", errou);
+
+		return mv;
 	}
-	
+
 }
