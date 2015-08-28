@@ -1,5 +1,5 @@
 package com.caelum.geradordeprovas.controllers;
-
+	
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -20,11 +20,15 @@ import com.caelum.geradordeprovas.models.Questao;
 @Controller
 public class QuestoesController {
 
-	@Autowired
+	
 	private QuestaoDao questaoDao;
-
-	@Autowired
 	private AlternativaDao alternativaDao;
+	
+	@Autowired
+	public QuestoesController(QuestaoDao questaoDao,AlternativaDao alternativaDao) {
+		this.questaoDao = questaoDao;
+		this.alternativaDao = alternativaDao;
+	}
 
 	@RequestMapping("adiciona-questao")
 	public String mostraAdicionaQuestaoForm(Questao questao) {

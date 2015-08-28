@@ -1,12 +1,12 @@
 package com.caelum.geradordeprovas.models;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
 import javax.validation.Valid;
 
@@ -21,6 +21,9 @@ public class Questao {
 
 	@NotBlank
 	private String titulo;
+	
+	@ManyToMany
+	private List<Tag> tags;
 
 	@Valid
 	@Transient
