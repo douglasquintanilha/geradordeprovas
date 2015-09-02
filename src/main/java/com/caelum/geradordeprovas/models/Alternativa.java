@@ -1,5 +1,6 @@
 package com.caelum.geradordeprovas.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
