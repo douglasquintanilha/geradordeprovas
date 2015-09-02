@@ -15,12 +15,14 @@
 	<div class="container">
 		<h1>Sua nota foi:</h1>
 		<h3>${nota}/${total}</h3>
-
-		<h3>Você errou a(s) questão(ões):</h3>
-		<c:forEach items="${erradas}" var="errou">
-				${errou.questao.titulo}
-		</c:forEach>
+		<c:if test="${not empty erradas}">
+			<h3>Você errou a(s) questão(ões):</h3>
+			<c:forEach items="${erradas}" var="errou">
+				${errou.questao.titulo}<br />
+			</c:forEach>
+		</c:if>
 	</div>
+	<a href="/GeradorDeProvas/">Voltar para o início</a>
 	<c:import url="footer.jsp"></c:import>
 </body>
 </html>

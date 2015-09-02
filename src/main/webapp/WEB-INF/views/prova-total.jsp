@@ -15,12 +15,12 @@
 	<c:import url="header.jsp"></c:import>
 	<div class="container">
 		<c:url var="urlPost" value='correcao-prova' />
-		<form:form action="correcao-prova" method="GET" commandName="resposta">
+		<form:form action="correcao-prova" method="POST" commandName="resposta">
 			<c:forEach items="${listaQuestoes}" var="questao" varStatus="i">
 					${questao.id} ${questao.titulo} <br />
 				<%-- agr vai acessar a lista de alternativas, index/index. Multiplica por 5 e depois vai somando, pra pegar a resposta correspondente a questao--%>
 				<input type="radio" name="alternativas[${i.index}]"
-					value="${listaAlternativas[i.index*5].id}">
+					value="${listaAlternativas[i.index*5].id}" required="required">
 				${listaAlternativas[i.index*5].descricao}<br />
 				<input type="radio" name="alternativas[${i.index}]"
 					value="${listaAlternativas[i.index*5+1].id}">

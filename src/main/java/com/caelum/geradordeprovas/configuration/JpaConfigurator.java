@@ -20,6 +20,7 @@ public class JpaConfigurator {
 	@Bean
 	public DataSource dataSource() {
 		DriverManagerDataSource dm = new DriverManagerDataSource();
+		//dm.setUrl("jdbc:mysql://localhost/caelum_provas");
 		dm.setUrl("jdbc:mysql://localhost/caelum_provas");
 		dm.setUsername("root");
 		dm.setPassword("");

@@ -18,12 +18,15 @@ import com.caelum.geradordeprovas.models.Resposta;
 @Controller
 public class GeradorController {
 
-	@Autowired
 	private QuestaoDao questaoDao;
-
-	@Autowired
 	private AlternativaDao alternativaDao;
-
+	
+	@Autowired
+	public GeradorController(QuestaoDao questaoDao,AlternativaDao alternativaDao) {
+		this.questaoDao = questaoDao;
+		this.alternativaDao = alternativaDao;
+	}
+	
 	@RequestMapping("prova-total")
 	public ModelAndView mostraQuestoes() {
 
@@ -39,7 +42,6 @@ public class GeradorController {
 	@RequestMapping("correcao-prova")
 	public ModelAndView corrigeProvas(@ModelAttribute("resposta") Resposta marcadas) {
 
-		System.out.println(marcadas.getAlternativas().size());
 		
 		List<Long> respostas = marcadas.getAlternativas();
 		List<Alternativa> acertou = new ArrayList<>();
