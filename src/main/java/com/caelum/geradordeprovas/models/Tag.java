@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 @Entity
 public class Tag {
@@ -14,9 +15,9 @@ public class Tag {
 	@JsonIgnore
 	private Long id;
 	
-	
 	private String nome;
 	
+	@JsonValue
 	public String getNome() {
 		return nome;
 	}
