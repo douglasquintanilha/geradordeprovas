@@ -6,15 +6,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Gerador de Provas</title>
+<title>Erro</title>
 <link rel="stylesheet" href="static/css/bootstrap.min.css">
 <link rel="stylesheet" href="static/css/main.css">
 </head>
 <body>
 	<c:import url="header.jsp"></c:import>
-	<h1>Gerador de provas Caelum!</h1>
+	<h3>Algo de inesperado aconteceu, =/</h3>
+	<h4>Por favor, tentar novamente ou utilizar outra funcionalidade:</h4>
 	<a href="/GeradorDeProvas/adiciona-questao"><h3>Adicionar Questão</h3></a>
 	<a href="/GeradorDeProvas/prova"><h3>Realizar Prova</h3></a>
-	<a href="/GeradorDeProvas/mostra-por-tag"><h3>Procurar por tag</h3></a>
 </body>
 </html>

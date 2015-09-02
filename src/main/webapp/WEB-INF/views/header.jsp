@@ -2,5 +2,7 @@
 pageEncoding="UTF-8"%>
 
 <header>
-	<img src="static/imagens/caelum-logo.svg" alt="Caelum - Ensino e Inovação" id="logo-header">
+	<a href="http://localhost:8080/GeradorDeProvas/">
+		<img src="static/imagens/caelum-logo.svg" alt="Caelum - Ensino e Inovação" id="logo-header">
+	</a>
 </header>	
