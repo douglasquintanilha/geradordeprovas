@@ -40,6 +40,7 @@ public class JpaConfigurator {
 
 		Properties property = new Properties();
 		property.setProperty("hibernate.hbm2ddl.auto", "update");
+		property.setProperty("hibernate.show_sql", "true");
 		property.setProperty("hibernate.dialect",
 				"org.hibernate.dialect.MySQL5InnoDBDialect");
 		emf.setJpaProperties(property);
