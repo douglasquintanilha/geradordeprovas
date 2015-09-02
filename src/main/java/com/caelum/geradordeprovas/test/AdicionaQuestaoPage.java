@@ -15,7 +15,7 @@ public class AdicionaQuestaoPage {
 	}
 
 	public void visita() {
-		driver.get("http://localhost:8080/adiciona-questao");
+		driver.get("http://localhost:8080/GeradorDeProvas/adiciona-questao");
 	}
 
 	public void adiciona(List<String> campos) {
@@ -26,7 +26,7 @@ public class AdicionaQuestaoPage {
 		WebElement txtC = driver.findElement(By.id("alternativaC"));
 		WebElement txtD = driver.findElement(By.id("alternativaD"));
 		WebElement txtE = driver.findElement(By.id("alternativaE"));
-		WebElement botaoCerto = driver.findElement(By.name(campos.get(6)));
+		WebElement botaoCerto = driver.findElement(By.id(campos.get(6)));
 		
 		botaoCerto.click();
 		txtTitulo.sendKeys(campos.get(0));
@@ -41,7 +41,7 @@ public class AdicionaQuestaoPage {
 	}
 
 	public boolean foiParaOkJsp() {
-		if (driver.getCurrentUrl() == "http://localhost:8080/GeradorDeProvas/ok")
+		if (driver.getCurrentUrl().equals("http://localhost:8080/GeradorDeProvas/ok"))
 			return true;
 		else {
 			return false;
