@@ -1,7 +1,10 @@
 package com.caelum.geradordeprovas.controllers;
 	
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -14,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.caelum.geradordeprovas.DAO.AlternativaDao;
 import com.caelum.geradordeprovas.DAO.QuestaoDao;
+import com.caelum.geradordeprovas.DAO.TagDao;
 import com.caelum.geradordeprovas.models.Alternativa;
 import com.caelum.geradordeprovas.models.Questao;
+import com.caelum.geradordeprovas.models.Tag;
 
 @Controller
 public class QuestoesController {
@@ -23,11 +28,13 @@ public class QuestoesController {
 	
 	private QuestaoDao questaoDao;
 	private AlternativaDao alternativaDao;
+	private TagDao tagDao;
 	
 	@Autowired
-	public QuestoesController(QuestaoDao questaoDao,AlternativaDao alternativaDao) {
+	public QuestoesController(QuestaoDao questaoDao,AlternativaDao alternativaDao,TagDao tagDao) {
 		this.questaoDao = questaoDao;
 		this.alternativaDao = alternativaDao;
+		this.tagDao = tagDao;
 	}
 
 	@RequestMapping("adiciona-questao")
@@ -47,7 +54,24 @@ public class QuestoesController {
 			model.addAttribute("alternativa", questao.getAlternativa());
 			return "adiciona-questao";
 		}
+			
+		Set<Tag> outraListaDeTag = new HashSet<>();
+		
+		for(Tag tag : questao.getTags()) { 
+			try { 
+				Tag tagBanco = tagDao.getTagPorNome(tag.getNome());
+				if(tagBanco != null){
+					outraListaDeTag.add(tagBanco);
+				}
+			} catch(NoResultException e) { 
+				tagDao.save(tag);
+				outraListaDeTag.add(tag);
+			}
+		}
+		
+		questao.setTags(outraListaDeTag);
 		questaoDao.save(questao);
+
 		int alternativaCorreta = Integer.parseInt(questao.getAlternativaCorreta());
 		List<Alternativa> alternativas = questao.getAlternativa();
 		

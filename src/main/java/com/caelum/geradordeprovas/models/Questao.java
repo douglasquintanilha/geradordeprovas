@@ -1,11 +1,15 @@
 package com.caelum.geradordeprovas.models;
 
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
 import javax.validation.Valid;
@@ -22,8 +26,9 @@ public class Questao {
 	@NotBlank
 	private String titulo;
 	
-	@ManyToMany
-	private List<Tag> tags;
+	@ManyToMany(cascade = {CascadeType.PERSIST})
+	@JoinColumn(unique=true)
+	private Set<Tag> tags = new HashSet<Tag>();
 
 	@Valid
 	@Transient
@@ -40,6 +45,15 @@ public class Questao {
 
 	public void setAlternativaCorreta(String alternativaCorreta) {
 		this.alternativaCorreta = alternativaCorreta;
+	}
+
+
+	public Set<Tag> getTags() {
+		return tags;
+	}
+
+	public void setTags(Set<Tag> tags) {
+		this.tags = tags;
 	}
 
 	public String getTitulo() {
@@ -61,4 +75,5 @@ public class Questao {
 	public Long getId() {
 		return id;
 	}
+	
 }

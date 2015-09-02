@@ -8,7 +8,9 @@ pageEncoding="UTF-8"%>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Caelum Provas</title>
 		<link rel="stylesheet" href="static/css/bootstrap.min.css">
+		<link rel="stylesheet" href="static/css/jquery-ui.min.css">
 		<link rel="stylesheet" href="static/css/main.css">
+		
 
 	</head>
 	<body>
@@ -23,9 +25,9 @@ pageEncoding="UTF-8"%>
 				<div class="form-group">
 					<label for="titulo">Titulo da Questão:</label>
 					<form:errors path="titulo" cssClass="alert alert-danger" element="div" />
-					<input type="text" value="${questao.titulo}" name="titulo" class="form-control" id="titulo" />
-				</div>
-
+					<input type="text" value="${questao.titulo}" name="titulo"class="form-control" id="titulo" />
+				</div
+>	
 				<div class="form-group">
 					<label for="tags">Escolha as tags da questão:</label> 
 					<input type="text" name="tags" id="tags" class="form-control">
