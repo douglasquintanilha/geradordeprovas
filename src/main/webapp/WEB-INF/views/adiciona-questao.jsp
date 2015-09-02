@@ -40,9 +40,9 @@ pageEncoding="UTF-8"%>
 					cssClass="alert alert-danger" element="div" />
 					<div class="input-group">
 						<span class="input-group-addon"> <input type="radio"
-							name="alternativaCorreta" value="0" />
+							name="alternativaCorreta" value="0" id="botaoA"/>
 						</span> <input type="text" value="${alternativa[0].descricao}"
-						class="form-control" name="alternativa">
+						class="form-control" name="alternativa" id="alternativaA">
 					</div>
 				</div>
 
@@ -54,7 +54,7 @@ pageEncoding="UTF-8"%>
 						<span class="input-group-addon"> <input type="radio"
 							name="alternativaCorreta" value="1" />
 						</span> <input type="text" value="${alternativa[1].descricao}"
-						class="form-control" name="alternativa">
+						class="form-control" name="alternativa" id="alternativaB">
 					</div>
 				</div>
 
@@ -66,7 +66,7 @@ pageEncoding="UTF-8"%>
 						<span class="input-group-addon"> <input type="radio"
 							name="alternativaCorreta" value="2" />
 						</span> <input type="text" value="${alternativa[2].descricao}"
-						class="form-control" name="alternativa">
+						class="form-control" name="alternativa" id="alternativaC">
 					</div>
 				</div>
 
@@ -78,7 +78,7 @@ pageEncoding="UTF-8"%>
 						<span class="input-group-addon"> <input type="radio"
 							name="alternativaCorreta" value="3" />
 						</span> <input type="text" value="${alternativa[3].descricao}"
-						class="form-control" name="alternativa">
+						class="form-control" name="alternativa" id="alternativaD">
 					</div>
 				</div>
 
@@ -91,7 +91,7 @@ pageEncoding="UTF-8"%>
 						<span class="input-group-addon"> <input type="radio"
 							name="alternativaCorreta" value="4" />
 						</span> <input type="text" value="${alternativa[4].descricao}"
-						class="form-control" name="alternativa">
+						class="form-control" name="alternativa" id="alternativaE">
 					</div>
 				</div>
 
