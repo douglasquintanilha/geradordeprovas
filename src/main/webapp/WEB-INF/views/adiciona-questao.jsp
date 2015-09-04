@@ -30,7 +30,7 @@ pageEncoding="UTF-8"%>
 >	
 				<div class="form-group">
 					<label for="tags">Escolha as tags da questão:</label> 
-					<input type="text" name="tags" id="tags" class="form-control">
+					<input type="text" value="${questao.tags}" name="tags" id="tags" class="form-control">
 				</div>
 
 				<span>Escolha qual será a alternativa correta:</span>
@@ -102,6 +102,7 @@ pageEncoding="UTF-8"%>
 			<script src="static/js/jquery-2.1.4.min.js"></script>
 			<script src="static/js/jquery-ui.min.js"></script>
 			<script src="static/js/autocomplete-tags.js"></script>
+			<script src="static/js/limpa-campo.js"></script>
 
 			<c:import url="footer.jsp"></c:import>
 
