@@ -1,5 +1,6 @@
 package com.caelum.geradordeprovas.DAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -34,5 +35,13 @@ public class TagDao {
 		List<Tag> tags = manager.createQuery("select n from Tag n where n.nome = :nome",Tag.class).setParameter("nome", tag.getNome()).getResultList();
 		
 		return tags.size() > 0;
+	}
+	
+	public List<Integer> getQuestoesPorTag(String tag){
+		
+		List<Integer> idQuestoes = new ArrayList<>();
+		idQuestoes = manager.createQuery("select Questao_Id from Questao_Tag where tags_id = tagId").setParameter("tagId", tag).getResultList();
+		
+		return idQuestoes;
 	}
 }

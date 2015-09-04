@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.caelum.geradordeprovas.DAO.AlternativaDao;
@@ -26,9 +27,10 @@ public class GeradorController {
 
 	@Autowired
 	public GeradorController(QuestaoDao questaoDao,
-			AlternativaDao alternativaDao) {
+			AlternativaDao alternativaDao, TagDao tagDao) {
 		this.questaoDao = questaoDao;
 		this.alternativaDao = alternativaDao;
+		this.tagDao = tagDao;
 	}
 
 	@RequestMapping("prova")
@@ -73,15 +75,39 @@ public class GeradorController {
 	}
 
 	@RequestMapping("mostra-por-tag")
-	public ModelAndView mostraQuestoesPorTag() {
+	public ModelAndView selecionaTag() {
 
 		List<Tag> tags = new ArrayList<>(tagDao.list());
 
 		System.out.println(tags);
+
+		ModelAndView mv = new ModelAndView();
+
+		mv.addObject("tags", tags);
+
+		return mv;
+	}
+
+	@RequestMapping("mostra-por-tag2")
+	public ModelAndView mostraQuestoesPorTag(
+			@RequestParam("tagSelecionada") String tag) {
+
+		List<Tag> tags = new ArrayList<>(tagDao.list());
+
+		System.out.println(tags);
+
+		List<Integer> idQuestoes = new ArrayList<>(tagDao.getQuestoesPorTag(tag));
+
+		List<Questao> questoes = new ArrayList<>();
+		
+		for(Integer id : idQuestoes){
+			questoes.add(questaoDao.getQuestaoPorId(id));
+		}
 		
 		ModelAndView mv = new ModelAndView();
 
-		mv.addObject(tags);
+		mv.addObject("tags", tags);
+		mv.addObject("questoes", questoes);
 
 		return mv;
 	}
