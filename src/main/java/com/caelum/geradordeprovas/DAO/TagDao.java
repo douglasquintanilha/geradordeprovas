@@ -37,11 +37,4 @@ public class TagDao {
 		return tags.size() > 0;
 	}
 	
-	public List<Integer> getQuestoesPorTag(String tag){
-		
-		List<Integer> idQuestoes = new ArrayList<>();
-		idQuestoes = manager.createQuery("select Questao_Id from Questao_Tag where tags_id = tagId").setParameter("tagId", tag).getResultList();
-		
-		return idQuestoes;
-	}
 }

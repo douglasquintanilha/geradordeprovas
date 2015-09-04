@@ -74,39 +74,35 @@ public class GeradorController {
 		return mv;
 	}
 
-	@RequestMapping("mostra-por-tag")
+	@RequestMapping("seleciona-tag")
 	public ModelAndView selecionaTag() {
 
 		List<Tag> tags = new ArrayList<>(tagDao.list());
 
-		System.out.println(tags);
-
-		ModelAndView mv = new ModelAndView();
+		ModelAndView mv = new ModelAndView("seleciona-tag");
 
 		mv.addObject("tags", tags);
 
 		return mv;
 	}
 
-	@RequestMapping("mostra-por-tag2")
+	@RequestMapping("mostra-por-tag")
 	public ModelAndView mostraQuestoesPorTag(
-			@RequestParam("tagSelecionada") String tag) {
+			@RequestParam("tagSelecionada") String nomeTag) {
 
-		List<Tag> tags = new ArrayList<>(tagDao.list());
+		Tag tag = tagDao.getTagPorNome(nomeTag);
 
-		System.out.println(tags);
-
-		List<Integer> idQuestoes = new ArrayList<>(tagDao.getQuestoesPorTag(tag));
+		List<Long> idQuestoes = new ArrayList<>();
+		idQuestoes = questaoDao.getQuestoesPorIdTag(tag.getId());
 
 		List<Questao> questoes = new ArrayList<>();
-		
-		for(Integer id : idQuestoes){
-			questoes.add(questaoDao.getQuestaoPorId(id));
+		for (int i = 0; i < idQuestoes.size(); i++) {
+			questoes.add(questaoDao.getQuestaoPorId(idQuestoes.get(i)));
 		}
-		
+
 		ModelAndView mv = new ModelAndView();
 
-		mv.addObject("tags", tags);
+		mv.addObject("nomeTag",nomeTag);
 		mv.addObject("questoes", questoes);
 
 		return mv;

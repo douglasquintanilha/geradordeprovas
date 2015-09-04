@@ -6,23 +6,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Questoes Por Tag</title>
+<title>${nomeTag}</title>
 <link rel="stylesheet" href="static/css/bootstrap.min.css">
 <link rel="stylesheet" href="static/css/main.css">
 </head>
 <body>
-	<c:import url="header.jsp"></c:import>
-	<form action="mostra-por-tag2" method="POST">
-		<select path="tagSelecionada">
-			<c:forEach items="${tags}" var="tag">
-				<option id="tagSelecionada" value="${tag.nome}">${tag.nome}</option>
-			</c:forEach>
-		</select> <input type="submit" value="Procurar">
-	</form>
-	<c:if test="${not empty questoes}">
-		<c:forEach items="${questoes}" var="questao">
-					${questao}
-				</c:forEach>
-	</c:if>
+<c:import url="header.jsp"></c:import>
+<c:forEach items="${questoes}" var="questao">
+	${questao.titulo}
+</c:forEach>
+
 </body>
 </html>
