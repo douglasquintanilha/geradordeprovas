@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import com.caelum.geradordeprovas.models.Questao;
+import com.caelum.geradordeprovas.models.Tag;
 
 @Repository
 public class QuestaoDao {
@@ -29,12 +30,12 @@ public class QuestaoDao {
 				.getResultList();
 	}
 
-	public List<Long> getQuestoesPorIdTag(Long id) {
+	public List<Long> getQuestoesPorIdTag(Tag tag) {
 
 		List<Long> idQuestoes = new ArrayList<>();
 		idQuestoes = manager
-				.createQuery("select Questao_Id from Questao_Tag where tags_id = tagId")
-				.setParameter("tagId", id)
+				.createQuery("select Questao_Id from Questao_Tag where tags_id = :tagId")
+				.setParameter("tagId", tag)
 				.getResultList();
 
 		return idQuestoes;

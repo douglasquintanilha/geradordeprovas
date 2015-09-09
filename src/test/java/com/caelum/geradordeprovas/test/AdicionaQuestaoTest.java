@@ -19,7 +19,7 @@ public class AdicionaQuestaoTest {
 	}
 
 	@Test
-	public void adicionaQuestaoComAlternativaASendoCerta() {
+	public void adicionaQuestaoComum() {
 
 		AdicionaQuestaoPage pagina = new AdicionaQuestaoPage(driver);
 		pagina.visita();
@@ -35,12 +35,33 @@ public class AdicionaQuestaoTest {
 
 		pagina.adiciona(preencheCampos);
 
-		assertTrue(pagina.foiParaOkJsp());
+		assertTrue(pagina.foiParaPaginaOk());
+	}
+
+	@Test
+	public void adicionaQuestaoSemMarcarAlternativaCerta() {
+
+		AdicionaQuestaoPage pagina = new AdicionaQuestaoPage(driver);
+		pagina.visita();
+		List<String> preencheCampos = new ArrayList<>();
+
+		preencheCampos.add("adicionaQuestaoComAlternativaASendoCerta");
+		preencheCampos.add("Certa A");
+		preencheCampos.add("Errada B");
+		preencheCampos.add("Errada C");
+		preencheCampos.add("Errada D");
+		preencheCampos.add("Errada E");
+		preencheCampos.add("");
+
+		pagina.adiciona(preencheCampos);
+
+		assertTrue(!(pagina.foiParaPaginaOk()));
+
 	}
 
 	@After
-	public void encerra(){
+	public void encerra() {
 		driver.close();
 	}
-	
+
 }

@@ -12,12 +12,13 @@
 </head>
 <body>
 	<c:import url="header.jsp"></c:import>
-	<form action="mostra-por-tag" method="POST">
-		<select path="tagSelecionada">
+	<form action="mostra-por-tag" method="GET">
+		<select name="tagSelecionada">
 			<c:forEach items="${tags}" var="tag">
-				<option id="tagSelecionada" value="${tag.nome}">${tag.nome}</option>
+				<option value="${tag.nome}">${tag.nome}</option>
 			</c:forEach>
-		</select> <input type="submit" value="Procurar">
+		</select>
+		<input type="submit" value="Procurar">
 	</form>
 </body>
 </html>

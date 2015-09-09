@@ -26,9 +26,12 @@ public class AdicionaQuestaoPage {
 		WebElement txtC = driver.findElement(By.id("alternativaC"));
 		WebElement txtD = driver.findElement(By.id("alternativaD"));
 		WebElement txtE = driver.findElement(By.id("alternativaE"));
-		WebElement botaoCerto = driver.findElement(By.id(campos.get(6)));
+
+		if (!(campos.get(6).equals(""))) {
+			WebElement botaoCerto = driver.findElement(By.id(campos.get(6)));
+			botaoCerto.click();
+		}//if feito pro teste sem apertar botao
 		
-		botaoCerto.click();
 		txtTitulo.sendKeys(campos.get(0));
 		txtA.sendKeys(campos.get(1));
 		txtB.sendKeys(campos.get(2));
@@ -40,8 +43,9 @@ public class AdicionaQuestaoPage {
 
 	}
 
-	public boolean foiParaOkJsp() {
-		if (driver.getCurrentUrl().equals("http://localhost:8080/GeradorDeProvas/ok"))
+	public boolean foiParaPaginaOk() {
+		if (driver.getCurrentUrl().equals(
+				"http://localhost:8080/GeradorDeProvas/ok"))
 			return true;
 		else {
 			return false;

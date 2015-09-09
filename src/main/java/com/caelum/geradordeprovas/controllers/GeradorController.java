@@ -93,7 +93,10 @@ public class GeradorController {
 		Tag tag = tagDao.getTagPorNome(nomeTag);
 
 		List<Long> idQuestoes = new ArrayList<>();
-		idQuestoes = questaoDao.getQuestoesPorIdTag(tag.getId());
+		Long aux=7l;
+		idQuestoes.add(aux);
+		
+		//questaoDao.getQuestoesPorIdTag(tag);
 
 		List<Questao> questoes = new ArrayList<>();
 		for (int i = 0; i < idQuestoes.size(); i++) {
@@ -102,6 +105,8 @@ public class GeradorController {
 
 		ModelAndView mv = new ModelAndView();
 
+		List<Tag> tags = new ArrayList<>(tagDao.list());
+		mv.addObject("tags", tags);
 		mv.addObject("nomeTag",nomeTag);
 		mv.addObject("questoes", questoes);
 
