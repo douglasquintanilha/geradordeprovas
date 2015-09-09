@@ -32,14 +32,16 @@ public class QuestaoDao {
 
 	public List<Questao> getQuestoesPorTag(Tag tag) {
 
+		
+		System.out.println(tag);
 		List<Questao> idQuestoes = new ArrayList<>();
 		idQuestoes = manager
-				.createQuery("select e from Questao e, Tag a where a.id = :tagId")
-				.setParameter("tagId", tag.getId())
+				.createQuery("select q from Questao q where q.tags IN :tag")
+				.setParameter("tag", tag)
 				.getResultList();
 
 		
-		System.out.println(idQuestoes.get(0).getClass());
+		
 		
 		return idQuestoes;
 	}
