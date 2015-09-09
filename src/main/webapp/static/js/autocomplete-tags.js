@@ -16,7 +16,7 @@ $(function() {
       })
       .autocomplete({
         source: function( request, response ) {
-          $.getJSON( "http://localhost:8000/GeradorDeProvas/json", {
+          $.getJSON( window.location.host +"GeradorDeProvas/json", {
             term: extractLast( request.term )
           }, response );
         },
