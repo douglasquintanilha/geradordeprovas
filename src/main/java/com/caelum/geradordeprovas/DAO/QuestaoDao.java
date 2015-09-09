@@ -30,14 +30,17 @@ public class QuestaoDao {
 				.getResultList();
 	}
 
-	public List<Long> getQuestoesPorIdTag(Tag tag) {
+	public List<Questao> getQuestoesPorTag(Tag tag) {
 
-		List<Long> idQuestoes = new ArrayList<>();
+		List<Questao> idQuestoes = new ArrayList<>();
 		idQuestoes = manager
-				.createQuery("select Questao_Id from Questao_Tag where tags_id = :tagId")
-				.setParameter("tagId", tag)
+				.createQuery("select e from Questao e, Tag a where a.id = :tagId")
+				.setParameter("tagId", tag.getId())
 				.getResultList();
 
+		
+		System.out.println(idQuestoes.get(0).getClass());
+		
 		return idQuestoes;
 	}
 }

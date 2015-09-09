@@ -91,26 +91,19 @@ public class GeradorController {
 			@RequestParam("tagSelecionada") String nomeTag) {
 
 		Tag tag = tagDao.getTagPorNome(nomeTag);
-
-		List<Long> idQuestoes = new ArrayList<>();
-		Long aux=7l;
-		idQuestoes.add(aux);
-		
-		//questaoDao.getQuestoesPorIdTag(tag);
-
 		List<Questao> questoes = new ArrayList<>();
-		for (int i = 0; i < idQuestoes.size(); i++) {
-			questoes.add(questaoDao.getQuestaoPorId(idQuestoes.get(i)));
-		}
+		questoes = questaoDao.getQuestoesPorTag(tag);
 
-		ModelAndView mv = new ModelAndView();
+		//System.out.println(questoes.get(0).getClass());
+		
+		ModelAndView mv = new ModelAndView("mostra-por-tag");
 
-		List<Tag> tags = new ArrayList<>(tagDao.list());
-		mv.addObject("tags", tags);
-		mv.addObject("nomeTag",nomeTag);
-		mv.addObject("questoes", questoes);
-
+		mv.addObject("questoes",questoes);
+		mv.addObject("nomeTag", nomeTag);
+		
 		return mv;
+		
+		
 	}
 
 }

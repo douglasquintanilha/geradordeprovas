@@ -22,7 +22,7 @@
 	</form>
 <h4>${nomeTag}</h4>
 <c:forEach items="${questoes}" var="questao">
-	${questao.titulo}
+	${questao.titulo}<br />
 </c:forEach>
 
 </body>
