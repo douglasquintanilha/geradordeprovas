@@ -6,12 +6,12 @@ $(function() {
       return split( term ).pop();
     }
  
-    $( "#tags" )
+    $("#tags")
       // don't navigate away from the field on tab when selecting an item
       .bind( "keydown", function( event ) {
         if ( event.keyCode === $.ui.keyCode.TAB &&
             $( this ).autocomplete( "instance" ).menu.active ) {
-          event.preventDefault();
+          event.preventDefault();	
         }
       })
       .autocomplete({
@@ -23,7 +23,7 @@ $(function() {
         search: function() {
           // custom minLength
           var term = extractLast( this.value );
-          if ( term.length < 1 ) {
+          if ( term.length < 2 ) {
             return false;
           }
         },

@@ -87,25 +87,23 @@ public class GeradorController {
 
 		return mv;
 	}
-
+	
 	@RequestMapping("mostra-por-tag")
 	public ModelAndView mostraQuestoesPorTag(
 			@RequestParam("tagSelecionada") String nomeTag) {
 
-		Set<Tag> t = new HashSet<>(questaoDao.getQuestaoPorId(3l).getTags());
 		List<Questao> questoes = new ArrayList<>();
-		questoes = questaoDao.getQuestoesPorTag(t);
+		questoes = questaoDao.getQuestoesPorTag(nomeTag);
 
-		//System.out.println(questoes.get(0).getClass());
-		
+		// System.out.println(questoes.get(0).getClass());
+
 		ModelAndView mv = new ModelAndView("mostra-por-tag");
 
-		mv.addObject("questoes",questoes);
+		mv.addObject("questoes", questoes);
 		mv.addObject("nomeTag", nomeTag);
-		
+
 		return mv;
-		
-		
+
 	}
 
 }

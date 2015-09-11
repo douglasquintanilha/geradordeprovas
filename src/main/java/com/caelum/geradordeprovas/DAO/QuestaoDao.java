@@ -31,13 +31,13 @@ public class QuestaoDao {
 				.getResultList();
 	}
 
-	public List<Questao> getQuestoesPorTag(Set<Tag> tag) {
+	public List<Questao> getQuestoesPorTag(String tag) {
 
 		
 		System.out.println(tag);
 		List<Questao> idQuestoes = new ArrayList<>();
 		idQuestoes = manager
-				.createQuery("select q from Questao q where q.tags IN :tag")
+				.createQuery("select q from Questao q JOIN q.tags t where t.nome =:tag")
 				.setParameter("tag", tag)
 				.getResultList();
 
