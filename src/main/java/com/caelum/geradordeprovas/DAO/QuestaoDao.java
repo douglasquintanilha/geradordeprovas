@@ -2,6 +2,7 @@ package com.caelum.geradordeprovas.DAO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -30,7 +31,7 @@ public class QuestaoDao {
 				.getResultList();
 	}
 
-	public List<Questao> getQuestoesPorTag(Tag tag) {
+	public List<Questao> getQuestoesPorTag(Set<Tag> tag) {
 
 		
 		System.out.println(tag);

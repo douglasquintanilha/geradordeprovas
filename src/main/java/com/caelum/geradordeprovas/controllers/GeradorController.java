@@ -1,7 +1,9 @@
 package com.caelum.geradordeprovas.controllers;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -90,9 +92,9 @@ public class GeradorController {
 	public ModelAndView mostraQuestoesPorTag(
 			@RequestParam("tagSelecionada") String nomeTag) {
 
-		Tag tag = tagDao.getTagPorNome(nomeTag);
+		Set<Tag> t = new HashSet<>(questaoDao.getQuestaoPorId(3l).getTags());
 		List<Questao> questoes = new ArrayList<>();
-		questoes = questaoDao.getQuestoesPorTag(tag);
+		questoes = questaoDao.getQuestoesPorTag(t);
 
 		//System.out.println(questoes.get(0).getClass());
 		
