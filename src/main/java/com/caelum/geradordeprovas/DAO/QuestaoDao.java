@@ -27,7 +27,7 @@ public class QuestaoDao {
 	}  
 
 	public List<Questao> list() {
-		return manager.createQuery("from Questao", Questao.class)
+		return manager.createQuery("from Questao q", Questao.class)
 				.getResultList();
 	}
 

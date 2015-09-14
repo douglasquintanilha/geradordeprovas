@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import javax.validation.Valid;
 
@@ -31,7 +32,7 @@ public class Questao {
 	private Set<Tag> tags = new HashSet<Tag>();
 
 	@Valid
-	@Transient
+	@OneToMany(cascade={CascadeType.PERSIST})
 	private List<Alternativa> alternativa;
 
 	@NotBlank( message = "Por favor assinale qual é a alternativa correta")
