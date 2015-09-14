@@ -4,7 +4,7 @@ package com.caelum.geradordeprovas.models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.Lob;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -15,6 +15,7 @@ public class Alternativa {
 	@GeneratedValue
 	private Long id;
 	
+	@Lob
 	@NotBlank
 	private String descricao;
 	

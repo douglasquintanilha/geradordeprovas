@@ -17,7 +17,21 @@
 	<c:import url="header.jsp"></c:import>
 	<div class="container">
 		<h1>Montar a prova:</h1>
-		
+		<form>
+		<c:forEach items="${questoes}" var="questao">
+			<div class="panel panel-default">
+				<div class="">${questao.titulo}</div>
+				<c:forEach items="${questao.tags}" var="tag">
+					<span><b>${tag}</b></span>
+				</c:forEach>
+				<ol type="A">
+					<c:forEach items="${questao.alternativa}" var="alternativa">
+						<li>${alternativa.descricao})</li>
+					</c:forEach>
+				</ol>
+			</div>
+		<form>										
+		</c:forEach>
 	</div>
 	<c:import url="footer.jsp"></c:import>
 </body>

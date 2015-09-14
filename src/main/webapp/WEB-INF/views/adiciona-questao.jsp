@@ -103,9 +103,7 @@ pageEncoding="UTF-8"%>
 			<script src="static/js/jquery-ui.min.js"></script>
 			<script src="static/js/autocomplete-tags.js"></script>
 			<script src="static/js/limpa-campo.js"></script>
-
-			<c:import url="footer.jsp"></c:import>
-
 		</div>
+		<c:import url="footer.jsp"></c:import>
 	</body>
 </html>
