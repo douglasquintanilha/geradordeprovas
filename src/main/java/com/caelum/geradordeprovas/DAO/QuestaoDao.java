@@ -24,7 +24,7 @@ public class QuestaoDao {
 
 	public Questao getQuestaoPorId(Long id) {
 		return manager.find(Questao.class, id);
-	}
+	}  
 
 	public List<Questao> list() {
 		return manager.createQuery("from Questao", Questao.class)
@@ -40,8 +40,6 @@ public class QuestaoDao {
 				.createQuery("select q from Questao q JOIN q.tags t where t.nome =:tag")
 				.setParameter("tag", tag)
 				.getResultList();
-
-		
 		
 		
 		return idQuestoes;
