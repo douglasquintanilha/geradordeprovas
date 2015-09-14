@@ -1,6 +1,6 @@
 package com.caelum.geradordeprovas.models;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -19,9 +19,6 @@ public class Alternativa {
 	private String descricao;
 	
 	private boolean alternativaCorreta;
-	
-	@ManyToOne()
-	private Questao questao;
 
 	public String getDescricao() {
 		return descricao;
@@ -42,13 +39,7 @@ public class Alternativa {
 	public void setAlternativaCorreta(boolean alternativaCorreta) {
 		this.alternativaCorreta = alternativaCorreta;
 	}
-	
-	public void setQuestao(Questao questao) {
-		this.questao = questao;
-	}
-	public Questao getQuestao() {
-		return questao;
-	}
+		
 
 	
 }

@@ -39,6 +39,8 @@ public class QuestoesController {
 			model.addAttribute("alternativa", questao.getAlternativa());
 			return "adiciona-questao";
 		}
+		
+		System.out.println(questao.getAlternativa());
 		questaoBo.salva(questao);
 		
 		return "redirect:ok";

@@ -63,7 +63,7 @@ public class QuestaoFacade {
 	public void preencheQuestaoDaAlternativa (Questao questao){
 		List<Alternativa> alternativas = questao.getAlternativa();
 		for (int i = 0; i < alternativas.size(); i++) {
-			alternativas.get(i).setQuestao(questao);
+			//alternativas.get(i).setQuestao(questao);
 		}
 	}
 	
@@ -79,8 +79,8 @@ public class QuestaoFacade {
 		verificaSeTagJaExisteNoBanco(questao);
 		questaoDao.save(questao);
 		preencheAlternativaCorreta(questao);
-		preencheQuestaoDaAlternativa(questao);
-		salvaAlternativas(questao);
+		//preencheQuestaoDaAlternativa(questao);
+		//salvaAlternativas(questao);
 	}
 	
 	

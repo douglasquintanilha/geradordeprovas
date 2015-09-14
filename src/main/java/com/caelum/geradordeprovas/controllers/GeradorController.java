@@ -105,5 +105,16 @@ public class GeradorController {
 		return mv;
 
 	}
+	
+	@RequestMapping("montar-prova")
+	public ModelAndView montarProvaView(){
+		List<Questao> questoes = questaoDao.list();
+		ModelAndView mv = new ModelAndView("montar-prova");
+		
+		System.out.println(questoes.get(0).getAlternativa());
+		
+		mv.addObject(questoes);
+		return mv;
+	}
 
 }

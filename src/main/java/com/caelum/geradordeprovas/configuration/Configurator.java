@@ -45,5 +45,6 @@ public class Configurator extends WebMvcConfigurerAdapter {
 		servico.addConverter(new TagConverter());
 		return servico;
 	}
+	
 
 }
