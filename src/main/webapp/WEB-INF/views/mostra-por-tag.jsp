@@ -12,12 +12,12 @@
 </head>
 <body>
 	<c:import url="header.jsp"></c:import>
-	
-	<h4>Nome da Tag: ${nomeTag}</h4>
-	<h5>Questoes:</h5>
-	<c:forEach items="${questoes}" var="questao">
-	${questao.titulo}<br />
-	</c:forEach>
-
+	<div class="container">
+		<h4>Nome da Tag: ${nomeTag}</h4>
+		<h5>Questoes:</h5>
+		<c:forEach items="${questoes}" var="questao">
+		${questao.titulo}<br />
+		</c:forEach>
+	</div>		
 </body>
 </html>

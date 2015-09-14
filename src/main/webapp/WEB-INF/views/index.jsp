@@ -12,9 +12,12 @@
 </head>
 <body>
 	<c:import url="header.jsp"></c:import>
-	<h1>Gerador de provas Caelum!</h1>
-	<a href="/GeradorDeProvas/adiciona-questao"><h3>Adicionar Questão</h3></a>
-	<a href="/GeradorDeProvas/prova"><h3>Realizar Prova</h3></a>
-	<a href="/GeradorDeProvas/seleciona-tag"><h3>Procurar por tag</h3></a>
+	<div class="container">
+		<h1>Gerador de provas Caelum!</h1>
+		<a href="<c:url value='adiciona-questao'/>"><h3>Adicionar Questão</h3></a>
+		<a href="<c:url value='/'/>"><h3>Teste</h3></a> 
+		<a href="<c:url value='prova'/>"><h3>Realizar Prova</h3></a>
+		<a href="<c:url value='seleciona-tag'/>"><h3>Procurar Questão por tag</h3></a>
+	</div>
 </body>
 </html>
