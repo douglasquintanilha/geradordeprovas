@@ -99,6 +99,9 @@ public class GeradorController {
 
 		ModelAndView mv = new ModelAndView("mostra-por-tag");
 
+		List<Tag> tags = new ArrayList<>(tagDao.list());
+		mv.addObject("tags", tags);
+		
 		mv.addObject("questoes", questoes);
 		mv.addObject("nomeTag", nomeTag);
 
