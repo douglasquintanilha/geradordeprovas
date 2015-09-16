@@ -16,7 +16,7 @@
 		<h1>Gerador de provas Caelum!</h1>
 		<a href="<c:url value='adiciona-questao'/>"><h3>Adicionar Questão</h3></a>
 		<a href="<c:url value='montar-prova'/>"><h3>Montar Prova</h3></a> 
-		<a href="<c:url value='prova'/>"><h3>Realizar Prova</h3></a>
+		<a href="<c:url value='prova-aluno2'/>"><h3>Realizar Prova</h3></a>
 		<a href="<c:url value='seleciona-tag'/>"><h3>Procurar Questão por tag</h3></a>
 	</div>
 </body>
