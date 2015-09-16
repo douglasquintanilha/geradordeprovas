@@ -1,9 +1,7 @@
 package com.caelum.geradordeprovas.controllers;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -119,9 +117,7 @@ public class GeradorController {
 		List<Questao> questoes = questaoDao.list();
 		ModelAndView mv = new ModelAndView("montar-prova");
 		
-		System.out.println(questoes.get(0).getAlternativa());
-		
-		mv.addObject(questoes);
+		mv.addObject("questoes",questoes);
 		return mv;
 	}
 

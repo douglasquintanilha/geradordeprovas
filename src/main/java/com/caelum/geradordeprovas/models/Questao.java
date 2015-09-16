@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
@@ -23,7 +24,8 @@ public class Questao {
 	@Id
 	@GeneratedValue
 	private Long id;
-
+	
+	@Lob
 	@NotBlank
 	private String titulo;
 	
