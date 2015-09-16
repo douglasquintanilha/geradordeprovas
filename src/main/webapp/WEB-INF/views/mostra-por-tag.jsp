@@ -26,5 +26,6 @@
 		${questao.titulo}<br />
 		</c:forEach>
 	</div>
+	<c:import url="footer.jsp"></c:import>
 </body>
 </html>

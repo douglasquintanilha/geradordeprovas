@@ -16,5 +16,7 @@
 	<h4>Por favor, tentar novamente ou utilizar outra funcionalidade:</h4>
 	<a href="/GeradorDeProvas/adiciona-questao"><h3>Adicionar Questão</h3></a>
 	<a href="/GeradorDeProvas/prova"><h3>Realizar Prova</h3></a>
+	<c:import url="footer.jsp"></c:import>
+	
 </body>
 </html>
