@@ -20,5 +20,7 @@
 		</select>
 		<input type="submit" value="Procurar">
 	</form>
+	<c:import url="footer.jsp"></c:import>
+	
 </body>
 </html>

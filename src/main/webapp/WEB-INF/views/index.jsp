@@ -19,5 +19,7 @@
 		<a href="<c:url value='prova'/>"><h3>Realizar Prova</h3></a>
 		<a href="<c:url value='seleciona-tag'/>"><h3>Procurar Questão por tag</h3></a>
 	</div>
+	<c:import url="footer.jsp"></c:import>
+	
 </body>
 </html>

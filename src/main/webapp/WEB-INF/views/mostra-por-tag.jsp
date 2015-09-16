@@ -18,6 +18,8 @@
 		<c:forEach items="${questoes}" var="questao">
 		${questao.titulo}<br />
 		</c:forEach>
-	</div>		
+	</div>
+	<c:import url="footer.jsp"></c:import>
+			
 </body>
 </html>
