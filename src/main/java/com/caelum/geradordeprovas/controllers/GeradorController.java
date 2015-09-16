@@ -33,18 +33,23 @@ public class GeradorController {
 		this.tagDao = tagDao;
 	}
 
-	@RequestMapping("prova")
-	public ModelAndView montaProvaPorLista(ArrayList<Questao> questoes,
-			ArrayList<Alternativa> alternativas) {
+	@RequestMapping("prova-aluno2")
+	public ModelAndView montaProvaPorLista() {
 
+//		ArrayList<Questao> questoes,
+//		ArrayList<Alternativa> alternativas
+
+		List<Questao> questoes = questaoDao.list();
+		List<Alternativa> alternativas = alternativaDao.list();
+		
 		if (questoes.isEmpty() || alternativas.isEmpty()) {
 			ModelAndView erro = new ModelAndView("erro");
 			return erro;
 		}
 
-		ModelAndView mv = new ModelAndView("prova-total");
-		mv.addObject("listaQuestoes", questoes);
-		mv.addObject("listaAlternativas", alternativas);
+		ModelAndView mv = new ModelAndView("prova-aluno2");
+		mv.addObject("listaDeQuestoes", questoes);
+		mv.addObject("listaDeAlternativas", alternativas);
 		return mv;
 	}
 
@@ -97,6 +102,9 @@ public class GeradorController {
 
 		ModelAndView mv = new ModelAndView("mostra-por-tag");
 
+		List<Tag> tags = new ArrayList<>(tagDao.list());
+		mv.addObject("tags", tags);
+		
 		mv.addObject("questoes", questoes);
 		mv.addObject("nomeTag", nomeTag);
 
