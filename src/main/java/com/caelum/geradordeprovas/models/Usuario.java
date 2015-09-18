@@ -14,6 +14,16 @@ public class Usuario {
 	private String login;
 	
 	private String senha;
+	
+	boolean admin;
+
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
 
 	public String getLogin() {
 		return login;

@@ -19,15 +19,14 @@ public class UsuarioDao {
 		manager.persist(usuario);
 	}
 
-	public boolean existeUsuario(Usuario usuario) {
+	public boolean validaUsuario(Usuario usuario) {
 
 		if (usuario == null) {
 			return false;
 		}
 
 		else {
-			String login = new String(usuario.getLogin());
-			Usuario us = manager.find(Usuario.class, login);
+			Usuario us = manager.find(Usuario.class, usuario.getLogin());
 			if (us.getSenha().equals(usuario.getSenha())) {
 				return true;
 			}
@@ -35,6 +34,12 @@ public class UsuarioDao {
 		return false;
 	}
 
+	public boolean ehAdmin(Usuario usuario){
+		Usuario us = manager.find(Usuario.class, usuario.getLogin());
+		return us.isAdmin();
+	}
+	
+	
 	public List<Usuario> list() {
 		return manager.createQuery("from Usuario u", Usuario.class)
 				.getResultList();
