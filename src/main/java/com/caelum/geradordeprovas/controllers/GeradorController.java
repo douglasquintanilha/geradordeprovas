@@ -3,17 +3,24 @@ package com.caelum.geradordeprovas.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.caelum.geradordeprovas.DAO.AlternativaDao;
+import com.caelum.geradordeprovas.DAO.ProvaDao;
 import com.caelum.geradordeprovas.DAO.QuestaoDao;
 import com.caelum.geradordeprovas.DAO.TagDao;
 import com.caelum.geradordeprovas.models.Alternativa;
+import com.caelum.geradordeprovas.models.Prova;
 import com.caelum.geradordeprovas.models.Questao;
 import com.caelum.geradordeprovas.models.Resposta;
 import com.caelum.geradordeprovas.models.Tag;
@@ -24,13 +31,15 @@ public class GeradorController {
 	private QuestaoDao questaoDao;
 	private AlternativaDao alternativaDao;
 	private TagDao tagDao;
+	private ProvaDao provaDao;
 
 	@Autowired
 	public GeradorController(QuestaoDao questaoDao,
-			AlternativaDao alternativaDao, TagDao tagDao) {
+			AlternativaDao alternativaDao, TagDao tagDao,ProvaDao provaDao) {
 		this.questaoDao = questaoDao;
 		this.alternativaDao = alternativaDao;
 		this.tagDao = tagDao;
+		this.provaDao = provaDao;
 	}
 
 	@RequestMapping("prova-aluno")
@@ -118,6 +127,21 @@ public class GeradorController {
 		ModelAndView mv = new ModelAndView("montar-prova");
 		
 		mv.addObject("questoes",questoes);
+		return mv;
+	}
+	
+	@Transactional
+	@RequestMapping("salvar-prova")
+	public ModelAndView salvaProva(@Valid @ModelAttribute("prova") Prova prova, BindingResult result){
+		if(result.hasErrors()){
+			ModelAndView mv = new ModelAndView("montar-prova",result.getModel());
+			return mv;
+		}
+		
+		provaDao.save(prova);
+		
+		ModelAndView mv = new ModelAndView("prova-adicionada");
+		
 		return mv;
 	}
 	

@@ -11,7 +11,6 @@ public class AlternativaConverter implements Converter<String, Alternativa> {
 		Alternativa alternativaObj = new Alternativa();
 		
 		alternativaObj.setDescricao(alternativa);
-
 		return alternativaObj;
 	}
 

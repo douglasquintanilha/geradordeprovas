@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,10 +13,11 @@
 </head>
 <body>
 	<c:import url="header.jsp"></c:import>
-	<div class="container">
+	<div class="container"> 
 		<h1>Monte uma prova:</h1>
 		<br>
-		<form method="GET">
+		<c:url var="urlPost" value='salvar-prova'/>
+		<form:form method="POST" action="${urlPost}" commandName="prova" >
 			<div class="form-group">
 				<label for="nome">Nome da Prova:</label>
 				<form:errors path="nome" cssClass="alert alert-danger" element="div" />
@@ -34,7 +35,7 @@
 			<c:forEach items="${questoes}" var="questao">
 				<div class="panel panel-primary questao">
 					<div class="panel-heading">
-						<label><input type="checkbox" name="questoesEscolhidas" value="${questao.id}"> Questão ${questao.id}</label>
+						<label><input type="checkbox" name="questoes" value="${questao.id}"> Questão ${questao.id}</label>
 					</div>
 					<div class="panel-body">
 						<p>${questao.titulo}</p>
@@ -51,7 +52,7 @@
 				</div>
 			</c:forEach>
 			<button type="submit" class="btn btn-default">Criar Prova</button>
-		</form>
+		</form:form>
 
 	</div>
 	<c:import url="footer.jsp"></c:import>
