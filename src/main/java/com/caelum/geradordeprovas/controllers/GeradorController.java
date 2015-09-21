@@ -33,7 +33,7 @@ public class GeradorController {
 		this.tagDao = tagDao;
 	}
 
-	@RequestMapping("prova-aluno2")
+	@RequestMapping("prova-aluno")
 	public ModelAndView montaProvaPorLista() {
 
 //		ArrayList<Questao> questoes,
