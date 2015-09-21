@@ -6,21 +6,25 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Gerador de Provas</title>
+<title>Cria Usuario</title>
 <link rel="stylesheet" href="static/css/bootstrap.min.css">
 <link rel="stylesheet" href="static/css/main.css">
 </head>
 <body>
 	<c:import url="header.jsp"></c:import>
-	<div class="container">
-		<h1>Gerador de provas Caelum!</h1>
-		<a href="<c:url value='adiciona-questao'/>"><h3>Adicionar Questão</h3></a>
-		<a href="<c:url value='montar-prova'/>"><h3>Montar Prova</h3></a> 
-		<a href="<c:url value='prova-aluno'/>"><h3>Realizar Prova</h3></a>
-		<a href="<c:url value='seleciona-tag'/>"><h3>Procurar Questão por tag</h3></a>
-		<a href="<c:url value='cria-usuario-form'/>"><h3>Criar Usuário</h3></a>
-	</div>
-	<c:import url="footer.jsp"></c:import>
+
+	<form action="adiciona-usuario" method="POST">
 	
+		Nome  <input type="text" name="nome"/><br/>
+		Senha <input type="password" name="senha"/><br/>
+		Admin?<br />
+		Sim <input type="radio" name="admin" value="true"/><br/>
+		Nao <input type="radio" name="admin" value="false"/><br/>
+		<input type="submit" value="Criar">
+		
+	</form>
+
+
+	<c:import url="footer.jsp"></c:import>
 </body>
 </html>

@@ -47,7 +47,7 @@ public class GeradorController {
 			return erro;
 		}
 
-		ModelAndView mv = new ModelAndView("prova-aluno2");
+		ModelAndView mv = new ModelAndView("prova-aluno");
 		mv.addObject("listaDeQuestoes", questoes);
 		mv.addObject("listaDeAlternativas", alternativas);
 		return mv;

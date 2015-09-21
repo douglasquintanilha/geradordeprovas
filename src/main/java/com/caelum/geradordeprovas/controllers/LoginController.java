@@ -30,7 +30,7 @@ public class LoginController {
 	@RequestMapping("logout")
 	public String logout(HttpSession sessao) {
 		sessao.invalidate();
-		return "loginForm";
+		return "redirect:loginForm";
 	}
 	
 	@RequestMapping("efetuaLogin")
