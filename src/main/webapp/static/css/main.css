@@ -6,6 +6,10 @@ body {
     margin: 0 0 40px; /* bottom = footer height */
 }
 
+.clear{
+	clear:both;
+}
+
 #logo-header{
 	width: 192px;
 	padding: 1.4em 20px;
@@ -13,6 +17,8 @@ body {
 }
 
 #link-logout{
+	float: right;
+	padding: 2em 40px 0em;;
 }
 
 header{

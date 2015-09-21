@@ -26,8 +26,8 @@ pageEncoding="UTF-8"%>
 					<label for="titulo">Titulo da Questão:</label>
 					<form:errors path="titulo" cssClass="alert alert-danger" element="div" />
 					<input type="text" value="${questao.titulo}" name="titulo"class="form-control" id="titulo" />
-				</div
->	
+				</div>
+					
 				<div class="form-group">
 					<label for="tags">Escolha as tags da questão:</label> 
 					<input type="text" value="${questao.tags}" name="tags" id="tags" class="form-control">
@@ -95,7 +95,7 @@ pageEncoding="UTF-8"%>
 					</div>
 				</div>
 
-				<button type="submit" class="btn btn-default">Adicionar</button>
+				<button type="submit" class="btn btn-default">Adicionar Questão</button>
 
 			</form:form>
 
