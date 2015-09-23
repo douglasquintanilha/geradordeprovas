@@ -1,6 +1,8 @@
 package com.caelum.geradordeprovas.configuration;
 
 import javax.servlet.Filter;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
@@ -12,6 +14,12 @@ public class Initializer extends AbstractAnnotationConfigDispatcherServletInitia
     	return new Class[] { Configurator.class,JpaConfigurator.class };
     }
   
+    @Override
+    public void onStartup(ServletContext servletContext) throws ServletException {
+        super.onStartup(servletContext);
+        servletContext.addListener(new TempoSessao());
+    }
+    
     @Override
     protected Class<?>[] getServletConfigClasses() {
     	return new Class[] {};

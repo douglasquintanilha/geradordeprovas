@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.caelum.geradordeprovas.DAO.UsuarioDao;
 import com.caelum.geradordeprovas.models.Usuario;
+import com.caelum.geradordeprovas.util.Criptografia;
 
 @Controller
 public class AdminController {
@@ -33,7 +34,9 @@ public class AdminController {
 		Usuario user = new Usuario();
 		user.setAdmin(admin);
 		user.setLogin(nome);
-		user.setSenha(senha);
+		Criptografia crypt = new Criptografia();
+		String senhaCript = crypt.criptografaSenha(senha);
+		user.setSenha(senhaCript);
 		
 		usuarioDao.save(user);
 		

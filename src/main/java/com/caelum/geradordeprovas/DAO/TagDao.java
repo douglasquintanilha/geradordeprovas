@@ -1,6 +1,5 @@
 package com.caelum.geradordeprovas.DAO;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
