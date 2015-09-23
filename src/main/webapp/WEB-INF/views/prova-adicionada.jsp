@@ -16,6 +16,7 @@
 		<div class="container">	
 
 			<h1>Prova criada com sucesso!</h1>
+			<a href="<c:url value='/'/>"> Voltar para o menu</a>
 			
 		</div>
 		<c:import url="footer.jsp"></c:import>

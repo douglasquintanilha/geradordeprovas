@@ -6,9 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Prova {
@@ -20,7 +20,7 @@ public class Prova {
 	@NotBlank
 	private String nome;
 	
-	@Size(min = 1)
+	@NotEmpty( message = "A prova deve conter pelo menos uma questão!")
 	@ManyToMany()
 	private List<Questao> questoes;
 

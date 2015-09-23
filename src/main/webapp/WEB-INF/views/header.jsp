@@ -2,7 +2,7 @@
 pageEncoding="UTF-8"%>
 
 <header>
-	<a href="/GeradorDeProvas/">
+	<a href="<c:url value='/'/>">
 		<img src="static/imagens/caelum-logo.svg" alt="Caelum - Ensino e Inovação" id="logo-header">
 	</a>
 	<a href="logout" id="link-logout">logout</a>

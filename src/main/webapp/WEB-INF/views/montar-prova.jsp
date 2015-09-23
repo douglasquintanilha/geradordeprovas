@@ -28,6 +28,7 @@
 			<h4>
 				Questões escolhidas: <span id="questoes-marcadas">0</span>
 			</h4>
+				<form:errors path="questoes" cssClass="alert alert-danger" element="div" />
 			<div class="input-group">
 				<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-tag" aria-hidden="true"></span></span> <input type="text" class="form-control" id="busca" placeholder="Filtre por tags..." aria-describedby="basic-addon1">
 			</div>

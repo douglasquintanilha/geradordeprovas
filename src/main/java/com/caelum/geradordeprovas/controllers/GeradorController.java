@@ -123,9 +123,8 @@ public class GeradorController {
 	
 	@RequestMapping("montar-prova")
 	public ModelAndView montarProvaView(){
-		List<Questao> questoes = questaoDao.list();
 		ModelAndView mv = new ModelAndView("montar-prova");
-		
+		List<Questao> questoes = questaoDao.list();
 		mv.addObject("questoes",questoes);
 		return mv;
 	}
@@ -135,6 +134,8 @@ public class GeradorController {
 	public ModelAndView salvaProva(@Valid @ModelAttribute("prova") Prova prova, BindingResult result){
 		if(result.hasErrors()){
 			ModelAndView mv = new ModelAndView("montar-prova",result.getModel());
+			List<Questao> questoes = questaoDao.list();
+			mv.addObject("questoes",questoes);
 			return mv;
 		}
 		
