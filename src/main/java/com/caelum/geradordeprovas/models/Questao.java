@@ -25,6 +25,10 @@ public class Questao {
 	@GeneratedValue
 	private Long id;
 	
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	@Lob
 	@NotBlank
 	private String titulo;

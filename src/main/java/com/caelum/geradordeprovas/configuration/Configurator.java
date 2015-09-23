@@ -12,6 +12,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 import com.caelum.geradordeprovas.util.AlternativaConverter;
+import com.caelum.geradordeprovas.util.QuestaoConverter;
 import com.caelum.geradordeprovas.util.TagConverter;
 
 @Configuration
@@ -41,6 +42,7 @@ public class Configurator extends WebMvcConfigurerAdapter {
 		FormattingConversionService servico = new FormattingConversionService();
 		servico.addConverter(new AlternativaConverter());
 		servico.addConverter(new TagConverter());
+		servico.addConverter(new QuestaoConverter());
 		return servico;
 	}
 	
