@@ -41,15 +41,15 @@ public class LoginController {
 			if(usuarioDao.ehAdmin(usuario)){
 				sessao.setAttribute("adminLogado", usuario);
 				System.out.println(sessao.getAttribute("adminLogado"));
+				ModelAndView mv = new ModelAndView( new RedirectView("/GeradorDeProvas/admin/index"));
+				return mv;
 			}
 			else{
 				sessao.setAttribute("usuarioLogado", usuario);
 				System.out.println(sessao.getAttribute("usuarioLogado"));
+				ModelAndView mv = new ModelAndView( new RedirectView("/GeradorDeProvas/"));
+				return mv;
 			}
-			System.out.println(usuario.isAdmin());
-			ModelAndView mv = new ModelAndView( new RedirectView("/GeradorDeProvas/"));
-			mv.addObject("nomeUsuario", usuario.getLogin());
-			return mv;
 		} else {
 			ModelAndView mv = new ModelAndView("loginForm");
 			return mv;
