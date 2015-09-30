@@ -1,8 +1,11 @@
 package com.caelum.geradordeprovas.models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Usuario {
@@ -13,7 +16,19 @@ public class Usuario {
 	@Lob
 	private String senha;
 
-	boolean admin;
+	private boolean admin;
+
+	@ManyToMany
+	private List<Prova> provas;
+	
+	
+	public List<Prova> getProvas() {
+		return provas;
+	}
+
+	public void setProvas(List<Prova> provas) {
+		this.provas = provas;
+	}
 
 	public boolean isAdmin() {
 		return admin;

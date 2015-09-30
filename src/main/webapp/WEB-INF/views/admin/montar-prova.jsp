@@ -12,7 +12,7 @@
 
 </head>
 <body>
-	<c:import url="header.jsp"></c:import>
+	<c:import url="../header.jsp"></c:import>
 	<div class="container"> 
 		<h1>Monte uma prova:</h1>
 		<br>

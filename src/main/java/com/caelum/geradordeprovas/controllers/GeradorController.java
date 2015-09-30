@@ -8,7 +8,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,11 +18,13 @@ import com.caelum.geradordeprovas.DAO.AlternativaDao;
 import com.caelum.geradordeprovas.DAO.ProvaDao;
 import com.caelum.geradordeprovas.DAO.QuestaoDao;
 import com.caelum.geradordeprovas.DAO.TagDao;
+import com.caelum.geradordeprovas.DAO.UsuarioDao;
 import com.caelum.geradordeprovas.models.Alternativa;
 import com.caelum.geradordeprovas.models.Prova;
 import com.caelum.geradordeprovas.models.Questao;
 import com.caelum.geradordeprovas.models.Resposta;
 import com.caelum.geradordeprovas.models.Tag;
+import com.caelum.geradordeprovas.models.Usuario;
 
 @Controller
 public class GeradorController {
@@ -32,14 +33,16 @@ public class GeradorController {
 	private AlternativaDao alternativaDao;
 	private TagDao tagDao;
 	private ProvaDao provaDao;
+	private UsuarioDao usuarioDao;
 
 	@Autowired
 	public GeradorController(QuestaoDao questaoDao,
-			AlternativaDao alternativaDao, TagDao tagDao,ProvaDao provaDao) {
+			AlternativaDao alternativaDao, TagDao tagDao,ProvaDao provaDao, UsuarioDao usuarioDao) {
 		this.questaoDao = questaoDao;
 		this.alternativaDao = alternativaDao;
 		this.tagDao = tagDao;
 		this.provaDao = provaDao;
+		this.usuarioDao = usuarioDao;
 	}
 
 	@RequestMapping("prova-aluno")
@@ -139,6 +142,17 @@ public class GeradorController {
 		ModelAndView mv = new ModelAndView("admin/prova-adicionada");
 		
 		return mv;
+	}
+	
+	@RequestMapping("admin/libera-prova")
+	public ModelAndView liberaProva(){
+		
+		List<Usuario> usuarios = new ArrayList<>(usuarioDao.list());
+		
+		ModelAndView mv = new ModelAndView("admin/libera-prova");
+		mv.addObject("usuarios", usuarios);
+		return mv;
+
 	}
 	
 
