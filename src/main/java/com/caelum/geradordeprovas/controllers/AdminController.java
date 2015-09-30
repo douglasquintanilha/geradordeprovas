@@ -19,6 +19,11 @@ public class AdminController {
 		this.usuarioDao = usuarioDao;
 	}
 	
+	@RequestMapping("usuario-adicionado")
+	public String usuarioAdicionado(){
+		return "/usuario-adicionado";
+	}
+	
 	@RequestMapping("admin/cria-usuario-form")
 	public String criaUsuarioForm() {
 		return "admin/cria-usuario-form";
