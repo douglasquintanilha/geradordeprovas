@@ -27,9 +27,9 @@ public class QuestoesController {
 		return "adiciona-questao";
 	}
 	
-	@RequestMapping("ok")
+	@RequestMapping("questao-adicionada")
 	public String ok(){
-		return "ok";
+		return "questao-adicionada";
 	}
 
 	@org.springframework.transaction.annotation.Transactional
@@ -43,7 +43,7 @@ public class QuestoesController {
 		System.out.println(questao.getAlternativa());
 		questaoBo.salva(questao);
 		
-		return "redirect:ok";
+		return "redirect:questao-adicionada";
 	}
 
 }

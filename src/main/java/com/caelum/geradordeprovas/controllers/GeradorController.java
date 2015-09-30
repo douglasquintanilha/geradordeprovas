@@ -45,20 +45,15 @@ public class GeradorController {
 	@RequestMapping("prova-aluno")
 	public ModelAndView montaProvaPorLista() {
 
-//		ArrayList<Questao> questoes,
-//		ArrayList<Alternativa> alternativas
-
 		List<Questao> questoes = questaoDao.list();
-		List<Alternativa> alternativas = alternativaDao.list();
 		
-		if (questoes.isEmpty() || alternativas.isEmpty()) {
+		if (questoes.isEmpty()) {
 			ModelAndView erro = new ModelAndView("erro");
 			return erro;
 		}
 
 		ModelAndView mv = new ModelAndView("prova-aluno2");
-		mv.addObject("listaDeQuestoes", questoes);
-		mv.addObject("listaDeAlternativas", alternativas);
+		mv.addObject("questoes", questoes);
 		return mv;
 	}
 
