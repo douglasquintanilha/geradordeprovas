@@ -4,9 +4,9 @@ pageEncoding="UTF-8"%>
 
 <header>
 	<a href="<c:url value='/'/>">
-		<img src="static/imagens/caelum-logo.svg" alt="Caelum - Ensino e Inovação" id="logo-header">
+		<img src="<c:url value='/static/imagens/caelum-logo.svg' />" alt="Caelum - Ensino e Inovação" id="logo-header">
 	</a>
 	<a href="logout" id="link-logout">logout</a>
 	<div class="clear"></div>
-	<script src="static/js/escondeLogout.js"></script>
+	<script src="<c:url value='/static/js/escondeLogout.js' />"></script>
 </header>	
