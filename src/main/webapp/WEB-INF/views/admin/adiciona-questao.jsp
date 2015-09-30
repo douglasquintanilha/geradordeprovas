@@ -14,7 +14,7 @@ pageEncoding="UTF-8"%>
 
 	</head>
 	<body>
-		<c:import url="header.jsp"></c:import>
+		<c:import url="../header.jsp"></c:import>
 		<div class="container">	
 
 			
@@ -104,6 +104,6 @@ pageEncoding="UTF-8"%>
 			<script src="static/js/autocomplete-tags.js"></script>
 			<script src="static/js/limpa-campo.js"></script>
 		</div>
-		<c:import url="footer.jsp"></c:import>
+		<c:import url="../footer.jsp"></c:import>
 	</body>
 </html>
