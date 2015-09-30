@@ -12,16 +12,24 @@
 </head>
 <body>
 	<c:import url="header.jsp"></c:import>
+	<div class="container">
+		<form:form action="efetuaLogin" method="POST" commandName="usuario" class="form col-xs-3" >
+			<div class="form-group">
+					<label for="login">Login:</label>
+					<input type="text" name="login" id="login" class="form-control" >
+			</div>
+			<div class="form-group">
+					<label for="senha">Senha:</label>
+					<input type="password" name="senha" id="senha" class="form-control" >
+			</div>
+			
+			<div class="form-group">
+					<button type="submit" class="btn btn-default">Entrar</button>
+			</div>
+	
+		</form:form>
 
-	<form:form action="efetuaLogin" method="POST" commandName="usuario">
-
-		<p>Login:</p> <input type="text" name="login" /><br /> 
-		<p>Senha:</p> <input type="password" name="senha" /><br />
-		<input type="submit" value="Entrar">
-
-	</form:form>
-
-
+	</div>
 	<c:import url="footer.jsp"></c:import>
 </body>
 </html>
