@@ -5,11 +5,11 @@ pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8" /> 
 		<title>Caelum Provas</title>
-		<link rel="stylesheet" href="static/css/bootstrap.min.css">
-		<link rel="stylesheet" href="static/css/jquery-ui.min.css">
-		<link rel="stylesheet" href="static/css/main.css">
+		<link rel="stylesheet" href="<c:url value='../static/css/bootstrap.min.css' />">
+		<link rel="stylesheet" href="<c:url value='../static/css/jquery-ui.min.css' /> ">
+		<link rel="stylesheet" href="<c:url value='../static/css/main.css' /> ">
 		
 
 	</head>
@@ -99,10 +99,10 @@ pageEncoding="UTF-8"%>
 
 			</form:form>
 
-			<script src="static/js/jquery-2.1.4.min.js"></script>
-			<script src="static/js/jquery-ui.min.js"></script>
-			<script src="static/js/autocomplete-tags.js"></script>
-			<script src="static/js/limpa-campo.js"></script>
+			<script src="<c:url value='../static/js/jquery-2.1.4.min.js' />"></script>
+			<script src="<c:url value='../static/js/jquery-ui.min.js' />"></script>
+			<script src="<c:url value='../static/js/autocomplete-tags.js' />"></script>
+			<script src="<c:url value='../static/js/limpa-campo.js' />"></script>
 		</div>
 		<c:import url="../footer.jsp"></c:import>
 	</body>
