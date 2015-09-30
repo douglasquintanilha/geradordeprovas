@@ -30,7 +30,7 @@ public class LoginController {
 	@RequestMapping("logout")
 	public String logout(HttpSession sessao) {
 		sessao.invalidate();
-		return "loginForm";
+		return "redirect:loginForm";
 	}
 	
 	@RequestMapping("efetuaLogin")
@@ -40,9 +40,11 @@ public class LoginController {
 		if (usuarioDao.validaUsuario(usuario)) {
 			if(usuarioDao.ehAdmin(usuario)){
 				sessao.setAttribute("adminLogado", usuario);
+				System.out.println(sessao.getAttribute("adminLogado"));
 			}
 			else{
 				sessao.setAttribute("usuarioLogado", usuario);
+				System.out.println(sessao.getAttribute("usuarioLogado"));
 			}
 			System.out.println(usuario.isAdmin());
 			ModelAndView mv = new ModelAndView( new RedirectView("/GeradorDeProvas/"));

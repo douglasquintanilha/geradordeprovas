@@ -2,7 +2,6 @@ package com.caelum.geradordeprovas.DAO;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -10,7 +9,6 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import com.caelum.geradordeprovas.models.Questao;
-import com.caelum.geradordeprovas.models.Tag;
 
 @Repository
 public class QuestaoDao {

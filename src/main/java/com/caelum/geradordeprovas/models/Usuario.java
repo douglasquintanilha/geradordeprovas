@@ -1,20 +1,18 @@
 package com.caelum.geradordeprovas.models;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 @Entity
 public class Usuario {
 
-	@GeneratedValue
-	private Long id;
-
 	@Id
 	private String login;
-	
+
+	@Lob
 	private String senha;
-	
+
 	boolean admin;
 
 	public boolean isAdmin() {
@@ -39,14 +37,6 @@ public class Usuario {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 }

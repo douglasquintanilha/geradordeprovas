@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import com.caelum.geradordeprovas.models.Usuario;
+import com.caelum.geradordeprovas.util.Criptografia;
 
 @Repository
 public class UsuarioDao {
@@ -27,7 +28,9 @@ public class UsuarioDao {
 
 		else {
 			Usuario us = manager.find(Usuario.class, usuario.getLogin());
-			if (us.getSenha().equals(usuario.getSenha())) {
+			Criptografia crypt = new Criptografia();
+			String compara = crypt.criptografaSenha(usuario.getSenha());
+			if (us.getSenha().equals(compara)){
 				return true;
 			}
 		}
