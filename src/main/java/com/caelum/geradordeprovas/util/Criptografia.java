@@ -31,9 +31,6 @@ public class Criptografia {
 	         }  
 	         return str.toUpperCase();  
 	      }  
-	   }     
-
-	
-	
+	   }     	
 	
 }

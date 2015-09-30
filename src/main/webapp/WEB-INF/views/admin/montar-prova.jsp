@@ -41,9 +41,7 @@
 					<div class="panel-body">
 						<p>${questao.titulo}</p>
 						<span>Tags: </span> <span class="tags"><c:forEach items="${questao.tags}" var="tag">${tag},</c:forEach></span> <br>
-						<button class="btn btn-primary botao-exibir-alternativas" type="button" data-toggle="collapse" data-target="#alternativas${questao.id}" aria-expanded="false" aria-controls="alternativas${questao.id}">Exibir alternativas</button>
-						<button class="btn btn-primary botao-esconder-alternativas" type="button" data-toggle="collapse" data-target="#alternativas${questao.id}" aria-expanded="false" aria-controls="alternativas${questao.id}" style="display: none">Esconder
-							alternativas</button>
+						<button class="btn btn-primary botao-exibir-alternativas" type="button" data-toggle="collapse" data-target="#alternativas${questao.id}" aria-expanded="false" aria-controls="alternativas${questao.id}">Exibir alternativas</button>	
 						<ol class="collapse" id="alternativas${questao.id}" type="A">
 							<c:forEach items="${questao.alternativa}" var="alternativa">
 								<li>${alternativa.descricao})</li>
