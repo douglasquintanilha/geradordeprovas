@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="static/css/main.css">
 </head>
 <body>
-	<c:import url="header.jsp"></c:import>
+<%-- 	<c:import url="header.jsp"></c:import> --%>
 	<form action="mostra-por-tag" method="GET">
 		<select name="tagSelecionada">
 			<c:forEach items="${tags}" var="tag">
@@ -20,7 +20,7 @@
 		</select>
 		<input type="submit" value="Procurar">
 	</form>
-	<c:import url="footer.jsp"></c:import>
+<%-- 	<c:import url="footer.jsp"></c:import> --%>
 	
 </body>
 </html>
