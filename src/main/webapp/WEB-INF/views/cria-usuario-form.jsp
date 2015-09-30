@@ -14,12 +14,15 @@
 	<c:import url="header.jsp"></c:import>
 
 	<form action="adiciona-usuario" method="POST">
-	
-		Nome  <input type="text" name="nome"/><br/>
-		Senha <input type="password" name="senha"/><br/>
-		Admin?<br />
-		Sim <input type="radio" name="admin" value="true"/><br/>
-		Nao <input type="radio" name="admin" value="false"/><br/>
+		<label for="nome">Nome</label>  
+		<input type="text" name="nome" id="nome"><br/>
+		
+		<label for="senha"> Senha</label>
+		<input type="password" name="senha"id="senha"><br/>
+		
+		Admin?
+		Sim <input type="radio" id="admin" name="admin" value="true"/><br/>
+		Nao <input type="radio" id="admin" name="admin" value="false"/><br/>
 		<input type="submit" value="Criar">
 		
 	</form>
