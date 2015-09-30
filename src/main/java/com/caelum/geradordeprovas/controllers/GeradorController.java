@@ -52,7 +52,7 @@ public class GeradorController {
 			return erro;
 		}
 
-		ModelAndView mv = new ModelAndView("prova-aluno2");
+		ModelAndView mv = new ModelAndView("prova-aluno");
 		mv.addObject("questoes", questoes);
 		return mv;
 	}
@@ -95,7 +95,7 @@ public class GeradorController {
 		return mv;
 	}
 	
-	@RequestMapping("mostra-por-tag")
+	@RequestMapping("admin/mostra-por-tag")
 	public ModelAndView mostraQuestoesPorTag(
 			@RequestParam("tagSelecionada") String nomeTag) {
 
@@ -104,7 +104,7 @@ public class GeradorController {
 
 		// System.out.println(questoes.get(0).getClass());
 
-		ModelAndView mv = new ModelAndView("mostra-por-tag");
+		ModelAndView mv = new ModelAndView("admin/mostra-por-tag");
 
 		List<Tag> tags = new ArrayList<>(tagDao.list());
 		mv.addObject("tags", tags);
@@ -116,19 +116,19 @@ public class GeradorController {
 
 	}
 	
-	@RequestMapping("montar-prova")
+	@RequestMapping("admin/montar-prova")
 	public ModelAndView montarProvaView(){
-		ModelAndView mv = new ModelAndView("montar-prova");
+		ModelAndView mv = new ModelAndView("admin/montar-prova");
 		List<Questao> questoes = questaoDao.list();
 		mv.addObject("questoes",questoes);
 		return mv;
 	}
 	
 	@Transactional
-	@RequestMapping("salvar-prova")
+	@RequestMapping("admin/salvar-prova")
 	public ModelAndView salvaProva(@Valid @ModelAttribute("prova") Prova prova, BindingResult result){
 		if(result.hasErrors()){
-			ModelAndView mv = new ModelAndView("montar-prova",result.getModel());
+			ModelAndView mv = new ModelAndView("admin/montar-prova",result.getModel());
 			List<Questao> questoes = questaoDao.list();
 			mv.addObject("questoes",questoes);
 			return mv;
@@ -136,7 +136,7 @@ public class GeradorController {
 		
 		provaDao.save(prova);
 		
-		ModelAndView mv = new ModelAndView("prova-adicionada");
+		ModelAndView mv = new ModelAndView("admin/prova-adicionada");
 		
 		return mv;
 	}

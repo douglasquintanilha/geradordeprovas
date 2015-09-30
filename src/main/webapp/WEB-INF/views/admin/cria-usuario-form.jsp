@@ -36,7 +36,6 @@
 				<button type="submit" class="btn btn-default">Criar</button>
 			</div>
 		</form>
-
 	</div>
 	<c:import url="../footer.jsp"></c:import>
 </body>

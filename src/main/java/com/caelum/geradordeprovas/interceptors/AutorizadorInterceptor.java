@@ -23,7 +23,6 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 
 		if ((request.getSession().getAttribute("usuarioLogado") != null)
 				&& (uri.contains("/admin"))) {
-//			response.sendRedirect(arg0);
 			return false;
 		}
 
