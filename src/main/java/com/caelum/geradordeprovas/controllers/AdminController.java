@@ -24,6 +24,11 @@ public class AdminController {
 		return "admin/cria-usuario-form";
 	}
 
+	@RequestMapping("admin/index")
+	public String indexAdmin(){
+		return "admin/index";
+	}
+	
 	@org.springframework.transaction.annotation.Transactional
 	@RequestMapping("adiciona-usuario")
 	public String criaUsuario(@RequestParam("nome") String nome,
@@ -40,7 +45,7 @@ public class AdminController {
 		
 		usuarioDao.save(user);
 		
-		return "redirect:ok";
+		return "redirect:admin/usuario-adicionado";
 	}
 
 }

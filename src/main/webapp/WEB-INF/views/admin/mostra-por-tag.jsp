@@ -6,21 +6,26 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Gerador de Provas</title>
+<title>${nomeTag}</title>
 <link rel="stylesheet" href="static/css/bootstrap.min.css">
 <link rel="stylesheet" href="static/css/main.css">
 </head>
 <body>
-	<c:import url="header.jsp"></c:import>
+<%-- 	<c:import url="header.jsp"></c:import> --%>
+	<form action="mostra-por-tag" method="GET">
+		<select name="tagSelecionada">
+			<c:forEach items="${tags}" var="tag">
+				<option value="${tag.nome}">${tag.nome}</option>
+			</c:forEach>
+		</select> <input type="submit" value="Procurar">
+	</form>
 	<div class="container">
-		<h1>Gerador de provas Caelum!</h1>
-		<a href="<c:url value='adiciona-questao'/>"><h3>Adicionar Questão</h3></a>
-		<a href="<c:url value='montar-prova'/>"><h3>Montar Prova</h3></a> 
-		<a href="<c:url value='prova-aluno'/>"><h3>Realizar Prova</h3></a>
-		<a href="<c:url value='seleciona-tag'/>"><h3>Procurar Questão por tag</h3></a>
-		<a href="<c:url value='cria-usuario-form'/>"><h3>Criar Usuário</h3></a>
+		<h4>Nome da Tag: ${nomeTag}</h4>
+		<h5>Questoes:</h5>
+		<c:forEach items="${questoes}" var="questao">
+		${questao.titulo}<br />
+		</c:forEach>
 	</div>
-	<c:import url="footer.jsp"></c:import>
-	
+<%-- 	<c:import url="footer.jsp"></c:import> --%>
 </body>
 </html>

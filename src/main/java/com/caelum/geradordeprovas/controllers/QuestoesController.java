@@ -22,28 +22,28 @@ public class QuestoesController {
 		this.questaoBo = questaoBo;
 	}
 
-	@RequestMapping("adiciona-questao")
+	@RequestMapping("admin/adiciona-questao")
 	public String mostraAdicionaQuestaoForm(Questao questao) {
-		return "adiciona-questao";
+		return "admin/adiciona-questao";
 	}
 	
-	@RequestMapping("questao-adicionada")
+	@RequestMapping("admin/questao-adicionada")
 	public String ok(){
-		return "questao-adicionada";
+		return "admin/questao-adicionada";
 	}
 
 	@org.springframework.transaction.annotation.Transactional
-	@RequestMapping("salva-questao")
+	@RequestMapping("admin/salva-questao")
 	public String salva(@ModelAttribute("questao") @Valid Questao questao, BindingResult result,Model model) {
 		if(result.hasErrors()){
 			model.addAttribute("alternativa", questao.getAlternativa());
-			return "adiciona-questao";
+			return "admin/adiciona-questao";
 		}
 		
 		System.out.println(questao.getAlternativa());
 		questaoBo.salva(questao);
 		
-		return "redirect:questao-adicionada";
+		return "redirect:admin/questao-adicionada";
 	}
 
 }

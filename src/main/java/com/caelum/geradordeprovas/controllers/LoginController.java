@@ -27,6 +27,11 @@ public class LoginController {
 		return "loginForm";
 	}
 
+	@RequestMapping("usuario-adicionado")
+	public String usuarioAdicionado(){
+		return "/usuario-adicionado";
+	}
+	
 	@RequestMapping("logout")
 	public String logout(HttpSession sessao) {
 		sessao.invalidate();

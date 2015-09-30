@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="static/css/main.css">
 </head>
 <body>
-<%-- 	<c:import url="/header.jsp"></c:import> --%>
+<%-- 	<c:import url="header.jsp"></c:import> --%>
 
 	<form action="<c:url value='/adiciona-usuario'/>" method="POST">
 	
