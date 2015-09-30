@@ -19,11 +19,6 @@ public class AdminController {
 		this.usuarioDao = usuarioDao;
 	}
 	
-	@RequestMapping("usuario-adicionado")
-	public String usuarioAdicionado(){
-		return "/usuario-adicionado";
-	}
-	
 	@RequestMapping("admin/cria-usuario-form")
 	public String criaUsuarioForm() {
 		return "admin/cria-usuario-form";
@@ -35,7 +30,7 @@ public class AdminController {
 	}
 	
 	@org.springframework.transaction.annotation.Transactional
-	@RequestMapping("adiciona-usuario")
+	@RequestMapping("admin/adiciona-usuario")
 	public String criaUsuario(@RequestParam("nome") String nome,
 			@RequestParam("senha") String senha,
 			@RequestParam("admin") boolean admin) {
@@ -50,7 +45,7 @@ public class AdminController {
 		
 		usuarioDao.save(user);
 		
-		return "redirect:admin/usuario-adicionado";
+		return "admin/usuario-adicionado";
 	}
 
 }

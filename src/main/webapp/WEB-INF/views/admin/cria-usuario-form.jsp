@@ -12,7 +12,8 @@
 <body>
 	<c:import url="../header.jsp"></c:import>
 	<div class="container">
-		<form action="adiciona-usuario" method="POST" class="form-horizontal col-xs-2">
+		<c:set var="urlPost" value="adiciona-usuario"/>
+		<form action="${urlPost}" method="POST" class="form-horizontal col-xs-2">
 			<div class="form-group">
 				<label for="nome">Nome:</label>
 				<input type="text" class="form-control" name="nome" id="nome">

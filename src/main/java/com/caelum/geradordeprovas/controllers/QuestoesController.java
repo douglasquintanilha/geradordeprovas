@@ -27,11 +27,6 @@ public class QuestoesController {
 		return "admin/adiciona-questao";
 	}
 	
-	@RequestMapping("admin/questao-adicionada")
-	public String ok(){
-		return "admin/questao-adicionada";
-	}
-
 	@org.springframework.transaction.annotation.Transactional
 	@RequestMapping("admin/salva-questao")
 	public String salva(@ModelAttribute("questao") @Valid Questao questao, BindingResult result,Model model) {
@@ -43,7 +38,7 @@ public class QuestoesController {
 		System.out.println(questao.getAlternativa());
 		questaoBo.salva(questao);
 		
-		return "redirect:admin/questao-adicionada";
+		return "admin/questao-adicionada";
 	}
 
 }
