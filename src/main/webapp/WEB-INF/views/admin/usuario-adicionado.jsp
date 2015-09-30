@@ -7,18 +7,19 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Caelum Provas</title>
-		<link rel="stylesheet" href="static/css/bootstrap.min.css">
-		<link rel="stylesheet" href="static/css/main.css">
+		<link rel="stylesheet" href="<c:url value='../static/css/bootstrap.min.css' />">
+		<link rel="stylesheet" href="<c:url value='../static/css/main.css' />">
+	
 
 	</head>
 	<body>
-		<c:import url="header.jsp"></c:import>
+		<c:import url="../header.jsp"></c:import>
 		<div class="container">	
 
 			<h1>Usuário adicionado com sucesso!</h1>
 			<a href="/GeradorDeProvas/adiciona-questao">Adicionar nova questão</a>
 
 		</div>
-		<c:import url="footer.jsp"></c:import>
+		<c:import url="../footer.jsp"></c:import>
 	</body>
 </html>	

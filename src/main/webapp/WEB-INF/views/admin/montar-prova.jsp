@@ -6,9 +6,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Caelum Provas</title>
-<link rel="stylesheet" href="static/css/bootstrap.min.css">
-<link rel="stylesheet" href="static/css/jquery-ui.min.css">
-<link rel="stylesheet" href="static/css/main.css">
+<link rel="stylesheet" href="<c:url value='../static/css/bootstrap.min.css' />">
+<link rel="stylesheet" href="<c:url value='../static/css/jquery-ui.min.css' />">
+<link rel="stylesheet" href="<c:url value='../static/css/main.css' />">
 
 </head>
 <body>
@@ -54,11 +54,12 @@
 		</form:form>
 
 	</div>
-	<c:import url="footer.jsp"></c:import>
-	<script src="static/js/jquery-2.1.4.min.js"></script>
-	<script src="static/js/bootstrap.min.js"></script>
-	<script src="static/js/troca-texto.js"></script>
-	<script src="static/js/filtra-por-tag.js"></script>
-	<script src="static/js/contador-de-questoes.js"></script>
+	<c:import url="../footer.jsp"></c:import>
+	
+	<script src="<c:url value='..static/js/jquery-2.1.4.min.js' />"></script>
+	<script src="<c:url value='..static/js/bootstrap.min.js' />"></script>
+	<script src="<c:url value='..static/js/troca-texto.js' />"></script>
+	<script src="<c:url value='..static/js/filtra-por-tag.js' />"></script>
+	<script src="<c:url value='..static/js/contador-de-questoes.js' />"></script>
 </body>
 </html>

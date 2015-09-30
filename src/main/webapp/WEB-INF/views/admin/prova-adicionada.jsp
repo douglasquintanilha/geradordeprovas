@@ -7,19 +7,20 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Caelum Provas</title>
-		<link rel="stylesheet" href="static/css/bootstrap.min.css">
-		<link rel="stylesheet" href="static/css/main.css">
+		<link rel="stylesheet" href="<c:url value='../static/css/bootstrap.min.css' />">
+		<link rel="stylesheet" href="<c:url value='../static/css/main.css' />">
+
 
 	</head>
 	<body>
-		<c:import url="header.jsp"></c:import>
+		<c:import url="../header.jsp"></c:import>
 		<div class="container">	
 
 			<h1>Prova criada com sucesso!</h1>
 			<a href="<c:url value='/'/>"> Voltar para o menu</a>
 			
 		</div>
-		<c:import url="footer.jsp"></c:import>
+		<c:import url="../footer.jsp"></c:import>
 	</body>
 </html>	
 			
