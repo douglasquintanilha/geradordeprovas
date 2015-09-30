@@ -45,15 +45,20 @@ public class GeradorController {
 	@RequestMapping("prova-aluno")
 	public ModelAndView montaProvaPorLista() {
 
+//		ArrayList<Questao> questoes,
+//		ArrayList<Alternativa> alternativas
+
 		List<Questao> questoes = questaoDao.list();
+		List<Alternativa> alternativas = alternativaDao.list();
 		
-		if (questoes.isEmpty()) {
+		if (questoes.isEmpty() || alternativas.isEmpty()) {
 			ModelAndView erro = new ModelAndView("erro");
 			return erro;
 		}
 
 		ModelAndView mv = new ModelAndView("prova-aluno2");
-		mv.addObject("questoes", questoes);
+		mv.addObject("listaDeQuestoes", questoes);
+		mv.addObject("listaDeAlternativas", alternativas);
 		return mv;
 	}
 
@@ -83,12 +88,12 @@ public class GeradorController {
 		return mv;
 	}
 
-	@RequestMapping("admin/seleciona-tag")
+	@RequestMapping("seleciona-tag")
 	public ModelAndView selecionaTag() {
 
 		List<Tag> tags = new ArrayList<>(tagDao.list());
 
-		ModelAndView mv = new ModelAndView("admin/seleciona-tag");
+		ModelAndView mv = new ModelAndView("seleciona-tag");
 
 		mv.addObject("tags", tags);
 

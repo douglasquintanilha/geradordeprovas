@@ -83,12 +83,12 @@ public class GeradorController {
 		return mv;
 	}
 
-	@RequestMapping("admin/seleciona-tag")
+	@RequestMapping("seleciona-tag")
 	public ModelAndView selecionaTag() {
 
 		List<Tag> tags = new ArrayList<>(tagDao.list());
 
-		ModelAndView mv = new ModelAndView("admin/seleciona-tag");
+		ModelAndView mv = new ModelAndView("seleciona-tag");
 
 		mv.addObject("tags", tags);
 

@@ -52,8 +52,14 @@ public class GeradorController {
 			return erro;
 		}
 
+<<<<<<< HEAD
 		ModelAndView mv = new ModelAndView("prova-aluno2");
 		mv.addObject("questoes", questoes);
+=======
+		ModelAndView mv = new ModelAndView("prova-aluno");
+		mv.addObject("listaDeQuestoes", questoes);
+		mv.addObject("listaDeAlternativas", alternativas);
+>>>>>>> dfff47d62debc6e2eb7d6d123222e4c111d3f97b
 		return mv;
 	}
 
@@ -83,12 +89,12 @@ public class GeradorController {
 		return mv;
 	}
 
-	@RequestMapping("admin/seleciona-tag")
+	@RequestMapping("seleciona-tag")
 	public ModelAndView selecionaTag() {
 
 		List<Tag> tags = new ArrayList<>(tagDao.list());
 
-		ModelAndView mv = new ModelAndView("admin/seleciona-tag");
+		ModelAndView mv = new ModelAndView("seleciona-tag");
 
 		mv.addObject("tags", tags);
 
