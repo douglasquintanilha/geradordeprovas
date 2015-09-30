@@ -37,6 +37,7 @@ public class LoginController {
 		sessao.invalidate();
 		return "redirect:loginForm";
 	}
+
 	
 	@RequestMapping("efetuaLogin")
 	public ModelAndView efetuaLogin(@ModelAttribute("usuario") Usuario usuario,
