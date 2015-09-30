@@ -17,8 +17,8 @@
 		<a href="<c:url value='adiciona-questao'/>"><h3>Adicionar Questão</h3></a>
 		<a href="<c:url value='montar-prova'/>"><h3>Montar Prova</h3></a> 
 		<a href="<c:url value='prova-aluno'/>"><h3>Realizar Prova</h3></a>
-		<a href="<c:url value='seleciona-tag'/>"><h3>Procurar Questão por tag</h3></a>
-		<a href="<c:url value='cria-usuario-form'/>"><h3>Criar Usuário</h3></a>
+		<a href="<c:url value='admin/seleciona-tag'/>"><h3>Procurar Questão por tag</h3></a>
+		<a href="<c:url value='admin/cria-usuario-form'/>"><h3>Criar Usuário</h3></a>
 	</div>
 	<c:import url="footer.jsp"></c:import>
 	

@@ -19,9 +19,9 @@ public class AdminController {
 		this.usuarioDao = usuarioDao;
 	}
 	
-	@RequestMapping("cria-usuario-form")
+	@RequestMapping("admin/cria-usuario-form")
 	public String criaUsuarioForm() {
-		return "cria-usuario-form";
+		return "admin/cria-usuario-form";
 	}
 
 	@org.springframework.transaction.annotation.Transactional
@@ -40,7 +40,7 @@ public class AdminController {
 		
 		usuarioDao.save(user);
 		
-		return "ok";
+		return "redirect:ok";
 	}
 
 }
