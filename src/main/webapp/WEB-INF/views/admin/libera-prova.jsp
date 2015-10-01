@@ -15,15 +15,21 @@
 </head>
 <body>
 	<c:import url="../header.jsp"></c:import>
-	<c:url var="urlPost" value='libera-prova-pro-usuario'/>
+	<c:url var="urlPost" value='salva-liberacao'/>
 	<form:form method="POST" action="${urlPost}">
+	
+	<c:forEach items="${provas}" var="prova">
+		<input type="checkbox" name="provas" value="${prova.id}">${prova.id} / ${prova.nome}<br>
+	</c:forEach>
+	------------------------------------------------------------------------------------------------
+		<br>
 		<c:forEach items="${usuarios}" var="usuario">
 
-			<input type="checkbox" value="${usuario.login}">${usuario.login}
+			<input type="checkbox" name="usuarios" value="${usuario.login}">${usuario.login}
 			<br>
 
 		</c:forEach>
-		<input type="submit" value="GO!">
+		<input type="submit" value="LiberoSim">
 	</form:form>
 		<c:import url="../footer.jsp"></c:import>
 </body>

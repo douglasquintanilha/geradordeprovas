@@ -1,5 +1,6 @@
 package com.caelum.geradordeprovas.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -20,6 +21,11 @@ public class Usuario {
 
 	@ManyToMany
 	private List<Prova> provas;
+	
+	
+	public void adicionaProvas(List<Prova> provas){
+		this.provas.addAll(provas);
+	}
 	
 	
 	public List<Prova> getProvas() {

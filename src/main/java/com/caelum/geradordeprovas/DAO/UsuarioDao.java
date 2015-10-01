@@ -1,5 +1,6 @@
 package com.caelum.geradordeprovas.DAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -7,6 +8,7 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
+import com.caelum.geradordeprovas.models.Prova;
 import com.caelum.geradordeprovas.models.Usuario;
 import com.caelum.geradordeprovas.util.Criptografia;
 
@@ -47,4 +49,12 @@ public class UsuarioDao {
 		return manager.createQuery("from Usuario u", Usuario.class)
 				.getResultList();
 	}
+	
+	public void salvaProvasLiberadas(String login, List<Prova> provas){
+		
+		Usuario us = manager.find(Usuario.class, login);
+		us.adicionaProvas(provas);
+
+	}
+	
 }
