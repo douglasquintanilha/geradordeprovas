@@ -16,7 +16,7 @@
 		<form:form action="efetuaLogin" method="POST" commandName="usuario" class="form col-xs-3" >
 			<div class="form-group">
 					<label for="login">Login:</label>
-					<input type="text" name="login" id="login" class="form-control" >
+					<input type="text" name="login" id="login" class="form-control" autofocus >
 			</div>
 			<div class="form-group">
 					<label for="senha">Senha:</label>
