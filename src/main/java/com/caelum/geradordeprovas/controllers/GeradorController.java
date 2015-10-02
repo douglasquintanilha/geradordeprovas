@@ -3,6 +3,7 @@ package com.caelum.geradordeprovas.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -165,13 +166,40 @@ public class GeradorController {
 	public String salvaLiberacao(@RequestParam("provas") List<Long> provasId,
 			@RequestParam("usuarios") List<String> usuarios) {
 
-		List<Prova> provas = new ArrayList<>(provaDao.getProvasPorId(provasId));
-		
+		List<Prova> provas = new ArrayList<>(provaDao.getProvasPorListDeIds(provasId));
+
 		for (String user : usuarios) {
 			usuarioDao.salvaProvasLiberadas(user, provas);
 		}
-		
+
 		return "admin/provas-liberadas";
 	}
 
+	@RequestMapping("provas-liberadas")
+	public ModelAndView provasLiberadas(HttpSession sessao) {
+
+		Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
+		Usuario user = usuarioDao.getUsuario(usuario.getLogin());
+		
+		List<Prova> provas = new ArrayList<>(user.getProvas());
+
+		System.out.println(provas.get(0).getNome());
+		
+		ModelAndView mv = new ModelAndView("provas-liberadas");
+		mv.addObject("provas", provas);
+
+		return mv;
+	}
+	
+	@RequestMapping("escolhe-prova")
+	public ModelAndView escolheProva(@RequestParam("provaId") Long id){
+		
+		Prova prova = provaDao.getProva(id);
+		
+		ModelAndView mv = new ModelAndView("realiza-prova");
+		mv.addObject("prova",prova);
+		
+		return mv;
+	}
+	
 }

@@ -20,7 +20,7 @@ public class Usuario {
 	private boolean admin;
 
 	@ManyToMany
-	private List<Prova> provas;
+	private List<Prova> provas = new ArrayList<>();
 	
 	
 	public void adicionaProvas(List<Prova> provas){

@@ -5,7 +5,7 @@
 
 
 <c:url var="urlPost" value='salva-liberacao'/>
-	<form:form method="POST" action="${urlPost}">
+	<form:form method="GET" action="${urlPost}">
 	
 	<c:forEach items="${provas}" var="prova">
 		<input type="checkbox" name="provas" value="${prova.id}">${prova.id} / ${prova.nome}<br>

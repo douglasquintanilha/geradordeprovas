@@ -22,10 +22,15 @@ public class UsuarioDao {
 		manager.persist(usuario);
 	}
 
-	public boolean validaUsuario(Usuario usuario) {
+	public Usuario getUsuario(String login){
+		Usuario usuario = manager.find(Usuario.class, login);
+		return usuario;
+	}
+	
+	public Usuario validaUsuario(Usuario usuario) {
 
 		if (usuario == null) {
-			return false;
+			return null;
 		}
 
 		else {
@@ -33,10 +38,10 @@ public class UsuarioDao {
 			Criptografia crypt = new Criptografia();
 			String compara = crypt.criptografaSenha(usuario.getSenha());
 			if (us.getSenha().equals(compara)){
-				return true;
+				return us;
 			}
 		}
-		return false;
+		return null;
 	}
 
 	public boolean ehAdmin(Usuario usuario){
@@ -56,5 +61,17 @@ public class UsuarioDao {
 		us.adicionaProvas(provas);
 
 	}
+	
+	public List<Prova> getProvasDoUsuario(String login){
+		
+		List<Prova> provas = new ArrayList<>();
+		provas = manager
+				.createQuery("select p from provas p JOIN p.Usuario u where u.login =:login")
+				.setParameter("login", login)
+				.getResultList();
+
+		return provas;
+	}
+	
 	
 }
