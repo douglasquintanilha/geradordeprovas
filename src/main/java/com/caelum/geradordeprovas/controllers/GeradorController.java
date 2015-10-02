@@ -8,7 +8,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,11 +18,13 @@ import com.caelum.geradordeprovas.DAO.AlternativaDao;
 import com.caelum.geradordeprovas.DAO.ProvaDao;
 import com.caelum.geradordeprovas.DAO.QuestaoDao;
 import com.caelum.geradordeprovas.DAO.TagDao;
+import com.caelum.geradordeprovas.DAO.UsuarioDao;
 import com.caelum.geradordeprovas.models.Alternativa;
 import com.caelum.geradordeprovas.models.Prova;
 import com.caelum.geradordeprovas.models.Questao;
 import com.caelum.geradordeprovas.models.Resposta;
 import com.caelum.geradordeprovas.models.Tag;
+import com.caelum.geradordeprovas.models.Usuario;
 
 @Controller
 public class GeradorController {
@@ -32,21 +33,24 @@ public class GeradorController {
 	private AlternativaDao alternativaDao;
 	private TagDao tagDao;
 	private ProvaDao provaDao;
+	private UsuarioDao usuarioDao;
 
 	@Autowired
 	public GeradorController(QuestaoDao questaoDao,
-			AlternativaDao alternativaDao, TagDao tagDao,ProvaDao provaDao) {
+			AlternativaDao alternativaDao, TagDao tagDao, ProvaDao provaDao,
+			UsuarioDao usuarioDao) {
 		this.questaoDao = questaoDao;
 		this.alternativaDao = alternativaDao;
 		this.tagDao = tagDao;
 		this.provaDao = provaDao;
+		this.usuarioDao = usuarioDao;
 	}
 
 	@RequestMapping("prova-aluno")
 	public ModelAndView montaProvaPorLista() {
 
 		List<Questao> questoes = questaoDao.list();
-		
+
 		if (questoes.isEmpty()) {
 			ModelAndView erro = new ModelAndView("erro");
 			return erro;
@@ -94,7 +98,7 @@ public class GeradorController {
 
 		return mv;
 	}
-	
+
 	@RequestMapping("admin/mostra-por-tag")
 	public ModelAndView mostraQuestoesPorTag(
 			@RequestParam("tagSelecionada") String nomeTag) {
@@ -108,38 +112,66 @@ public class GeradorController {
 
 		List<Tag> tags = new ArrayList<>(tagDao.list());
 		mv.addObject("tags", tags);
-		
+
 		mv.addObject("questoes", questoes);
 		mv.addObject("nomeTag", nomeTag);
 
 		return mv;
 
 	}
-	
+
 	@RequestMapping("admin/montar-prova")
-	public ModelAndView montarProvaView(){
+	public ModelAndView montarProvaView() {
 		ModelAndView mv = new ModelAndView("admin/montar-prova");
 		List<Questao> questoes = questaoDao.list();
-		mv.addObject("questoes",questoes);
+		mv.addObject("questoes", questoes);
 		return mv;
 	}
-	
+
 	@Transactional
 	@RequestMapping("admin/salvar-prova")
-	public ModelAndView salvaProva(@Valid @ModelAttribute("prova") Prova prova, BindingResult result){
-		if(result.hasErrors()){
-			ModelAndView mv = new ModelAndView("admin/montar-prova",result.getModel());
+	public ModelAndView salvaProva(@Valid @ModelAttribute("prova") Prova prova,
+			BindingResult result) {
+		if (result.hasErrors()) {
+			ModelAndView mv = new ModelAndView("admin/montar-prova",
+					result.getModel());
 			List<Questao> questoes = questaoDao.list();
-			mv.addObject("questoes",questoes);
+			mv.addObject("questoes", questoes);
 			return mv;
 		}
-		
 		provaDao.save(prova);
-		
+
 		ModelAndView mv = new ModelAndView("admin/prova-adicionada");
-		
+
 		return mv;
 	}
-	
+
+	@RequestMapping("admin/libera-prova")
+	public ModelAndView liberaProva() {
+
+		List<Usuario> usuarios = new ArrayList<>(usuarioDao.list());
+		List<Prova> provas = new ArrayList<>(provaDao.list());
+
+		ModelAndView mv = new ModelAndView("admin/libera-prova");
+		mv.addObject("usuarios", usuarios);
+		mv.addObject("provas", provas);
+
+		return mv;
+
+	}
+
+	@Transactional
+	@RequestMapping("admin/salva-liberacao")
+	public String salvaLiberacao(@RequestParam("provas") List<Long> provasId,
+			@RequestParam("usuarios") List<String> usuarios) {
+
+		List<Prova> provas = new ArrayList<>(provaDao.getProvasPorId(provasId));
+		
+		for (String user : usuarios) {
+			usuarioDao.salvaProvasLiberadas(user, provas);
+		}
+		
+		return "admin/provas-liberadas";
+	}
 
 }

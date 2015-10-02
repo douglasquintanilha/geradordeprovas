@@ -16,9 +16,9 @@
 		<c:import url="../header.jsp"></c:import>
 		<div class="container">	
 
-			<h1>Questão adicionada com sucesso!</h1>
-			<a href="/GeradorDeProvas/admin/adiciona-questao">Adicionar nova questão</a>
-
+			<h1>Provas Liberadas!</h1>
+			<a href="<c:url value='/'/>"> Voltar para o menu</a>
+			
 		</div>
 		<c:import url="../footer.jsp"></c:import>
 	</body>
