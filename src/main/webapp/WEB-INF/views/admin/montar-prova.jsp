@@ -56,10 +56,10 @@
 	</div>
 	<c:import url="../footer.jsp"></c:import>
 	
-	<script src="<c:url value='..static/js/jquery-2.1.4.min.js' />"></script>
-	<script src="<c:url value='..static/js/bootstrap.min.js' />"></script>
-	<script src="<c:url value='..static/js/troca-texto.js' />"></script>
-	<script src="<c:url value='..static/js/filtra-por-tag.js' />"></script>
-	<script src="<c:url value='..static/js/contador-de-questoes.js' />"></script>
+	<script src="<c:url value='../static/js/jquery-2.1.4.min.js' />"></script>
+	<script src="<c:url value='../static/js/bootstrap.min.js' />"></script>
+	<script src="<c:url value='../static/js/troca-texto.js' />"></script>
+	<script src="<c:url value='../static/js/filtra-por-tag.js' />"></script>
+	<script src="<c:url value='../static/js/contador-de-questoes.js' />"></script>
 </body>
 </html>
