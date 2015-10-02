@@ -202,4 +202,9 @@ public class GeradorController {
 		return mv;
 	}
 	
+	@RequestMapping("corrige-prova")
+	public void corrigeProva(@ModelAttribute("resposta") Resposta respostas){
+		
+	}
+	
 }

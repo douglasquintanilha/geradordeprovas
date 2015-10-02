@@ -13,15 +13,17 @@
 <body>
 
 	<c:import url="header.jsp"></c:import>
-
-		<c:forEach items="${prova.questoes}" var="questao">
+	<c:url var="urlPost" value='correcao-prova' />
+	<form:form method="GET" action="${urlPost}" commandName="resposta">
+		<c:forEach items="${prova.questoes}" var="questao" varStatus="i">
 			${questao.titulo}<br>
 			<c:forEach items="${questao.alternativa}" var="alternativa">
-				<input type="radio" name="alternativa">${alternativa.descricao}<br>
+				<input type="radio" value="${alternativa.id}" name="alternativas[${i.index}]">${alternativa.descricao}<br>
 			</c:forEach>
 			---------------------------------------------<br>
 		</c:forEach>
-
+		<input type="submit" value="Ok">
+	</form:form>
 	<c:import url="footer.jsp"></c:import>
 
 
