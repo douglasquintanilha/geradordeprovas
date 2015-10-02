@@ -38,16 +38,16 @@ public class LoginController {
 	public ModelAndView efetuaLogin(@ModelAttribute("usuario") Usuario usuario,
 			HttpSession sessao) {
 
-		if (usuarioDao.validaUsuario(usuario)) {
-			if(usuarioDao.ehAdmin(usuario)){
-				sessao.setAttribute("adminLogado", usuario);
-				System.out.println(sessao.getAttribute("adminLogado"));
+		Usuario user = usuarioDao.validaUsuario(usuario);
+		
+		if (user!=null) {
+			if(user.isAdmin()){
+				sessao.setAttribute("adminLogado", user);
 				ModelAndView mv = new ModelAndView( new RedirectView("/GeradorDeProvas/admin/index"));
 				return mv;
 			}
 			else{
-				sessao.setAttribute("usuarioLogado", usuario);
-				System.out.println(sessao.getAttribute("usuarioLogado"));
+				sessao.setAttribute("usuarioLogado", user);
 				ModelAndView mv = new ModelAndView( new RedirectView("/GeradorDeProvas/"));
 				return mv;
 			}

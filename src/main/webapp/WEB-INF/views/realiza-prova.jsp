@@ -6,19 +6,26 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Gerador de Provas</title>
+<title>Boa-Sorte</title>
 <link rel="stylesheet" href="static/css/bootstrap.min.css">
 <link rel="stylesheet" href="static/css/main.css">
 </head>
 <body>
+
 	<c:import url="header.jsp"></c:import>
-	<div class="container">
-		<h1>Gerador de provas Caelum!</h1>
-		<h1>Aluno!</h1>
-		<a href="<c:url value='provas-liberadas'/>"><h3>Realizar Prova</h3></a>
-		
-	</div>
+	<c:url var="urlPost" value='correcao-prova' />
+	<form:form method="GET" action="${urlPost}" commandName="resposta">
+		<c:forEach items="${prova.questoes}" var="questao" varStatus="i">
+			${questao.titulo}<br>
+			<c:forEach items="${questao.alternativa}" var="alternativa">
+				<input type="radio" value="${alternativa.id}" name="alternativas[${i.index}]">${alternativa.descricao}<br>
+			</c:forEach>
+			---------------------------------------------<br>
+		</c:forEach>
+		<input type="submit" value="Ok">
+	</form:form>
 	<c:import url="footer.jsp"></c:import>
-	
+
+
 </body>
 </html>

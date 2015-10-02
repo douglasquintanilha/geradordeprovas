@@ -24,7 +24,11 @@ public class ProvaDao {
 		return manager.createQuery("from Prova p", Prova.class).getResultList();
 	}
 
-	public List<Prova> getProvasPorId(List<Long> ids) {
+	public Prova getProva(Long id){
+		return manager.find(Prova.class, id);
+	}
+	
+	public List<Prova> getProvasPorListDeIds(List<Long> ids) {
 	
 		List<Prova> provas = new ArrayList<>();
 		for(Long id : ids){
