@@ -24,7 +24,7 @@
 				<ul class='list-unstyled'>
 					<c:forEach items="${provas}" var="prova">
 						<div class="checkbox">
-							<label> <input type="checkbox" value="${prova.id}"> {prova.id} / ${prova.nome}
+							<label> <input type="checkbox" value="${prova.id}"> ${prova.id} / ${prova.nome}
 							</label>
 						</div>
 					</c:forEach>
