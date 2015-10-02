@@ -25,7 +25,8 @@ pageEncoding="UTF-8"%>
 				<div class="form-group">
 					<label for="titulo">Titulo da Questão:</label>
 					<form:errors path="titulo" cssClass="alert alert-danger" element="div" />
-					<input type="text" value="${questao.titulo}" name="titulo"class="form-control" id="titulo" />
+					<div id='titulo-markdown-preview'></div>
+					<input type="text" value="${questao.titulo}" name="titulo" class="form-control" id="titulo" />
 				</div>
 					
 				<div class="form-group">
@@ -36,8 +37,9 @@ pageEncoding="UTF-8"%>
 				<span>Escolha qual será a alternativa correta:</span>
 				<div class="form-group">
 					<label for="alternativa">Alternativa A:</label>
-					<form:errors path="alternativa[0].descricao"
-					cssClass="alert alert-danger" element="div" />
+					<div class="alternativaA-markdown-preview"></div>
+					<form:errors path="alternativa[0].descricao" cssClass="alert alert-danger" element="div" />
+					<div id="alternativaA-markdown-preview"></div>
 					<div class="input-group">
 						<span class="input-group-addon"> <input type="radio"
 							name="alternativaCorreta" value="0" id="botaoA"/>
@@ -48,20 +50,22 @@ pageEncoding="UTF-8"%>
 
 				<div class="form-group">
 					<label for="alternativa">Alternativa B:</label>
-					<form:errors path="alternativa[1].descricao"
-					cssClass="alert alert-danger" element="div" />
+					
+					<form:errors path="alternativa[1].descricao" cssClass="alert alert-danger" element="div" />
+					<div id="alternativaB-markdown-preview"></div>
 					<div class="input-group">
 						<span class="input-group-addon"> <input type="radio"
 							name="alternativaCorreta" value="1" />
-						</span> <input type="text" value="${alternativa[1].descricao}"
+						</span> 
+						<input type="text" value="${alternativa[1].descricao}"
 						class="form-control" name="alternativa" id="alternativaB">
 					</div>
 				</div>
 
 				<div class="form-group">
 					<label for="alternativa">Alternativa C:</label>
-					<form:errors path="alternativa[2].descricao"
-					cssClass="alert alert-danger" element="div" />
+					<form:errors path="alternativa[2].descricao" cssClass="alert alert-danger" element="div" />
+					<div id="alternativaC-markdown-preview"></div>
 					<div class="input-group">
 						<span class="input-group-addon"> <input type="radio"
 							name="alternativaCorreta" value="2" />
@@ -72,8 +76,8 @@ pageEncoding="UTF-8"%>
 
 				<div class="form-group">
 					<label for="alternativa">Alternativa D:</label>
-					<form:errors path="alternativa[3].descricao"
-					cssClass="alert alert-danger" element="div" />
+					<form:errors path="alternativa[3].descricao" cssClass="alert alert-danger" element="div" />
+					<div id="alternativaD-markdown-preview"></div>
 					<div class="input-group">
 						<span class="input-group-addon"> <input type="radio"
 							name="alternativaCorreta" value="3" />
@@ -85,8 +89,8 @@ pageEncoding="UTF-8"%>
 
 				<div class="form-group">
 					<label for="alternativa">Alternativa E:</label>
-					<form:errors path="alternativa[4].descricao"
-					cssClass="alert alert-danger" element="div" />
+					<form:errors path="alternativa[4].descricao" cssClass="alert alert-danger" element="div" />
+					<div id="alternativaE-markdown-preview"></div>
 					<div class="input-group">
 						<span class="input-group-addon"> <input type="radio"
 							name="alternativaCorreta" value="4" />
@@ -103,6 +107,8 @@ pageEncoding="UTF-8"%>
 			<script src="<c:url value='../static/js/jquery-ui.min.js' />"></script>
 			<script src="<c:url value='../static/js/autocomplete-tags.js' />"></script>
 			<script src="<c:url value='../static/js/limpa-campo.js' />"></script>
+			<script src="<c:url value='../static/js/markdown.min.js' />"></script>
+			<script src="<c:url value='../static/js/markdown-preview.js' />"></script>
 		</div>
 		<c:import url="../footer.jsp"></c:import>
 	</body>
