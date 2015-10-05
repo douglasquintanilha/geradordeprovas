@@ -7,14 +7,17 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Usuario {
 
 	@Id
+	@Size(min=5, max=30, message="Minimo de 5 e maximo de 30")
 	private String login;
 
 	@Lob
+	@Size(min=5)
 	private String senha;
 
 	private boolean admin;

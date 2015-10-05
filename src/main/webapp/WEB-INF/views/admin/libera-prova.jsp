@@ -17,7 +17,7 @@
 	<div class="container">
 
 		<c:url var="urlPost" value='salva-liberacao' />
-		<form:form method="POST" action="${urlPost}">
+		<form:form method="POST" action="${urlPost}" commandName="provas">
 			<h4>
 				Selecione a prova que será liberada:
 				</h3>

@@ -13,10 +13,10 @@
 	<c:import url="header.jsp"></c:import>
 	<div class="container">
 		<c:set var="urlPost" value="novo-usuario"/>
-		<form action="${urlPost}" method="POST" class="form-horizontal col-xs-2">
+		<form action="${urlPost}" method="POST" commandName="usuario" class="form-horizontal col-xs-2">
 			<div class="form-group">
 				<label for="nome">Nome:</label>
-				<input type="text" class="form-control" name="nome" id="nome">
+				<input type="text" class="form-control" name="login" id="nome">
 			</div>
 			<div class="form-group">	
 				<label for="senha">Senha:</label>

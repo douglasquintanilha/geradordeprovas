@@ -13,14 +13,16 @@
 	<c:import url="../header.jsp"></c:import>
 	<div class="container">
 		<c:set var="urlPost" value="adiciona-usuario"/>
-		<form action="${urlPost}" method="POST" class="form-horizontal col-xs-2">
+		<form:form action="${urlPost}" method="POST" comandName="usuario" class="form-horizontal col-xs-2">
 			<div class="form-group">
 				<label for="nome">Nome:</label>
-				<input type="text" class="form-control" name="nome" id="nome">
+				<input type="text" class="form-control" name="login" id="nome">
+				<form:errors path="login" cssClass="alert alert-danger" element="div" />
 			</div>
 			<div class="form-group">	
 				<label for="senha">Senha:</label>
 				<input type="password" class="form-control" name="senha" id="senha">
+				<form:errors path="senha" cssClass="alert alert-danger" element="div" />
 			</div>
 			<div class="form-group">	 
 					<span>Admin? </span><br>
@@ -36,7 +38,7 @@
 			<div class="form-group">
 				<button type="submit" class="btn btn-default">Criar</button>
 			</div>
-		</form>
+		</form:form>
 	</div>
 	<c:import url="../footer.jsp"></c:import>
 </body>
