@@ -13,7 +13,10 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 
 		String uri = request.getRequestURI();
 
-		if (uri.endsWith("loginForm") || uri.endsWith("efetuaLogin")) {
+		if (uri.endsWith("loginForm") || uri.endsWith("efetuaLogin")
+				|| uri.endsWith("novo-usuario-form")
+				|| uri.endsWith("usuario-adicionado")
+				|| uri.endsWith("novo-usuario")) {
 			return true;
 		}
 
@@ -29,7 +32,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 		if (request.getSession().getAttribute("usuarioLogado") != null) {
 			return true;
 		}
-		
+
 		response.sendRedirect("/GeradorDeProvas/loginForm");
 		return false;
 	}

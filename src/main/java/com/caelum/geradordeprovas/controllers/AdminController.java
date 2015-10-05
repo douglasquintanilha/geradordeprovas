@@ -47,5 +47,31 @@ public class AdminController {
 		
 		return "admin/usuario-adicionado";
 	}
+	
+	@RequestMapping("novo-usuario-form")
+	public String novoUsuarioForm(){
+		return "novo-usuario-form";
+	}
 
+	@org.springframework.transaction.annotation.Transactional
+	@RequestMapping("novo-usuario")
+	public String novoUsuario(@RequestParam("nome") String nome,
+			@RequestParam("senha") String senha){
+		
+		Usuario user = new Usuario();
+		user.setLogin(nome);
+		user.setAdmin(false);
+		Criptografia crypt = new Criptografia();
+		String senhaCript = crypt.criptografaSenha(senha);
+		user.setSenha(senhaCript);
+		
+		usuarioDao.save(user);
+		
+		return "redirect:usuario-adicionado";
+	}
+	
+	@RequestMapping("usuario-adicionado")
+	public String usuarioAdicionado(){
+		return "usuario-adicionado";
+	}
 }
