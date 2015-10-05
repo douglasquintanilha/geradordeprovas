@@ -10,6 +10,7 @@ pageEncoding="UTF-8"%>
 		<link rel="stylesheet" href="<c:url value='../static/css/bootstrap.min.css' />">
 		<link rel="stylesheet" href="<c:url value='../static/css/jquery-ui.min.css' /> ">
 		<link rel="stylesheet" href="<c:url value='../static/css/main.css' /> ">
+		<link rel="stylesheet" href="<c:url value='../static/css/highlight.min.css' /> ">
 		
 
 	</head>
@@ -25,13 +26,16 @@ pageEncoding="UTF-8"%>
 				<div class="form-group">
 					<label for="titulo">Titulo da Questão:</label>
 					<form:errors path="titulo" cssClass="alert alert-danger" element="div" />
-					<div id='titulo-markdown-preview'></div>
-					<input type="text" value="${questao.titulo}" name="titulo" class="form-control" id="titulo" />
+					<div class='esconde'>
+						<span>Preview:</span>
+						<div id='titulo-markdown-preview' class="preview-markdown"></div>
+					</div>
+					<input type="text" value="${questao.titulo}" placeholder="Digite aqui o título da sua questão" name="titulo" class="form-control" id="titulo" />
 				</div>
 					
 				<div class="form-group">
 					<label for="tags">Escolha as tags da questão:</label> 
-					<input type="text" value="${questao.tags}" name="tags" id="tags" class="form-control">
+					<input type="text" placeholder="Digite aqui as tags da questão e vá selecionando-as, para adicionar uma nova tag basta colocá-la entre vírgulas que na próxima vez ela será preenchida automaticamente." value="${questao.tags}" name="tags" id="tags" class="form-control">
 				</div>
 
 				<span>Escolha qual será a alternativa correta:</span>
@@ -39,12 +43,17 @@ pageEncoding="UTF-8"%>
 					<label for="alternativa">Alternativa A:</label>
 					<div class="alternativaA-markdown-preview"></div>
 					<form:errors path="alternativa[0].descricao" cssClass="alert alert-danger" element="div" />
-					<div id="alternativaA-markdown-preview"></div>
+					<div class='esconde'>
+						<span>Preview:</span>
+						<div id="alternativaA-markdown-preview" class="preview-markdown"></div>
+					</div>	
 					<div class="input-group">
 						<span class="input-group-addon"> <input type="radio"
 							name="alternativaCorreta" value="0" id="botaoA"/>
-						</span> <input type="text" value="${alternativa[0].descricao}"
-						class="form-control" name="alternativa" id="alternativaA">
+						</span> 
+						<textarea class="form-control alternativa" name="alternativa" id="alternativaA">
+							${alternativa[0].descricao}
+						</textarea>	
 					</div>
 				</div>
 
@@ -52,37 +61,51 @@ pageEncoding="UTF-8"%>
 					<label for="alternativa">Alternativa B:</label>
 					
 					<form:errors path="alternativa[1].descricao" cssClass="alert alert-danger" element="div" />
-					<div id="alternativaB-markdown-preview"></div>
+					<div class='esconde'>
+						<span>Preview:</span>
+						<div id="alternativaB-markdown-preview" class="preview-markdown"></div>
+					</div>						
 					<div class="input-group">
 						<span class="input-group-addon"> <input type="radio"
 							name="alternativaCorreta" value="1" />
 						</span> 
-						<input type="text" value="${alternativa[1].descricao}"
-						class="form-control" name="alternativa" id="alternativaB">
+						<textarea class="form-control alternativa" name="alternativa" id="alternativaB">
+							${alternativa[1].descricao}
+						</textarea>	
 					</div>
 				</div>
 
 				<div class="form-group">
 					<label for="alternativa">Alternativa C:</label>
 					<form:errors path="alternativa[2].descricao" cssClass="alert alert-danger" element="div" />
-					<div id="alternativaC-markdown-preview"></div>
+					<div class='esconde'>
+						<span>Preview:</span>
+						<div id="alternativaC-markdown-preview" class="preview-markdown"></div>
+					</div>	
 					<div class="input-group">
 						<span class="input-group-addon"> <input type="radio"
-							name="alternativaCorreta" value="2" />
-						</span> <input type="text" value="${alternativa[2].descricao}"
-						class="form-control" name="alternativa" id="alternativaC">
+							name="alternativaCorreta" value="2" >
+						</span> 
+						<textarea class="form-control alternativa" name="alternativa" id="alternativaC">
+							${alternativa[2].descricao}
+						</textarea>
 					</div>
 				</div>
 
 				<div class="form-group">
 					<label for="alternativa">Alternativa D:</label>
 					<form:errors path="alternativa[3].descricao" cssClass="alert alert-danger" element="div" />
-					<div id="alternativaD-markdown-preview"></div>
+					<div class='esconde'>
+						<span>Preview:</span>
+						<div id="alternativaD-markdown-preview" class="preview-markdown"></div>
+					</div>	
 					<div class="input-group">
 						<span class="input-group-addon"> <input type="radio"
 							name="alternativaCorreta" value="3" />
-						</span> <input type="text" value="${alternativa[3].descricao}"
-						class="form-control" name="alternativa" id="alternativaD">
+						</span>
+						<textarea class="form-control alternativa" name="alternativa" id="alternativaD">
+							${alternativa[3].descricao}
+						</textarea>
 					</div>
 				</div>
 
@@ -90,12 +113,17 @@ pageEncoding="UTF-8"%>
 				<div class="form-group">
 					<label for="alternativa">Alternativa E:</label>
 					<form:errors path="alternativa[4].descricao" cssClass="alert alert-danger" element="div" />
-					<div id="alternativaE-markdown-preview"></div>
+					<div class='esconde'>
+						<span>Preview:</span>
+						<div id="alternativaE-markdown-preview" class="preview-markdown"></div>
+					</div>
 					<div class="input-group">
 						<span class="input-group-addon"> <input type="radio"
 							name="alternativaCorreta" value="4" />
-						</span> <input type="text" value="${alternativa[4].descricao}"
-						class="form-control" name="alternativa" id="alternativaE">
+						</span> 
+						<textarea class="form-control alternativa" name="alternativa" id="alternativaE">
+							${alternativa[4].descricao}
+						</textarea>
 					</div>
 				</div>
 
@@ -109,6 +137,8 @@ pageEncoding="UTF-8"%>
 			<script src="<c:url value='../static/js/limpa-campo.js' />"></script>
 			<script src="<c:url value='../static/js/markdown.min.js' />"></script>
 			<script src="<c:url value='../static/js/markdown-preview.js' />"></script>
+			<script src="<c:url value='../static/js/highlight.min.js' />"></script>
+			<script src="<c:url value='../static/js/preview.js' />"></script>
 		</div>
 		<c:import url="../footer.jsp"></c:import>
 	</body>
