@@ -13,6 +13,9 @@
 <body>
 	<c:import url="header.jsp"></c:import>
 	<div class="container">
+	<c:if test="${validacao == false}">
+		Login/Senha Incorretos!
+	</c:if>
 		<form:form action="efetuaLogin" method="POST" commandName="usuario" class="form col-xs-3" >
 			<div class="form-group">
 					<label for="login">Login:</label>

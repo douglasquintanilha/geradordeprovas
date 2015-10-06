@@ -15,13 +15,17 @@
 	<c:import url="header.jsp"></c:import>
 	<div class="container">
 	<c:url var="urlPost" value='correcao-prova' />
-	<form:form method="GET" action="${urlPost}" commandName="resposta">
+	<c:if test="${validacao == false}">
+		Preencha todas as Respostas!
+	</c:if>
+	<form:form method="POST" action="${urlPost}" commandName="resposta">
 		<c:forEach items="${prova.questoes}" var="questao" varStatus="i">
 			${questao.titulo}<br>
 			<c:forEach items="${questao.alternativa}" var="alternativa">
 				<input type="radio" value="${alternativa.id}" name="alternativas[${i.index}]">${alternativa.descricao}<br>
 			</c:forEach>
 		</c:forEach>
+		<input type="hidden" name="provaId" value="${prova.id}">
 		<input type="submit" value="Ok">
 	</form:form>
 	</div>

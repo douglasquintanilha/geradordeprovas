@@ -38,6 +38,7 @@ public class AdminController {
 	public String criaUsuario(@ModelAttribute("usuario") @Valid Usuario usuario, BindingResult result) {
 
 		if(result.hasErrors()){
+			System.out.println(result.getErrorCount());
 			return "admin/cria-usuario-form";
 		}
 		

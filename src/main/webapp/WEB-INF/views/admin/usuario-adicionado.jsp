@@ -17,7 +17,7 @@
 		<div class="container">	
 
 			<h1>Usuário adicionado com sucesso!</h1>
-			<a href="/GeradorDeProvas/adiciona-questao">Adicionar nova questão</a>
+			<a href="/GeradorDeProvas/admin/index">Voltar ao menu</a>
 
 		</div>
 		<c:import url="../footer.jsp"></c:import>

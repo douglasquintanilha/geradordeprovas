@@ -15,14 +15,14 @@
 		<c:set var="urlPost" value="adiciona-usuario"/>
 		<form:form action="${urlPost}" method="POST" comandName="usuario" class="form-horizontal col-xs-2">
 			<div class="form-group">
-				<label for="nome">Nome:</label>
-				<input type="text" class="form-control" name="login" id="nome">
+				<label for="nome">Login:</label>
 				<form:errors path="login" cssClass="alert alert-danger" element="div" />
+				<input type="text" class="form-control" name="login" id="nome">
 			</div>
 			<div class="form-group">	
 				<label for="senha">Senha:</label>
-				<input type="password" class="form-control" name="senha" id="senha">
 				<form:errors path="senha" cssClass="alert alert-danger" element="div" />
+				<input type="password" class="form-control" name="senha" id="senha">
 			</div>
 			<div class="form-group">	 
 					<span>Admin? </span><br>

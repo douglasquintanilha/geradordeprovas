@@ -13,24 +13,35 @@ import javax.validation.constraints.Size;
 public class Usuario {
 
 	@Id
-	@Size(min=5, max=30, message="Minimo de 5 e maximo de 30")
+	@Size(min = 5, max = 30, message = "Minimo de 5 e maximo de 30")
 	private String login;
 
 	@Lob
-	@Size(min=5)
+	@Size(min = 5)
 	private String senha;
 
 	private boolean admin;
 
 	@ManyToMany
 	private List<Prova> provas = new ArrayList<>();
-	
-	
-	public void adicionaProvas(List<Prova> provas){
-		this.provas.addAll(provas);
+
+	public void adicionaProvas(List<Prova> provas) {
+
+		List<Prova> provasPraAdicionar = new ArrayList<>();
+		
+		for (Prova prova : provas) {
+			for (Prova thisprova : this.provas) {
+				if (thisprova.getId() == prova.getId()) {
+					// ja tem essa prova na lista
+				} else {
+					provasPraAdicionar.add(prova);
+				}
+			}
+		}
+		
+		this.provas.addAll(provasPraAdicionar);
 	}
-	
-	
+
 	public List<Prova> getProvas() {
 		return provas;
 	}
