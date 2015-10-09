@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri='http://ur6lad.co.ua/markdown-taglib' prefix ='md' %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -30,7 +31,8 @@
 			</h4>
 				<form:errors path="questoes" cssClass="alert alert-danger" element="div" />
 			<div class="input-group">
-				<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-tag" aria-hidden="true"></span></span> <input type="text" class="form-control" id="busca" placeholder="Filtre por tags..." aria-describedby="basic-addon1">
+				<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-tag" aria-hidden="true"></span></span> 
+				<input type="text" class="form-control" id="busca" placeholder="Filtre por tags..." aria-describedby="basic-addon1">
 			</div>
 			<br>
 			<c:forEach items="${questoes}" var="questao">
@@ -39,12 +41,12 @@
 						<label><input type="checkbox" name="questoes" value="${questao.id}"> Questão ${questao.id}</label>
 					</div>
 					<div class="panel-body">
-						<p>${questao.titulo}</p>
+						<p><md:render>${questao.titulo}</md:render></p>
 						<span>Tags: </span> <span class="tags"><c:forEach items="${questao.tags}" var="tag">${tag},</c:forEach></span> <br>
 						<button class="btn btn-primary botao-exibir-alternativas" type="button" data-toggle="collapse" data-target="#alternativas${questao.id}" aria-expanded="false" aria-controls="alternativas${questao.id}">Exibir alternativas</button>	
 						<ol class="collapse" id="alternativas${questao.id}" type="A">
 							<c:forEach items="${questao.alternativa}" var="alternativa">
-								<li>${alternativa.descricao})</li>
+								<li><md:render>${alternativa.descricao})</md:render></li>
 							</c:forEach>
 						</ol>
 					</div>
