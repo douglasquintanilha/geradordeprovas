@@ -7,12 +7,12 @@ $("#titulo").on('blur',function(){
 });
 
 
-$(".alternativa").on('focus',function(){
+$(".alternativa").on('input',function(){
 	$(this).parent().prev(".esconde").show();
 });
-
-$(".alternativa").on('blur',function(){
-	$(this).parent().prev(".esconde").hide();
-});
+//
+//$(".alternativa").on('blur',function(){
+//	$(this).parent().prev(".esconde").hide();
+//});
 
 

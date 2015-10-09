@@ -1,4 +1,4 @@
-<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
@@ -22,7 +22,7 @@
 		</c:if>
 		<form:form method="POST" action="${urlPost}" commandName="provas">
 			<h4>
-				Selecione a prova que ser√° liberada:
+				Selecione a prova que ser· liberada:
 				</h3>
 				<ul class='list-unstyled'>
 					<c:forEach items="${provas}" var="prova">
@@ -34,7 +34,7 @@
 					<li role="separator" class="divider"></li>
 				</ul>
 				<h4>
-					Selecione os usu√°rios que podem ter acesso a esta prova:
+					Selecione os usu·rios que podem ter acesso a esta prova:
 					</h3>
 					<ul class='list-unstyled'>
 						<c:forEach items="${usuarios}" var="usuario">

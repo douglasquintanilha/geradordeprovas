@@ -25,26 +25,23 @@ public class Questao {
 	@GeneratedValue
 	private Long id;
 	
-	public void setId(Long id) {
-		this.id = id;
-	}
-
+	// transformar em @Collumn
 	@Lob
-	@NotBlank
+	@NotBlank 
 	private String titulo;
 	
 	@ManyToMany(cascade = {CascadeType.PERSIST})
 	@JoinColumn(unique=true)
 	private Set<Tag> tags = new HashSet<Tag>();
-
+	//Transformar em Set
 	@Valid
 	@OneToMany(cascade={CascadeType.PERSIST})
 	private List<Alternativa> alternativa;
 
+	// Colocar em um arquivo validatormessages
 	@NotBlank( message = "Por favor assinale qual é a alternativa correta")
 	@Transient
 	private String alternativaCorreta;
-	
 
 	public String getAlternativaCorreta() {
 		return alternativaCorreta;
@@ -53,7 +50,6 @@ public class Questao {
 	public void setAlternativaCorreta(String alternativaCorreta) {
 		this.alternativaCorreta = alternativaCorreta;
 	}
-
 
 	public Set<Tag> getTags() {
 		return tags;
@@ -83,4 +79,8 @@ public class Questao {
 		return id;
 	}
 	
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 }

@@ -74,7 +74,7 @@ public class GeradorController {
 			mv.addObject("validacao", false);
 			return mv;
 		}
-		
+
 		List<Long> respostas = marcadas.getAlternativas();
 		List<Alternativa> acertou = new ArrayList<>();
 		List<Alternativa> errou = new ArrayList<>();
@@ -149,6 +149,7 @@ public class GeradorController {
 			mv.addObject("questoes", questoes);
 			return mv;
 		}
+
 		provaDao.save(prova);
 
 		ModelAndView mv = new ModelAndView("admin/prova-adicionada");
@@ -172,22 +173,23 @@ public class GeradorController {
 
 	@Transactional
 	@RequestMapping("admin/salva-liberacao")
-	public ModelAndView salvaLiberacao(@RequestParam("provas") List<Long> provasId,
+	public ModelAndView salvaLiberacao(
+			@RequestParam("provas") List<Long> provasId,
 			@RequestParam("usuarios") List<String> usuarios) {
-
-		if(provasId.isEmpty() || usuarios.isEmpty()){
-			ModelAndView mv = new ModelAndView("redirect:libera-prova");
-			mv.addObject("validacao", false);
-			return mv;
-		}
 		
+		// Refatorar getProvasPorIds
 		List<Prova> provas = new ArrayList<>(
 				provaDao.getProvasPorListDeIds(provasId));
+
+		// if(provasId.isEmpty() || usuarios.isEmpty()){
+		// ModelAndView mv = new ModelAndView("redirect:libera-prova");
+		// mv.addObject("validacao", false);
+		// return mv;
+		// }
 
 		for (String user : usuarios) {
 			usuarioDao.salvaProvasLiberadas(user, provas);
 		}
-
 		ModelAndView mv = new ModelAndView("admin/provas-liberadas");
 		return mv;
 	}
@@ -195,6 +197,8 @@ public class GeradorController {
 	@RequestMapping("provas-liberadas")
 	public ModelAndView provasLiberadas(HttpSession sessao) {
 
+		// Não usar a sessão e passar pro Spring
+		// Renomear as variaveis 
 		Usuario usuario = new Usuario();
 
 		if (sessao.getAttribute("usuarioLogado") == null) {

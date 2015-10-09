@@ -1,4 +1,4 @@
-package com.caelum.geradordeprovas.controllers;
+	package com.caelum.geradordeprovas.controllers;
 	
 import javax.validation.Valid;
 
@@ -26,6 +26,8 @@ public class QuestoesController {
 	public String mostraAdicionaQuestaoForm(Questao questao) {
 		return "admin/adiciona-questao";
 	}
+
+	
 	
 	@org.springframework.transaction.annotation.Transactional
 	@RequestMapping("admin/salva-questao")
@@ -39,5 +41,4 @@ public class QuestoesController {
 		
 		return "admin/questao-adicionada";
 	}
-
 }

@@ -1,17 +1,20 @@
 function Editor(input, preview) {
     this.update = function () {
-      preview.innerHTML = markdown.toHTML(input.value);
+      preview.html(markdown.toHTML(input.val()));
     };
     input.editor = this;
     this.update();
   }
-var editor = new Editor($("#titulo").get(0), $('#titulo-markdown-preview').get(0));
+var editor = new Editor($("#titulo"), $('#titulo-markdown-preview'));
 
-var editorA = new Editor($("#alternativaA").get(0), $('#alternativaA-markdown-preview').get(0));
-var editorB = new Editor($("#alternativaB").get(0), $('#alternativaB-markdown-preview').get(0));
-var editorC = new Editor($("#alternativaC").get(0), $('#alternativaC-markdown-preview').get(0));
-var editorD = new Editor($("#alternativaD").get(0), $('#alternativaD-markdown-preview').get(0));
-var editorE = new Editor($("#alternativaE").get(0), $('#alternativaE-markdown-preview').get(0));
+var editorA = new Editor($("#alternativaA"), $('#alternativaA-markdown-preview'));
+var editorB = new Editor($("#alternativaB"), $('#alternativaB-markdown-preview'));
+var editorC = new Editor($("#alternativaC"), $('#alternativaC-markdown-preview'));
+var editorD = new Editor($("#alternativaD"), $('#alternativaD-markdown-preview'));
+var editorE = new Editor($("#alternativaE"), $('#alternativaE-markdown-preview'));
+
+//$('#titulo,[id=^alternativa]').each( new Editor( this, $());
+
 
 $("#titulo").on('input',function(){
 	editor.update();

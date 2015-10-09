@@ -20,17 +20,13 @@ public class Prova {
 	@NotBlank
 	private String nome;
 	
+	// Mudar a List para Set , e mandar mensage pro properties
 	@NotEmpty( message = "A prova deve conter pelo menos uma questão!")
 	@ManyToMany()
 	private List<Questao> questoes;
 	
 	public Long getId() {
 		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	
 	}
 
 	public String getNome() {
