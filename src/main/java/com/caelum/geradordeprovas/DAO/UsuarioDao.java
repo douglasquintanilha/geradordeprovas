@@ -59,14 +59,11 @@ public class UsuarioDao {
 	}
 
 	public List<Prova> getProvasDoUsuario(String login) {
-
-		List<Prova> provas = new ArrayList<>();
-		provas = manager
+		return manager
 				.createQuery(
-						"select p from provas p JOIN p.Usuario u where u.login =:login")
+						"select p from provas p JOIN p.Usuario u where u.login =:login",Prova.class)
 				.setParameter("login", login).getResultList();
 
-		return provas;
 	}
 
 }

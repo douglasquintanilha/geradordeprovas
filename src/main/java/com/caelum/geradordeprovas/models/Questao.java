@@ -24,19 +24,21 @@ public class Questao {
 	@Id
 	@GeneratedValue
 	private Long id;
-
+	
+	// transformar em @Collumn
 	@Lob
-	@NotBlank
+	@NotBlank 
 	private String titulo;
 	
 	@ManyToMany(cascade = {CascadeType.PERSIST})
 	@JoinColumn(unique=true)
 	private Set<Tag> tags = new HashSet<Tag>();
-
+	//Transformar em Set
 	@Valid
 	@OneToMany(cascade={CascadeType.PERSIST})
 	private List<Alternativa> alternativa;
 
+	// Colocar em um arquivo validatormessages
 	@NotBlank( message = "Por favor assinale qual é a alternativa correta")
 	@Transient
 	private String alternativaCorreta;
