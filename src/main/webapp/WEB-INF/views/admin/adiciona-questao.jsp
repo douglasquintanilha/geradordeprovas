@@ -2,6 +2,8 @@
 pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri='http://ur6lad.co.ua/markdown-taglib' prefix ='md' %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -17,8 +19,7 @@ pageEncoding="UTF-8"%>
 	<body>
 		<c:import url="../header.jsp"></c:import>
 		<div class="container">	
-
-			
+	
 			<c:url var="urlPost" value='salva-questao' />
 			<form:form action="${urlPost}" method="POST" commandName="questao">
 

@@ -34,8 +34,7 @@ public class QuestoesController {
 			model.addAttribute("alternativa", questao.getAlternativa());
 			return "admin/adiciona-questao";
 		}
-		
-		System.out.println(questao.getAlternativa());
+		System.out.println(questao.getAlternativa().get(0).getDescricao());
 		questaoBo.salva(questao);
 		
 		return "admin/questao-adicionada";

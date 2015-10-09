@@ -21,7 +21,7 @@
 			<div class="form-group">
 				<label for="nome">Nome da Prova:</label>
 				<form:errors path="nome" cssClass="alert alert-danger" element="div" />
-				<input type="text" value="${prova.nome}" name="nome" class="form-control" id="nome" />
+				<input type="text" value="${prova.nome}" name="nome" class="form-control" id="nome" required>
 			</div>
 
 			<h3>Escolha as questões:</h3>
