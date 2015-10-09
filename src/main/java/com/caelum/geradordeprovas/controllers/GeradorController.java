@@ -181,9 +181,7 @@ public class GeradorController {
 			return mv;
 		}
 		
-		
-		List<Prova> provas = new ArrayList<>(
-				provaDao.getProvasPorListDeIds(provasId));
+		List<Prova> provas = new ArrayList<>(provaDao.getProvasPorListDeIds(provasId));
 
 		for (String user : usuarios) {
 			usuarioDao.salvaProvasLiberadas(user, provas);

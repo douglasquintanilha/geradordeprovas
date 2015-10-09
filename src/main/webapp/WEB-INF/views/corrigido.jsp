@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -16,13 +15,13 @@
 		<h1>Sua nota foi:</h1>
 		<h3>${nota}/${total}</h3>
 <%-- 		<c:if test="${not empty erradas}"> --%>
-<!-- 			<h3>VocÃª errou a(s) questÃ£o(Ãµes):</h3> -->
+<!-- 			<h3>Você errou a(s) questão(ões):</h3> -->
 <%-- 			<c:forEach items="${erradas}" var="errou"> --%>
 <%-- 				${errou.questao.titulo}<br /> --%>
 <%-- 			</c:forEach> --%>
 <%-- 		</c:if> --%>
 	</div>
-	<a href="/GeradorDeProvas/">Voltar para o inÃ­cio</a>
+	<a href="/GeradorDeProvas/">Voltar para o início</a>
 	<c:import url="footer.jsp"></c:import>
 </body>
 </html>

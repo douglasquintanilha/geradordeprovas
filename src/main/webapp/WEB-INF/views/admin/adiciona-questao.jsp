@@ -1,13 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri='http://ur6lad.co.ua/markdown-taglib' prefix ='md' %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-	<head>
-		<meta charset="utf-8" /> 
+	<head> 
 		<title>Caelum Provas</title>
 		<link rel="stylesheet" href="<c:url value='../static/css/bootstrap.min.css' />">
 		<link rel="stylesheet" href="<c:url value='../static/css/jquery-ui.min.css' /> ">
@@ -25,21 +23,21 @@ pageEncoding="UTF-8"%>
 
 				<form:errors path="alternativaCorreta" cssClass="alert alert-danger" element="div" />
 				<div class="form-group">
-					<label for="titulo">Titulo da Quest√£o:</label>
+					<label for="titulo">Titulo da Quest„o:</label>
 					<form:errors path="titulo" cssClass="alert alert-danger" element="div" />
 					<div class='esconde'>
 						<span>Preview:</span>
 						<div id='titulo-markdown-preview' class="preview-markdown"></div>
 					</div>
-					<input type="text" value="${questao.titulo}" placeholder="Digite aqui o t√≠tulo da sua quest√£o" name="titulo" class="form-control" id="titulo" />
+					<input type="text" value="${questao.titulo}" placeholder="Digite aqui o tÌtulo da sua quest„o" name="titulo" class="form-control" id="titulo" />
 				</div>
 					
 				<div class="form-group">
-					<label for="tags">Escolha as tags da quest√£o:</label> 
-					<input type="text" placeholder="Digite aqui as tags da quest√£o e v√° selecionando-as, para adicionar uma nova tag basta coloc√°-la entre v√≠rgulas que na pr√≥xima vez ela ser√° preenchida automaticamente." value="${questao.tags}" name="tags" id="tags" class="form-control">
+					<label for="tags">Escolha as tags da quest„o:</label> 
+					<input type="text" placeholder="Digite aqui as tags da quest„o e v· selecionando-as, para adicionar uma nova tag basta coloc·-la entre vÌrgulas que na prÛxima vez ela ser· preenchida automaticamente." value="${questao.tags}" name="tags" id="tags" class="form-control">
 				</div>
 
-				<span>Escolha qual ser√° a alternativa correta:</span>
+				<span>Escolha qual ser· a alternativa correta:</span>
 				<div class="form-group">
 					<label for="alternativa">Alternativa A:</label>
 					<div class="alternativaA-markdown-preview"></div>
@@ -128,7 +126,7 @@ pageEncoding="UTF-8"%>
 					</div>
 				</div>
 
-				<button type="submit" class="btn btn-default">Adicionar Quest√£o</button>
+				<button type="submit" class="btn btn-default">Adicionar Quest„o</button>
 
 			</form:form>
 

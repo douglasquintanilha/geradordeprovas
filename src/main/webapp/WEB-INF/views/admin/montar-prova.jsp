@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri='http://ur6lad.co.ua/markdown-taglib' prefix ='md' %>
@@ -25,9 +25,9 @@
 				<input type="text" value="${prova.nome}" name="nome" class="form-control" id="nome" required>
 			</div>
 
-			<h3>Escolha as quest√µes:</h3>
+			<h3>Escolha as questıes:</h3>
 			<h4>
-				Quest√µes escolhidas: <span id="questoes-marcadas">0</span>
+				Questıes escolhidas: <span id="questoes-marcadas">0</span>
 			</h4>
 				<form:errors path="questoes" cssClass="alert alert-danger" element="div" />
 			<div class="input-group">
@@ -38,7 +38,7 @@
 			<c:forEach items="${questoes}" var="questao">
 				<div class="panel panel-primary questao">
 					<div class="panel-heading">
-						<label><input type="checkbox" name="questoes" value="${questao.id}"> Quest√£o ${questao.id}</label>
+						<label><input type="checkbox" name="questoes" value="${questao.id}"> Quest„o ${questao.id}</label>
 					</div>
 					<div class="panel-body">
 						<p><md:render>${questao.titulo}</md:render></p>

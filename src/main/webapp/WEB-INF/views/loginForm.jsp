@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -13,23 +12,22 @@
 <body>
 	<c:import url="header.jsp"></c:import>
 	<div class="container">
-	<c:if test="${validacao == false}">
-		Login/Senha Incorretos!
-	</c:if>
-		<form:form action="efetuaLogin" method="POST" commandName="usuario" class="form col-xs-3" >
+		<form:form action="efetuaLogin" method="POST" commandName="usuario" class="form col-xs-3">
 			<div class="form-group">
-					<label for="login">Login:</label>
-					<input type="text" name="login" id="login" class="form-control" autofocus >
+				<label for="login">Login:</label>
+				<c:if test="${validacao == false}">
+					<span>Login ou Senha Incorretos!</span>
+				</c:if>
+				<input type="text" name="login" id="login" class="form-control" autofocus>
 			</div>
 			<div class="form-group">
-					<label for="senha">Senha:</label>
-					<input type="password" name="senha" id="senha" class="form-control" >
+				<label for="senha">Senha:</label> <input type="password" name="senha" id="senha" class="form-control">
 			</div>
-			
+
 			<div class="form-group">
-					<button type="submit" class="btn btn-default">Entrar</button>
+				<button type="submit" class="btn btn-default">Entrar</button>
 			</div>
-	
+
 		</form:form>
 
 	</div>

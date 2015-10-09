@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -14,11 +13,11 @@
 	<c:import url="../header.jsp"></c:import>
 	<div class="container">
 		<h1>Bem vindo ao geraX!</h1>
-		<a href="<c:url value='adiciona-questao'/>"><h3>Adicionar Quest√£o</h3></a>
+		<a href="<c:url value='adiciona-questao'/>"><h3>Adicionar Quest„o</h3></a>
 		<a href="<c:url value='montar-prova'/>"><h3>Montar Prova</h3></a> 
 		<a href="<c:url value='/provas-liberadas'/>"><h3>Realizar Prova</h3></a>
-		<a href="<c:url value='seleciona-tag'/>"><h3>Procurar Quest√£o por tag</h3></a>
-		<a href="<c:url value='cria-usuario-form'/>"><h3>Criar Usu√°rio</h3></a>
+		<a href="<c:url value='seleciona-tag'/>"><h3>Procurar Quest„o por tag</h3></a>
+		<a href="<c:url value='cria-usuario-form'/>"><h3>Criar Usu·rio</h3></a>
 		<a href="<c:url value='libera-prova'/>"><h3>Liberar Prova</h3></a>
 	</div>
 	<c:import url="../footer.jsp"></c:import>

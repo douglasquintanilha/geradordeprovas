@@ -24,10 +24,6 @@ public class Questao {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	@Lob
 	@NotBlank
@@ -44,7 +40,6 @@ public class Questao {
 	@NotBlank( message = "Por favor assinale qual é a alternativa correta")
 	@Transient
 	private String alternativaCorreta;
-	
 
 	public String getAlternativaCorreta() {
 		return alternativaCorreta;
@@ -53,7 +48,6 @@ public class Questao {
 	public void setAlternativaCorreta(String alternativaCorreta) {
 		this.alternativaCorreta = alternativaCorreta;
 	}
-
 
 	public Set<Tag> getTags() {
 		return tags;
@@ -83,4 +77,8 @@ public class Questao {
 		return id;
 	}
 	
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 }
