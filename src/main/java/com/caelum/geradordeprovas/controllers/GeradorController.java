@@ -174,19 +174,20 @@ public class GeradorController {
 	@RequestMapping("admin/salva-liberacao")
 	public ModelAndView salvaLiberacao(@RequestParam("provas") List<Long> provasId,
 			@RequestParam("usuarios") List<String> usuarios) {
-
-		if(provasId.isEmpty() || usuarios.isEmpty()){
-			ModelAndView mv = new ModelAndView("redirect:libera-prova");
-			mv.addObject("validacao", false);
-			return mv;
-		}
 		
 		List<Prova> provas = new ArrayList<>(provaDao.getProvasPorListDeIds(provasId));
+
+//		if(provasId.isEmpty() || usuarios.isEmpty()){
+//			ModelAndView mv = new ModelAndView("redirect:libera-prova");
+//			mv.addObject("validacao", false);
+//			return mv;
+//		}
+
+
 
 		for (String user : usuarios) {
 			usuarioDao.salvaProvasLiberadas(user, provas);
 		}
-
 		ModelAndView mv = new ModelAndView("admin/provas-liberadas");
 		return mv;
 	}
