@@ -3,6 +3,7 @@ package com.caelum.geradordeprovas.models;
 import java.util.List;
 
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
 
 public class Resposta {

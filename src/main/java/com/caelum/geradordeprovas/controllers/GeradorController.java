@@ -47,25 +47,34 @@ public class GeradorController {
 		this.usuarioDao = usuarioDao;
 	}
 
-	@RequestMapping("prova-aluno")
-	public ModelAndView montaProvaPorLista() {
-
-		List<Questao> questoes = questaoDao.list();
-
-		if (questoes.isEmpty()) {
-			ModelAndView erro = new ModelAndView("erro");
-			return erro;
-		}
-
-		ModelAndView mv = new ModelAndView("prova-aluno");
-		mv.addObject("questoes", questoes);
-		return mv;
-	}
+	// @RequestMapping("prova-aluno")
+	// public ModelAndView montaProvaPorLista() {
+	//
+	// List<Questao> questoes = questaoDao.list();
+	//
+	// if (questoes.isEmpty()) {
+	// ModelAndView erro = new ModelAndView("erro");
+	// return erro;
+	// }
+	//
+	// ModelAndView mv = new ModelAndView("prova-aluno");
+	// mv.addObject("questoes", questoes);
+	// return mv;
+	// }
 
 	@RequestMapping("correcao-prova")
 	public ModelAndView corrigeProvas(
-			@ModelAttribute("resposta") Resposta marcadas) {
+			@ModelAttribute("resposta") Resposta marcadas,
+			@RequestParam("provaId") Long id) {
 
+		Prova prova = provaDao.getProva(id);
+
+		if (prova.getQuestoes().size() > marcadas.getAlternativas().size()) {
+			ModelAndView mv = new ModelAndView("realiza-prova");
+			mv.addObject("validacao", false);
+			return mv;
+		}
+		
 		List<Long> respostas = marcadas.getAlternativas();
 		List<Alternativa> acertou = new ArrayList<>();
 		List<Alternativa> errou = new ArrayList<>();
@@ -163,48 +172,57 @@ public class GeradorController {
 
 	@Transactional
 	@RequestMapping("admin/salva-liberacao")
-	public String salvaLiberacao(@RequestParam("provas") List<Long> provasId,
+	public ModelAndView salvaLiberacao(@RequestParam("provas") List<Long> provasId,
 			@RequestParam("usuarios") List<String> usuarios) {
 
-		List<Prova> provas = new ArrayList<>(provaDao.getProvasPorListDeIds(provasId));
+		if(provasId.isEmpty() || usuarios.isEmpty()){
+			ModelAndView mv = new ModelAndView("redirect:libera-prova");
+			mv.addObject("validacao", false);
+			return mv;
+		}
+		
+		
+		List<Prova> provas = new ArrayList<>(
+				provaDao.getProvasPorListDeIds(provasId));
 
 		for (String user : usuarios) {
 			usuarioDao.salvaProvasLiberadas(user, provas);
 		}
 
-		return "admin/provas-liberadas";
+		ModelAndView mv = new ModelAndView("admin/provas-liberadas");
+		return mv;
 	}
 
 	@RequestMapping("provas-liberadas")
 	public ModelAndView provasLiberadas(HttpSession sessao) {
 
-		Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
+		Usuario usuario = new Usuario();
+
+		if (sessao.getAttribute("usuarioLogado") == null) {
+			usuario = (Usuario) sessao.getAttribute("adminLogado");
+		} else {
+			usuario = (Usuario) sessao.getAttribute("usuarioLogado");
+		}
+
 		Usuario user = usuarioDao.getUsuario(usuario.getLogin());
-		
+
 		List<Prova> provas = new ArrayList<>(user.getProvas());
 
-		System.out.println(provas.get(0).getNome());
-		
 		ModelAndView mv = new ModelAndView("provas-liberadas");
 		mv.addObject("provas", provas);
 
 		return mv;
 	}
-	
+
 	@RequestMapping("escolhe-prova")
-	public ModelAndView escolheProva(@RequestParam("provaId") Long id){
-		
+	public ModelAndView escolheProva(@RequestParam("provaId") Long id) {
+
 		Prova prova = provaDao.getProva(id);
-		
+
 		ModelAndView mv = new ModelAndView("realiza-prova");
-		mv.addObject("prova",prova);
-		
+		mv.addObject("prova", prova);
+
 		return mv;
 	}
-	
-	@RequestMapping("corrige-prova")
-	public void corrigeProva(@ModelAttribute("resposta") Resposta respostas){
-		
-	}
-	
+
 }

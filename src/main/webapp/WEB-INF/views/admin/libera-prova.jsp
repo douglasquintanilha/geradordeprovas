@@ -17,7 +17,10 @@
 	<div class="container">
 
 		<c:url var="urlPost" value='salva-liberacao' />
-		<form:form method="POST" action="${urlPost}">
+		<c:if test="${validacao == false}">
+			Insira Pelo menos 1 prova e 1 usuario!
+		</c:if>
+		<form:form method="POST" action="${urlPost}" commandName="provas">
 			<h4>
 				Selecione a prova que será liberada:
 				</h3>

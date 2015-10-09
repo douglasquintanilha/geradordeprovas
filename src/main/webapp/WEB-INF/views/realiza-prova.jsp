@@ -15,6 +15,9 @@ pageEncoding="UTF-8"%>
 
 	<c:import url="header.jsp"></c:import>
 	<div class="container">
+		<c:if test="${validacao == false}">
+		Preencha todas as Respostas!
+		</c:if>
 		<c:url var="urlPost" value='correcao-prova' />
 		<form:form method="GET" action="${urlPost}" commandName="resposta">
 			<ol>
@@ -24,7 +27,7 @@ pageEncoding="UTF-8"%>
 						<c:forEach items="${questao.alternativa}" var="alternativa">
 						<div class="radio">				
 							<label for="${alternativa.id}">
-								<input type="radio" value="${alternativa.id}" id="${alternativa.id}" name="alternativas[${i.index}]">
+								<input type="radio" value="${alternativa.id}"  id="${alternativa.id}" name="alternativas[${i.index}]">
 								<md:render>${alternativa.descricao}</md:render>
 							</label>
 						</div>	
@@ -32,11 +35,11 @@ pageEncoding="UTF-8"%>
 					</li>
 				</c:forEach>
 			</ol>
+			<input type="hidden" name="provaId" value="${prova.id}">
 			<button type="submit" class="btn btn-default">Ok</button>
 		</form:form>
 	</div>		
 <c:import url="footer.jsp"></c:import>
-
 
 </body>
 </html>

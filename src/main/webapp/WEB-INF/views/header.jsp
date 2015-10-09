@@ -6,6 +6,7 @@ pageEncoding="UTF-8"%>
 	<a href="<c:url value='/'/>">
 		<img src="<c:url value='/static/imagens/caelum-logo.svg' />" alt="Caelum - Ensino e Inovação" id="logo-header">
 	</a>
+	<a href="<c:url value='/novo-usuario-form'/>" id="link-novo-usuario">Cadastre-se</a>
 	<a href="<c:url value='/logout'/>" id="link-logout">logout</a>
 	<div class="clear"></div>
 	<script src="<c:url value='/static/js/escondeLogout.js' />"></script>

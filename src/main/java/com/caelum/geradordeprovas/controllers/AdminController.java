@@ -1,7 +1,11 @@
 package com.caelum.geradordeprovas.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -18,34 +22,59 @@ public class AdminController {
 	public AdminController(UsuarioDao usuarioDao) {
 		this.usuarioDao = usuarioDao;
 	}
-	
+
 	@RequestMapping("admin/cria-usuario-form")
 	public String criaUsuarioForm() {
 		return "admin/cria-usuario-form";
 	}
 
 	@RequestMapping("admin/index")
-	public String indexAdmin(){
+	public String indexAdmin() {
 		return "admin/index";
 	}
-	
+
 	@org.springframework.transaction.annotation.Transactional
 	@RequestMapping("admin/adiciona-usuario")
-	public String criaUsuario(@RequestParam("nome") String nome,
-			@RequestParam("senha") String senha,
-			@RequestParam("admin") boolean admin) {
+	public String criaUsuario(@ModelAttribute("usuario") @Valid Usuario usuario, BindingResult result) {
 
-
-		Usuario user = new Usuario();
-		user.setAdmin(admin);
-		user.setLogin(nome);
+		if(result.hasErrors()){
+			System.out.println(result.getErrorCount());
+			return "admin/cria-usuario-form";
+		}
+		
 		Criptografia crypt = new Criptografia();
-		String senhaCript = crypt.criptografaSenha(senha);
-		user.setSenha(senhaCript);
-		
-		usuarioDao.save(user);
-		
+		String senhaCriptografada = crypt.criptografaSenha(usuario.getSenha());
+		usuario.setSenha(senhaCriptografada);
+		usuarioDao.save(usuario);
+
 		return "admin/usuario-adicionado";
 	}
 
+	@RequestMapping("novo-usuario-form")
+	public String novoUsuarioForm() {
+		return "novo-usuario-form";
+	}
+
+	@org.springframework.transaction.annotation.Transactional
+	@RequestMapping("novo-usuario")
+	public String novoUsuario(@ModelAttribute("usuario") @Valid Usuario usuario, BindingResult result) {
+
+		if(result.hasErrors()){
+			return "novo-usuario-form";
+		}
+		
+		Criptografia crypt = new Criptografia();
+		String senhaCript = crypt.criptografaSenha(usuario.getSenha());
+		usuario.setSenha(senhaCript);
+		usuario.setAdmin(false);
+		
+		usuarioDao.save(usuario);
+
+		return "redirect:usuario-adicionado";
+	}
+
+	@RequestMapping("usuario-adicionado")
+	public String usuarioAdicionado() {
+		return "usuario-adicionado";
+	}
 }

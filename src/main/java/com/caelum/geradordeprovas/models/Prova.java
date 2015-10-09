@@ -20,19 +20,9 @@ public class Prova {
 	@NotBlank
 	private String nome;
 	
-//	private String autor;
-	
 	@NotEmpty( message = "A prova deve conter pelo menos uma questão!")
 	@ManyToMany()
 	private List<Questao> questoes;
-
-//	public String getAutor() {
-//		return autor;
-//	}
-//
-//	public void setAutor(String autor) {
-//		this.autor = autor;
-//	}
 	
 	public Long getId() {
 		return id;
