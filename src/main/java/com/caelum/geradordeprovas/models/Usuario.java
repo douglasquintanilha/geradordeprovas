@@ -27,19 +27,7 @@ public class Usuario {
 
 	public void adicionaProvas(List<Prova> provas) {
 
-		List<Prova> provasPraAdicionar = new ArrayList<>();
-		
-		for (Prova prova : provas) {
-			for (Prova thisprova : this.provas) {
-				if (thisprova.getId() == prova.getId()) {
-					// ja tem essa prova na lista
-				} else {
-					provasPraAdicionar.add(prova);
-				}
-			}
-		}
-		
-		this.provas.addAll(provasPraAdicionar);
+		this.provas.addAll(provas);
 	}
 
 	public List<Prova> getProvas() {
