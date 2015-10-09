@@ -33,22 +33,22 @@ public class LoginController {
 		return "redirect:loginForm";
 	}
 
-	
 	@RequestMapping("efetuaLogin")
 	public ModelAndView efetuaLogin(@ModelAttribute("usuario") Usuario usuario,
 			HttpSession sessao) {
 
 		Usuario user = usuarioDao.validaUsuario(usuario);
-		
-		if (user!=null) {
-			if(user.isAdmin()){
+
+		if (user != null) {
+			if (user.isAdmin()) {
 				sessao.setAttribute("adminLogado", user);
-				ModelAndView mv = new ModelAndView( new RedirectView("/GeradorDeProvas/admin/index"));
+				ModelAndView mv = new ModelAndView(new RedirectView(
+						"/GeradorDeProvas/admin/index"));
 				return mv;
-			}
-			else{
+			} else {
 				sessao.setAttribute("usuarioLogado", user);
-				ModelAndView mv = new ModelAndView( new RedirectView("/GeradorDeProvas/"));
+				ModelAndView mv = new ModelAndView(new RedirectView(
+						"/GeradorDeProvas/"));
 				return mv;
 			}
 		} else {
@@ -58,7 +58,5 @@ public class LoginController {
 		}
 
 	}
-	
-	
 
 }

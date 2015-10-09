@@ -22,56 +22,51 @@ public class UsuarioDao {
 		manager.persist(usuario);
 	}
 
-	public Usuario getUsuario(String login){
+	public Usuario getUsuario(String login) {
 		Usuario usuario = manager.find(Usuario.class, login);
 		return usuario;
 	}
-	
+
 	public Usuario validaUsuario(Usuario usuario) {
 
-		if (usuario == null) {
-			return null;
-		}
-
-		else {
-			Usuario us = manager.find(Usuario.class, usuario.getLogin());
+		Usuario us = manager.find(Usuario.class, usuario.getLogin());
+		if (us != null) {
 			Criptografia crypt = new Criptografia();
 			String compara = crypt.criptografaSenha(usuario.getSenha());
-			if (us.getSenha().equals(compara)){
+			if (us.getSenha().equals(compara)) {
 				return us;
 			}
 		}
+
 		return null;
 	}
 
-	public boolean ehAdmin(Usuario usuario){
+	public boolean ehAdmin(Usuario usuario) {
 		Usuario us = manager.find(Usuario.class, usuario.getLogin());
 		return us.isAdmin();
 	}
-	
-	
+
 	public List<Usuario> list() {
 		return manager.createQuery("from Usuario u", Usuario.class)
 				.getResultList();
 	}
-	
-	public void salvaProvasLiberadas(String login, List<Prova> provas){
-		
+
+	public void salvaProvasLiberadas(String login, List<Prova> provas) {
+
 		Usuario us = manager.find(Usuario.class, login);
 		us.adicionaProvas(provas);
 
 	}
-	
-	public List<Prova> getProvasDoUsuario(String login){
-		
+
+	public List<Prova> getProvasDoUsuario(String login) {
+
 		List<Prova> provas = new ArrayList<>();
 		provas = manager
-				.createQuery("select p from provas p JOIN p.Usuario u where u.login =:login")
-				.setParameter("login", login)
-				.getResultList();
+				.createQuery(
+						"select p from provas p JOIN p.Usuario u where u.login =:login")
+				.setParameter("login", login).getResultList();
 
 		return provas;
 	}
-	
-	
+
 }
