@@ -22,14 +22,14 @@
 			<form:form action="${urlPost}" method="POST" commandName="questao">
 
 				<form:errors path="alternativaCorreta" cssClass="alert alert-danger" element="div" />
-				<div class="form-group">
+				<div class="form-group grupo-titulo">
 					<label for="titulo">Titulo da Questão:</label>
 					<form:errors path="titulo" cssClass="alert alert-danger" element="div" />
 					<div class='esconde'>
 						<span>Preview:</span>
-						<div id='titulo-markdown-preview' class="preview-markdown"></div>
+						<div class="preview-markdown"></div>
 					</div>
-					<input type="text" value="${questao.titulo}" placeholder="Digite aqui o título da sua questão" name="titulo" class="form-control" id="titulo" />
+					<input type="text" value="${questao.titulo}" placeholder="Digite aqui o título da sua questão" name="titulo" class="form-control entrada" id="titulo" >
 				</div>
 					
 				<div class="form-group">
@@ -38,89 +38,88 @@
 				</div>
 
 				<span>Escolha qual será a alternativa correta:</span>
-				<div class="form-group">
+				<div class="form-group alternativa">
 					<label for="alternativa">Alternativa A:</label>
-					<div class="alternativaA-markdown-preview"></div>
 					<form:errors path="alternativa[0].descricao" cssClass="alert alert-danger" element="div" />
 					<div class='esconde'>
 						<span>Preview:</span>
-						<div id="alternativaA-markdown-preview" class="preview-markdown"></div>
+						<div class="preview-markdown"></div>
 					</div>	
 					<div class="input-group">
 						<span class="input-group-addon"> <input type="radio"
 							name="alternativaCorreta" value="0" id="botaoA"/>
 						</span> 
-						<textarea class="form-control alternativa" name="alternativa" id="alternativaA">
+						<textarea class="form-control entrada" name="alternativa" >
 							${alternativa[0].descricao}
 						</textarea>	
 					</div>
 				</div>
 
-				<div class="form-group">
+				<div class="form-group alternativa">
 					<label for="alternativa">Alternativa B:</label>
 					
 					<form:errors path="alternativa[1].descricao" cssClass="alert alert-danger" element="div" />
 					<div class='esconde'>
 						<span>Preview:</span>
-						<div id="alternativaB-markdown-preview" class="preview-markdown"></div>
+						<div  class="preview-markdown"></div>
 					</div>						
 					<div class="input-group">
 						<span class="input-group-addon"> <input type="radio"
 							name="alternativaCorreta" value="1" />
 						</span> 
-						<textarea class="form-control alternativa" name="alternativa" id="alternativaB">
+						<textarea class="form-control entrada" name="alternativa">
 							${alternativa[1].descricao}
 						</textarea>	
 					</div>
 				</div>
 
-				<div class="form-group">
+				<div class="form-group alternativa">
 					<label for="alternativa">Alternativa C:</label>
 					<form:errors path="alternativa[2].descricao" cssClass="alert alert-danger" element="div" />
 					<div class='esconde'>
 						<span>Preview:</span>
-						<div id="alternativaC-markdown-preview" class="preview-markdown"></div>
+						<div class="preview-markdown"></div>
 					</div>	
 					<div class="input-group">
 						<span class="input-group-addon"> <input type="radio"
 							name="alternativaCorreta" value="2" >
 						</span> 
-						<textarea class="form-control alternativa" name="alternativa" id="alternativaC">
+						<textarea class="form-control entrada" name="alternativa" >
 							${alternativa[2].descricao}
 						</textarea>
 					</div>
 				</div>
 
-				<div class="form-group">
+				<div class="form-group alternativa">
 					<label for="alternativa">Alternativa D:</label>
 					<form:errors path="alternativa[3].descricao" cssClass="alert alert-danger" element="div" />
 					<div class='esconde'>
 						<span>Preview:</span>
-						<div id="alternativaD-markdown-preview" class="preview-markdown"></div>
+						<div class="preview-markdown"></div>
 					</div>	
 					<div class="input-group">
 						<span class="input-group-addon"> <input type="radio"
 							name="alternativaCorreta" value="3" />
 						</span>
-						<textarea class="form-control alternativa" name="alternativa" id="alternativaD">
+						<textarea class="form-control entrada" name="alternativa">
 							${alternativa[3].descricao}
 						</textarea>
 					</div>
 				</div>
 
 
-				<div class="form-group">
+				<div class="form-group alternativa">
 					<label for="alternativa">Alternativa E:</label>
 					<form:errors path="alternativa[4].descricao" cssClass="alert alert-danger" element="div" />
 					<div class='esconde'>
 						<span>Preview:</span>
-						<div id="alternativaE-markdown-preview" class="preview-markdown"></div>
+						<div class="preview-markdown"></div>
 					</div>
 					<div class="input-group">
 						<span class="input-group-addon"> <input type="radio"
 							name="alternativaCorreta" value="4" />
 						</span> 
-						<textarea class="form-control alternativa" name="alternativa" id="alternativaE">
+						<textarea class="form-control entrada" name="alternativa">
 							${alternativa[4].descricao}
 						</textarea>
 					</div>
