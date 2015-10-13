@@ -14,12 +14,12 @@
 	<c:import url="header.jsp"></c:import>
 	<div class="container">
 		<h1>Sua nota foi:</h1>
-		<h3>${nota}/${total}</h3>
-		<c:if test="${temErrada == true}">
+		<h3>${relatorio.nota}/${relatorio.totalDeQuestoes}</h3>
+		<c:if test="${relatorio.temErrada == true}">
 			<h3>Você errou a(s) questão(ões):</h3>
-			<c:forEach items="${resultado}" var="teste" varStatus = "i">
+			<c:forEach items="${relatorio.resultado}" var="teste" varStatus = "i">
 				<c:if test="${teste == false}">
-					"${questoes[i.index].titulo}"<br />
+					"${relatorio.questoes[i.index].titulo}"<br />
 				</c:if>
 			</c:forEach>
 		</c:if>

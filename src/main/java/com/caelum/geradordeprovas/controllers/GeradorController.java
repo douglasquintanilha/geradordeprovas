@@ -23,6 +23,7 @@ import com.caelum.geradordeprovas.DAO.UsuarioDao;
 import com.caelum.geradordeprovas.models.Alternativa;
 import com.caelum.geradordeprovas.models.Prova;
 import com.caelum.geradordeprovas.models.Questao;
+import com.caelum.geradordeprovas.models.RelatorioProva;
 import com.caelum.geradordeprovas.models.Resposta;
 import com.caelum.geradordeprovas.models.Tag;
 import com.caelum.geradordeprovas.models.Usuario;
@@ -65,7 +66,9 @@ public class GeradorController {
 			alternativas.add(alternativaDao.getAlternativaPorId(idAlternativa));
 		}
 		
-		ModelAndView mv = prova.corrige(alternativas, prova);
+		RelatorioProva rp = prova.corrige(alternativas);
+		ModelAndView mv = new ModelAndView("corrigido");
+		mv.addObject("relatorio", rp);
 		
 		return mv;
 	}

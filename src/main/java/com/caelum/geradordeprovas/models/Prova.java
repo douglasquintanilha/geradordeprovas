@@ -47,12 +47,12 @@ public class Prova {
 		this.questoes = questoes;
 	}
 
-	public ModelAndView corrige(List<Alternativa> marcadas, Prova prova) {
+	public RelatorioProva corrige(List<Alternativa> marcadas) {
 
 		List<Alternativa> acertou = new ArrayList<>();
 		List<Boolean> resultado = new ArrayList<>();
 		boolean temErrada = false;
-		List<Questao> questoes = prova.getQuestoes();
+		List<Questao> questoes = this.getQuestoes();
 
 		for (Alternativa alternativa : marcadas) {
 			if (alternativa.isAlternativaCorreta()) {
@@ -64,14 +64,10 @@ public class Prova {
 			}
 		}
 
-		ModelAndView mv = new ModelAndView("corrigido");
-		mv.addObject("nota", acertou.size());
-		mv.addObject("total", marcadas.size());
-		mv.addObject("temErrada", temErrada);
-		mv.addObject("resultado", resultado);
-		mv.addObject("questoes", questoes);
-		
-		return mv;
+		RelatorioProva rp = new RelatorioProva(acertou.size(), marcadas.size(),
+				temErrada, questoes, resultado);
+
+		return rp;
 	}
 
 }
