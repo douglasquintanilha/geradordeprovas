@@ -48,31 +48,6 @@ public class GeradorController {
 		this.usuarioDao = usuarioDao;
 	}
 
-	@RequestMapping("correcao-prova")
-	public ModelAndView corrigeProvas(
-			@ModelAttribute("resposta") Resposta marcadas,
-			@RequestParam("provaId") Long id) {
-
-		Prova prova = provaDao.getProva(id);
-
-		if (prova.getQuestoes().size() > marcadas.getAlternativas().size()) {
-			ModelAndView mv = new ModelAndView("realiza-prova");
-			mv.addObject("validacao", false);
-			return mv;
-		}
-
-		List<Alternativa> alternativas = new ArrayList<>();
-		for(Long idAlternativa : marcadas.getAlternativas()){
-			alternativas.add(alternativaDao.getAlternativaPorId(idAlternativa));
-		}
-		
-		RelatorioProva rp = prova.corrige(alternativas);
-		ModelAndView mv = new ModelAndView("corrigido");
-		mv.addObject("relatorio", rp);
-		
-		return mv;
-	}
-
 	@RequestMapping("admin/seleciona-tag")
 	public ModelAndView selecionaTag() {
 
@@ -167,40 +142,6 @@ public class GeradorController {
 			usuarioDao.salvaProvasLiberadas(user, provas);
 		}
 		ModelAndView mv = new ModelAndView("admin/provas-liberadas");
-		return mv;
-	}
-
-	@RequestMapping("provas-liberadas")
-	public ModelAndView provasLiberadas(HttpSession sessao) {
-
-		// Não usar a sessão e passar pro Spring
-		// Renomear as variaveis
-		Usuario usuario = new Usuario();
-
-		if (sessao.getAttribute("usuarioLogado") == null) {
-			usuario = (Usuario) sessao.getAttribute("adminLogado");
-		} else {
-			usuario = (Usuario) sessao.getAttribute("usuarioLogado");
-		}
-
-		Usuario user = usuarioDao.getUsuario(usuario.getLogin());
-
-		List<Prova> provas = new ArrayList<>(user.getProvas());
-
-		ModelAndView mv = new ModelAndView("provas-liberadas");
-		mv.addObject("provas", provas);
-
-		return mv;
-	}
-
-	@RequestMapping("escolhe-prova")
-	public ModelAndView escolheProva(@RequestParam("provaId") Long id) {
-
-		Prova prova = provaDao.getProva(id);
-
-		ModelAndView mv = new ModelAndView("realiza-prova");
-		mv.addObject("prova", prova);
-
 		return mv;
 	}
 

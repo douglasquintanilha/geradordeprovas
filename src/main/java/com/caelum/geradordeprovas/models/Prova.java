@@ -64,8 +64,8 @@ public class Prova {
 			}
 		}
 
-		RelatorioProva rp = new RelatorioProva(acertou.size(), marcadas.size(),
-				temErrada, questoes, resultado);
+		RelatorioProva rp = new RelatorioProva(acertou.size(), temErrada,
+				questoes, resultado);
 
 		return rp;
 	}
