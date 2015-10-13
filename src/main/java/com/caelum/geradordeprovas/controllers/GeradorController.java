@@ -132,11 +132,11 @@ public class GeradorController {
 		List<Prova> provas = new ArrayList<>(
 				provaDao.getProvasPorListDeIds(provasId));
 
-		// if(provasId.isEmpty() || usuarios.isEmpty()){
-		// ModelAndView mv = new ModelAndView("redirect:libera-prova");
-		// mv.addObject("validacao", false);
-		// return mv;
-		// }
+		 if(provasId.isEmpty() || usuarios.isEmpty()){
+		 ModelAndView mv = new ModelAndView("redirect:libera-prova");
+		 mv.addObject("validacao", false);
+		 return mv;
+		 }
 
 		for (String user : usuarios) {
 			usuarioDao.salvaProvasLiberadas(user, provas);
