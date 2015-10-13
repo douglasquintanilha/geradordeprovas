@@ -47,21 +47,6 @@ public class GeradorController {
 		this.usuarioDao = usuarioDao;
 	}
 
-	// @RequestMapping("prova-aluno")
-	// public ModelAndView montaProvaPorLista() {
-	//
-	// List<Questao> questoes = questaoDao.list();
-	//
-	// if (questoes.isEmpty()) {
-	// ModelAndView erro = new ModelAndView("erro");
-	// return erro;
-	// }
-	//
-	// ModelAndView mv = new ModelAndView("prova-aluno");
-	// mv.addObject("questoes", questoes);
-	// return mv;
-	// }
-
 	@RequestMapping("correcao-prova")
 	public ModelAndView corrigeProvas(
 			@ModelAttribute("resposta") Resposta marcadas,
@@ -75,25 +60,13 @@ public class GeradorController {
 			return mv;
 		}
 
-		List<Long> respostas = marcadas.getAlternativas();
-		List<Alternativa> acertou = new ArrayList<>();
-		List<Alternativa> errou = new ArrayList<>();
-
-		for (int i = 0; i < respostas.size(); i++) {
-			if (alternativaDao.getAlternativaPorId(respostas.get(i))
-					.isAlternativaCorreta() == true) {
-				acertou.add(alternativaDao.getAlternativaPorId(respostas.get(i)));
-			} else {
-				errou.add(alternativaDao.getAlternativaPorId(respostas.get(i)));
-			}
+		List<Alternativa> alternativas = new ArrayList<>();
+		for(Long idAlternativa : marcadas.getAlternativas()){
+			alternativas.add(alternativaDao.getAlternativaPorId(idAlternativa));
 		}
-
-		ModelAndView mv = new ModelAndView("corrigido");
-		mv.addObject("nota", acertou.size());
-		mv.addObject("total", marcadas.getAlternativas().size());
-		mv.addObject("certas", acertou);
-		mv.addObject("erradas", errou);
-
+		
+		ModelAndView mv = prova.corrige(alternativas, prova);
+		
 		return mv;
 	}
 
@@ -176,7 +149,7 @@ public class GeradorController {
 	public ModelAndView salvaLiberacao(
 			@RequestParam("provas") List<Long> provasId,
 			@RequestParam("usuarios") List<String> usuarios) {
-		
+
 		// Refatorar getProvasPorIds
 		List<Prova> provas = new ArrayList<>(
 				provaDao.getProvasPorListDeIds(provasId));
@@ -198,7 +171,7 @@ public class GeradorController {
 	public ModelAndView provasLiberadas(HttpSession sessao) {
 
 		// Não usar a sessão e passar pro Spring
-		// Renomear as variaveis 
+		// Renomear as variaveis
 		Usuario usuario = new Usuario();
 
 		if (sessao.getAttribute("usuarioLogado") == null) {
