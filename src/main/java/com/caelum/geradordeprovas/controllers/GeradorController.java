@@ -128,9 +128,8 @@ public class GeradorController {
 			@RequestParam("provas") List<Long> provasId,
 			@RequestParam("usuarios") List<String> usuarios) {
 
-		// Refatorar getProvasPorIds
 		List<Prova> provas = new ArrayList<>(
-				provaDao.getProvasPorListDeIds(provasId));
+				provaDao.getProvasPorIds(provasId));
 
 		 if(provasId.isEmpty() || usuarios.isEmpty()){
 		 ModelAndView mv = new ModelAndView("redirect:libera-prova");
