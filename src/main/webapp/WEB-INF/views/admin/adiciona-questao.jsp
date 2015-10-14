@@ -136,7 +136,6 @@
 			<script src="<c:url value='../static/js/markdown.min.js' />"></script>
 			<script src="<c:url value='../static/js/markdown-preview.js' />"></script>
 			<script src="<c:url value='../static/js/highlight.min.js' />"></script>
-			<script src="<c:url value='../static/js/preview.js' />"></script>
 		</div>
 		<c:import url="../footer.jsp"></c:import>
 	</body>
