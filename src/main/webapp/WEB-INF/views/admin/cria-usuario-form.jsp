@@ -13,9 +13,9 @@
 	<c:import url="../header.jsp"></c:import>
 	<div class="container">
 		<c:set var="urlPost" value="adiciona-usuario"/>
-		<form:form action="${urlPost}" method="POST" comandName="usuario" class="form-horizontal col-xs-2">
+		<form:form action="${urlPost}" method="POST" commandName="usuario" class="form-horizontal col-xs-2">
 			<div class="form-group">
-				<label for="nome">Login:</label>
+				<label for="nome">Nome:</label>
 				<form:errors path="login" cssClass="alert alert-danger" element="div" />
 				<input type="text" class="form-control" name="login" id="nome">
 			</div>
