@@ -3,10 +3,11 @@ package com.caelum.geradordeprovas.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -16,9 +17,10 @@ public class Usuario {
 	@Size(min = 5, max = 30)
 	private String login;
 
-	@Lob
+	@Column(length=2048)
 	@Size(min = 5)
 	private String senha;
+
 
 	private boolean admin;
 
