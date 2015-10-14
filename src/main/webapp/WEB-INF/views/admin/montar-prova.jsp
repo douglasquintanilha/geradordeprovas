@@ -7,9 +7,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Caelum Provas</title>
-<link rel="stylesheet" href="<c:url value='../static/css/bootstrap.min.css' />">
-<link rel="stylesheet" href="<c:url value='../static/css/jquery-ui.min.css' />">
-<link rel="stylesheet" href="<c:url value='../static/css/main.css' />">
+<link rel="stylesheet" href="<c:url value='/static/css/bootstrap.min.css' />">
+<link rel="stylesheet" href="<c:url value='/static/css/jquery-ui.min.css' />">
+<link rel="stylesheet" href="<c:url value='/static/css/main.css' />">
 
 </head>
 <body>
@@ -17,7 +17,7 @@
 	<div class="container"> 
 		<h1>Monte uma prova:</h1>
 		<br>
-		<c:url var="urlPost" value='salvar-prova'/>
+		<c:url var="urlPost" value='salvaProva'/>
 		<form:form method="POST" action="${urlPost}" commandName="prova" >
 			<div class="form-group">
 				<label for="nome">Nome da Prova:</label>
@@ -58,10 +58,10 @@
 	</div>
 	<c:import url="../footer.jsp"></c:import>
 	
-	<script src="<c:url value='../static/js/jquery-2.1.4.min.js' />"></script>
-	<script src="<c:url value='../static/js/bootstrap.min.js' />"></script>
-	<script src="<c:url value='../static/js/troca-texto.js' />"></script>
-	<script src="<c:url value='../static/js/filtra-por-tag.js' />"></script>
-	<script src="<c:url value='../static/js/contador-de-questoes.js' />"></script>
+	<script src="<c:url value='/static/js/jquery-2.1.4.min.js' />"></script>
+	<script src="<c:url value='/static/js/bootstrap.min.js' />"></script>
+	<script src="<c:url value='/static/js/troca-texto.js' />"></script>
+	<script src="<c:url value='/static/js/filtra-por-tag.js' />"></script>
+	<script src="<c:url value='/static/js/contador-de-questoes.js' />"></script>
 </body>
 </html>

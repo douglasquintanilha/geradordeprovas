@@ -7,10 +7,11 @@
 <html>
 	<head> 
 		<title>Caelum Provas</title>
-		<link rel="stylesheet" href="<c:url value='../static/css/bootstrap.min.css' />">
-		<link rel="stylesheet" href="<c:url value='../static/css/jquery-ui.min.css' /> ">
-		<link rel="stylesheet" href="<c:url value='../static/css/main.css' /> ">
-		<link rel="stylesheet" href="<c:url value='../static/css/highlight.min.css' /> ">
+		
+		<link rel="stylesheet" href="<c:url value='/static/css/bootstrap.min.css' />">
+		<link rel="stylesheet" href="<c:url value='/static/css/jquery-ui.min.css' /> ">
+		<link rel="stylesheet" href="<c:url value='/static/css/main.css' /> ">
+		<link rel="stylesheet" href="<c:url value='/static/css/highlight.min.css' /> ">
 		
 
 	</head>
@@ -129,14 +130,14 @@
 
 			</form:form>
 
-			<script src="<c:url value='../static/js/jquery-2.1.4.min.js' />"></script>
-			<script src="<c:url value='../static/js/jquery-ui.min.js' />"></script>
-			<script src="<c:url value='../static/js/autocomplete-tags.js' />"></script>
-			<script src="<c:url value='../static/js/limpa-campo.js' />"></script>
-			<script src="<c:url value='../static/js/markdown.min.js' />"></script>
-			<script src="<c:url value='../static/js/markdown-preview.js' />"></script>
-			<script src="<c:url value='../static/js/highlight.min.js' />"></script>
-			<script src="<c:url value='../static/js/preview.js' />"></script>
+			<script src="<c:url value='/static/js/jquery-2.1.4.min.js' />"></script>
+			<script src="<c:url value='/static/js/jquery-ui.min.js' />"></script>
+			<script src="<c:url value='/static/js/autocomplete-tags.js' />"></script>
+			<script src="<c:url value='/static/js/limpa-campo.js' />"></script>
+			<script src="<c:url value='/static/js/markdown.min.js' />"></script>
+			<script src="<c:url value='/static/js/markdown-preview.js' />"></script>
+			<script src="<c:url value='/static/js/highlight.min.js' />"></script>
+			<script src="<c:url value='/static/js/preview.js' />"></script>
 		</div>
 		<c:import url="../footer.jsp"></c:import>
 	</body>

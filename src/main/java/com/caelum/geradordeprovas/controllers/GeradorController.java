@@ -67,8 +67,6 @@ public class GeradorController {
 		List<Questao> questoes = new ArrayList<>();
 		questoes = questaoDao.getQuestoesPorTag(nomeTag);
 
-		// System.out.println(questoes.get(0).getClass());
-
 		ModelAndView mv = new ModelAndView("admin/mostra-por-tag");
 
 		List<Tag> tags = new ArrayList<>(tagDao.list());
@@ -79,69 +77,6 @@ public class GeradorController {
 
 		return mv;
 
-	}
-
-	@RequestMapping("admin/montar-prova")
-	public ModelAndView montarProvaView() {
-		ModelAndView mv = new ModelAndView("admin/montar-prova");
-		List<Questao> questoes = questaoDao.list();
-		mv.addObject("questoes", questoes);
-		return mv;
-	}
-
-	@Transactional
-	@RequestMapping("admin/salvar-prova")
-	public ModelAndView salvaProva(@Valid @ModelAttribute("prova") Prova prova,
-			BindingResult result) {
-		if (result.hasErrors()) {
-			ModelAndView mv = new ModelAndView("admin/montar-prova",
-					result.getModel());
-			List<Questao> questoes = questaoDao.list();
-			mv.addObject("questoes", questoes);
-			return mv;
-		}
-
-		provaDao.save(prova);
-
-		ModelAndView mv = new ModelAndView("admin/prova-adicionada");
-
-		return mv;
-	}
-
-	@RequestMapping("admin/libera-prova")
-	public ModelAndView liberaProva() {
-
-		List<Usuario> usuarios = new ArrayList<>(usuarioDao.list());
-		List<Prova> provas = new ArrayList<>(provaDao.list());
-
-		ModelAndView mv = new ModelAndView("admin/libera-prova");
-		mv.addObject("usuarios", usuarios);
-		mv.addObject("provas", provas);
-
-		return mv;
-
-	}
-
-	@Transactional
-	@RequestMapping("admin/salva-liberacao")
-	public ModelAndView salvaLiberacao(
-			@RequestParam("provas") List<Long> provasId,
-			@RequestParam("usuarios") List<String> usuarios) {
-
-		List<Prova> provas = new ArrayList<>(
-				provaDao.getProvasPorIds(provasId));
-
-		 if(provasId.isEmpty() || usuarios.isEmpty()){
-		 ModelAndView mv = new ModelAndView("redirect:libera-prova");
-		 mv.addObject("validacao", false);
-		 return mv;
-		 }
-
-		for (String user : usuarios) {
-			usuarioDao.salvaProvasLiberadas(user, provas);
-		}
-		ModelAndView mv = new ModelAndView("admin/provas-liberadas");
-		return mv;
 	}
 
 }
