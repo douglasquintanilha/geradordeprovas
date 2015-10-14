@@ -25,7 +25,7 @@ public class Questao {
 	@GeneratedValue
 	private Long id;
 	
-	// transformar em @Collumn
+	// (DONE) transformar em @Collumn 
 	@Column(length=2048)
 	@NotBlank 
 	private String titulo;
