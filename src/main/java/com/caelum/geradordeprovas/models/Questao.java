@@ -6,17 +6,18 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Questao {
@@ -25,21 +26,20 @@ public class Questao {
 	@GeneratedValue
 	private Long id;
 	
-	// transformar em @Collumn
-	@Lob
-	@NotBlank 
+	// (DONE) transformar em @Collumn 
+	@Column(length=2048)
+	@NotBlank()
 	private String titulo;
 	
 	@ManyToMany(cascade = {CascadeType.PERSIST})
 	@JoinColumn(unique=true)
 	private Set<Tag> tags = new HashSet<Tag>();
-	//Transformar em Set
+	
 	@Valid
 	@OneToMany(cascade={CascadeType.PERSIST})
 	private List<Alternativa> alternativa;
 
-	// Colocar em um arquivo validatormessages
-	@NotBlank( message = "Por favor assinale qual é a alternativa correta")
+	@NotBlank
 	@Transient
 	private String alternativaCorreta;
 

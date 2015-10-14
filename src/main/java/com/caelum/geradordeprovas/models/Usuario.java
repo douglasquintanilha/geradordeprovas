@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 public class Usuario {
 
 	@Id
-	@Size(min = 5, max = 30, message = "Minimo de 5 e maximo de 30")
+	@Size(min = 5, max = 30)
 	private String login;
 
 	@Lob

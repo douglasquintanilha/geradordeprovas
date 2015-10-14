@@ -32,20 +32,12 @@ import com.caelum.geradordeprovas.models.Usuario;
 public class GeradorController {
 
 	private QuestaoDao questaoDao;
-	private AlternativaDao alternativaDao;
 	private TagDao tagDao;
-	private ProvaDao provaDao;
-	private UsuarioDao usuarioDao;
 
 	@Autowired
-	public GeradorController(QuestaoDao questaoDao,
-			AlternativaDao alternativaDao, TagDao tagDao, ProvaDao provaDao,
-			UsuarioDao usuarioDao) {
+	public GeradorController(QuestaoDao questaoDao, TagDao tagDao) {
 		this.questaoDao = questaoDao;
-		this.alternativaDao = alternativaDao;
 		this.tagDao = tagDao;
-		this.provaDao = provaDao;
-		this.usuarioDao = usuarioDao;
 	}
 
 	@RequestMapping("admin/seleciona-tag")

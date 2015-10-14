@@ -9,7 +9,6 @@ import javax.persistence.NoResultException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.caelum.geradordeprovas.DAO.AlternativaDao;
 import com.caelum.geradordeprovas.DAO.QuestaoDao;
 import com.caelum.geradordeprovas.DAO.TagDao;
 import com.caelum.geradordeprovas.models.Alternativa;
@@ -20,13 +19,11 @@ import com.caelum.geradordeprovas.models.Tag;
 public class QuestaoFacade {
 	
 	private QuestaoDao questaoDao;
-	private AlternativaDao alternativaDao;
 	private TagDao tagDao;
 	
 	@Autowired
-	public QuestaoFacade(QuestaoDao questaoDao,AlternativaDao alternativaDao,TagDao tagDao) {
+	public QuestaoFacade(QuestaoDao questaoDao,TagDao tagDao) {
 		this.questaoDao = questaoDao;
-		this.alternativaDao = alternativaDao;
 		this.tagDao = tagDao;
 	}
 	
@@ -60,27 +57,12 @@ public class QuestaoFacade {
 		}
 	}
 	
-	public void preencheQuestaoDaAlternativa (Questao questao){
-		List<Alternativa> alternativas = questao.getAlternativa();
-		for (int i = 0; i < alternativas.size(); i++) {
-			//alternativas.get(i).setQuestao(questao);
-		}
-	}
-	
-	public void salvaAlternativas(Questao questao){
-		List<Alternativa> alternativas = questao.getAlternativa();
-		for (int i = 0; i < alternativas.size(); i++) {
-			alternativaDao.save(alternativas.get(i));
-		} 	
-	}
 	
 	
 	public void salva (Questao questao){
 		verificaSeTagJaExisteNoBanco(questao);
 		questaoDao.save(questao);
 		preencheAlternativaCorreta(questao);
-		//preencheQuestaoDaAlternativa(questao);
-		//salvaAlternativas(questao);
 	}
 	
 	

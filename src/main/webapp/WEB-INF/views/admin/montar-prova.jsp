@@ -46,7 +46,7 @@
 						<button class="btn btn-primary botao-exibir-alternativas" type="button" data-toggle="collapse" data-target="#alternativas${questao.id}" aria-expanded="false" aria-controls="alternativas${questao.id}">Exibir alternativas</button>	
 						<ol class="collapse" id="alternativas${questao.id}" type="A">
 							<c:forEach items="${questao.alternativa}" var="alternativa">
-								<li><md:render>${alternativa.descricao})</md:render></li>
+								<li><md:render>${alternativa.descricao}</md:render></li>
 							</c:forEach>
 						</ol>
 					</div>

@@ -1,11 +1,14 @@
 	package com.caelum.geradordeprovas.controllers;
 	
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -34,9 +37,12 @@ public class QuestoesController {
 	public String salva(@ModelAttribute("questao") @Valid Questao questao, BindingResult result,Model model) {
 		if(result.hasErrors()){
 			model.addAttribute("alternativa", questao.getAlternativa());
+		    List<FieldError> errors = result.getFieldErrors();
+		    for (FieldError error : errors ) {
+		        System.out.println ( error.getCode() + " - " + error.getField() + " - " + error.getDefaultMessage());
+		    }
 			return "admin/adiciona-questao";
 		}
-		System.out.println(questao.getAlternativa().get(0).getDescricao());
 		questaoBo.salva(questao);
 		
 		return "admin/questao-adicionada";

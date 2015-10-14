@@ -1,8 +1,10 @@
 package com.caelum.geradordeprovas.configuration;
 
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.format.support.FormattingConversionService;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -44,6 +46,15 @@ public class Configurator extends WebMvcConfigurerAdapter {
 		servico.addConverter(new TagConverter());
 		servico.addConverter(new QuestaoConverter());
 		return servico;
+	}
+	
+	@Bean
+	public MessageSource messageSource(){
+		ReloadableResourceBundleMessageSource bundle = new ReloadableResourceBundleMessageSource();
+		bundle.setBasename("WEB-INF/messages");
+		bundle.setDefaultEncoding("ISO-8859-1");
+		bundle.setCacheSeconds(1);
+		return bundle;
 	}
 	
 

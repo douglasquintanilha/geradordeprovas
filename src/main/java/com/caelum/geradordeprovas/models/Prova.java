@@ -10,7 +10,6 @@ import javax.persistence.ManyToMany;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.web.servlet.ModelAndView;
 
 @Entity
 public class Prova {
@@ -23,7 +22,7 @@ public class Prova {
 	private String nome;
 
 	// Mudar a List para Set , e mandar mensagem pro properties
-	@NotEmpty(message = "A prova deve conter pelo menos uma questão!")
+	@NotEmpty()
 	@ManyToMany()
 	private List<Questao> questoes;
 
