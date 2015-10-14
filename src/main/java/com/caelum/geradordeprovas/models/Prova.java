@@ -22,7 +22,7 @@ public class Prova {
 	private String nome;
 
 	// Mudar a List para Set , e mandar mensagem pro properties
-	@NotEmpty(message = "A prova deve conter pelo menos uma questão!")
+	@NotEmpty()
 	@ManyToMany()
 	private List<Questao> questoes;
 
