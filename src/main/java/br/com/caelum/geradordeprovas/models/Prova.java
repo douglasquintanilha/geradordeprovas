@@ -11,7 +11,7 @@ import javax.persistence.ManyToMany;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import com.caelum.geradordeprovas.DAO.AlternativaDao;
+import br.com.caelum.geradordeprovas.dao.AlternativaDao;
 
 @Entity
 public class Prova {

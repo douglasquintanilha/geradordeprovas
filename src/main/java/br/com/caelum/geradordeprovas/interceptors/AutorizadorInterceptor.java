@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import br.com.caelum.geradordeprovas.models.Usuario;
+
 public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 
 	@Override
@@ -20,19 +22,21 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 			return true;
 		}
 
-		if (request.getSession().getAttribute("adminLogado") != null) {
+		if (request.getSession().getAttribute("usuario") != null) {
+			Usuario usuario = (Usuario) request.getSession().getAttribute(
+					"usuario");
+
+			if (usuario.isAdmin()) {
+				return true;
+			}
+
+			if (!usuario.isAdmin() && (uri.contains("/admin"))) {
+				return false;
+			}
+
 			return true;
 		}
-
-		if ((request.getSession().getAttribute("usuarioLogado") != null)
-				&& (uri.contains("/admin"))) {
-			return false;
-		}
-
-		if (request.getSession().getAttribute("usuarioLogado") != null) {
-			return true;
-		}
-
+		
 		response.sendRedirect("/GeradorDeProvas/loginForm");
 		return false;
 	}

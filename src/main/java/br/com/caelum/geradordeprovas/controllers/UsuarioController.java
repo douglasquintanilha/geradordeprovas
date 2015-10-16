@@ -14,10 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.caelum.geradordeprovas.dao.AlternativaDao;
 import br.com.caelum.geradordeprovas.dao.ProvaDao;
-import br.com.caelum.geradordeprovas.dao.QuestaoDao;
-import br.com.caelum.geradordeprovas.dao.TagDao;
 import br.com.caelum.geradordeprovas.dao.UsuarioDao;
-import br.com.caelum.geradordeprovas.models.Alternativa;
 import br.com.caelum.geradordeprovas.models.Prova;
 import br.com.caelum.geradordeprovas.models.RelatorioProva;
 import br.com.caelum.geradordeprovas.models.Resposta;
@@ -61,18 +58,9 @@ public class UsuarioController {
 	@RequestMapping("provas-liberadas")
 	public ModelAndView provasLiberadas(HttpSession sessao) {
 
-		// Não usar a sessão e passar pro Spring
-		// Renomear as variaveis
-		Usuario usuario = new Usuario();
-
-		if (sessao.getAttribute("usuarioLogado") == null) {
-			usuario = (Usuario) sessao.getAttribute("adminLogado");
-		} else {
-			usuario = (Usuario) sessao.getAttribute("usuarioLogado");
-		}
-
+		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
 		Usuario user = usuarioDao.getUsuario(usuario.getLogin());
-
+		
 		List<Prova> provas = new ArrayList<>(user.getProvas());
 
 		ModelAndView mv = new ModelAndView("provas-liberadas");
