@@ -13,6 +13,7 @@ import br.com.caelum.geradordeprovas.models.Usuario;
 import br.com.caelum.geradordeprovas.util.Criptografia;
 
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
 
 	private UsuarioDao usuarioDao;
@@ -22,18 +23,18 @@ public class AdminController {
 		this.usuarioDao = usuarioDao;
 	}
 
-	@RequestMapping("admin/cria-usuario-form")
+	@RequestMapping("/usuario/novo/form")
 	public String criaUsuarioForm() {
 		return "admin/cria-usuario-form";
 	}
 
-	@RequestMapping("admin/index")
+	@RequestMapping("/index")
 	public String indexAdmin() {
 		return "admin/index";
 	}
 
 	@org.springframework.transaction.annotation.Transactional
-	@RequestMapping("admin/adiciona-usuario")
+	@RequestMapping("/usuario/novo/salva")
 	public String criaUsuario(@ModelAttribute("usuario") @Valid Usuario usuario, BindingResult result) {
 
 		if(result.hasErrors()){

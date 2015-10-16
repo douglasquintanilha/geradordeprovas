@@ -46,13 +46,14 @@ public class LoginController {
 		Usuario user = usuarioDao.validaUsuario(usuario);
 
 		if (user != null) {
+			
+			sessao.setAttribute("usuario", user);
+			
 			if (user.isAdmin()) {
-				sessao.setAttribute("adminLogado", user);
 				ModelAndView mv = new ModelAndView(new RedirectView(
 						"/GeradorDeProvas/admin/index"));
 				return mv;
 			} else {
-				sessao.setAttribute("usuarioLogado", user);
 				ModelAndView mv = new ModelAndView(new RedirectView(
 						"/GeradorDeProvas/"));
 				return mv;

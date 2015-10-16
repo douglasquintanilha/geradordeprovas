@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.Transient;
 
-
 public class Resposta {
 
 	@Transient
@@ -17,7 +16,14 @@ public class Resposta {
 	public void setAlternativas(List<Long> alternativas) {
 		this.alternativas = alternativas;
 	}
-	
-	
-	
+
+	public boolean validacao(Prova prova) {
+
+		if (prova.getQuestoes().size() > this.getAlternativas().size())
+			return false;
+		else
+			return true;
+		
+	}
+
 }
