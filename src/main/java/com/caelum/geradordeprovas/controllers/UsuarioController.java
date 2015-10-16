@@ -45,18 +45,13 @@ public class UsuarioController {
 
 		Prova prova = provaDao.getProva(id);
 
-		if (prova.getQuestoes().size() > marcadas.getAlternativas().size()) {
+		if(!marcadas.validacao(prova)){
 			ModelAndView mv = new ModelAndView("realiza-prova");
 			mv.addObject("validacao", false);
 			return mv;
 		}
 
-		List<Alternativa> alternativas = new ArrayList<>();
-		for (Long idAlternativa : marcadas.getAlternativas()) {
-			alternativas.add(alternativaDao.getAlternativaPorId(idAlternativa));
-		}
-
-		RelatorioProva rp = prova.corrige(alternativas);
+		RelatorioProva rp = prova.corrige(marcadas, alternativaDao);
 		ModelAndView mv = new ModelAndView("corrigido");
 		mv.addObject("relatorio", rp);
 

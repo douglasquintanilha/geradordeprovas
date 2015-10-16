@@ -11,6 +11,8 @@ import javax.persistence.ManyToMany;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.caelum.geradordeprovas.DAO.AlternativaDao;
+
 @Entity
 public class Prova {
 
@@ -46,14 +48,19 @@ public class Prova {
 		this.questoes = questoes;
 	}
 
-	public RelatorioProva corrige(List<Alternativa> marcadas) {
+	public RelatorioProva corrige(Resposta marcadas, AlternativaDao alternativaDao) {
 
+		List<Alternativa> alternativasMarcadas = new ArrayList<>();
+		for (Long idAlternativa : marcadas.getAlternativas()) {
+			alternativasMarcadas.add(alternativaDao.getAlternativaPorId(idAlternativa));
+		}
+		
 		List<Alternativa> acertou = new ArrayList<>();
 		List<Boolean> resultado = new ArrayList<>();
 		boolean temErrada = false;
 		List<Questao> questoes = this.getQuestoes();
 
-		for (Alternativa alternativa : marcadas) {
+		for (Alternativa alternativa : alternativasMarcadas) {
 			if (alternativa.isAlternativaCorreta()) {
 				acertou.add(alternativa);
 				resultado.add(true);
