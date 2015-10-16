@@ -19,7 +19,7 @@
 		<c:import url="../header.jsp"></c:import>
 		<div class="container">	
 	
-			<c:url var="urlPost" value='salva-questao' />
+			<c:url var="urlPost" value='salva' />
 			<form:form action="${urlPost}" method="POST" commandName="questao">
 
 				<form:errors path="alternativaCorreta" cssClass="alert alert-danger" element="div" />
@@ -130,13 +130,13 @@
 
 			</form:form>
 
-			<script src="<c:url value='../static/js/jquery-2.1.4.min.js' />"></script>
-			<script src="<c:url value='../static/js/jquery-ui.min.js' />"></script>
-			<script src="<c:url value='../static/js/autocomplete-tags.js' />"></script>
-			<script src="<c:url value='../static/js/limpa-campo.js' />"></script>
-			<script src="<c:url value='../static/js/markdown.min.js' />"></script>
-			<script src="<c:url value='../static/js/markdown-preview.js' />"></script>
-			<script src="<c:url value='../static/js/highlight.min.js' />"></script>
+			<script src="<c:url value='/static/js/jquery-2.1.4.min.js' />"></script>
+			<script src="<c:url value='/static/js/jquery-ui.min.js' />"></script>
+			<script src="<c:url value='/static/js/autocomplete-tags.js' />"></script>
+			<script src="<c:url value='/static/js/limpa-campo.js' />"></script>
+			<script src="<c:url value='/static/js/markdown.min.js' />"></script>
+			<script src="<c:url value='/static/js/markdown-preview.js' />"></script>
+			<script src="<c:url value='/static/js/highlight.min.js' />"></script>
 		</div>
 		<c:import url="../footer.jsp"></c:import>
 	</body>

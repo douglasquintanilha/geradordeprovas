@@ -6,8 +6,8 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Caelum Provas</title>
-		<link rel="stylesheet" href="<c:url value='../static/css/bootstrap.min.css' />">
-		<link rel="stylesheet" href="<c:url value='../static/css/main.css' />">
+		<link rel="stylesheet" href="<c:url value='/static/css/bootstrap.min.css' />">
+		<link rel="stylesheet" href="<c:url value='/static/css/main.css' />">
 
 
 	</head>
@@ -16,7 +16,7 @@
 		<div class="container">	
 
 			<h1>Questão adicionada com sucesso!</h1>
-			<a href="/GeradorDeProvas/admin/adiciona-questao">Adicionar nova questão</a>
+			<a href="adiciona">Adicionar nova questão</a>
 
 		</div>
 		<c:import url="../footer.jsp"></c:import>

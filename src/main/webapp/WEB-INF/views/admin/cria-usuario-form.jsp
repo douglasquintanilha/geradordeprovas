@@ -12,7 +12,7 @@
 <body>
 	<c:import url="../header.jsp"></c:import>
 	<div class="container">
-		<c:set var="urlPost" value="adiciona-usuario"/>
+		<c:set var="urlPost" value="salva"/>
 		<form:form action="${urlPost}" method="POST" commandName="usuario" class="form-horizontal col-xs-2">
 			<div class="form-group">
 				<label for="nome">Nome:</label>
@@ -31,7 +31,7 @@
 						Sim 
 					</label>
 					<label class="radio-inline">
-						 <input type="radio" id="admin" name="admin" value="false">
+						 <input type="radio" id="admin" name="admin" value="false" checked="checked">
 						 Nao
 					 </label>
 			</div>

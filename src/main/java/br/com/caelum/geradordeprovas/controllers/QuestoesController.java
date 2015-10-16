@@ -13,6 +13,7 @@ import br.com.caelum.geradordeprovas.models.Questao;
 import br.com.caelum.geradordeprovas.services.QuestaoFacade;
 
 @Controller
+@RequestMapping("/admin/questao")
 public class QuestoesController {
 
 	private QuestaoFacade questaoBo;
@@ -22,7 +23,7 @@ public class QuestoesController {
 		this.questaoBo = questaoBo;
 	}
 
-	@RequestMapping("admin/adiciona-questao")
+	@RequestMapping("/adiciona")
 	public String mostraAdicionaQuestaoForm(Questao questao) {
 		return "admin/adiciona-questao";
 	}
@@ -30,7 +31,7 @@ public class QuestoesController {
 	
 	
 	@org.springframework.transaction.annotation.Transactional
-	@RequestMapping("admin/salva-questao")
+	@RequestMapping("/salva")
 	public String salva(@ModelAttribute("questao") @Valid Questao questao, BindingResult result,Model model) {
 		if(result.hasErrors()){
 			model.addAttribute("alternativa", questao.getAlternativa());
