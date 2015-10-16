@@ -29,6 +29,9 @@
 			</div>
 
 		</form:form>
+		
+		<a href="<c:url value='loginGitHub'/>"><h3>Login Git Hub</h3></a>
+
 
 	</div>
 	<c:import url="footer.jsp"></c:import>

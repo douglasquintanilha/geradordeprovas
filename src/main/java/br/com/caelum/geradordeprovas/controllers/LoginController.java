@@ -1,5 +1,6 @@
 package br.com.caelum.geradordeprovas.controllers;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,11 @@ public class LoginController {
 	@Autowired
 	public LoginController(UsuarioDao usuarioDao) {
 		this.usuarioDao = usuarioDao;
+	}
+	
+	@RequestMapping("loginGitHub")
+	public ModelAndView loginGithub(HttpServletRequest request){
+		return new ModelAndView("redirect:https://github.com/login/oauth/authorize?client_id=3043231979046f1d8a4b&redirect_uri=http://localhost:8000/GeradorDeProvas/admin/index&scope=repo,user");
 	}
 
 	@RequestMapping("loginForm")
