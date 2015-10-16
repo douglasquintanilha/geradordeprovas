@@ -21,7 +21,7 @@ public class UsuarioDao {
 		manager.persist(usuario);
 	}
 
-	public Usuario getUsuario(String login) {
+	public Usuario buscarPorLogin(String login) {
 		Usuario usuario = manager.find(Usuario.class, login);
 		return usuario;
 	}

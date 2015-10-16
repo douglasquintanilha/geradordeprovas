@@ -1,5 +1,7 @@
 package br.com.caelum.geradordeprovas.configuration;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -13,7 +15,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+import br.com.caelum.geradordeprovas.dao.AlternativaDao;
+import br.com.caelum.geradordeprovas.dao.ProvaDao;
+import br.com.caelum.geradordeprovas.dao.UsuarioDao;
+import br.com.caelum.geradordeprovas.models.Usuario;
 import br.com.caelum.geradordeprovas.util.AlternativaConverter;
+import br.com.caelum.geradordeprovas.util.AlternativaFormatter;
+import br.com.caelum.geradordeprovas.util.ProvaConverter;
 import br.com.caelum.geradordeprovas.util.QuestaoConverter;
 import br.com.caelum.geradordeprovas.util.TagConverter;
 
@@ -21,6 +29,9 @@ import br.com.caelum.geradordeprovas.util.TagConverter;
 @EnableWebMvc
 @ComponentScan(basePackages = "br.com.caelum.geradordeprovas")
 public class Configurator extends WebMvcConfigurerAdapter {
+	
+	
+	
 	@Bean
 	public ViewResolver viewResolver() {
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
@@ -40,11 +51,13 @@ public class Configurator extends WebMvcConfigurerAdapter {
 	
 
 	@Bean
-	public FormattingConversionService mvcConversionService() {
+	public FormattingConversionService mvcConversionService(ProvaDao provaDao,AlternativaDao alternativaDao) {
 		FormattingConversionService servico = new FormattingConversionService();
 		servico.addConverter(new AlternativaConverter());
 		servico.addConverter(new TagConverter());
 		servico.addConverter(new QuestaoConverter());
+		servico.addConverter(new ProvaConverter(provaDao));
+		servico.addFormatter(new AlternativaFormatter(alternativaDao));
 		return servico;
 	}
 	
@@ -55,6 +68,13 @@ public class Configurator extends WebMvcConfigurerAdapter {
 		bundle.setDefaultEncoding("ISO-8859-1");
 		bundle.setCacheSeconds(1);
 		return bundle;
+	}
+	
+	@Bean
+	public Usuario getUsuarioLogado(HttpSession session, UsuarioDao usuarioDao){
+		Usuario usuario = (Usuario) session.getAttribute("usuario");
+		
+		return usuarioDao.buscarPorLogin(usuario.getLogin());
 	}
 	
 

@@ -18,7 +18,7 @@
 		Preencha todas as Respostas!
 		</c:if>
 		<c:url var="urlPost" value='correcao-prova' />
-		<form:form method="GET" action="${urlPost}" commandName="resposta">
+		<form:form method="GET" action="${urlPost}" >
 			<ol>
 				<c:forEach items="${prova.questoes}" var="questao" varStatus="i">
 					<li>

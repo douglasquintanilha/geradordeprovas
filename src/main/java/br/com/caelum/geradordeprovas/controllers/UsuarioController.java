@@ -3,9 +3,8 @@ package br.com.caelum.geradordeprovas.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,70 +13,54 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.caelum.geradordeprovas.dao.AlternativaDao;
 import br.com.caelum.geradordeprovas.dao.ProvaDao;
-import br.com.caelum.geradordeprovas.dao.UsuarioDao;
+import br.com.caelum.geradordeprovas.models.Alternativa;
 import br.com.caelum.geradordeprovas.models.Prova;
 import br.com.caelum.geradordeprovas.models.RelatorioProva;
-import br.com.caelum.geradordeprovas.models.Resposta;
 import br.com.caelum.geradordeprovas.models.Usuario;
 
 @Controller
+@Scope("request")
 public class UsuarioController {
 
 	private AlternativaDao alternativaDao;
 	private ProvaDao provaDao;
-	private UsuarioDao usuarioDao;
+	private Usuario usuarioLogado;
 
 	@Autowired
-	public UsuarioController(AlternativaDao alternativaDao, ProvaDao provaDao,
-			UsuarioDao usuarioDao) {
+	public UsuarioController(AlternativaDao alternativaDao, ProvaDao provaDao,Usuario usuarioLogado) {
 		this.alternativaDao = alternativaDao;
 		this.provaDao = provaDao;
-		this.usuarioDao = usuarioDao;
+		this.usuarioLogado = usuarioLogado;
 	}
 
 	@RequestMapping("correcao-prova")
 	public ModelAndView corrigeProvas(
-			@ModelAttribute("resposta") Resposta marcadas,
-			@RequestParam("provaId") Long id) {
+			@ModelAttribute @RequestParam("alternativas[]") List<Alternativa> alternativas,
+			@RequestParam("provaId") Prova prova) {
 
-		Prova prova = provaDao.getProva(id);
+		// if(!marcadas.validacao(prova)){
+		// ModelAndView mv = new ModelAndView("realiza-prova");
+		// mv.addObject("validacao", false);
+		// return mv;
+		// }
 
-		if(!marcadas.validacao(prova)){
-			ModelAndView mv = new ModelAndView("realiza-prova");
-			mv.addObject("validacao", false);
-			return mv;
-		}
+		RelatorioProva rp = prova.corrige(alternativas);
 
-		RelatorioProva rp = prova.corrige(marcadas, alternativaDao);
-		ModelAndView mv = new ModelAndView("corrigido");
-		mv.addObject("relatorio", rp);
+		return new ModelAndView("corrigido").addObject("relatorio", rp);
 
-		return mv;
 	}
 
 	@RequestMapping("provas-liberadas")
-	public ModelAndView provasLiberadas(HttpSession sessao) {
-
-		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
-		Usuario user = usuarioDao.getUsuario(usuario.getLogin());
+	public ModelAndView provasLiberadas() {
 		
-		List<Prova> provas = new ArrayList<>(user.getProvas());
-
-		ModelAndView mv = new ModelAndView("provas-liberadas");
-		mv.addObject("provas", provas);
-
-		return mv;
+		List<Prova> provas = new ArrayList<>(usuarioLogado.getProvas());
+		return new ModelAndView("provas-liberadas").addObject("provas", provas);
 	}
 
 	@RequestMapping("escolhe-prova")
-	public ModelAndView escolheProva(@RequestParam("provaId") Long id) {
+	public ModelAndView escolheProva(@RequestParam("provaId") Prova prova) {
+		return new ModelAndView("realiza-prova").addObject("prova", prova);
 
-		Prova prova = provaDao.getProva(id);
-
-		ModelAndView mv = new ModelAndView("realiza-prova");
-		mv.addObject("prova", prova);
-
-		return mv;
 	}
 
 }

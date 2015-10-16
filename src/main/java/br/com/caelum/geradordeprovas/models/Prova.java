@@ -48,12 +48,7 @@ public class Prova {
 		this.questoes = questoes;
 	}
 
-	public RelatorioProva corrige(Resposta marcadas, AlternativaDao alternativaDao) {
-
-		List<Alternativa> alternativasMarcadas = new ArrayList<>();
-		for (Long idAlternativa : marcadas.getAlternativas()) {
-			alternativasMarcadas.add(alternativaDao.getAlternativaPorId(idAlternativa));
-		}
+	public RelatorioProva corrige(List<Alternativa> alternativasMarcadas) {
 		
 		List<Alternativa> acertou = new ArrayList<>();
 		List<Boolean> resultado = new ArrayList<>();
