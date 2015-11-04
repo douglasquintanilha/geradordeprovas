@@ -14,7 +14,7 @@ public class GithubApi extends DefaultApi20 {
 	public String getAuthorizationUrl(OAuthConfig config) {
 		// o param scope define o que queremos acessar
 		return String.format("https://github.com/login/oauth/authorize?"
-				+ "scope=user:email&client_id=%s", config.getApiKey());
+				+ "scope=user:email,read:org&client_id=%s", config.getApiKey());
 	}
 
 }

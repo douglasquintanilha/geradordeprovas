@@ -1,8 +1,13 @@
 package br.com.caelum.geradordeprovas.controllers;
 
+import java.io.IOException;
+
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 
+import org.codehaus.jackson.JsonProcessingException;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.node.ObjectNode;
 import org.scribe.builder.ServiceBuilder;
 import org.scribe.model.OAuthRequest;
 import org.scribe.model.Response;
@@ -15,7 +20,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import br.com.caelum.geradordeprovas.models.Usuario;
@@ -34,8 +38,7 @@ public class OAuthController {
 				.provider(GithubApi.class)
 				.apiKey("3043231979046f1d8a4b")
 				.apiSecret("3cdb01d3be4bd90011341b4bd5e46827737168c5")
-				.callback(
-						"http://localhost:8000/GeradorDeProvas/oauth/callback")
+				.callback("http://localhost:8000/GeradorDeProvas/oauth/callback")
 				.build();
 	}
 
@@ -46,26 +49,38 @@ public class OAuthController {
 	}
 
 	@RequestMapping("/callback")
-	public String callback(@RequestParam("code") String authToken, Model model) {
+	public ModelAndView callback(@RequestParam("code") String authToken, Model model) {
 		Verifier verifier = new Verifier(authToken);
 		Token accessToken = service.getAccessToken(EMPTY_TOKEN, verifier);
-		model.addAttribute("accessToken", accessToken.getToken());
-		model.addAttribute("authToken", authToken);
-		return "logado";
-	}
-
-	@RequestMapping("/github-emails")
-	public String githubRequest(@RequestParam("accessToken") String token,
-			RedirectAttributes redirectAttributes) {
-		OAuthRequest request = new OAuthRequest(Verb.GET,
-				"https://api.github.com/user/emails");
-		request.addBodyParameter("access_token", token.trim());
-		service.signRequest(new Token(token, ""), request);
+		
+		OAuthRequest request = new OAuthRequest(Verb.GET, "https://api.github.com/user");
+		service.signRequest(accessToken, request);
 		Response response = request.send();
-		redirectAttributes
-				.addFlashAttribute("responseBody", response.getBody());
-		return "redirect:github-logado";
-	}
+		
+		Usuario usuario = new Usuario();
+		
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			ObjectNode myObject = (ObjectNode) mapper.readTree(response.getBody());
+			usuario.setLogin(myObject.get("login").asText()); 
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		OAuthRequest requestOrg = new OAuthRequest(Verb.GET, "https://api.github.com/orgs/caelum/members/"+usuario.getLogin());
+		service.signRequest(accessToken, requestOrg);
+		Response responseOrg = requestOrg.send();		 
+		
+
+		if(responseOrg.getCode() == 204){
+			return new ModelAndView(new RedirectView("/GeradorDeProvas/oauth/github-logado"));
+		}
+		return new ModelAndView(new RedirectView("/GeradorDeProvas/oauth/github-error"));
+	} 
 
 	@RequestMapping("/github-logado")
 	public ModelAndView logado(HttpSession sessao) {
@@ -73,6 +88,12 @@ public class OAuthController {
 			usuario.setAdmin(true);
 			sessao.setAttribute("usuario", usuario);
 			ModelAndView mv = new ModelAndView(new RedirectView("/GeradorDeProvas/admin/index"));
+			return mv;
+	}
+	
+	@RequestMapping("/github-error")
+	public ModelAndView logado() {
+			ModelAndView mv = new ModelAndView("login-error");
 			return mv;
 	}
 

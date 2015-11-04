@@ -19,8 +19,6 @@ public class Initializer extends AbstractAnnotationConfigDispatcherServletInitia
     public void onStartup(ServletContext servletContext) throws ServletException {
         super.onStartup(servletContext);
         servletContext.addListener(new TempoSessao());
-
-
     }
     
     @Override

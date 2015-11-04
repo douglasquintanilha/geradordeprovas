@@ -30,7 +30,7 @@
 
 		</form:form>
 		
-		<a href="<c:url value='loginGitHub'/>"><h3>Login Git Hub</h3></a>
+		<a href="<c:url value='/oauth/github-login'/>"><h3>Login Git Hub</h3></a>
 
 
 	</div>

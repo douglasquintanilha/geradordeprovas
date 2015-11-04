@@ -20,8 +20,11 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 				|| uri.endsWith("novo-usuario-form")
 				|| uri.endsWith("usuario-adicionado")
 				|| uri.endsWith("novo-usuario")
-				|| uri.endsWith("loginGitHub"))
-			{
+				|| uri.endsWith("loginGitHub")
+				|| uri.endsWith("github-login")
+				|| uri.endsWith("github-logado")
+				|| uri.endsWith("/github-error")
+				|| uri.endsWith("oauth/callback")){
 			return true;
 		}
 
@@ -39,7 +42,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 
 			return true;
 		}
-		
+		System.out.println("Denied " + uri);
 		response.sendRedirect("/GeradorDeProvas/loginForm");
 		return false;
 	}

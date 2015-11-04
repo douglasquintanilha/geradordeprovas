@@ -75,7 +75,6 @@ public class Configurator extends WebMvcConfigurerAdapter {
 	@Scope("session")
 	public Usuario getUsuarioLogado(HttpSession session, UsuarioDao usuarioDao){
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
-		
 		return usuarioDao.buscarPorLogin(usuario.getLogin());
 	}
 	
