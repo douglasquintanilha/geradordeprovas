@@ -24,6 +24,6 @@ $(".alternativa,.grupo-titulo").each(function() {
 		$esconde.show();
 	});
 	$entrada.on("blur",function(){
-		//$esconde.hide();
+		$esconde.hide();
 	});
 });
