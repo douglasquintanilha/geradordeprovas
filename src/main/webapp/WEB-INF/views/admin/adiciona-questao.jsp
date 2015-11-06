@@ -11,7 +11,7 @@
 		<link rel="stylesheet" href="<c:url value='/static/css/bootstrap.min.css' />">
 		<link rel="stylesheet" href="<c:url value='/static/css/jquery-ui.min.css' /> ">
 		<link rel="stylesheet" href="<c:url value='/static/css/main.css' /> ">
-		<link rel="stylesheet" href="<c:url value='/static/css/highlight.min.css' /> ">
+		<link rel="stylesheet" href="<c:url value='/static/css/github.css' /> ">
 		
 
 	</head>
@@ -50,9 +50,7 @@
 						<span class="input-group-addon"> <input type="radio"
 							name="alternativaCorreta" value="0" id="botaoA"/>
 						</span> 
-						<textarea class="form-control entrada" name="alternativa" >
-							${alternativa[0].descricao}
-						</textarea>	
+						<textarea class="form-control entrada" name="alternativa" >${alternativa[0].descricao}</textarea>	
 					</div>
 				</div>
 
@@ -68,9 +66,7 @@
 						<span class="input-group-addon"> <input type="radio"
 							name="alternativaCorreta" value="1" />
 						</span> 
-						<textarea class="form-control entrada" name="alternativa">
-							${alternativa[1].descricao}
-						</textarea>	
+						<textarea class="form-control entrada" name="alternativa">${alternativa[1].descricao}</textarea>	
 					</div>
 				</div>
 
@@ -85,9 +81,7 @@
 						<span class="input-group-addon"> <input type="radio"
 							name="alternativaCorreta" value="2" >
 						</span> 
-						<textarea class="form-control entrada" name="alternativa" >
-							${alternativa[2].descricao}
-						</textarea>
+						<textarea class="form-control entrada" name="alternativa" >${alternativa[2].descricao}</textarea>
 					</div>
 				</div>
 
@@ -102,9 +96,7 @@
 						<span class="input-group-addon"> <input type="radio"
 							name="alternativaCorreta" value="3" />
 						</span>
-						<textarea class="form-control entrada" name="alternativa">
-							${alternativa[3].descricao}
-						</textarea>
+						<textarea class="form-control entrada" name="alternativa">${alternativa[3].descricao}</textarea>
 					</div>
 				</div>
 
@@ -120,9 +112,7 @@
 						<span class="input-group-addon"> <input type="radio"
 							name="alternativaCorreta" value="4" />
 						</span> 
-						<textarea class="form-control entrada" name="alternativa">
-							${alternativa[4].descricao}
-						</textarea>
+						<textarea class="form-control entrada" name="alternativa">${alternativa[4].descricao}</textarea>
 					</div>
 				</div>
 
@@ -134,9 +124,11 @@
 			<script src="<c:url value='/static/js/jquery-ui.min.js' />"></script>
 			<script src="<c:url value='/static/js/autocomplete-tags.js' />"></script>
 			<script src="<c:url value='/static/js/limpa-campo.js' />"></script>
-			<script src="<c:url value='/static/js/markdown.min.js' />"></script>
+			<script src="<c:url value='/static/js/showdown.min.js' />"></script>
 			<script src="<c:url value='/static/js/markdown-preview.js' />"></script>
 			<script src="<c:url value='/static/js/highlight.min.js' />"></script>
+			<script src="<c:url value='/static/js/autogrowtextarea.min.js' />"></script>
+			<script src="<c:url value='/static/js/autogrow-init.js' />"></script>
 		</div>
 		<c:import url="../footer.jsp"></c:import>
 	</body>

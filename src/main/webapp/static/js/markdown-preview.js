@@ -1,8 +1,12 @@
+converter = new showdown.Converter();
+
 function Editor(input, preview) {
 	this.update = function() {
-		preview.html(markdown.toHTML(input.val()));
-		console.log(input.val());
-		console.log(preview.text());
+		var html = converter.makeHtml(input.val());
+		preview.html(html);
+		if(html.indexOf("<pre><code>") > -1){
+			hljs.highlightBlock(preview.find("code")[0]);
+		}
 	};
 }
 
@@ -20,6 +24,6 @@ $(".alternativa,.grupo-titulo").each(function() {
 		$esconde.show();
 	});
 	$entrada.on("blur",function(){
-		$esconde.hide();
+		//$esconde.hide();
 	});
 });
