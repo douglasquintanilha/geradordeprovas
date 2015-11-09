@@ -18,6 +18,8 @@ import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import br.com.caelum.geradordeprovas.validation.Size;
+
 @Entity
 public class Questao {
 
@@ -25,7 +27,6 @@ public class Questao {
 	@GeneratedValue
 	private Long id;
 	
-	// (DONE) transformar em @Collumn 
 	@Column(length=2048)
 	@NotBlank()
 	private String titulo;
@@ -34,6 +35,7 @@ public class Questao {
 	@JoinColumn(unique=true)
 	private Set<Tag> tags = new HashSet<Tag>();
 	
+	@Size(5)
 	@Valid
 	@OneToMany(cascade={CascadeType.PERSIST})
 	private List<Alternativa> alternativa;

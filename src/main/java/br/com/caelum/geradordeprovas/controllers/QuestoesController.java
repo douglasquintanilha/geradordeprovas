@@ -1,5 +1,5 @@
-	package br.com.caelum.geradordeprovas.controllers;
-	
+package br.com.caelum.geradordeprovas.controllers;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +17,9 @@ import br.com.caelum.geradordeprovas.services.QuestaoFacade;
 public class QuestoesController {
 
 	private QuestaoFacade questaoBo;
-	
+
 	@Autowired
-	public QuestoesController(QuestaoFacade questaoBo ) {
+	public QuestoesController(QuestaoFacade questaoBo) {
 		this.questaoBo = questaoBo;
 	}
 
@@ -28,17 +28,19 @@ public class QuestoesController {
 		return "admin/adiciona-questao";
 	}
 
-	
-	
 	@org.springframework.transaction.annotation.Transactional
 	@RequestMapping("/salva")
-	public String salva(@ModelAttribute("questao") @Valid Questao questao, BindingResult result,Model model) {
-		if(result.hasErrors()){
+	public String salva(@ModelAttribute("questao") @Valid Questao questao,
+			BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			System.out.println("Alternativa[0]"
+					+ questao.getAlternativa().get(0));
 			model.addAttribute("alternativa", questao.getAlternativa());
+			System.out.println("Erros" + result.getAllErrors());
 			return "admin/adiciona-questao";
 		}
 		questaoBo.salva(questao);
-		
+
 		return "admin/questao-adicionada";
 	}
 }
