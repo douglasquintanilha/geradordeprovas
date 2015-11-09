@@ -42,7 +42,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 
 			return true;
 		}
-		System.out.println("Denied " + uri);
+		System.out.println("Denied \n" + uri + "\n");
 		response.sendRedirect("/GeradorDeProvas/loginForm");
 		return false;
 	}
