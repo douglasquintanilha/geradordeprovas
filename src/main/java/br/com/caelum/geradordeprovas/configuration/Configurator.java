@@ -20,6 +20,7 @@ import br.com.caelum.geradordeprovas.dao.AlternativaDao;
 import br.com.caelum.geradordeprovas.dao.ProvaDao;
 import br.com.caelum.geradordeprovas.dao.UsuarioDao;
 import br.com.caelum.geradordeprovas.models.Usuario;
+import br.com.caelum.geradordeprovas.util.AlternativaArrayConverter;
 import br.com.caelum.geradordeprovas.util.AlternativaConverter;
 import br.com.caelum.geradordeprovas.util.AlternativaFormatter;
 import br.com.caelum.geradordeprovas.util.ProvaConverter;
@@ -55,6 +56,7 @@ public class Configurator extends WebMvcConfigurerAdapter {
 	public FormattingConversionService mvcConversionService(ProvaDao provaDao,AlternativaDao alternativaDao) {
 		FormattingConversionService servico = new FormattingConversionService();
 		servico.addConverter(new AlternativaConverter());
+		servico.addConverter(new AlternativaArrayConverter());
 		servico.addConverter(new TagConverter());
 		servico.addConverter(new QuestaoConverter());
 		servico.addConverter(new ProvaConverter(provaDao));
@@ -75,7 +77,8 @@ public class Configurator extends WebMvcConfigurerAdapter {
 	@Scope("session")
 	public Usuario getUsuarioLogado(HttpSession session, UsuarioDao usuarioDao){
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
-		return usuarioDao.buscarPorLogin(usuario.getLogin());
+		Usuario logado = usuarioDao.buscarPorLogin(usuario.getLogin());
+		return logado;
 	}
 	
 

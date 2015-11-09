@@ -61,6 +61,7 @@ public class QuestaoFacade {
 	
 	public void salva (Questao questao){
 		verificaSeTagJaExisteNoBanco(questao);
+		System.out.println("Questao:" + questao.getTitulo() +"A:"+ questao.getAlternativa().get(0));
 		questaoDao.save(questao);
 		preencheAlternativaCorreta(questao);
 	}

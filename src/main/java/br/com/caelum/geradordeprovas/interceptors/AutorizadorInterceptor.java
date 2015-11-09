@@ -29,9 +29,8 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 		}
 
 		if (request.getSession().getAttribute("usuario") != null) {
-			Usuario usuario = (Usuario) request.getSession().getAttribute(
-					"usuario");
-
+			Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+			System.out.println("É admin? :" + usuario.isAdmin());
 			if (usuario.isAdmin()) {
 				return true;
 			}
@@ -42,7 +41,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 
 			return true;
 		}
-		System.out.println("Denied \n" + uri + "\n");
+		System.out.println("Denied " + uri + "Sessao:" + request.getSession().getAttribute("usuario") );
 		response.sendRedirect("/GeradorDeProvas/loginForm");
 		return false;
 	}
