@@ -35,7 +35,7 @@ public class LoginTest {
 		LoginPage pagina = new LoginPage(driver);
 		pagina.visita();
 		String login = "admin";
-		String senha = "12345";
+		String senha = "1234";
 		pagina.preenche(login, senha);
 
 		assertEquals(pagina.realizouLogin(), "admin");
