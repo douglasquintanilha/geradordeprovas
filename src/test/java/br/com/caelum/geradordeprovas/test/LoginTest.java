@@ -11,6 +11,7 @@ public class LoginTest {
 
 	private FirefoxDriver driver;
 
+	
 	@Before
 	public void inicializa() {
 		this.driver = new FirefoxDriver();

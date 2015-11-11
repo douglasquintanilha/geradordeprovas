@@ -46,7 +46,7 @@ public class LoginPage {
 			return "admin";
 		if (driver.getCurrentUrl().equals(
 				"http://localhost:8000/GeradorDeProvas/oauth/github-error"))
-			return "failGitHub";
+			return "Testando as branches";
 		return "";
 	}
 }
