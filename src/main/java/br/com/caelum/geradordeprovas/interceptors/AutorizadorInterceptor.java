@@ -17,9 +17,6 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 
 		if (uri.endsWith("loginForm") 
 				|| uri.endsWith("efetuaLogin")
-				|| uri.endsWith("novo-usuario-form")
-				|| uri.endsWith("usuario-adicionado")
-				|| uri.endsWith("novo-usuario")
 				|| uri.endsWith("loginGitHub")
 				|| uri.endsWith("github-login")
 				|| uri.endsWith("github-logado")
