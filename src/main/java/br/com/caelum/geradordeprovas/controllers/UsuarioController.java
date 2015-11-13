@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.caelum.geradordeprovas.dao.AlternativaDao;
 import br.com.caelum.geradordeprovas.dao.ProvaDao;
@@ -50,17 +51,21 @@ public class UsuarioController {
 
 	}
 
-	@RequestMapping("provas-liberadas")
+	@RequestMapping("/liberadas")
 	public ModelAndView provasLiberadas() {
 		
 		List<Prova> provas = new ArrayList<>(usuarioLogado.getProvas());
 		return new ModelAndView("provas-liberadas").addObject("provas", provas);
 	}
 
-	@RequestMapping("escolhe-prova")
-	public ModelAndView escolheProva(@RequestParam("provaId") Prova prova) {
-		return new ModelAndView("realiza-prova").addObject("prova", prova);
-
+	@RequestMapping("/escolhe")
+	public String escolheProva(@RequestParam("provaId") Prova prova, final RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("prova", prova);
+		return "redirect:realiza";
 	}
 
+	@RequestMapping("/realiza")
+	public ModelAndView realizaProvas(@ModelAttribute("prova") Prova prova){
+		return new ModelAndView("realiza-prova").addObject("prova", provaDao.getProva(prova.getId()));
+	}
 }
