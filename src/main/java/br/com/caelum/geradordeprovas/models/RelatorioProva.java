@@ -9,6 +9,8 @@ public class RelatorioProva {
 	boolean temErrada = false;
 
 	List<Questao> questoes;
+	
+	List<Alternativa> alternativasMarcadas;
 
 	long qntDeQuestoes;
 	

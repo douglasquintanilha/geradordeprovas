@@ -33,10 +33,7 @@ public class QuestoesController {
 	public String salva(@ModelAttribute("questao") @Valid Questao questao,
 			BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			System.out.println("Alternativa[0]"
-					+ questao.getAlternativa().get(0));
 			model.addAttribute("alternativa", questao.getAlternativa());
-			System.out.println("Erros" + result.getAllErrors());
 			return "admin/adiciona-questao";
 		}
 		questaoBo.salva(questao);
