@@ -15,22 +15,12 @@
 
 	<c:import url="header.jsp"></c:import>
 	<div class="container">
-		<c:set var="urlPost" value="escolhe-prova" />
-		<form method="POST" action="${urlPost}">
-			<h3>Seleciona uma prova:<h3>
+			<h3>Selecione uma prova:</h3>
 			<c:forEach items="${provas}" var="prova">
-				<div class="radio">
 					<label for="${prova.id}">
-						<input type="radio" id="${prova.id}" name="provaId" value="${prova.id}">
-						<a href="<c:url value='/escolhe.html?provaId=${prova.id}'/>"><h3>Realizar Prova</h3></a>
-						<md:render>${prova.nome}</md:render>
+						<h4><a href="<c:url value='/escolhe.html?provaId=${prova.id}'/>">${prova.nome}</a></h4>
 					</label>
-				</div>
 			</c:forEach>
-			<button type="submit" class="btn btn-default">Selecionar!</button>
-
-		</form>
-
 	</div>
 	<c:import url="footer.jsp"></c:import>
 </body>

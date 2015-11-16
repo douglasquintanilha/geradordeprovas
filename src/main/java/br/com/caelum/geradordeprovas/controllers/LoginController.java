@@ -49,7 +49,7 @@ public class LoginController {
 				return mv;
 			} else {
 				ModelAndView mv = new ModelAndView(new RedirectView(
-						"/GeradorDeProvas/provas-liberadas"));
+						"/GeradorDeProvas/liberadas"));
 				return mv;
 			}
 		} else {

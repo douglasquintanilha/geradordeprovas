@@ -14,7 +14,7 @@
 	<c:import url="header.jsp"></c:import>
 	<div class="container">
 		<h1>Sua nota foi:</h1>
-		<h3>${relatorio.nota}</h3>
+		<h3>${relatorio.nota}/${relatorio.qntDeQuestoes}</h3>
 		<c:if test="${relatorio.temErrada == true}">
 			<h3>Você errou a(s) questão(ões):</h3>
 			<c:forEach items="${relatorio.resultado}" var="teste" varStatus = "i">
