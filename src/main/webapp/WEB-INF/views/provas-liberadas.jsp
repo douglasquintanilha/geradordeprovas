@@ -22,6 +22,7 @@
 				<div class="radio">
 					<label for="${prova.id}">
 						<input type="radio" id="${prova.id}" name="provaId" value="${prova.id}">
+						<a href="<c:url value='/escolhe.html?provaId=${prova.id}'/>"><h3>Realizar Prova</h3></a>
 						<md:render>${prova.nome}</md:render>
 					</label>
 				</div>
