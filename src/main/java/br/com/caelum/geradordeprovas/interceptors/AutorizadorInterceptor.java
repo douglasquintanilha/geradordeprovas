@@ -38,8 +38,8 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 
 			return true;
 		}
-		System.out.println("Denied " + uri + "Sessao:" + request.getSession().getAttribute("usuario") );
+		System.out.println("Denied " + uri + "Sessao: " + request.getSession().getAttribute("usuario") );
 		response.sendRedirect("/GeradorDeProvas/loginForm");
-		return true;
+		return false;
 	}
 }
