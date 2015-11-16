@@ -9,6 +9,8 @@ public class RelatorioProva {
 	boolean temErrada = false;
 
 	List<Questao> questoes;
+	
+	List<Alternativa> alternativasMarcadas;
 
 	List<Boolean> resultado;
 
@@ -22,9 +24,8 @@ public class RelatorioProva {
 
 	}
 
-	public float getNota() {
-		float notaDecimal = nota;
-		return (notaDecimal*10)/questoes.size();
+	public long getNota() {
+		return nota;
 	}
 
 	public boolean isTemErrada() {
