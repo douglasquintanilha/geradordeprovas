@@ -23,8 +23,8 @@
 				</c:if>
 			</c:forEach>
 		</c:if>
+		<a href="/GeradorDeProvas/liberadas">Voltar para o início</a>
 	</div>
-	<a href="/GeradorDeProvas/">Voltar para o início</a>
 	<c:import url="footer.jsp"></c:import>
 </body>
 </html>
