@@ -38,6 +38,11 @@ public class GeradorController {
 		return mv;
 	}
 
+	@RequestMapping("/erro")
+	public String erroJsp(){
+		return "erro";
+	}
+	
 	@RequestMapping("admin/mostra-por-tag")
 	public ModelAndView mostraQuestoesPorTag(
 			@RequestParam("tagSelecionada") String nomeTag) {

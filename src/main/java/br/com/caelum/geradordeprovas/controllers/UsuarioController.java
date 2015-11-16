@@ -59,13 +59,7 @@ public class UsuarioController {
 	}
 
 	@RequestMapping("/escolhe")
-	public String escolheProva(@RequestParam("provaId") Prova prova, final RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("prova", prova);
-		return "redirect:realiza";
-	}
-
-	@RequestMapping("/realiza")
-	public ModelAndView realizaProvas(@ModelAttribute("prova") Prova prova){
+	public ModelAndView escolheProva(@RequestParam("provaId") Prova prova) {
 		return new ModelAndView("realiza-prova").addObject("prova", provaDao.getProva(prova.getId()));
 	}
 }
