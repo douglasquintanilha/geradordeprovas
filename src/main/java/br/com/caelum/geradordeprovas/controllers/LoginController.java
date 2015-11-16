@@ -24,7 +24,7 @@ public class LoginController {
 	
 	@RequestMapping("loginForm")
 	public String loginForm() {
-		return "/loginForm";
+		return "loginForm";
 	}
 
 	@RequestMapping("logout")

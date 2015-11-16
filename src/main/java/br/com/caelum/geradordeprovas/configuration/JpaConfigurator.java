@@ -7,6 +7,7 @@ import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -18,9 +19,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class JpaConfigurator {
 	@Bean
+	@Profile("dev")
 	public DataSource dataSource() {
 		DriverManagerDataSource dm = new DriverManagerDataSource();
-		//dm.setUrl("jdbc:mysql://localhost/caelum_provas");
 		dm.setUrl("jdbc:mysql://localhost/caelum_provas");
 		dm.setUsername("root");
 		dm.setPassword("");
@@ -28,6 +29,19 @@ public class JpaConfigurator {
 
 		return dm;
 	}
+	
+	@Bean
+	@Profile("producao")
+	public DataSource dataSourceProducao() {
+		DriverManagerDataSource dm = new DriverManagerDataSource();
+		dm.setUrl("jdbc:mysql://" + System.getenv().get("OPENSHIFT_MYSQL_DB_HOST")+":" + System.getenv().get("OPENSHIFT_MYSQL_DB_PORT") + "/mytomcatapp");
+		dm.setUsername("root");
+		dm.setPassword("");
+		dm.setDriverClassName("com.mysql.jdbc.Driver");
+
+		return dm;
+	}
+
 
 	@Bean
 	public LocalContainerEntityManagerFactoryBean emf(DataSource ds) {
