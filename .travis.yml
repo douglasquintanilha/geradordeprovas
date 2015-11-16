@@ -1,3 +1,11 @@
 language: java
 jdk:
-  - oraclejdk8
+- oraclejdk8
+deploy:
+  provider: openshift
+  user: login-openshift
+  password: password-openshift
+  app: mytomcatapp
+  domain: dquintanilha
+  on:
+    repo: douglasquintanilha/geradordeprovas
