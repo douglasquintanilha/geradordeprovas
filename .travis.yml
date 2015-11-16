@@ -3,8 +3,9 @@ jdk:
 - oraclejdk8
 deploy:
   provider: openshift
-  user: login-openshift
-  password: password-openshift
+  user: dougquintanilha@gmail.com
+  password:
+    secure: oXY8IeGNBaYrkDFSB4jFOk6epFwxnhzaQToS8ERFwgM/jXlJgXkjKWyUVbCM9zJLVz8yVoSw/Wc8UMQZzEyxqh99YGHF8FY/r/CBQ4ca+H/9qZ/bsLRNNQoMp0w7AP4gfoRIUNPX4jKtI0W3rNtcbNTtzqvOpglIC6KUWR4matFWAZ+lJTA45/4PixV40tcHLMoYx5TEGeIVi3GKRFKJTUaTqr3Ay/2P6/toIQGvWQjg7aXxkScfig1T73R312nwxU0C5sT2435arreivzZsTRMsSIJVnfaovO9Yf/QBsjpAAqVq1clkhEpbmVG0E1ecRbCss5sNnx701qvigweZ1ux9zqAWS5TkizBNkHr11j5d2/h7qqwZ1EXQcLRJs37LyGTe1Be0yxUEERwVb5+5elHpV2l7rU5r6PFhqFyuVrIgwXQKDu2+I1P/ChJKsp02m0AcPnvOGhZR+BuioeNpDSFp0ll55n/8tkXpdgu9R0d84ZE18L6K/kl6tycoh6FE5ZBVUarxlNEeIX3VmamXZYxbOF5P6HwMZyfFdTfeAM8I3MHvwC1maKRUziQPTyDegMgPUDLS4mjWivOc9hRG+wjhxua4OKNmm3UTyDO1BDtSjVK4PaHhE7OdJDnYiF+I68T1vO4GhuqCe0aY3CX/07olirq6V59YCwGmb90lmII=
   app: mytomcatapp
   domain: dquintanilha
   on:
