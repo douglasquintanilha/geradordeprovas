@@ -11,6 +11,7 @@ public class LoginTest {
 
 	private FirefoxDriver driver;
 
+	
 	@Before
 	public void inicializa() {
 		this.driver = new FirefoxDriver();
@@ -35,7 +36,7 @@ public class LoginTest {
 		LoginPage pagina = new LoginPage(driver);
 		pagina.visita();
 		String login = "admin";
-		String senha = "12345";
+		String senha = "1234";
 		pagina.preenche(login, senha);
 
 		assertEquals(pagina.realizouLogin(), "admin");

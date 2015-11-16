@@ -16,6 +16,7 @@ import br.com.caelum.geradordeprovas.dao.ProvaDao;
 import br.com.caelum.geradordeprovas.models.Alternativa;
 import br.com.caelum.geradordeprovas.models.Prova;
 import br.com.caelum.geradordeprovas.models.RelatorioProva;
+import br.com.caelum.geradordeprovas.models.Resposta;
 import br.com.caelum.geradordeprovas.models.Usuario;
 
 @Controller
@@ -35,15 +36,14 @@ public class UsuarioController {
 
 	@RequestMapping("correcao-prova")
 	public ModelAndView corrigeProvas(
-			@ModelAttribute @RequestParam("alternativas[]") List<Alternativa> alternativas,
+			@ModelAttribute("resposta") Resposta resposta,
 			@RequestParam("provaId") Prova prova) {
 
-		// if(!marcadas.validacao(prova)){
-		// ModelAndView mv = new ModelAndView("realiza-prova");
-		// mv.addObject("validacao", false);
-		// return mv;
-		// }
-
+		List<Alternativa> alternativas = new ArrayList<>();
+		for(Long alternativaId : resposta.getAlternativas()){
+			alternativas.add(alternativaDao.getAlternativaPorId(alternativaId));
+		}
+		
 		RelatorioProva rp = prova.corrige(alternativas);
 
 		return new ModelAndView("corrigido").addObject("relatorio", rp);
