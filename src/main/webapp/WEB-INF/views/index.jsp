@@ -14,7 +14,7 @@
 	<div class="container">
 		<h1>Gerador de provas Caelum!</h1>
 		<h1>Aluno!</h1>
-		<a href="<c:url value='/liberadas'/>"><h3>Realizar Prova</h3></a>
+		<a href="<c:url value='liberadas'/>"><h3>Realizar Prova</h3></a>
 		
 	</div>
 	<c:import url="footer.jsp"></c:import>

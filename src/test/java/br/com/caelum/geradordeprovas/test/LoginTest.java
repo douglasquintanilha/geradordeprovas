@@ -16,7 +16,6 @@ public class LoginTest {
 	public void inicializa() {
 		this.driver = new FirefoxDriver();
 	}
-//
 //	@Test
 //	public void loginDeUsuario() {
 //
@@ -56,7 +55,6 @@ public class LoginTest {
 //		assertEquals(pagina.realizouLogin(), "failGitHub");
 //
 //	}
-
 	@After
 	public void encerra() {
 		driver.close();

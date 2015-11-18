@@ -32,7 +32,7 @@
 				</c:if>
 			</c:forEach>
 		</c:if>
-		<a href="/GeradorDeProvas/liberadas">Voltar para o início</a>
+		<a href="<c:url value='liberadas'/>">Voltar para o início</a>
 	</div>
 	<c:import url="footer.jsp"></c:import>
 </body>

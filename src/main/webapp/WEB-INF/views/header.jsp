@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <header>
-	<a href="<c:url value='/liberadas'/>">
+	<a href="<c:url value='liberadas'/>">
 		<img src="<c:url value='/static/imagens/caelum-logo.svg' />" alt="Caelum - Ensino e Inovação" id="logo-header">
 	</a>
 	<a href="<c:url value='/logout'/>" id="link-logout">logout</a>
