@@ -16,7 +16,7 @@
 		<div class="container">	
 
 			<h1>Usuário adicionado com sucesso!</h1>
-			<a href="/GeradorDeProvas/">Login</a>
+			<a href="<c:url value='/'/>">Login</a>
 
 		</div>
 		<c:import url="footer.jsp"></c:import>
