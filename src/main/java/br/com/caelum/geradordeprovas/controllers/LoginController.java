@@ -45,11 +45,10 @@ public class LoginController {
 			
 			if (user.isAdmin()) {
 				ModelAndView mv = new ModelAndView(new RedirectView(
-						"/GeradorDeProvas/admin/index"));
+						"admin/index"));
 				return mv;
 			} else {
-				ModelAndView mv = new ModelAndView(new RedirectView(
-						"/GeradorDeProvas/"));
+				ModelAndView mv = new ModelAndView(new RedirectView("index"));
 				return mv;
 			}
 		} else {
