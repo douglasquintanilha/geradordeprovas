@@ -3,9 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>br.com.caelum</groupId>
 	<artifactId>GeradorDeProvas</artifactId>
+	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>GeradorDeProvas Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+	
 	<dependencies>
 
 		<dependency>
@@ -124,7 +126,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>GeradorDeProvas</finalName>
+		<finalName>geradordeprovas</finalName>
 		<pluginManagement>
 			<plugins>
 				<plugin>
