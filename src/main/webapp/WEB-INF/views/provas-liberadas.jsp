@@ -18,7 +18,7 @@
 			<h3>Selecione uma prova:</h3>
 			<c:forEach items="${provas}" var="prova">
 					<label for="${prova.id}">
-						<h4><a href="<c:url value='/escolhe.html?provaId=${prova.id}'/>">${prova.nome}</a></h4>
+						<h4><a href="<c:url value='/escolhe.html?provaId=${prova.id}'/>">${prova.nome}</a></h4><br>
 					</label>
 			</c:forEach>
 	</div>
