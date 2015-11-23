@@ -98,5 +98,6 @@ public class ProvaController {
 		ModelAndView mv = new ModelAndView("admin/provas-liberadas");
 		return mv;
 	}
+	
 
 }

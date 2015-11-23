@@ -17,8 +17,9 @@
 		<c:if test="${validacao == false}">
 		Preencha todas as Respostas!
 		</c:if>
-		<c:url var="urlPost" value='correcao-prova' />
-		<form:form method="GET" action="${urlPost}" >
+		<c:url var="urlPost" value='avaliacao/correcao' />
+		<form:form method="GET" action="${urlPost}" command="avaliacao" >
+			<input type="hidden" name="prova.id" value="${prova}">
 			<ol>
 				<c:forEach items="${prova.questoes}" var="questao" varStatus="i">
 					<li>
@@ -26,7 +27,7 @@
 						<c:forEach items="${questao.alternativa}" var="alternativa">
 						<div class="radio">				
 							<label for="${alternativa.id}">
-								<input type="radio" value="${alternativa.id}"  id="${alternativa.id}" required="required" name="alternativas[${i.index}]">
+								<input type="radio" value="${alternativa.id}"  id="${alternativa.id}" required="required" name="alternativasMarcadas[${i.index}]">
 								<md:render>${alternativa.descricao}</md:render>
 							</label>
 						</div>	
@@ -34,7 +35,6 @@
 					</li>
 				</c:forEach>
 			</ol>
-			<input type="hidden" name="provaId" value="${prova.id}">
 			<button type="submit" class="btn btn-default">Ok</button>
 		</form:form>
 	</div>		

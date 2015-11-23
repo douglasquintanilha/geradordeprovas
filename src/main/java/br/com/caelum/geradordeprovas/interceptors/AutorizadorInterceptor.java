@@ -27,7 +27,6 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 
 		if (request.getSession().getAttribute("usuario") != null) {
 			Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-			System.out.println("É admin? :" + usuario.isAdmin());
 			if (usuario.isAdmin()) {
 				return true;
 			}
