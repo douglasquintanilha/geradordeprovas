@@ -15,23 +15,21 @@
 	<c:import url="header.jsp"></c:import>
 	<div class="container">
 		<h1>Sua nota foi:</h1>
-		<h3>${relatorio.nota}/${relatorio.qntDeQuestoes}</h3>
-		<c:if test="${relatorio.temErrada == true}">
-			<h3>Você errou a(s) questão(ões):</h3>
-			<c:forEach items="${relatorio.resultado}" var="teste" varStatus = "i">
-				<c:if test="${teste == false}">
-					<h3><md:render>${relatorio.questoes[i.index].titulo}<br></md:render></h3>
-					<c:forEach items="${relatorio.questoes[i.index].alternativa}" var="alternativa">
+		<h3>${avaliacao.nota}/${avaliacao.prova.getQuantidadeDeQuestoesDaProva}</h3>
+			<c:forEach items="${avaliacao.prova.questoes}" var="questao" varStatus = "i">
+			<h4>Gabarito:</h4>
+					<h3><md:render>${questao.titulo}<br></md:render></h3>
+					<c:forEach items="${questao.alternativa}" var="alternativa">
 						<div class="radio">
-							<label for="${alternativa.id}" <c:choose><c:when test="${alternativa.alternativaCorreta == true}">class="green"</c:when> <c:otherwise>class="red"</c:otherwise></c:choose>>
-								<input type="radio" <c:if test="${alternativa.alternativaCorreta == true}">checked="checked"</c:if> value="${alternativa.id}"  id="${alternativa.id}" name="alternativas[${i.index}]">
+							<label for="${alternativa.id}"<c:choose><c:when test="${alternativa.alternativaCorreta == true}">class="green"</c:when>
+							 <c:otherwise>class="red"</c:otherwise></c:choose>>
+								<input type="radio" <c:if test="${alternativa == avaliacao.alternativasMarcadas[i.index] }">checked="checked"</c:if>
+								 value="${alternativa.id}"  id="${alternativa.id}" name="alternativas[${i.index}]">
 								<md:render>${alternativa.descricao}</md:render>
 							</label>
 						</div>	
 					</c:forEach>
-				</c:if>
 			</c:forEach>
-		</c:if>
 		<a href="<c:url value='liberadas'/>">Voltar para o início</a>
 	</div>
 	<c:import url="footer.jsp"></c:import>

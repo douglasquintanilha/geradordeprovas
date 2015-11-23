@@ -18,8 +18,9 @@
 			<h3>Selecione uma prova:</h3>
 			<c:forEach items="${provas}" var="prova">
 					<label for="${prova.id}">
-						<h4><a href="<c:url value='/avaliacao/${prova.id}'/>">${prova.nome}</a></h4><br>
+						<h4><a href="<c:url value='/avaliacao/${prova.id}'/>">${prova.nome}</a></h4>
 					</label>
+					<br>
 			</c:forEach>
 	</div>
 	<c:import url="footer.jsp"></c:import>

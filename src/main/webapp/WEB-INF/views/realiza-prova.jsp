@@ -15,7 +15,7 @@
 	<c:import url="header.jsp"></c:import>
 	<div class="container">
 		<c:url var="urlPost" value='corrige' />
-		<form:form method="GET" action="${urlPost}" >
+		<form:form method="POST" action="${urlPost}" >
 			<ol>
 				<c:forEach items="${prova.questoes}" var="questao" varStatus="i">
 					<li>

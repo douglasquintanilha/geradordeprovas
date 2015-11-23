@@ -63,8 +63,4 @@ public class UsuarioController {
 		return new ModelAndView("realiza-prova").addObject("prova", provaDao.getProva(prova.getId()));
 	}
 	
-	@RequestMapping("/avaliacao")
-	public ModelAndView realizaProva(@ModelAttribute("prova") Prova prova){
-		return new ModelAndView("realiza-prova").addObject("prova", provaDao.getProva(prova.getId()));
-	}
 }
