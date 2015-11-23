@@ -7,17 +7,14 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Boa Sorte</title>
-	<link rel="stylesheet" href="static/css/bootstrap.min.css">
-	<link rel="stylesheet" href="static/css/main.css">
+	<link rel="stylesheet" href="../static/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../static/css/main.css">
 </head>
 <body>
 
 	<c:import url="header.jsp"></c:import>
 	<div class="container">
-		<c:if test="${validacao == false}">
-		Preencha todas as Respostas!
-		</c:if>
-		<c:url var="urlPost" value='correcao-prova' />
+		<c:url var="urlPost" value='corrige' />
 		<form:form method="GET" action="${urlPost}" >
 			<ol>
 				<c:forEach items="${prova.questoes}" var="questao" varStatus="i">

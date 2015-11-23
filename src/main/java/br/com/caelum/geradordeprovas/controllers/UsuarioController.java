@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.caelum.geradordeprovas.dao.AlternativaDao;
 import br.com.caelum.geradordeprovas.dao.ProvaDao;
@@ -35,7 +35,7 @@ public class UsuarioController {
 		this.usuarioLogado = usuarioLogado;
 	}
 
-	@RequestMapping("correcao-prova")
+	@RequestMapping("avaliacao/corrige")
 	public ModelAndView corrigeProvas(
 			@ModelAttribute("resposta") Resposta resposta,
 			@RequestParam("provaId") Prova prova) {
@@ -58,8 +58,13 @@ public class UsuarioController {
 		return new ModelAndView("provas-liberadas").addObject("provas", provas);
 	}
 
-	@RequestMapping("/escolhe")
-	public ModelAndView escolheProva(@RequestParam("provaId") Prova prova) {
+	@RequestMapping("/avaliacao/{provaId}")
+	public ModelAndView escolheProva(@PathVariable("provaId") Prova prova) {
+		return new ModelAndView("realiza-prova").addObject("prova", provaDao.getProva(prova.getId()));
+	}
+	
+	@RequestMapping("/avaliacao")
+	public ModelAndView realizaProva(@ModelAttribute("prova") Prova prova){
 		return new ModelAndView("realiza-prova").addObject("prova", provaDao.getProva(prova.getId()));
 	}
 }
