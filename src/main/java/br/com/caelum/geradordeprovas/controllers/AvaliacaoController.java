@@ -2,6 +2,8 @@ package br.com.caelum.geradordeprovas.controllers;
 
 import java.util.Calendar;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.caelum.geradordeprovas.dao.AvaliacaoDao;
@@ -31,15 +34,23 @@ public class AvaliacaoController {
 	}
 	
 	@Transactional
-	@RequestMapping("correcao")
-	public ModelAndView corrige(@ModelAttribute("avaliacao") Avaliacao avaliacao) {
+	@RequestMapping(value = "correcao", method={RequestMethod.POST})
+	public ModelAndView corrigePost(@ModelAttribute("avaliacao") Avaliacao avaliacao, HttpSession session) {
 		avaliacao.setDataRealizada(Calendar.getInstance());
 		avaliacao.corrige();
 		avaliacao.setUsuario(usuarioLogado);
 		avaliacaoDao.save(avaliacao);
-		return new ModelAndView("corrigido");
+		session.setAttribute("avaliacao", avaliacao);
+		return new ModelAndView("redirect:correcao");
 
 	}
 	
-	
+	@Transactional
+	@RequestMapping(value = "correcao", method={RequestMethod.GET})
+	public ModelAndView corrigeGet(@ModelAttribute("avaliacao") Avaliacao avaliacao, HttpSession session) {
+		avaliacao = (Avaliacao) session.getAttribute("avaliacao");
+		avaliacao = avaliacaoDao.atualiza(avaliacao);
+		return new ModelAndView("corrigido").addObject("avaliacao", avaliacao);
+	}
 }
+

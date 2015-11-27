@@ -9,15 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.caelum.geradordeprovas.dao.AlternativaDao;
 import br.com.caelum.geradordeprovas.dao.ProvaDao;
-import br.com.caelum.geradordeprovas.models.Alternativa;
 import br.com.caelum.geradordeprovas.models.Prova;
-import br.com.caelum.geradordeprovas.models.RelatorioProva;
-import br.com.caelum.geradordeprovas.models.Resposta;
 import br.com.caelum.geradordeprovas.models.Usuario;
 
 @Controller

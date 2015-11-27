@@ -30,7 +30,7 @@
 						</div>	
 					</c:forEach>
 			</c:forEach>
-		<a href="<c:url value='liberadas'/>">Voltar para o início</a>
+		<a href="<c:url value='/'/>">Voltar para o início</a>
 	</div>
 	<c:import url="footer.jsp"></c:import>
 </body>

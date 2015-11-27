@@ -26,4 +26,9 @@ public class AvaliacaoDao {
 	public List<Avaliacao> list() { 
 		return manager.createQuery("from Avaliacao", Avaliacao.class).getResultList();
 	}
+
+	public Avaliacao atualiza(Avaliacao avaliacao) {
+		avaliacao = manager.merge(avaliacao);
+		return avaliacao;
+	}
 }

@@ -1,12 +1,12 @@
 package br.com.caelum.geradordeprovas.controllers;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
 
 import br.com.caelum.geradordeprovas.models.Usuario;
 
@@ -15,12 +15,16 @@ import br.com.caelum.geradordeprovas.models.Usuario;
 public class HelloWorldController {
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String sayHello(HttpServletRequest request) {
+	public String sayHello(HttpServletRequest request,HttpSession session) {
 		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+		if(session.getAttribute("avaliacao") != null ){
+			session.removeAttribute("avaliacao");
+		}		
+		
 		if (usuario.isAdmin()) {
 			return "redirect:admin/index";
 		} else
-			return "index";
+			return "redirect:/liberadas";
 	}
 
 	@RequestMapping("index")
