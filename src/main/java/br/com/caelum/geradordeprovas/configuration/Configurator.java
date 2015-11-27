@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.format.support.FormattingConversionService;
 import org.springframework.web.servlet.ViewResolver;
@@ -57,6 +58,8 @@ public class Configurator extends WebMvcConfigurerAdapter {
 		FormattingConversionService servico = new FormattingConversionService();
 		servico.addConverter(new AlternativaConverter());
 		servico.addConverter(new AlternativaArrayConverter());
+		servico.addConverter(new AlternativaMarcadaConverter());
+		servico.addConverter(new AlternativaMarcadaArrayConverter());
 		servico.addConverter(new TagConverter());
 		servico.addConverter(new QuestaoConverter());
 		servico.addConverter(new ProvaConverter(provaDao));
@@ -74,7 +77,7 @@ public class Configurator extends WebMvcConfigurerAdapter {
 	}
 	
 	@Bean
-	@Scope("session")
+	@Scope(value="session",proxyMode=ScopedProxyMode.TARGET_CLASS)
 	public Usuario getUsuarioLogado(HttpSession session, UsuarioDao usuarioDao){
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
 		Usuario logado = usuarioDao.buscarPorLogin(usuario.getLogin());

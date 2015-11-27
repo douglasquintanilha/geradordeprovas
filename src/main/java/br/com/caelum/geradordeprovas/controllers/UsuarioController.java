@@ -35,21 +35,6 @@ public class UsuarioController {
 		this.usuarioLogado = usuarioLogado;
 	}
 
-	@RequestMapping("avaliacao/corrige")
-	public ModelAndView corrigeProvas(
-			@ModelAttribute("resposta") Resposta resposta,
-			@RequestParam("provaId") Prova prova) {
-
-		List<Alternativa> alternativas = new ArrayList<>();
-		for(Long alternativaId : resposta.getAlternativas()){
-			alternativas.add(alternativaDao.getAlternativaPorId(alternativaId));
-		}
-		
-		RelatorioProva rp = prova.corrige(alternativas);
-
-		return new ModelAndView("corrigido").addObject("relatorio", rp);
-
-	}
 
 	@RequestMapping("/liberadas")
 	public ModelAndView provasLiberadas() {

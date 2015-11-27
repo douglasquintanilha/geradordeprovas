@@ -24,7 +24,7 @@
 					<c:forEach items="${relatorio.questoes[i.index].alternativa}" var="alternativa">
 						<div class="radio">
 							<label for="${alternativa.id}" <c:choose><c:when test="${alternativa.alternativaCorreta == true}">class="green"</c:when> <c:otherwise>class="red"</c:otherwise></c:choose>>
-								<input type="radio" <c:if test="${alternativa.alternativaCorreta == true}">checked="checked"</c:if> value="${alternativa.id}"  id="${alternativa.id}" name="alternativas[${i.index}]">
+								<input type="radio" disabled <c:if test="${alternativa.alternativaCorreta == true}">checked="checked"</c:if> value="${alternativa.id}"  id="${alternativa.id}" name="alternativas[${i.index}]">
 								<md:render>${alternativa.descricao}</md:render>
 							</label>
 						</div>	

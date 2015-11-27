@@ -27,6 +27,7 @@ public class Prova {
 	@NotEmpty()
 	@ManyToMany()
 	private List<Questao> questoes;
+	
 
 	public Long getId() {
 		return id;
