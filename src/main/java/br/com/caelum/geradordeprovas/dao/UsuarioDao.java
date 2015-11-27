@@ -1,5 +1,6 @@
 package br.com.caelum.geradordeprovas.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -8,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import br.com.caelum.geradordeprovas.models.Prova;
+import br.com.caelum.geradordeprovas.models.Questao;
 import br.com.caelum.geradordeprovas.models.Usuario;
 import br.com.caelum.geradordeprovas.util.Criptografia;
 
@@ -21,14 +23,19 @@ public class UsuarioDao {
 		manager.persist(usuario);
 	}
 
-	public Usuario buscarPorLogin(String login) {
-		Usuario usuario = manager.find(Usuario.class, login);
+	public Usuario getUsuarioByLogin(String login) {
+		Usuario usuario = (Usuario) manager
+				.createQuery("select u from Usuario u where u.login =:login")
+				.setParameter("login", login)
+				.getSingleResult();
+	
 		return usuario;
 	}
+	
 
 	public Usuario validaUsuario(Usuario usuario) {
 
-		Usuario us = manager.find(Usuario.class, usuario.getLogin());
+		Usuario us = getUsuarioByLogin(usuario.getLogin());
 		if (us != null) {
 			Criptografia crypt = new Criptografia();
 			String compara = crypt.criptografaSenha(usuario.getSenha());
@@ -50,9 +57,9 @@ public class UsuarioDao {
 				.getResultList();
 	}
 
-	public void salvaProvasLiberadas(String login, List<Prova> provas) {
+	public void salvaProvasLiberadas(Long id, List<Prova> provas) {
 
-		Usuario us = manager.find(Usuario.class, login);
+		Usuario us = manager.find(Usuario.class, id);
 		us.adicionaProvas(provas);
 
 	}

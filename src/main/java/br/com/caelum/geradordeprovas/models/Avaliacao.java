@@ -3,6 +3,8 @@ package br.com.caelum.geradordeprovas.models;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 @Entity
 public class Avaliacao {
@@ -18,6 +21,9 @@ public class Avaliacao {
 	@GeneratedValue
 	private Long id;
 	
+	@Transient
+	private List<Long> alternativasIds;
+
 	private int nota;
 	
 	@OneToOne()
@@ -29,7 +35,7 @@ public class Avaliacao {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar dataRealizada;
 	
-	@OneToMany()
+	@ElementCollection
 	private List<AlternativaMarcada> alternativasMarcadas;
 
 	public List<AlternativaMarcada> getAlternativasMarcadas() {
@@ -40,8 +46,6 @@ public class Avaliacao {
 			List<AlternativaMarcada> alternativasMarcadas) {
 		this.alternativasMarcadas = alternativasMarcadas;
 	}
-
-
 
 	public Calendar getDataRealizada() {
 		return dataRealizada;
@@ -82,7 +86,23 @@ public class Avaliacao {
 	public void setProva(Prova prova) {
 		this.prova = prova;
 	}
-	
+
+	public void corrige() {
+		this.nota = 0;
+		for (AlternativaMarcada alternativaMarcada : alternativasMarcadas) {
+			if(alternativaMarcada.isAlternativaCorreta()){
+				this.nota++;
+			}
+		}
+		
+	}
+	public List<Long> getAlternativasIds() {
+		return alternativasIds;
+	}
+
+	public void setAlternativasIds(List<Long> alternativasIds) {
+		this.alternativasIds = alternativasIds;
+	}
 	
 	
 }

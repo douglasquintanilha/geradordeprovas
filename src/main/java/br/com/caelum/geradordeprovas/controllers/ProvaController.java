@@ -82,7 +82,7 @@ public class ProvaController {
 	@RequestMapping("/salvaLiberacao")
 	public ModelAndView salvaLiberacao(
 			@RequestParam("provas") List<Long> provasId,
-			@RequestParam("usuarios") List<String> usuarios) {
+			@RequestParam("usuarios") List<Long> usuarios) {
 
 		List<Prova> provas = new ArrayList<>(provaDao.getProvasPorIds(provasId));
 
@@ -92,8 +92,8 @@ public class ProvaController {
 			return mv;
 		}
 
-		for (String user : usuarios) {
-			usuarioDao.salvaProvasLiberadas(user, provas);
+		for (Long usuarioId : usuarios) {
+			usuarioDao.salvaProvasLiberadas(usuarioId, provas);
 		}
 		ModelAndView mv = new ModelAndView("admin/provas-liberadas");
 		return mv;

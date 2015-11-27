@@ -40,7 +40,7 @@
 						<c:forEach items="${usuarios}" var="usuario">
 							<li>
 								<div class="checkbox">
-									<label> <input type="checkbox" name="usuarios" value="${usuario.login}"> ${usuario.login}
+									<label> <input type="checkbox" name="usuarios" value="${usuario.id}"> ${usuario.login}
 									</label>
 								</div>
 							</li>
