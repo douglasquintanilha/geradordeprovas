@@ -24,6 +24,8 @@ import br.com.caelum.geradordeprovas.models.Usuario;
 import br.com.caelum.geradordeprovas.util.AlternativaArrayConverter;
 import br.com.caelum.geradordeprovas.util.AlternativaConverter;
 import br.com.caelum.geradordeprovas.util.AlternativaFormatter;
+import br.com.caelum.geradordeprovas.util.AlternativaMarcadaArrayConverter;
+import br.com.caelum.geradordeprovas.util.AlternativaMarcadaConverter;
 import br.com.caelum.geradordeprovas.util.ProvaConverter;
 import br.com.caelum.geradordeprovas.util.QuestaoConverter;
 import br.com.caelum.geradordeprovas.util.TagConverter;

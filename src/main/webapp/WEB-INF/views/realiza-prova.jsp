@@ -17,7 +17,7 @@
 		<c:if test="${validacao == false}">
 		Preencha todas as Respostas!
 		</c:if>
-		<c:url var="urlPost" value='avaliacao/correcao' />
+		<c:url var="urlPost" value='correcao' />
 		<form:form method="GET" action="${urlPost}" command="avaliacao" >
 			<input type="hidden" name="prova.id" value="${prova}">
 			<ol>
