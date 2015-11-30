@@ -1,5 +1,6 @@
 package br.com.caelum.geradordeprovas.models;
 
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -8,10 +9,9 @@ import javax.persistence.Lob;
 import org.hibernate.validator.constraints.NotBlank;
 
 
-@Entity
+@Embeddable
 public class AlternativaMarcada {
-	@Id
-	@GeneratedValue
+	
 	private Long id;
 	
 	@Lob
@@ -32,6 +32,10 @@ public class AlternativaMarcada {
 		return id;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	public boolean isAlternativaCorreta() {
 		return alternativaCorreta;
 	}

@@ -1,17 +1,15 @@
 package br.com.caelum.geradordeprovas.models;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
-
-import br.com.caelum.geradordeprovas.dao.AlternativaDao;
 
 @Entity
 public class Prova {
@@ -28,7 +26,6 @@ public class Prova {
 	@ManyToMany()
 	private List<Questao> questoes;
 	
-
 	public Long getId() {
 		return id;
 	}
@@ -49,27 +46,9 @@ public class Prova {
 		this.questoes = questoes;
 	}
 
-	public RelatorioProva corrige(List<Alternativa> alternativasMarcadas) {
-		
-		List<Alternativa> acertou = new ArrayList<>();
-		List<Boolean> resultado = new ArrayList<>();
-		boolean temErrada = false;
-		List<Questao> questoes = this.getQuestoes();
-
-		for (Alternativa alternativa : alternativasMarcadas) {
-			if (alternativa.isAlternativaCorreta()) {
-				acertou.add(alternativa);
-				resultado.add(true);
-			} else {
-				resultado.add(false);
-				temErrada = true;
-			}
-		}
-
-		RelatorioProva rp = new RelatorioProva(acertou.size(), temErrada,
-				questoes, resultado);
-
-		return rp;
+	public int getQuantidadeDeQuestoes() {		
+		return questoes.size();
 	}
+
 
 }
