@@ -15,8 +15,8 @@ import br.com.caelum.geradordeprovas.models.Usuario;
 public class HelloWorldController {
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String sayHello(HttpServletRequest request,HttpSession session) {
-		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+	public String sayHello(HttpSession session) {
+		Usuario usuario = (Usuario) session.getAttribute("usuario");
 		if(session.getAttribute("avaliacao") != null ){
 			session.removeAttribute("avaliacao");
 		}		

@@ -39,8 +39,6 @@ public class LoginController {
 
 		Usuario user = usuarioDao.validaUsuario(usuario);
 
-		System.out.println("Voltei da validacao");
-		
 		if (user != null) {
 			
 			sessao.setAttribute("usuario", user);

@@ -84,7 +84,7 @@ public class ProvaController {
 			@RequestParam("provas") List<Long> provasId,
 			@RequestParam("usuarios") List<Long> usuarios) {
 
-		List<Prova> provas = new ArrayList<>(provaDao.getProvasPorIds(provasId));
+		List<Prova> provas = provaDao.getProvasPorIds(provasId);
 
 		if (provasId.isEmpty() || usuarios.isEmpty()) {
 			ModelAndView mv = new ModelAndView("redirect:libera");
