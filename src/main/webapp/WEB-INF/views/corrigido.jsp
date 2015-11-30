@@ -16,8 +16,8 @@
 	<div class="container">
 		<h1>Sua nota foi:</h1>
 		<h3>${avaliacao.nota}/${avaliacao.prova.quantidadeDeQuestoes}</h3>
+		<h4>Gabarito:</h4>
 			<c:forEach items="${avaliacao.prova.questoes}" var="questao" varStatus = "i">
-			<h4>Gabarito:</h4>
 					<h3><md:render>${questao.titulo}<br></md:render></h3>
 					<c:forEach items="${questao.alternativa}" var="alternativa">
 						<div class="radio">
