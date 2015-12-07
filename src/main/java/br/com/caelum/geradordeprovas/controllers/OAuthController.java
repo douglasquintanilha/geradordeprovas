@@ -5,7 +5,6 @@ import java.io.IOException;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 
-import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ObjectNode;
 import org.scribe.builder.ServiceBuilder;
@@ -15,6 +14,7 @@ import org.scribe.model.Token;
 import org.scribe.model.Verb;
 import org.scribe.model.Verifier;
 import org.scribe.oauth.OAuthService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,8 +32,20 @@ public class OAuthController {
 	private OAuthService service;
 	private Token EMPTY_TOKEN = null;
 
+	@Profile("producao")
 	@PostConstruct
-	public void prepareOAuthService() {
+	public void prepareOAuthServiceProducao() {
+		this.service = new ServiceBuilder()
+				.provider(GithubApi.class)
+				.apiKey("3043231979046f1d8a4b")
+				.apiSecret("3cdb01d3be4bd90011341b4bd5e46827737168c5")
+				.callback("http://caelumprovas-dquintanilha.rhcloud.com/oauth/callback")
+				.build();
+	}
+	
+	@Profile("dev")
+	@PostConstruct
+	public void prepareOAuthServiceDev() {
 		this.service = new ServiceBuilder()
 				.provider(GithubApi.class)
 				.apiKey("3043231979046f1d8a4b")
@@ -49,7 +61,7 @@ public class OAuthController {
 	}
 
 	@RequestMapping("/callback")
-	public ModelAndView callback(@RequestParam("code") String authToken, Model model) {
+	public ModelAndView callback(@RequestParam("code") String authToken, Model model ) throws IOException  {
 		Verifier verifier = new Verifier(authToken);
 		Token accessToken = service.getAccessToken(EMPTY_TOKEN, verifier);
 		
@@ -58,18 +70,10 @@ public class OAuthController {
 		Response response = request.send();
 		
 		Usuario usuario = new Usuario();
-		
-		try {
-			ObjectMapper mapper = new ObjectMapper();
-			ObjectNode myObject = (ObjectNode) mapper.readTree(response.getBody());
-			usuario.setLogin(myObject.get("login").asText()); 
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		ObjectMapper mapper = new ObjectMapper();
+		ObjectNode myObject = (ObjectNode) mapper.readTree(response.getBody());
+		usuario.setLogin(myObject.get("login").asText()); 
+			
 		
 		OAuthRequest requestOrg = new OAuthRequest(Verb.GET, "https://api.github.com/orgs/caelum/members/"+usuario.getLogin());
 		service.signRequest(accessToken, requestOrg);

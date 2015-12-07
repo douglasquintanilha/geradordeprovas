@@ -16,13 +16,13 @@ import br.com.caelum.geradordeprovas.models.Questao;
 import br.com.caelum.geradordeprovas.models.Tag;
 
 @Component
-public class QuestaoFacade {
+public class QuestaoService {
 	
 	private QuestaoDao questaoDao;
 	private TagDao tagDao;
 	
 	@Autowired
-	public QuestaoFacade(QuestaoDao questaoDao,TagDao tagDao) {
+	public QuestaoService(QuestaoDao questaoDao,TagDao tagDao) {
 		this.questaoDao = questaoDao;
 		this.tagDao = tagDao;
 	}
