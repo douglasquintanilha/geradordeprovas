@@ -13,9 +13,9 @@ import br.com.caelum.geradordeprovas.models.Usuario;
 
 @Controller
 @RequestMapping("/")
-public class HelloWorldController {
+public class IndexController {
 
-	private static final Logger LOG = LogManager.getLogger(HelloWorldController.class);
+	private static final Logger LOG = LogManager.getLogger(IndexController.class);
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String sayHello(HttpServletRequest request,HttpSession session) {
