@@ -61,7 +61,8 @@ public class UsuarioDao {
 
 		Usuario us = manager.find(Usuario.class, id);
 		us.adicionaProvas(provas);
-
+		
+		
 	}
 
 	public List<Prova> getProvasDoUsuario(String login) {

@@ -35,6 +35,7 @@
 					</li>
 				</c:forEach>
 			</ol>
+			<label><input type="checkbox" required="required">  Estou ciente das opções marcadas e desejo enviar</label><br>
 			<button type="submit" class="btn btn-default">Ok</button>
 		</form:form>
 	</div>		

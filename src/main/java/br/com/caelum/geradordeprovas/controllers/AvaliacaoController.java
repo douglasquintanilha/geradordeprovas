@@ -36,13 +36,16 @@ public class AvaliacaoController {
 	@Transactional
 	@RequestMapping(value = "correcao", method={RequestMethod.POST})
 	public ModelAndView corrigePost(@ModelAttribute("avaliacao") Avaliacao avaliacao, HttpSession session) {
+		if(session.getAttribute("avaliacao") != null){
+			return new ModelAndView("redirect:refaz");
+		}else{
 		avaliacao.setDataRealizada(Calendar.getInstance());
 		avaliacao.corrige();
 		avaliacao.setUsuario(usuarioLogado);
 		avaliacaoDao.save(avaliacao);
 		session.setAttribute("avaliacao", avaliacao);
 		return new ModelAndView("redirect:correcao");
-
+		}
 	}
 	
 	@Transactional
@@ -52,5 +55,9 @@ public class AvaliacaoController {
 		avaliacao = avaliacaoDao.atualiza(avaliacao);
 		return new ModelAndView("corrigido").addObject("avaliacao", avaliacao);
 	}
-}
 
+	@RequestMapping("refaz")
+	public String refazerAvaliacao(){
+		return "refazAvaliacao";
+	}
+}

@@ -95,6 +95,7 @@ public class ProvaController {
 		for (Long usuarioId : usuarios) {
 			usuarioDao.salvaProvasLiberadas(usuarioId, provas);
 		}
+		
 		ModelAndView mv = new ModelAndView("admin/provas-liberadas");
 		return mv;
 	}

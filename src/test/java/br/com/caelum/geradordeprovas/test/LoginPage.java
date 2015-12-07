@@ -16,11 +16,6 @@ public class LoginPage {
 		driver.get("localhost:8000/GeradorDeProvas/loginForm");
 	}
 
-	public GitHubPage clicaGitHub() {
-		driver.findElement(By.linkText("Login Git Hub")).click();
-		return new GitHubPage(driver);
-	}
-
 	public void preenche(String login, String senha) {
 
 		WebElement txtLogin = driver.findElement(By.name("login"));
@@ -39,14 +34,11 @@ public class LoginPage {
 
 	public String realizouLogin() {
 		if (driver.getCurrentUrl().equals(
-				"http://localhost:8000/GeradorDeProvas/"))
+				"http://localhost:8000/GeradorDeProvas/liberadas"))
 			return "usuario";
 		if (driver.getCurrentUrl().equals(
 				"http://localhost:8000/GeradorDeProvas/admin/index"))
 			return "admin";
-		if (driver.getCurrentUrl().equals(
-				"http://localhost:8000/GeradorDeProvas/oauth/github-error"))
-			return "Testando as branches";
 		return "";
 	}
 }
