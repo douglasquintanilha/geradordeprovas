@@ -12,6 +12,7 @@
 <body>
 	<c:import url="header.jsp"></c:import>
 	<div class="container">
+		
 		<form:form action="efetuaLogin" method="POST" commandName="usuario" class="form col-xs-3">
 			<div class="form-group">
 				<label for="login">Login:</label>
@@ -29,9 +30,11 @@
 			</div>
 
 		</form:form>
-		
-		<a href="<c:url value='/oauth/github-login'/>"><h3>Login Git Hub</h3></a>
-
+		<div class="login-github col-xs-3">
+			<a class="login-github-text" href="<c:url value='/oauth/github-login'/>"><img class="github-icon" src="<c:url value='/static/imagens/github-icon.png' />">
+			Login com GitHub</a>	
+		</div>
+	
 
 	</div>
 	<c:import url="footer.jsp"></c:import>

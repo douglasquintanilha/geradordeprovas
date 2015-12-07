@@ -30,12 +30,10 @@ public class QuestaoDao {
 	}
 
 	public List<Questao> getQuestoesPorTag(String tag) {
-		List<Questao> idQuestoes = new ArrayList<>();
-		idQuestoes = manager
-				.createQuery("select q from Questao q JOIN q.tags t where t.nome =:tag")
+		List<Questao> idQuestoes = manager
+				.createQuery("select q from Questao q JOIN q.tags t where t.nome =:tag",Questao.class)
 				.setParameter("tag", tag)
 				.getResultList();
-		
 		
 		return idQuestoes;
 	}
