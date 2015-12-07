@@ -37,8 +37,8 @@ public class OAuthController {
 	public void prepareOAuthServiceProducao() {
 		this.service = new ServiceBuilder()
 				.provider(GithubApi.class)
-				.apiKey("3043231979046f1d8a4b")
-				.apiSecret("3cdb01d3be4bd90011341b4bd5e46827737168c5")
+				.apiKey("0a3a59bd8fd88d2fc3ba")
+				.apiSecret("a20f087bb1e97ddac919a6664ac050577b24ab63")
 				.callback("http://caelumprovas-dquintanilha.rhcloud.com/oauth/callback")
 				.build();
 	}
