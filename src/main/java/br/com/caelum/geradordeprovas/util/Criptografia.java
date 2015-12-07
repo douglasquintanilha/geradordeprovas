@@ -11,7 +11,6 @@ public class Criptografia {
 			byte[] crypt = md.digest();
 			return bytesToHex(crypt);
 		} catch (Exception e) {
-			System.out.println("Exception:" + e);
 		}
 
 		return senha;

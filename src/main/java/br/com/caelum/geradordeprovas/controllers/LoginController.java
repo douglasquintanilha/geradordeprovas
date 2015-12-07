@@ -38,8 +38,6 @@ public class LoginController {
 			HttpSession sessao) {
 
 		Usuario user = usuarioDao.validaUsuario(usuario);
-
-		System.out.println("Voltei da validacao");
 		
 		if (user != null) {
 			
