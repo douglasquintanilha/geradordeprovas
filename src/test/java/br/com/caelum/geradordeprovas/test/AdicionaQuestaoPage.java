@@ -43,10 +43,10 @@ public class AdicionaQuestaoPage {
 		txtTitulo.submit();
 	}
 
-	public String realizouLogin() {
+	public String adicionouQuestao() {
 		if (driver.getCurrentUrl().equals(
 				"http://localhost:8000/GeradorDeProvas/admin/questao/salva")) {
-			return "entrou";
+			return "sim";
 		}
 		return "";
 	}

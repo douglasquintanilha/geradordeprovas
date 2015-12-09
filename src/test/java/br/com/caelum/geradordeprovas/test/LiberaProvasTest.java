@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class CriaUsuarioTest {
+public class LiberaProvasTest {
 
 	private FirefoxDriver driver;
 
@@ -20,30 +20,19 @@ public class CriaUsuarioTest {
 		String senha = "12345";
 		pagina.preenche(login, senha);
 	}
-
+	
 	@Test
-	public void adicionaUsuarioComum() {
-
-		CriaUsuarioPage pagina = new CriaUsuarioPage(driver);
+	public void liberaUmaProvaParaTodosOsAlunos(){
+		
+		LiberaProvasPage pagina = new LiberaProvasPage(driver);
 		pagina.visita();
-		String nome = "romulo";
-		String senha = "12345";
-
-		pagina.preenche(nome, senha, false);
-		assertEquals(pagina.criouUsuario(), "sim");
+		
+		int qntdProvas = 1, qntdAlunos = 2;
+		pagina.liberaProvaAlunos(qntdProvas, qntdAlunos);
+		
+		assertEquals(pagina.liberou(), "sim");
 	}
-
-	public void adicionaAdmin() {
-
-		CriaUsuarioPage pagina = new CriaUsuarioPage(driver);
-		pagina.visita();
-		String nome = "admin";
-		String senha = "12345";
-
-		pagina.preenche(nome, senha, true);
-		assertEquals(pagina.criouUsuario(), "entrou");
-	}
-
+	
 	@After
 	public void encerra() {
 		driver.close();

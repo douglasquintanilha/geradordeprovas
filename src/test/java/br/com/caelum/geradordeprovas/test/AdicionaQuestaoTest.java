@@ -34,7 +34,7 @@ public class AdicionaQuestaoTest {
 		
 		
 		pagina.preenche(titulo, tags, alternativaCorreta, alternativaErrada);
-		assertEquals(pagina.realizouLogin(), "entrou");
+		assertEquals(pagina.adicionouQuestao(), "sim");
 	}
 	
 	@After

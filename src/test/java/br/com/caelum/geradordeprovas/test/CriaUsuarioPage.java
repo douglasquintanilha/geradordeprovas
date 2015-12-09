@@ -32,10 +32,10 @@ public class CriaUsuarioPage {
 		
 	}
 
-	public String realizouLogin() {
+	public String criouUsuario() {
 		if (driver.getCurrentUrl().equals(
 				"http://localhost:8000/GeradorDeProvas/admin/usuario/novo/salva")) {
-			return "entrou";
+			return "sim";
 		}
 		return "";
 	}
