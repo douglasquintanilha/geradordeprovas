@@ -17,6 +17,7 @@ public class Usuario {
 	@GeneratedValue
 	private Long id;
 	
+	@Column(unique=true)
 	@Size(min = 5, max = 30)
 	private String login;
 
