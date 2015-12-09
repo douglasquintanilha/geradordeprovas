@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.caelum.geradordeprovas.models.Questao;
-import br.com.caelum.geradordeprovas.services.QuestaoFacade;
+import br.com.caelum.geradordeprovas.services.QuestaoService;
 
 @Controller
 @RequestMapping("/admin/questao")
 public class QuestoesController {
 
-	private QuestaoFacade questaoBo;
+	private QuestaoService questaoBo;
 
 	@Autowired
-	public QuestoesController(QuestaoFacade questaoBo) {
+	public QuestoesController(QuestaoService questaoBo) {
 		this.questaoBo = questaoBo;
 	}
 

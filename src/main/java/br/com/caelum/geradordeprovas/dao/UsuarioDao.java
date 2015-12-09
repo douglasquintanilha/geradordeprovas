@@ -24,8 +24,8 @@ public class UsuarioDao {
 	}
 
 	public Usuario getUsuarioByLogin(String login) {
-		Usuario usuario = (Usuario) manager
-				.createQuery("select u from Usuario u where u.login =:login")
+		Usuario usuario = manager
+				.createQuery("select u from Usuario u where u.login =:login",Usuario.class)
 				.setParameter("login", login)
 				.getSingleResult();
 	

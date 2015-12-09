@@ -59,3 +59,26 @@ footer{
 .red{
 	color:red;
 }
+
+.login-github{
+	background-color: white;
+	height: 200px;
+	border-left: 1px solid gray;
+}
+.login-github-text{
+	font-size: 1.7em;
+	text-decoration: none !important;
+	color: black;	
+	display:block;
+	margin-top: 60px;
+}
+.login-github-text:hover{
+	text-decoration: none !important;
+	color: black;	
+}
+
+
+.github-icon{
+	width: 2.0em;
+}
+

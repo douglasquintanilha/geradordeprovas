@@ -7,13 +7,11 @@ public class TempoSessao implements HttpSessionListener {
 
     @Override
     public void sessionCreated(HttpSessionEvent event) {
-        System.out.println("==== Session is created ====");
         event.getSession().setMaxInactiveInterval(72*3600);
     }
 
     @Override
     public void sessionDestroyed(HttpSessionEvent event) {
-        System.out.println("==== Session is destroyed ====");
     }
 }
 

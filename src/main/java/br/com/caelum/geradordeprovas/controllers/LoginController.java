@@ -21,7 +21,7 @@ public class LoginController {
 	public LoginController(UsuarioDao usuarioDao) {
 		this.usuarioDao = usuarioDao;
 	}
-	
+
 	@RequestMapping("loginForm")
 	public String loginForm() {
 		return "loginForm";
@@ -38,18 +38,17 @@ public class LoginController {
 			HttpSession sessao) {
 
 		Usuario user = usuarioDao.validaUsuario(usuario);
-
 		if (user != null) {
-			
+
 			sessao.setAttribute("usuario", user);
-			
+
 			if (user.isAdmin()) {
 				ModelAndView mv = new ModelAndView(new RedirectView(
 						"admin/index"));
 				return mv;
 			} else {
-				ModelAndView mv = new ModelAndView(new RedirectView(
-						"liberadas"));
+				ModelAndView mv = new ModelAndView(
+						new RedirectView("liberadas"));
 				return mv;
 			}
 		} else {
