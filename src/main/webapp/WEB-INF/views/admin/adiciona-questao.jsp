@@ -50,7 +50,7 @@
 						<span class="input-group-addon"> <input type="radio"
 							name="alternativaCorreta" value="0" id="botaoA"/>
 						</span> 
-						<textarea class="form-control entrada" name="alternativa" >${alternativa[0].descricao}</textarea>	
+						<textarea class="form-control entrada" name="alternativa" id="alternativa" >${alternativa[0].descricao}</textarea>	
 					</div>
 				</div>
 
@@ -66,7 +66,7 @@
 						<span class="input-group-addon"> <input type="radio"
 							name="alternativaCorreta" value="1" />
 						</span> 
-						<textarea class="form-control entrada" name="alternativa">${alternativa[1].descricao}</textarea>	
+						<textarea class="form-control entrada" name="alternativa" id="alternativa">${alternativa[1].descricao}</textarea>	
 					</div>
 				</div>
 
@@ -81,7 +81,7 @@
 						<span class="input-group-addon"> <input type="radio"
 							name="alternativaCorreta" value="2" >
 						</span> 
-						<textarea class="form-control entrada" name="alternativa" >${alternativa[2].descricao}</textarea>
+						<textarea class="form-control entrada" name="alternativa" id="alternativa">${alternativa[2].descricao}</textarea>
 					</div>
 				</div>
 
@@ -96,7 +96,7 @@
 						<span class="input-group-addon"> <input type="radio"
 							name="alternativaCorreta" value="3" />
 						</span>
-						<textarea class="form-control entrada" name="alternativa">${alternativa[3].descricao}</textarea>
+						<textarea class="form-control entrada" name="alternativa" id="alternativa">${alternativa[3].descricao}</textarea>
 					</div>
 				</div>
 
@@ -112,7 +112,7 @@
 						<span class="input-group-addon"> <input type="radio"
 							name="alternativaCorreta" value="4" />
 						</span> 
-						<textarea class="form-control entrada" name="alternativa">${alternativa[4].descricao}</textarea>
+						<textarea class="form-control entrada" name="alternativa" id="alternativa">${alternativa[4].descricao}</textarea>
 					</div>
 				</div>
 

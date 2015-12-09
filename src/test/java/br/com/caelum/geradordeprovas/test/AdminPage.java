@@ -14,6 +14,4 @@ public class AdminPage {
 		driver.get("localhost:8000/GeradorDeProvas/admin/index");
 	}
 
-	
-	
 }
