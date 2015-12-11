@@ -10,13 +10,13 @@ public class TestConfigurator {
 	@Profile("dev")
 	@Bean
 	public String getContext(){
-		return "localhost:8000/GeradorDeProvas/";
+		return "http://localhost:8000/GeradorDeProvas/";
 	}
 	
 	@Qualifier("rootAplicacao")
 	@Profile("test")
 	@Bean
 	public String getContextTest(){
-		return "localhost:8000/GeradorDeProvas/";
+		return "http://localhost:8000/GeradorDeProvas/";
 	}
 }
