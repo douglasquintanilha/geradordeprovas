@@ -13,7 +13,7 @@ public class TestConfigurator {
 		return "localhost:8000/GeradorDeProvas/";
 	}
 	
-	
+	@Qualifier("rootAplicacao")
 	@Profile("test")
 	@Bean
 	public String getContextTest(){

@@ -37,7 +37,7 @@ public class LoginTest {
 	public void loginDeUsuario() {
 		LoginPage pagina = new LoginPage(driver);
 		pagina.visita(root);
-		String login = "douglas";
+		String login = "usuario";
 		String senha = "12345";
 		pagina.preenche(login, senha);
 
