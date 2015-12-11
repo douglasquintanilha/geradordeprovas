@@ -1,5 +1,6 @@
 package br.com.caelum.geradordeprovas.controllers;
 
+import javax.persistence.NoResultException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +29,14 @@ public class AdminController {
 	}
 
 	@ExceptionHandler(Exception.class)
-	public ModelAndView excecao(){
+	public ModelAndView exception(){
 		return new ModelAndView("erro");
 	}
 	
+	@ExceptionHandler(NoResultException.class)
+	public ModelAndView exceptionPersistence(){
+		return new ModelAndView("erro");
+	}
 	
 	@RequestMapping("/usuario/novo/form")
 	public String criaUsuarioForm() {

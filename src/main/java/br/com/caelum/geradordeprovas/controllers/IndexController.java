@@ -5,8 +5,10 @@ import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import br.com.caelum.geradordeprovas.models.Usuario;
 
@@ -33,4 +35,10 @@ public class IndexController {
 	public String index() {
 		return "index";
 	}
+	
+	@ExceptionHandler(javax.persistence.NoResultException.class)
+	public ModelAndView exceptionPersistence(){
+		return new ModelAndView("erro");
+	}
+	
 }
