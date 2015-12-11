@@ -12,8 +12,8 @@ public class LoginPage {
 		this.driver = driver;
 	}
 
-	public void visita() {
-		driver.get("localhost:8000/GeradorDeProvas/loginForm");
+	public void visita(String root) {
+		driver.get(root+ "loginForm");
 	}
 
 	public void preenche(String login, String senha) {

@@ -12,8 +12,8 @@ public class CriaUsuarioPage {
 		this.driver = driver;
 	}
 
-	public void visita() {
-		driver.get("localhost:8000/GeradorDeProvas/admin/usuario/novo/form");
+	public void visita(String root) {
+		driver.get(root + "admin/usuario/novo/form");
 	}
 
 	public void preenche(String nome, String senha, boolean admin) {

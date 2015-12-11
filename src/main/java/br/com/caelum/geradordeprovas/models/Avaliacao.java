@@ -96,6 +96,7 @@ public class Avaliacao {
 		}
 		
 	}
+	
 	public List<Long> getAlternativasIds() {
 		return alternativasIds;
 	}

@@ -14,8 +14,8 @@ public class AdicionaQuestaoPage {
 		this.driver = driver;
 	}
 
-	public void visita() {
-		driver.get("localhost:8000/GeradorDeProvas/admin/questao/adiciona");
+	public void visita(String root) {
+		driver.get(root + "admin/questao/adiciona");
 	}
 
 	public void preenche(String titulo, String tags, String alternativaCorreta,
