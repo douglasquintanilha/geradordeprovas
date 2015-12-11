@@ -19,10 +19,12 @@ import br.com.caelum.geradordeprovas.util.Criptografia;
 public class AdminController {
 
 	private UsuarioDao usuarioDao;
+	private Criptografia criptografia;
 
 	@Autowired
-	public AdminController(UsuarioDao usuarioDao) {
+	public AdminController(UsuarioDao usuarioDao,Criptografia criptografia) {
 		this.usuarioDao = usuarioDao;
+		this.criptografia = criptografia;
 	}
 
 	@ExceptionHandler(Exception.class)
@@ -48,8 +50,7 @@ public class AdminController {
 		if(result.hasErrors()){
 			return "admin/cria-usuario-form";
 		}
-		Criptografia crypt = new Criptografia();
-		String senhaCriptografada = crypt.criptografaSenha(usuario.getSenha());
+		String senhaCriptografada = criptografia.criptografaSenha(usuario.getSenha());
 		usuario.setSenha(senhaCriptografada);
 		usuarioDao.save(usuario);
 

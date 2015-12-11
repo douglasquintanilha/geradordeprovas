@@ -4,10 +4,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Login geraX</title>
-<link rel="stylesheet" href="static/css/bootstrap.min.css">
-<link rel="stylesheet" href="static/css/main.css">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Login geraX</title>
+	<link href="<c:url value='/static/imagens/favicon.ico' />" rel="icon" type="image/x-icon" />
+	<link rel="stylesheet" href="static/css/bootstrap.min.css">
+	<link rel="stylesheet" href="static/css/main.css">
 </head>
 <body>
 	<c:import url="header.jsp"></c:import>

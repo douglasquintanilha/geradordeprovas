@@ -2,6 +2,9 @@ package br.com.caelum.geradordeprovas.util;
 
 import java.security.MessageDigest;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Criptografia {
 
 	public String criptografaSenha(String senha) {
