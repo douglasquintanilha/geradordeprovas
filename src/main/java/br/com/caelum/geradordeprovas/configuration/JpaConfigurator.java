@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 public class JpaConfigurator {
+	
 	@Bean
 	@Profile("dev")
 	public DataSource dataSource() {
@@ -37,6 +38,18 @@ public class JpaConfigurator {
 		dm.setUrl("jdbc:mysql://" + System.getenv().get("OPENSHIFT_MYSQL_DB_HOST")+":" + System.getenv().get("OPENSHIFT_MYSQL_DB_PORT") + "/caelum_provas");
 		dm.setUsername("adminGMbfzh1");
 		dm.setPassword("Ga8d1VKWRfjm");
+		dm.setDriverClassName("com.mysql.jdbc.Driver");
+
+		return dm;
+	}
+	
+	@Bean
+	@Profile("test")
+	public DataSource dataSourceTest() {
+		DriverManagerDataSource dm = new DriverManagerDataSource();
+		dm.setUrl("jdbc:mysql://localhost/caelum_provas_test");
+		dm.setUsername("root");
+		dm.setPassword("");
 		dm.setDriverClassName("com.mysql.jdbc.Driver");
 
 		return dm;
