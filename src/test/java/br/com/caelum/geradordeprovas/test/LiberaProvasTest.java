@@ -42,12 +42,12 @@ public class LiberaProvasTest {
 	public void liberaUmaProvaParaTodosOsAlunos(){
 		
 		LiberaProvasPage pagina = new LiberaProvasPage(driver);
-		pagina.visita();
+		pagina.visita(root);
 		
 		int qntdProvas = 1, qntdAlunos = 2;
 		pagina.liberaProvaAlunos(qntdProvas, qntdAlunos);
 		
-		assertEquals(pagina.liberou(), "sim");
+		assertEquals(pagina.liberou(root), "sim");
 	}
 	
 	@After

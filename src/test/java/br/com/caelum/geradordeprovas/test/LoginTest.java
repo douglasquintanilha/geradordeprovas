@@ -41,7 +41,7 @@ public class LoginTest {
 		String senha = "12345";
 		pagina.preenche(login, senha);
 
-		assertEquals(pagina.realizouLogin(), "usuario");
+		assertEquals(pagina.realizouLogin(root), "usuario");
 
 	}
 
@@ -53,7 +53,7 @@ public class LoginTest {
 		String senha = "12345";
 		pagina.preenche(login, senha);
 
-		assertEquals(pagina.realizouLogin(), "admin");
+		assertEquals(pagina.realizouLogin(root), "admin");
 
 	}
 

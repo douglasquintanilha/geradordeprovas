@@ -43,9 +43,9 @@ public class AdicionaQuestaoPage {
 		txtTitulo.submit();
 	}
 
-	public String adicionouQuestao() {
+	public String adicionouQuestao(String root) {
 		if (driver.getCurrentUrl().equals(
-				"http://localhost:8000/GeradorDeProvas/admin/questao/salva")) {
+				root+"admin/questao/salva")) {
 			return "sim";
 		}
 		return "";

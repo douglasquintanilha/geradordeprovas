@@ -32,12 +32,12 @@ public class LoginPage {
 		return driver.getCurrentUrl();
 	}
 
-	public String realizouLogin() {
+	public String realizouLogin(String root) {
 		if (driver.getCurrentUrl().equals(
-				"http://localhost:8000/GeradorDeProvas/liberadas"))
+				root+"liberadas"))
 			return "usuario";
 		if (driver.getCurrentUrl().equals(
-				"http://localhost:8000/GeradorDeProvas/admin/index"))
+				root+"admin/index"))
 			return "admin";
 		return "";
 	}

@@ -14,8 +14,8 @@ public class LiberaProvasPage {
 		this.driver = driver;
 	}
 
-	public void visita() {
-		driver.get("localhost:8000/GeradorDeProvas/admin/prova/libera");
+	public void visita(String root) {
+		driver.get(root+"admin/prova/libera");
 	}
 
 	public void liberaProvaAlunos(int qntdProvas, int qntdAlunos) {
@@ -34,9 +34,9 @@ public class LiberaProvasPage {
 		
 	}
 
-	public String liberou() {
+	public String liberou(String root) {
 		if (driver.getCurrentUrl().equals(
-				"http://localhost:8000/GeradorDeProvas/admin/prova/salvaLiberacao")) {
+				root+"admin/prova/salvaLiberacao")) {
 			return "sim";
 		}
 		return "";

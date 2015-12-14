@@ -17,16 +17,15 @@ import br.com.caelum.geradordeprovas.configuration.JpaConfigurator;
 import br.com.caelum.geradordeprovas.configuration.TestConfigurator;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {JpaConfigurator.class,TestConfigurator.class})
+@ContextConfiguration(classes = { JpaConfigurator.class, TestConfigurator.class })
 @ActiveProfiles("test")
 public class CriaUsuarioTest {
 
 	private FirefoxDriver driver;
-	
+
 	@Autowired
 	@Qualifier("rootAplicacao")
 	private String root;
-	
 
 	@Before
 	public void inicializa() {
@@ -47,9 +46,10 @@ public class CriaUsuarioTest {
 		String senha = "12345";
 
 		pagina.preenche(nome, senha, false);
-		assertEquals(pagina.criouUsuario(), "sim");
+		assertEquals(pagina.criouUsuario(root), "sim");
 	}
 
+	@Test
 	public void adicionaAdmin() {
 
 		CriaUsuarioPage pagina = new CriaUsuarioPage(driver);
@@ -58,7 +58,7 @@ public class CriaUsuarioTest {
 		String senha = "12345";
 
 		pagina.preenche(nome, senha, true);
-		assertEquals(pagina.criouUsuario(), "entrou");
+		assertEquals(pagina.criouUsuario(root), "sim");
 	}
 
 	@After

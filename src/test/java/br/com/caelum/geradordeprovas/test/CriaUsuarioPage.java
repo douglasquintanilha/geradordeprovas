@@ -20,21 +20,19 @@ public class CriaUsuarioPage {
 
 		WebElement txtNome = driver.findElement(By.id("nome"));
 		WebElement txtSenha = driver.findElement(By.id("senha"));
-		if(admin){
+		if (admin) {
 			WebElement botaoAdmin = driver.findElement(By.id("admin"));
 			botaoAdmin.click();
 		}
 		txtNome.sendKeys(nome);
 		txtSenha.sendKeys(senha);
-		
+
 		txtNome.submit();
-		
-		
+
 	}
 
-	public String criouUsuario() {
-		if (driver.getCurrentUrl().equals(
-				"http://localhost:8000/GeradorDeProvas/admin/usuario/novo/salva")) {
+	public String criouUsuario(String root) {
+		if (driver.getCurrentUrl().equals(root+"admin/usuario/novo/salva")) {
 			return "sim";
 		}
 		return "";

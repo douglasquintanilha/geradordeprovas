@@ -51,7 +51,7 @@ public class AdicionaQuestaoTest {
 		
 		
 		pagina.preenche(titulo, tags, alternativaCorreta, alternativaErrada);
-		assertEquals(pagina.adicionouQuestao(), "sim");
+		assertEquals(pagina.adicionouQuestao(root), "sim");
 	}
 	
 	@After
