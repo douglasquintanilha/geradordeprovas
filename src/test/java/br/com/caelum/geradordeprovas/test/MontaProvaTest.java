@@ -17,17 +17,16 @@ import br.com.caelum.geradordeprovas.configuration.JpaConfigurator;
 import br.com.caelum.geradordeprovas.configuration.TestConfigurator;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {JpaConfigurator.class,TestConfigurator.class})
+@ContextConfiguration(classes = { JpaConfigurator.class, TestConfigurator.class })
 @ActiveProfiles("test")
-public class AdicionaQuestaoTest {
+public class MontaProvaTest {
 
 	private FirefoxDriver driver;
-	
+
 	@Autowired
 	@Qualifier("rootAplicacao")
 	private String root;
 
-	
 	@Before
 	public void inicializa() {
 		this.driver = new FirefoxDriver();
@@ -37,23 +36,19 @@ public class AdicionaQuestaoTest {
 		String senha = "12345";
 		pagina.preenche(login, senha);
 	}
-	
+
 	@Test
-	public void adicionaUmaQuestaoSemMarkdown(){
-		
-		AdicionaQuestaoPage pagina = new AdicionaQuestaoPage(driver);
+	public void monta_prova_com_todas_as_questoes_do_banco() {
+
+		MontaProvaPage pagina = new MontaProvaPage(driver);
 		pagina.visita(root);
-		
-		String titulo = "Questao adicionada com Selenium";
-		String tags = "teste, selenium";
-		String alternativaCorreta = "correta";
-		String alternativaErrada = "errada";
-		
-		
-		pagina.preenche(titulo, tags, alternativaCorreta, alternativaErrada);
-		assertEquals(pagina.adicionouQuestao(), "sim");
+
+		String nomeProva = "Prova criada com Selenium";
+		pagina.preenche(nomeProva);
+
+		assertEquals(pagina.montouProva(), "sim");
 	}
-	
+
 	@After
 	public void encerra() {
 		driver.close();
