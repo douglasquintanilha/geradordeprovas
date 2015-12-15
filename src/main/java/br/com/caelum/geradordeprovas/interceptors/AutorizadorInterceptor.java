@@ -5,39 +5,32 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import br.com.caelum.geradordeprovas.models.Usuario;
+import br.com.caelum.geradordeprovas.interceptors.chain.UrisPermitidasChain;
+import br.com.caelum.geradordeprovas.interceptors.chain.UsuarioDeslogadoChain;
+import br.com.caelum.geradordeprovas.interceptors.chain.UsuarioLogadoChain;
+import br.com.caelum.geradordeprovas.interceptors.chain.VerificadorPermissaoAdminChain;
 
 public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 
 	@Override
-	public boolean preHandle(HttpServletRequest request,
-			HttpServletResponse response, Object controller) throws Exception {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object controller) 
+																				throws Exception {
 
-		String uri = request.getRequestURI();
-
-		if (uri.endsWith("loginForm") 
-				|| uri.endsWith("efetuaLogin")
-				|| uri.endsWith("loginGitHub")
-				|| uri.endsWith("github-login")
-				|| uri.endsWith("github-logado")
-				|| uri.endsWith("/github-error")
-				|| uri.endsWith("oauth/callback")){
-			return true;
+		AutorizadorChain urisPermitidas = new UrisPermitidasChain();
+		AutorizadorChain usuarioDeslogado = new UsuarioDeslogadoChain();
+		AutorizadorChain usuarioLogado = new UsuarioLogadoChain();
+		AutorizadorChain verificadorPermissao = new VerificadorPermissaoAdminChain();
+		
+		urisPermitidas.setProximo(usuarioDeslogado);
+		usuarioDeslogado.setProximo(usuarioLogado);
+		usuarioLogado.setProximo(verificadorPermissao);
+		
+		if(!urisPermitidas.autoriza(request)) {
+			response.sendRedirect(request.getContextPath() + "/loginForm");
+			return false;
 		}
-
-		if (request.getSession().getAttribute("usuario") != null) {
-			Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-			if (usuario.isAdmin()) {
-				return true;
-			}
-
-			if (!usuario.isAdmin() && (uri.contains("/admin"))) {
-				return false;
-			}
-
-			return true;
-		}
-		response.sendRedirect("loginForm");
-		return false;
+		
+		return true;
+	
 	}
 }
