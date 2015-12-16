@@ -1,8 +1,6 @@
 package br.com.caelum.geradordeprovas.controllers;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
@@ -16,6 +14,7 @@ import org.scribe.model.Token;
 import org.scribe.model.Verb;
 import org.scribe.model.Verifier;
 import org.scribe.oauth.OAuthService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import br.com.caelum.geradordeprovas.configuration.Constantes;
 import br.com.caelum.geradordeprovas.models.Usuario;
 import br.com.caelum.geradordeprovas.oauth.GithubApi;
 
@@ -33,30 +33,29 @@ public class OAuthController {
 
 	private OAuthService service;
 	private Token EMPTY_TOKEN = null;
-
+	
+	@Autowired
+	private Constantes constantes;
 	
 	@Profile("producao")
 	@PostConstruct
 	public void prepareOAuthServiceProducao() throws IOException {
-		InputStream constantes = this.getClass().getResourceAsStream("/constantes.properties");
-		Properties properties = new Properties();
-		properties.load(constantes);
 		this.service = new ServiceBuilder()
 				.provider(GithubApi.class)
-				.apiKey(properties.getProperty("apiKeyProducao"))
-				.apiSecret("a20f087bb1e97ddac919a6664ac050577b24ab63")
-				.callback("http://caelumprovas-dquintanilha.rhcloud.com/oauth/callback")
+				.apiKey(constantes.getProperty("apiKeyProducao"))
+				.apiSecret(constantes.getProperty("apiSecretProducao"))
+				.callback(constantes.getProperty("apiUrlCallbackProducao"))
 				.build();
 	}
 	
 	@Profile("dev")
 	@PostConstruct
-	public void prepareOAuthServiceDev() {
+	public void prepareOAuthServiceDev() throws IOException {
 		this.service = new ServiceBuilder()
 				.provider(GithubApi.class)
-				.apiKey("3043231979046f1d8a4b")
-				.apiSecret("3cdb01d3be4bd90011341b4bd5e46827737168c5")
-				.callback("http://localhost:8000/GeradorDeProvas/oauth/callback")
+				.apiKey(constantes.getProperty("apiKeyDev"))
+				.apiSecret(constantes.getProperty("apiSecretDev"))
+				.callback(constantes.getProperty("apiUrlCallbackDev"))
 				.build();
 	}
 

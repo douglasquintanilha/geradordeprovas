@@ -35,10 +35,10 @@ public class JpaConfigurator {
 	@Profile("producao")
 	public DataSource dataSourceProducao() {
 		DriverManagerDataSource dm = new DriverManagerDataSource();
-		dm.setUrl("jdbc:mysql://" + System.getenv().get("OPENSHIFT_MYSQL_DB_HOST")+":" + System.getenv().get("OPENSHIFT_MYSQL_DB_PORT") + "/caelum_provas");
-		dm.setUsername("adminGMbfzh1");
-		dm.setPassword("Ga8d1VKWRfjm");
-		dm.setDriverClassName("com.mysql.jdbc.Driver");
+		dm.setUrl("jdbc:mysql://" + System.getenv().get("OPENSHIFT_MYSQL_DB_HOST")+":" + System.getenv().get("OPENSHIFT_MYSQL_DB_PORT") + "");
+		dm.setUsername("");
+		dm.setPassword("");
+		dm.setDriverClassName("");
 
 		return dm;
 	}
