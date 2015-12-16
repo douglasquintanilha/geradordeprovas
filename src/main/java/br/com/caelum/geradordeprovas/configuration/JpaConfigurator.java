@@ -5,6 +5,7 @@ import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -19,14 +20,17 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class JpaConfigurator {
 	
+	@Autowired
+	Constantes constantes;
+	
 	@Bean
 	@Profile("dev")
 	public DataSource dataSource() {
 		DriverManagerDataSource dm = new DriverManagerDataSource();
-		dm.setUrl("jdbc:mysql://localhost/caelum_provas");
-		dm.setUsername("root");
-		dm.setPassword("");
-		dm.setDriverClassName("com.mysql.jdbc.Driver");
+		dm.setUrl(constantes.getProperty("BdUrlDev"));
+		dm.setUsername(constantes.getProperty("BdUsernameDev"));
+		dm.setPassword(constantes.getProperty("BdUrlPasswordDev"));
+		dm.setDriverClassName(constantes.getProperty("BdDriverDev"));
 
 		return dm;
 	}
@@ -35,10 +39,10 @@ public class JpaConfigurator {
 	@Profile("producao")
 	public DataSource dataSourceProducao() {
 		DriverManagerDataSource dm = new DriverManagerDataSource();
-		dm.setUrl("jdbc:mysql://" + System.getenv().get("OPENSHIFT_MYSQL_DB_HOST")+":" + System.getenv().get("OPENSHIFT_MYSQL_DB_PORT") + "");
-		dm.setUsername("");
-		dm.setPassword("");
-		dm.setDriverClassName("");
+		dm.setUrl("jdbc:mysql://" + System.getenv().get("OPENSHIFT_MYSQL_DB_HOST")+":" + System.getenv().get("OPENSHIFT_MYSQL_DB_PORT") + "caelum_provas");
+		dm.setUsername(constantes.getProperty("BdUsernameProducao"));
+		dm.setPassword(constantes.getProperty("BdUrlPasswordProducao"));
+		dm.setDriverClassName(constantes.getProperty("BdDriverProducao"));
 
 		return dm;
 	}
@@ -47,10 +51,10 @@ public class JpaConfigurator {
 	@Profile("test")
 	public DataSource dataSourceTest() {
 		DriverManagerDataSource dm = new DriverManagerDataSource();
-		dm.setUrl("jdbc:mysql://localhost/caelum_provas_test");
-		dm.setUsername("root");
-		dm.setPassword("");
-		dm.setDriverClassName("com.mysql.jdbc.Driver");
+		dm.setUrl(constantes.getProperty("BdUrlTest"));
+		dm.setUsername(constantes.getProperty("BdUsernameTest"));
+		dm.setPassword(constantes.getProperty("BdUrlPasswordTest"));
+		dm.setDriverClassName(constantes.getProperty("BdDriverTest"));
 
 		return dm;
 	}
