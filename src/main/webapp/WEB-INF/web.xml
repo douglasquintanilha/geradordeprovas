@@ -1,3 +1,6 @@
 <web-app version="3.0">
 	<display-name>Archetype Created Web Application</display-name>
+	<session-config>
+		<session-timeout>34560</session-timeout>
+	</session-config>
 </web-app>

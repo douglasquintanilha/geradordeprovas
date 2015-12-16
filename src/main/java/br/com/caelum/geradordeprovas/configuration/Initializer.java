@@ -17,7 +17,6 @@ public class Initializer extends AbstractAnnotationConfigDispatcherServletInitia
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         super.onStartup(servletContext);
-        servletContext.addListener(new TempoSessao());
         servletContext.setInitParameter("spring.profiles.active", "dev");
     }
     

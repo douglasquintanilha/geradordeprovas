@@ -1,15 +1,15 @@
 package br.com.caelum.geradordeprovas.dao;
 
-import java.util.ArrayList;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import br.com.caelum.geradordeprovas.models.Prova;
-import br.com.caelum.geradordeprovas.models.Questao;
 import br.com.caelum.geradordeprovas.models.Usuario;
 import br.com.caelum.geradordeprovas.util.Criptografia;
 
@@ -18,6 +18,9 @@ public class UsuarioDao {
 
 	@PersistenceContext
 	private EntityManager manager;
+	
+	@Autowired
+	private Criptografia crypto;
 
 	public void save(Usuario usuario) {
 		manager.persist(usuario);
@@ -33,12 +36,11 @@ public class UsuarioDao {
 	}
 	
 
-	public Usuario validaUsuario(Usuario usuario) {
+	public Usuario validaUsuario(Usuario usuario)  {
 
 		Usuario us = getUsuarioByLogin(usuario.getLogin());
 		if (us != null) {
-			Criptografia crypt = new Criptografia();
-			String compara = crypt.criptografaSenha(usuario.getSenha());
+			String compara = crypto.criptografaSenha(usuario.getSenha());
 			if (us.getSenha().equals(compara)) {
 				return us;
 			}

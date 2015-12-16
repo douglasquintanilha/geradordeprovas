@@ -6,12 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.caelum.geradordeprovas.dao.AlternativaDao;
 import br.com.caelum.geradordeprovas.dao.ProvaDao;
 import br.com.caelum.geradordeprovas.models.Prova;
 import br.com.caelum.geradordeprovas.models.Usuario;
@@ -20,13 +18,11 @@ import br.com.caelum.geradordeprovas.models.Usuario;
 @Scope("request")
 public class UsuarioController {
 
-	private AlternativaDao alternativaDao;
 	private ProvaDao provaDao;
 	private Usuario usuarioLogado;
 
 	@Autowired
-	public UsuarioController(AlternativaDao alternativaDao, ProvaDao provaDao,Usuario usuarioLogado) {
-		this.alternativaDao = alternativaDao;
+	public UsuarioController(ProvaDao provaDao,Usuario usuarioLogado) {
 		this.provaDao = provaDao;
 		this.usuarioLogado = usuarioLogado;
 	}

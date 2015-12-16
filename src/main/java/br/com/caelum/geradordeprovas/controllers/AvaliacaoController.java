@@ -33,22 +33,23 @@ public class AvaliacaoController {
 		this.avaliacaoDao = avaliacaoDao;
 	}
 	
+	
 	@Transactional
 	@RequestMapping(value = "correcao", method={RequestMethod.POST})
 	public ModelAndView corrigePost(@ModelAttribute("avaliacao") Avaliacao avaliacao, HttpSession session) {
 		if(session.getAttribute("avaliacao") != null){
 			return new ModelAndView("redirect:refaz");
 		}else{
-		avaliacao.setDataRealizada(Calendar.getInstance());
-		avaliacao.corrige();
-		avaliacao.setUsuario(usuarioLogado);
-		avaliacaoDao.save(avaliacao);
-		session.setAttribute("avaliacao", avaliacao);
-		return new ModelAndView("redirect:correcao");
+			avaliacao.setDataRealizada(Calendar.getInstance());	
+			avaliacao.setUsuario(usuarioLogado);
+			avaliacao.corrige();
+			avaliacaoDao.save(avaliacao);
+			session.setAttribute("avaliacao", avaliacao);
+			return new ModelAndView("redirect:correcao");
 		}
 	}
 	
-	@Transactional
+	@Transactional 
 	@RequestMapping(value = "correcao", method={RequestMethod.GET})
 	public ModelAndView corrigeGet(@ModelAttribute("avaliacao") Avaliacao avaliacao, HttpSession session) {
 		avaliacao = (Avaliacao) session.getAttribute("avaliacao");

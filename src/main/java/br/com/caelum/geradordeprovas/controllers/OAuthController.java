@@ -1,6 +1,8 @@
 package br.com.caelum.geradordeprovas.controllers;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
@@ -32,12 +34,16 @@ public class OAuthController {
 	private OAuthService service;
 	private Token EMPTY_TOKEN = null;
 
+	
 	@Profile("producao")
 	@PostConstruct
-	public void prepareOAuthServiceProducao() {
+	public void prepareOAuthServiceProducao() throws IOException {
+		InputStream constantes = this.getClass().getResourceAsStream("/constantes.properties");
+		Properties properties = new Properties();
+		properties.load(constantes);
 		this.service = new ServiceBuilder()
 				.provider(GithubApi.class)
-				.apiKey("0a3a59bd8fd88d2fc3ba")
+				.apiKey(properties.getProperty("apiKeyProducao"))
 				.apiSecret("a20f087bb1e97ddac919a6664ac050577b24ab63")
 				.callback("http://caelumprovas-dquintanilha.rhcloud.com/oauth/callback")
 				.build();
@@ -73,7 +79,6 @@ public class OAuthController {
 		ObjectMapper mapper = new ObjectMapper();
 		ObjectNode myObject = (ObjectNode) mapper.readTree(response.getBody());
 		usuario.setLogin(myObject.get("login").asText()); 
-			
 		
 		OAuthRequest requestOrg = new OAuthRequest(Verb.GET, "https://api.github.com/orgs/caelum/members/"+usuario.getLogin());
 		service.signRequest(accessToken, requestOrg);

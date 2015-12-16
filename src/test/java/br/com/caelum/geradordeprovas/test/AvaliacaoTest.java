@@ -1,20 +1,22 @@
 package br.com.caelum.geradordeprovas.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import br.com.caelum.geradordeprovas.models.AlternativaMarcada;
 import br.com.caelum.geradordeprovas.models.Avaliacao;
 
 public class AvaliacaoTest {
-
-	@Test
-	public void verifica_se_avalicao_foi_corrigida_corretamente() {
-		Avaliacao avaliacao = new Avaliacao();
+	
+	Avaliacao avaliacao;
+	
+	@Before
+	public void criaUmaAvalicao() {
 		List<AlternativaMarcada> marcadas = new ArrayList<AlternativaMarcada>();
 		
 		AlternativaMarcada a1 = new AlternativaMarcada();
@@ -28,12 +30,16 @@ public class AvaliacaoTest {
 		marcadas.add(a1);
 		marcadas.add(a2);
 		marcadas.add(a3);		
-			
-		avaliacao.setAlternativasMarcadas(marcadas);
-		
-		avaliacao.corrige();
-		
-		assertEquals(avaliacao.getNota(),2);		
+		this.avaliacao.setAlternativasMarcadas(marcadas);
 	}
+
+	@Test
+	public void verifica_se_avalicao_foi_corrigida_corretamente() {					
+		this.avaliacao.corrige();
+		
+		assertEquals(this.avaliacao.getNota(),2);		
+	}
+	
+	
 
 }

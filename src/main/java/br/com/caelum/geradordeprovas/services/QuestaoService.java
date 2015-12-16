@@ -35,15 +35,20 @@ public class QuestaoService {
 			try { 
 				String nome = tag.getNome();
 				Tag tagBanco = tagDao.getTagPorNome(nome);
-				if(tagBanco != null){
-					outraListaDeTag.add(tagBanco);
-				}
+				seTagNaoTiverNoBanco(outraListaDeTag, tagBanco);
 			} catch(NoResultException e) { 
 				tagDao.save(tag);
 				outraListaDeTag.add(tag);
 			}
 		}
 		questao.setTags(outraListaDeTag);
+	}
+
+
+	private void seTagNaoTiverNoBanco(Set<Tag> outraListaDeTag, Tag tagBanco) {
+		if(tagBanco != null){
+			outraListaDeTag.add(tagBanco);
+		}
 	}
 	
 	

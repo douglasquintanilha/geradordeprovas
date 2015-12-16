@@ -1,15 +1,13 @@
 package br.com.caelum.geradordeprovas.controllers;
 
-import javax.persistence.NoResultException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import br.com.caelum.geradordeprovas.dao.UsuarioDao;
 import br.com.caelum.geradordeprovas.models.Usuario;
@@ -28,15 +26,6 @@ public class AdminController {
 		this.criptografia = criptografia;
 	}
 
-	@ExceptionHandler(Exception.class)
-	public ModelAndView exception(){
-		return new ModelAndView("erro");
-	}
-	
-	@ExceptionHandler(NoResultException.class)
-	public ModelAndView exceptionPersistence(){
-		return new ModelAndView("erro");
-	}
 	
 	@RequestMapping("/usuario/novo/form")
 	public String criaUsuarioForm() {
@@ -48,9 +37,9 @@ public class AdminController {
 		return "admin/index";
 	}
 
-	@org.springframework.transaction.annotation.Transactional
+	@Transactional
 	@RequestMapping("/usuario/novo/salva")
-	public String criaUsuario(@ModelAttribute("usuario") @Valid Usuario usuario, BindingResult result) {
+	public String criaUsuario(@ModelAttribute("usuario") @Valid Usuario usuario, BindingResult result){
 
 		if(result.hasErrors()){
 			return "admin/cria-usuario-form";

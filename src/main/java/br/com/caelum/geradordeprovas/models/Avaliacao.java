@@ -84,7 +84,15 @@ public class Avaliacao {
 	public void setProva(Prova prova) {
 		this.prova = prova;
 	}
+	
+	public List<Long> getAlternativasIds() {
+		return alternativasIds;
+	}
 
+	public void setAlternativasIds(List<Long> alternativasIds) {
+		this.alternativasIds = alternativasIds;
+	}
+	
 	public void corrige() {
 		this.nota = 0;
 		for (AlternativaMarcada alternativaMarcada : alternativasMarcadas) {
@@ -93,14 +101,6 @@ public class Avaliacao {
 			}
 		}
 		
-	}
-	
-	public List<Long> getAlternativasIds() {
-		return alternativasIds;
-	}
-
-	public void setAlternativasIds(List<Long> alternativasIds) {
-		this.alternativasIds = alternativasIds;
 	}
 	
 	

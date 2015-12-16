@@ -1,22 +1,23 @@
 package br.com.caelum.geradordeprovas.util;
 
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import org.springframework.stereotype.Component;
 
 @Component
 public class Criptografia {
 
-	public String criptografaSenha(String senha) {
-		try {
+	public String criptografaSenha(String senha)  {
+		try{
 			MessageDigest md = MessageDigest.getInstance("SHA1");
 			md.update(senha.getBytes());
 			byte[] crypt = md.digest();
 			return bytesToHex(crypt);
-		} catch (Exception e) {
+		}catch(NoSuchAlgorithmException e){
+			throw new RuntimeException(e);
 		}
-
-		return senha;
+		
 	}
 	
 	public String bytesToHex(byte[] data) {  
