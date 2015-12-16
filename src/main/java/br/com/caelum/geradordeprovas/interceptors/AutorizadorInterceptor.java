@@ -11,7 +11,6 @@ import br.com.caelum.geradordeprovas.interceptors.chain.UsuarioLogadoChain;
 import br.com.caelum.geradordeprovas.interceptors.chain.VerificadorPermissaoAdminChain;
 
 public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
-
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object controller) 
 																				throws Exception {
@@ -30,7 +29,6 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 			return false;
 		}
 		
-		response.sendRedirect(request.getContextPath()+ "/loginForm");
-		return false;
+		return true;
 	}
 }
