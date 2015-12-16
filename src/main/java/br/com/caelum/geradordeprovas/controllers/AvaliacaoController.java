@@ -10,12 +10,15 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.caelum.geradordeprovas.dao.AvaliacaoDao;
+import br.com.caelum.geradordeprovas.dao.ProvaDao;
 import br.com.caelum.geradordeprovas.models.Avaliacao;
+import br.com.caelum.geradordeprovas.models.Prova;
 import br.com.caelum.geradordeprovas.models.Usuario;
 
 @Controller
@@ -26,9 +29,10 @@ public class AvaliacaoController {
 
 	private Usuario usuarioLogado;
 	private AvaliacaoDao avaliacaoDao;
-
+	private ProvaDao provaDao;
+	
 	@Autowired
-	public AvaliacaoController(@Qualifier("usuarioLogado") Usuario usuarioLogado,AvaliacaoDao avaliacaoDao) {
+	public AvaliacaoController(@Qualifier("usuarioLogado") Usuario usuarioLogado,ProvaDao provaDao,AvaliacaoDao avaliacaoDao) {
 		this.usuarioLogado = usuarioLogado;
 		this.avaliacaoDao = avaliacaoDao;
 	}
@@ -56,7 +60,10 @@ public class AvaliacaoController {
 		avaliacao = avaliacaoDao.atualiza(avaliacao);
 		return new ModelAndView("corrigido").addObject("avaliacao", avaliacao);
 	}
+	
 
+	
+	
 	@RequestMapping("refaz")
 	public String refazerAvaliacao(){
 		return "refazAvaliacao";

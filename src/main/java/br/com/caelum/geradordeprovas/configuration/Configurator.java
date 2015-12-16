@@ -8,7 +8,6 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.format.support.FormattingConversionService;
@@ -20,6 +19,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 import br.com.caelum.geradordeprovas.dao.AlternativaDao;
+import br.com.caelum.geradordeprovas.dao.AvaliacaoDao;
 import br.com.caelum.geradordeprovas.dao.ProvaDao;
 import br.com.caelum.geradordeprovas.dao.UsuarioDao;
 import br.com.caelum.geradordeprovas.models.Usuario;
@@ -28,6 +28,7 @@ import br.com.caelum.geradordeprovas.util.AlternativaConverter;
 import br.com.caelum.geradordeprovas.util.AlternativaFormatter;
 import br.com.caelum.geradordeprovas.util.AlternativaMarcadaArrayConverter;
 import br.com.caelum.geradordeprovas.util.AlternativaMarcadaConverter;
+import br.com.caelum.geradordeprovas.util.AvaliacaoConverter;
 import br.com.caelum.geradordeprovas.util.ProvaConverter;
 import br.com.caelum.geradordeprovas.util.QuestaoConverter;
 import br.com.caelum.geradordeprovas.util.TagConverter;
@@ -56,13 +57,14 @@ public class Configurator extends WebMvcConfigurerAdapter {
 	
 
 	@Bean
-	public FormattingConversionService mvcConversionService(ProvaDao provaDao,AlternativaDao alternativaDao) {
+	public FormattingConversionService mvcConversionService(ProvaDao provaDao,AlternativaDao alternativaDao, AvaliacaoDao avaliacaoDao) {
 		FormattingConversionService servico = new FormattingConversionService();
 		servico.addConverter(new AlternativaConverter());
 		servico.addConverter(new AlternativaArrayConverter());
 		servico.addConverter(new AlternativaMarcadaConverter(alternativaDao));
 		servico.addConverter(new AlternativaMarcadaArrayConverter(alternativaDao));
 		servico.addConverter(new TagConverter());
+		servico.addConverter(new AvaliacaoConverter(avaliacaoDao));
 		servico.addConverter(new QuestaoConverter());
 		servico.addConverter(new ProvaConverter(provaDao));
 		servico.addFormatter(new AlternativaFormatter(alternativaDao));

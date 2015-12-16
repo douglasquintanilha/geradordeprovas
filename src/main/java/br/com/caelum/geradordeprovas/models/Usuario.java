@@ -32,10 +32,17 @@ public class Usuario {
 	private List<Prova> provas = new ArrayList<>();
 
 	public void adicionaProvas(List<Prova> provas) {
-
 		this.provas.addAll(provas);
 	}
 
+	public List<Long> getProvasIds(){
+		List<Long> provaIds = new ArrayList<>();
+		for(Prova prova : provas){
+			provaIds.add(prova.getId());
+		}
+		return provaIds;
+	}
+	
 	public List<Prova> getProvas() {
 		return provas;
 	}
