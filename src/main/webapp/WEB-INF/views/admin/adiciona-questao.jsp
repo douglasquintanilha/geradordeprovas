@@ -35,7 +35,8 @@
 					
 				<div class="form-group">
 					<label for="tags">Escolha as tags da questão:</label> 
-					<input type="text" placeholder="Digite aqui as tags da questão e vá selecionando-as, para adicionar uma nova tag basta colocá-la entre vírgulas que na próxima vez ela será preenchida automaticamente." value="${questao.tags}" name="tags" id="tags" class="form-control">
+					<input type="text" placeholder="Digite aqui as tags da questão e vá selecionando-as, para adicionar uma nova tag basta colocá-la entre vírgulas que na próxima vez ela será preenchida automaticamente."  value="${questao.tags}" name="tags" id="tags" class="form-control">
+					
 				</div>
 
 				<span>Escolha qual será a alternativa correta:</span>
@@ -122,7 +123,6 @@
 
 			<script src="<c:url value='/static/js/jquery-2.1.4.min.js' />"></script>
 			<script src="<c:url value='/static/js/jquery-ui.min.js' />"></script>
-			<script src="<c:url value='/static/js/autocomplete-tags.js' />"></script>
 			<script src="<c:url value='/static/js/limpa-campo.js' />"></script>
 			<script src="<c:url value='/static/js/showdown.min.js' />"></script>
 			<script src="<c:url value='/static/js/markdown-preview.js' />"></script>
