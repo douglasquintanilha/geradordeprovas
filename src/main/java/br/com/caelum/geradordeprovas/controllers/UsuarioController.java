@@ -1,7 +1,10 @@
 package br.com.caelum.geradordeprovas.controllers;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -46,7 +49,7 @@ public class UsuarioController {
 
 		}
 
-		ModelAndView mv = new ModelAndView("provas-realizadas").addObject(
+		ModelAndView mv = new ModelAndView("lista-provas-realizadas").addObject(
 				"avaliacoes", avaliacoes);
 		mv.addObject("idProva", prova.getId());
 
@@ -54,7 +57,8 @@ public class UsuarioController {
 	}
 
 	@RequestMapping("avaliacao/realiza")
-	public ModelAndView realizaProva(@RequestParam("provaId") Prova prova) {
+	public ModelAndView realizaProva(@RequestParam("provaId") Prova prova,HttpSession session) {
+		session.setAttribute("horarioInicio", Calendar.getInstance());
 		return new ModelAndView("realiza-prova").addObject("prova",
 				provaDao.getProva(prova.getId()));
 	}

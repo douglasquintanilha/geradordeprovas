@@ -22,11 +22,12 @@
 						<br>
 			</c:forEach>
 			</ul>
+			<h4>Deseja tentar novamente?</h4>
 			<c:set var="urlPost" value="realiza"/>
 			<form:form action="${urlPost}" method="POST" class="form-horizontal col-xs-2">
 			<div class="form-group">
 				<input type="hidden" value="${idProva}" name="provaId">
-				<input type="submit" class="btn btn-info" value="Tentar Novamente">
+				<input type="submit" class="btn btn-info" value="Sim">
 			</div>
 			</form:form>
 	</div>

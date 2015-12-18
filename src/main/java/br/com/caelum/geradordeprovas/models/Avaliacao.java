@@ -31,7 +31,10 @@ public class Avaliacao {
 	private Prova prova;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	private Calendar dataRealizada;
+	private Calendar horarioInicio;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Calendar horarioFim;
 	
 	@ElementCollection
 	private List<AlternativaMarcada> alternativasMarcadas;
@@ -45,12 +48,21 @@ public class Avaliacao {
 		this.alternativasMarcadas = alternativasMarcadas;
 	}
 
-	public Calendar getDataRealizada() {
-		return dataRealizada;
+
+	public Calendar getHorarioInicio() {
+		return horarioInicio;
 	}
 
-	public void setDataRealizada(Calendar dataRealizada) {
-		this.dataRealizada = dataRealizada;
+	public void setHorarioInicio(Calendar horaInicio) {
+		this.horarioInicio = horaInicio;
+	}
+
+	public Calendar getHorarioFim() {
+		return horarioFim;
+	}
+
+	public void setHorarioFim(Calendar horaFim) {
+		this.horarioFim = horaFim;
 	}
 
 	public Long getId() {
@@ -101,6 +113,16 @@ public class Avaliacao {
 			}
 		}
 		
+	}
+	
+	public boolean validaDuracao(){
+		long duracao = this.horarioFim.getTimeInMillis() - this.horarioInicio.getTimeInMillis();
+		long duracaoComTolerancia = this.getProva().getDuracao() + 1;
+		long duracaoComToleranciaEmMilis = duracaoComTolerancia * 60 * 1000;
+		if( duracaoComToleranciaEmMilis >= duracao)
+			return true;
+		else
+			return false;
 	}
 	
 	
