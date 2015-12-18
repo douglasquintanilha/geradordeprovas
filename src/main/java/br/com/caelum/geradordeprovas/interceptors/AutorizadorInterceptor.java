@@ -25,7 +25,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 		usuarioLogado.setProximo(verificadorPermissao);
 		
 		if(!urisPermitidas.autoriza(request)) {
-			response.sendRedirect(request.getContextPath() + "/loginForm");
+			response.sendRedirect(request.getContextPath() + "/login");
 			return false;
 		}
 		

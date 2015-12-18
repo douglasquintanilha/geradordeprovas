@@ -14,7 +14,8 @@ import br.com.caelum.geradordeprovas.models.Usuario;
 
 @Controller
 public class LoginController {
-
+	
+	
 	private UsuarioDao usuarioDao;
 
 	@Autowired
@@ -22,7 +23,7 @@ public class LoginController {
 		this.usuarioDao = usuarioDao;
 	}
 
-	@RequestMapping("loginForm")
+	@RequestMapping("login")
 	public String loginForm() {
 		return "loginForm";
 	}
@@ -30,7 +31,7 @@ public class LoginController {
 	@RequestMapping("logout")
 	public String logout(HttpSession sessao) {
 		sessao.invalidate();
-		return "redirect:loginForm";
+		return "redirect:login";
 	}
 
 	@RequestMapping("efetuaLogin")

@@ -2,7 +2,9 @@ package br.com.caelum.geradordeprovas.interceptors;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+
+import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -67,6 +69,16 @@ public class AutorizadorInterceptorTest {
 		when(request.getSession().getAttribute(USUARIO_LOGADO)).thenReturn(null);
 		
 		assertFalse(interceptor.preHandle(request, response, null));
+	}
+	
+	@Test
+	public void deve_redirecionar_se_nao_for_autorizado () throws Exception{
+		when(request.getRequestURI()).thenReturn("/uri_super_marota_seguragem_total");
+		when(request.getContextPath()).thenReturn("gerador-provas");
+			
+		interceptor.preHandle(request, response, null);
+		verify(response, times(1)).sendRedirect(request.getContextPath() + "/login");
+		
 	}
 
 }
