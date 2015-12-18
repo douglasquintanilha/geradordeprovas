@@ -2,12 +2,9 @@ package br.com.caelum.geradordeprovas.interceptors;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.*;
-<<<<<<< HEAD
-
-import java.io.IOException;
-=======
->>>>>>> 2e78c1dbcf7fc83f86f358e0b68b8b3a170ac96d
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
