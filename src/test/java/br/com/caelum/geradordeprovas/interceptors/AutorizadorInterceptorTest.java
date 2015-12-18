@@ -3,8 +3,11 @@ package br.com.caelum.geradordeprovas.interceptors;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
+<<<<<<< HEAD
 
 import java.io.IOException;
+=======
+>>>>>>> 2e78c1dbcf7fc83f86f358e0b68b8b3a170ac96d
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -71,14 +75,15 @@ public class AutorizadorInterceptorTest {
 		assertFalse(interceptor.preHandle(request, response, null));
 	}
 	
-	@Test
-	public void deve_redirecionar_se_nao_for_autorizado () throws Exception{
+	@Test		
+	public void deve_redirecionar_caso_nao_esteja_autorizado() throws Exception { 
 		when(request.getRequestURI()).thenReturn("/uri_super_marota_seguragem_total");
-		when(request.getContextPath()).thenReturn("gerador-provas");
-			
-		interceptor.preHandle(request, response, null);
-		verify(response, times(1)).sendRedirect(request.getContextPath() + "/login");
 		
+		interceptor.preHandle(request, response, null);
+		
+		ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
+		
+		verify(response, times(1)).sendRedirect(argumentCaptor.capture());
 	}
 
 }
