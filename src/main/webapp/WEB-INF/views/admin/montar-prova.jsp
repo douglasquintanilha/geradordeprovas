@@ -24,13 +24,16 @@
 				<form:errors path="nome" cssClass="alert alert-danger" element="div" />
 				<input type="text" value="${prova.nome}" name="nome" class="form-control" id="nomeProva" required>
 			</div>
-
-			<h3>Escolha as questões:</h3>
-			<h4>
-				Questões escolhidas: <span id="questoes-marcadas">0</span>
-			</h4>
+			<div class="">
+				<label for="duracao">Coloque a duração da prova em minutos:</label>
+				<input class="form-control" value="${prova.duracao}" id="duracao" min="0" type="number" step="1" name="duracao">
+			</div>
+			<div class="text-questoes-marcadas">
+				<h3>Escolha as questões:</h3>
+				<h4>Questões escolhidas: <span id="questoes-marcadas">0</span></h4>
 				<form:errors path="questoes" cssClass="alert alert-danger" element="div" />
-			<div class="input-group">
+			</div>
+			<div class="input-group col-md-12">
 				<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-tag" aria-hidden="true"></span></span> 
 				<input type="text" class="form-control" id="busca" placeholder="Filtre por tags..." aria-describedby="basic-addon1">
 			</div>

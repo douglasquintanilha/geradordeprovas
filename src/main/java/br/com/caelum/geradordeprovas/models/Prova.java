@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -21,10 +20,13 @@ public class Prova {
 	@NotBlank
 	private String nome;
 
+	private Long duracao;
+
 	// Mudar a List para Set , e mandar mensagem pro properties
 	@NotEmpty()
 	@ManyToMany()
 	private List<Questao> questoes;
+	
 	
 	public Long getId() {
 		return id;
@@ -49,6 +51,15 @@ public class Prova {
 	public int getQuantidadeDeQuestoes() {		
 		return questoes.size();
 	}
+
+	public long getDuracao() {
+		return duracao;
+	}
+
+	public void setDuracao(long duracao) {
+		this.duracao = duracao;
+	}
+
 
 
 }

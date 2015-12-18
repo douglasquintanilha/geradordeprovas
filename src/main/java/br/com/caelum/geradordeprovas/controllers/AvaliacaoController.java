@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.caelum.geradordeprovas.dao.AvaliacaoDao;
 import br.com.caelum.geradordeprovas.dao.ProvaDao;
 import br.com.caelum.geradordeprovas.models.Avaliacao;
-import br.com.caelum.geradordeprovas.models.Prova;
 import br.com.caelum.geradordeprovas.models.Usuario;
 
 @Controller
@@ -44,8 +42,10 @@ public class AvaliacaoController {
 		if(session.getAttribute("avaliacao") != null){
 			return new ModelAndView("redirect:refaz");
 		}else{
-			avaliacao.setDataRealizada(Calendar.getInstance());	
+			avaliacao.setHorarioInicio((Calendar)session.getAttribute("horarioInicio"));
+			avaliacao.setHorarioFim(Calendar.getInstance());	
 			avaliacao.setUsuario(usuarioLogado);
+			avaliacao.validaDuracao();
 			avaliacao.corrige();
 			avaliacaoDao.save(avaliacao);
 			session.setAttribute("avaliacao", avaliacao);
