@@ -36,9 +36,4 @@ public class IndexController {
 		return "index";
 	}
 	
-	@ExceptionHandler(javax.persistence.NoResultException.class)
-	public ModelAndView exceptionPersistence(){
-		return new ModelAndView("erro");
-	}
-	
 }

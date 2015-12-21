@@ -38,12 +38,12 @@ public class UsuarioController {
 	}
 
 	@RequestMapping("/avaliacao/{provaId}")
-	public ModelAndView escolheProva(@PathVariable("provaId") Prova prova) {
+	public ModelAndView escolheProva(@PathVariable("provaId") Prova prova, HttpSession session) {
 
 		List<Avaliacao> avaliacoes = avaliacaoDao.getAvaliacoesPor(
 				usuarioLogado, prova);
 		if (avaliacoes.isEmpty()) {
-
+			session.setAttribute("horarioInicio", Calendar.getInstance());
 			return new ModelAndView("realiza-prova").addObject("prova",
 					provaDao.getProva(prova.getId()));
 
