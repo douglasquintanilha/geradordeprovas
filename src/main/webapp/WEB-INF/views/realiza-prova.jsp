@@ -9,6 +9,7 @@
 	<title>Boa Sorte</title>
 	<link rel="stylesheet" href="../static/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../static/css/main.css">
+	<link rel="stylesheet" href="../static/css/clock.css">
 </head>
 <body>
 
@@ -17,9 +18,13 @@
 		<c:if test="${validacao == false}">
 		Preencha todas as Respostas!
 		</c:if>
+		
+		<div id="clock-div"></div>
+		
 		<c:url var="urlPost" value='correcao' />
 		<form:form method="POST" action="${urlPost}" command="avaliacao" >
 			<input type="hidden" name="prova" value="${prova.id}">
+			<input type="hidden" id="duracao" value="${prova.duracao}">
 			<ol>
 				<c:forEach items="${prova.questoes}" var="questao" varStatus="i">
 					<li>
@@ -40,6 +45,6 @@
 		</form:form>
 	</div>		
 <c:import url="footer.jsp"></c:import>
-
+<script src="<c:url value='/static/js/countdown.js' />"></script>
 </body>
 </html>
