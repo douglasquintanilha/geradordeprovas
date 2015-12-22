@@ -107,6 +107,9 @@ public class Avaliacao {
 	
 	public void corrige() {
 		this.nota = 0;
+		if(alternativasMarcadas == null){
+			return;
+		}
 		for (AlternativaMarcada alternativaMarcada : alternativasMarcadas) {
 			if(alternativaMarcada.isAlternativaCorreta()){
 				this.nota++;
