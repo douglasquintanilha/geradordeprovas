@@ -22,7 +22,7 @@ function initializeClock(id, endtime){
     ':' + t.minutes + 
     ':' + t.seconds;
     if(t.total<=0){
-      $("#command").submit();	
+      $("#	command").submit();	
       clearInterval(timeinterval);
     }
   },1000);
