@@ -32,7 +32,7 @@
 						<c:forEach items="${questao.alternativa}" var="alternativa">
 						<div class="radio">				
 							<label for="${alternativa.id}">
-								<input type="radio" value="${alternativa.id}"  id="${alternativa.id}" required="required" name="alternativasMarcadas[${i.index}]">
+								<input type="radio" value="${alternativa.id}" required="required"  id="${alternativa.id}"  name="alternativasMarcadas">
 								<md:render>${alternativa.descricao}</md:render>
 							</label>
 						</div>	
@@ -45,6 +45,7 @@
 		</form:form>
 	</div>		
 <c:import url="footer.jsp"></c:import>
+<script src="<c:url value='/static/js/jquery-2.1.4.min.js' />"></script>
 <script src="<c:url value='/static/js/countdown.js' />"></script>
 </body>
 </html>
