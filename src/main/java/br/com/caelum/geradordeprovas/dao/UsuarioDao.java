@@ -1,6 +1,5 @@
 package br.com.caelum.geradordeprovas.dao;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
