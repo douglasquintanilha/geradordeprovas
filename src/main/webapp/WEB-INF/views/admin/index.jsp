@@ -19,6 +19,7 @@
 		<a href="<c:url value='seleciona-tag'/>"><h3>Procurar Questão por tag</h3></a>
 		<a href="<c:url value='usuario/novo/form'/>"><h3>Criar Usuário</h3></a>
 		<a href="<c:url value='prova/libera'/>"><h3>Liberar Prova</h3></a>
+		<a href="<c:url value='estatisticas'/>"><h3>Estatísticas</h3></a>
 	</div>
 	<c:import url="../footer.jsp"></c:import>
 	

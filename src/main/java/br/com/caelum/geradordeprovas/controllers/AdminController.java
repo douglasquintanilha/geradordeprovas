@@ -27,6 +27,10 @@ public class AdminController {
 		this.criptografia = criptografia;
 	}
 
+	@RequestMapping("/estatisticas")
+	public String estatisticas() {
+		return "admin/estatisticas";
+	}
 	
 	@RequestMapping("/usuario/novo/form")
 	public String criaUsuarioForm() {

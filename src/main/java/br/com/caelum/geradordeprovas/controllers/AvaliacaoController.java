@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.caelum.geradordeprovas.dao.AvaliacaoDao;
+import br.com.caelum.geradordeprovas.dao.EstatisticaQuestaoDao;
 import br.com.caelum.geradordeprovas.dao.ProvaDao;
 import br.com.caelum.geradordeprovas.models.Avaliacao;
+import br.com.caelum.geradordeprovas.models.EstatisticaQuestao;
 import br.com.caelum.geradordeprovas.models.Usuario;
 
 @Controller
@@ -28,11 +30,13 @@ public class AvaliacaoController {
 	private Usuario usuarioLogado;
 	private AvaliacaoDao avaliacaoDao;
 	private ProvaDao provaDao;
+	private EstatisticaQuestaoDao estatisticaQuestaoDao;
 	
 	@Autowired
-	public AvaliacaoController(@Qualifier("usuarioLogado") Usuario usuarioLogado,ProvaDao provaDao,AvaliacaoDao avaliacaoDao) {
+	public AvaliacaoController(@Qualifier("usuarioLogado") Usuario usuarioLogado,ProvaDao provaDao,AvaliacaoDao avaliacaoDao, EstatisticaQuestaoDao estatisticaQuestaoDao) {
 		this.usuarioLogado = usuarioLogado;
 		this.avaliacaoDao = avaliacaoDao;
+		this.estatisticaQuestaoDao = estatisticaQuestaoDao;
 	}
 	
 	
@@ -42,6 +46,13 @@ public class AvaliacaoController {
 		if(session.getAttribute("avaliacao") != null){
 			return new ModelAndView("redirect:refaz");
 		}else{
+			//testando. Começando jpa-avançado day
+			EstatisticaQuestao eq = new EstatisticaQuestao();
+			eq.setAcertos(0);
+			eq.setErros(0);
+			eq.setQuestao(avaliacao.getProva().getQuestoes().get(0));
+			estatisticaQuestaoDao.save(eq);
+			//termino do teste
 			avaliacao.setHorarioInicio((Calendar)session.getAttribute("horarioInicio"));
 			avaliacao.setHorarioFim(Calendar.getInstance());	
 			avaliacao.setUsuario(usuarioLogado);
