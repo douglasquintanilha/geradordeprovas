@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class JpaConfigurator {
 	
 	@Autowired
-	Constantes constantes;
+	private Constantes constantes;
 	
 	@Bean
 	@Profile("dev")
