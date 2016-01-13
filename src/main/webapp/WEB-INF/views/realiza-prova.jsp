@@ -32,7 +32,7 @@
 						<c:forEach items="${questao.alternativa}" var="alternativa">
 						<div class="radio">				
 							<label for="${alternativa.id}">
-								<input type="radio" value="${alternativa.id}" required="required"  id="${alternativa.id}"  name="alternativasMarcadas">
+								<input type="radio" value="${alternativa.id}" required="required"  id="${alternativa.id}"  name="alternativasMarcadas[${i.index}]">
 								<md:render>${alternativa.descricao}</md:render>
 							</label>
 						</div>	

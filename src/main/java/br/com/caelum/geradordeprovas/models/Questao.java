@@ -1,6 +1,5 @@
 package br.com.caelum.geradordeprovas.models;
 
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import javax.validation.Valid;
 
@@ -26,23 +26,35 @@ public class Questao {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
-	@Column(length=2048)
+
+	@Column(length = 2048)
 	@NotBlank()
 	private String titulo;
-	
-	@ManyToMany(cascade = {CascadeType.PERSIST})
-	@JoinColumn(unique=true)
+
+	@ManyToMany(cascade = { CascadeType.PERSIST })
+	@JoinColumn(unique = true)
 	private Set<Tag> tags = new HashSet<Tag>();
-	
+
+	@OneToOne(cascade = { CascadeType.PERSIST })
+	private EstatisticaQuestao estatistica = new EstatisticaQuestao();
+
 	@Size(5)
 	@Valid
-	@OneToMany(cascade={CascadeType.PERSIST})
+	@OneToMany(cascade = { CascadeType.PERSIST })
 	private List<Alternativa> alternativa;
 
 	@NotBlank
 	@Transient
 	private String alternativaCorreta;
+
+	public void atualizaEstatistica(boolean acertou) {
+		
+		if (acertou)
+			estatistica.incrementaAcertos();
+		else
+			estatistica.incrementaErros();
+
+	}
 
 	public String getAlternativaCorreta() {
 		return alternativaCorreta;
@@ -79,9 +91,17 @@ public class Questao {
 	public Long getId() {
 		return id;
 	}
-	
+
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public EstatisticaQuestao getEstatistica() {
+		return estatistica;
+	}
+
+	public void setEstatistica(EstatisticaQuestao estatistica) {
+		this.estatistica = estatistica;
 	}
 
 }

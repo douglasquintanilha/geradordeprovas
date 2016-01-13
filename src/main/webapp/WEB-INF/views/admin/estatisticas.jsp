@@ -10,12 +10,36 @@
 <link rel="stylesheet" href="../static/css/main.css">
 </head>
 <body>
-	<c:import url="header.jsp"></c:import>
+	<c:import url="../header.jsp"></c:import>
 	
+	<c:forEach items="${questoes}" var="questao">
+		
+		<div class="container">
+			<div class="panel panel-default">
+				
+				<div class="panel-heading">
+					${questao.titulo}
+				</div>
+				
+				<table class="table">
+				
+					<tr>
+						<th>Acertos</th>
+						<th>Erros</th>
+					</tr>
+					
+					<tr>
+						<td>${questao.estatistica.acertos}</td>
+						<td>${questao.estatistica.erros}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		
+		
+		
+	</c:forEach>
 	
-	
-	
-	
-	<c:import url="footer.jsp"></c:import>
+	<c:import url="../footer.jsp"></c:import>
 </body>
 </html>

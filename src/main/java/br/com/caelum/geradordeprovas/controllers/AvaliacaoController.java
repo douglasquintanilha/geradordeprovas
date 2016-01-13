@@ -46,13 +46,6 @@ public class AvaliacaoController {
 		if(session.getAttribute("avaliacao") != null){
 			return new ModelAndView("redirect:refaz");
 		}else{
-			//testando. Começando jpa-avançado day
-			EstatisticaQuestao eq = new EstatisticaQuestao();
-			eq.setAcertos(0);
-			eq.setErros(0);
-			eq.setQuestao(avaliacao.getProva().getQuestoes().get(0));
-			estatisticaQuestaoDao.save(eq);
-			//termino do teste
 			avaliacao.setHorarioInicio((Calendar)session.getAttribute("horarioInicio"));
 			avaliacao.setHorarioFim(Calendar.getInstance());	
 			avaliacao.setUsuario(usuarioLogado);

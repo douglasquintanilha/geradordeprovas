@@ -11,21 +11,10 @@ public class EstatisticaQuestao {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
-	@OneToOne()
-	private Questao questao;
-	
+
 	private long acertos;
-	
+
 	private long erros;
-
-	public Questao getQuestao() {
-		return questao;
-	}
-
-	public void setQuestao(Questao questao) {
-		this.questao = questao;
-	}
 
 	public long getAcertos() {
 		return acertos;
@@ -42,5 +31,20 @@ public class EstatisticaQuestao {
 	public void setErros(long erros) {
 		this.erros = erros;
 	}
-	
+
+	public void incrementaAcertos() {
+		acertos++;
+	}
+
+	public void incrementaErros() {
+		erros++;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 }

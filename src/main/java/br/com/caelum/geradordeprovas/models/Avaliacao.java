@@ -14,28 +14,28 @@ import javax.persistence.Transient;
 
 @Entity
 public class Avaliacao {
-	
+
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	@Transient
 	private List<Long> alternativasIds;
 
 	private int nota;
-	
+
 	@OneToOne()
 	private Usuario usuario;
-	
+
 	@OneToOne()
 	private Prova prova;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar horarioInicio;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar horarioFim;
-	
+
 	@ElementCollection
 	private List<AlternativaMarcada> alternativasMarcadas;
 
@@ -47,7 +47,6 @@ public class Avaliacao {
 			List<AlternativaMarcada> alternativasMarcadas) {
 		this.alternativasMarcadas = alternativasMarcadas;
 	}
-
 
 	public Calendar getHorarioInicio() {
 		return horarioInicio;
@@ -96,7 +95,7 @@ public class Avaliacao {
 	public void setProva(Prova prova) {
 		this.prova = prova;
 	}
-	
+
 	public List<Long> getAlternativasIds() {
 		return alternativasIds;
 	}
@@ -104,29 +103,37 @@ public class Avaliacao {
 	public void setAlternativasIds(List<Long> alternativasIds) {
 		this.alternativasIds = alternativasIds;
 	}
-	
+
 	public void corrige() {
 		this.nota = 0;
-		if(alternativasMarcadas == null){
+		if (alternativasMarcadas == null) {
 			return;
 		}
-		for (AlternativaMarcada alternativaMarcada : alternativasMarcadas) {
-			if(alternativaMarcada.isAlternativaCorreta()){
-				this.nota++;
-			}
-		}
 		
+		int i = 0;
+		
+		for (AlternativaMarcada alternativaMarcada : alternativasMarcadas) {
+
+			if (alternativaMarcada.isAlternativaCorreta()) {
+				this.nota++;
+				prova.getQuestoes().get(i).atualizaEstatistica(true);
+			} else {
+				prova.getQuestoes().get(i).atualizaEstatistica(false);
+			}
+			i++;
+		}
+
 	}
-	
-	public boolean validaDuracao(){
-		long duracao = this.horarioFim.getTimeInMillis() - this.horarioInicio.getTimeInMillis();
+
+	public boolean validaDuracao() {
+		long duracao = this.horarioFim.getTimeInMillis()
+				- this.horarioInicio.getTimeInMillis();
 		long duracaoComTolerancia = this.getProva().getDuracao() + 1;
 		long duracaoComToleranciaEmMilis = duracaoComTolerancia * 60 * 1000;
-		if( duracaoComToleranciaEmMilis >= duracao)
+		if (duracaoComToleranciaEmMilis >= duracao)
 			return true;
 		else
 			return false;
 	}
-	
-	
+
 }
