@@ -24,7 +24,7 @@
 		<div id="clock-div"></div>
 		
 		<c:url var="urlPost" value='correcao' />
-		<form:form method="POST" action="${urlPost}" command="avaliacao" >
+		<form:form method="POST" action="${urlPost}" id="command" command="avaliacao" >
 			<input type="hidden" name="prova" value="${prova.id}">
 			<input type="hidden" id="duracao" value="${prova.duracao}">
 			<ol>
