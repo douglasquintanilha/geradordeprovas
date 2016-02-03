@@ -9,6 +9,8 @@
 	<title>Boa Sorte</title>
 	<link rel="stylesheet" href="../static/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../static/css/main.css">
+	<link rel="stylesheet" href="<c:url value='/static/css/github.css' /> ">
+	
 	<link rel="stylesheet" href="../static/css/clock.css">
 </head>
 <body>
@@ -46,6 +48,8 @@
 	</div>		
 <c:import url="footer.jsp"></c:import>
 <script src="<c:url value='/static/js/jquery-2.1.4.min.js' />"></script>
+<script src="<c:url value='/static/js/highlight.min.js' />"></script>
+<script src="<c:url value='/static/js/highlight-init.js' />"></script>
 <script src="<c:url value='/static/js/countdown.js' />"></script>
 </body>
 </html>
