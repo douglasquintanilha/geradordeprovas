@@ -20,8 +20,8 @@
 </head>
 <body>
 	<c:import url="../header.jsp"></c:import>
+	<span id="json-url" data-baseurl="<c:url value='/json' />"></span>
 	<div class="container">
-
 		<c:url var="urlPost" value='salva' />
 		<form:form action="${urlPost}" method="POST" commandName="questao">
 
