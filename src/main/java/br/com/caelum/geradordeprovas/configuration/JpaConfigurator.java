@@ -39,9 +39,9 @@ public class JpaConfigurator {
 	@Profile("producao")
 	public DataSource dataSourceProducao() {
 		DriverManagerDataSource dm = new DriverManagerDataSource();
-		dm.setUrl("jdbc:mysql://" + System.getenv().get("OPENSHIFT_MYSQL_DB_HOST")+":" + System.getenv().get("OPENSHIFT_MYSQL_DB_PORT") + "caelum_provas");
+		dm.setUrl("jdbc:mysql://" + System.getenv().get("OPENSHIFT_MYSQL_DB_HOST")+":" + System.getenv().get("OPENSHIFT_MYSQL_DB_PORT") + "/" + "caelum_provas");
 		dm.setUsername(constantes.getProperty("BdUsernameProducao"));
-		dm.setPassword(constantes.getProperty("BdUrlPasswordProducao"));
+		dm.setPassword(constantes.getProperty("BdPasswordProducao"));
 		dm.setDriverClassName(constantes.getProperty("BdDriverProducao"));
 
 		return dm;

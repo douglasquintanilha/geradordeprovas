@@ -1,4 +1,5 @@
-$.getJSON('/GeradorDeProvas/json',inicializaTags);
+var url = $("#json-url").data("baseurl");
+$.getJSON(url,inicializaTags);
 
 function inicializaTags(data){
 	$("#myTags").tagit({
@@ -7,3 +8,4 @@ function inicializaTags(data){
     	singleField: true
     });
 }
+ 
