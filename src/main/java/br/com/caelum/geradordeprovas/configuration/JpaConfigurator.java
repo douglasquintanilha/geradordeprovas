@@ -1,10 +1,14 @@
 package br.com.caelum.geradordeprovas.configuration;
 
+import java.io.IOException;
 import java.util.Properties;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
+import org.scribe.builder.ServiceBuilder;
+import org.scribe.oauth.OAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +19,8 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import br.com.caelum.geradordeprovas.oauth.GithubApi;
 
 @Configuration
 @EnableTransactionManagement
@@ -34,6 +40,29 @@ public class JpaConfigurator {
 
 		return dm;
 	}
+	@Bean
+	@Profile("producao")	
+	public OAuthService prepareOAuthServiceProducao() throws IOException {
+		return new ServiceBuilder()
+				.provider(GithubApi.class)
+				.apiKey(constantes.getProperty("apiKeyProducao"))
+				.apiSecret(constantes.getProperty("apiSecretProducao"))
+				.callback(constantes.getProperty("apiUrlCallbackProducao"))
+				.build();
+	}
+	
+	@Bean
+	@Profile("dev")
+	public OAuthService prepareOAuthServiceDev() throws IOException {
+		return new ServiceBuilder()
+				.provider(GithubApi.class)
+				.apiKey(constantes.getProperty("apiKeyDev"))
+				.apiSecret(constantes.getProperty("apiSecretDev"))
+				.callback(constantes.getProperty("apiUrlCallbackDev"))
+				.build();
+	}
+	
+	
 	
 	@Bean
 	@Profile("producao")
