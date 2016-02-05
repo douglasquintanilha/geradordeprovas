@@ -16,9 +16,11 @@ body {
 	
 }
 
-#link-logout{
+#logout{
 	float: right;
-	padding: 2em 40px 0em;;
+	position: relative;
+	right: 80px;
+	top: 30px;
 }
 
 header{
