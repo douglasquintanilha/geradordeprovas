@@ -25,10 +25,8 @@
 		<form:form method="POST" action="${urlPost}" command="avaliacao" >
 			<input type="hidden" name="prova" value="${prova.id}">
 			<input type="hidden" id="duracao" value="${prova.duracao}">
-			<ol>
 				<c:forEach items="${prova.questoes}" var="questao" varStatus="i">
-					<li>
-						<h3><md:render>${questao.titulo}</md:render></h3>
+						<h3><md:render><b>${i.index+1}</b> - ${questao.titulo}</md:render></h3>
 						<c:forEach items="${questao.alternativa}" var="alternativa">
 						<div class="radio">				
 							<label for="${alternativa.id}">
@@ -37,9 +35,7 @@
 							</label>
 						</div>	
 						</c:forEach>
-					</li>
 				</c:forEach>
-			</ol>
 			<label><input type="checkbox" required="required">  Estou ciente das opções marcadas e desejo enviar</label><br>
 			<button type="submit" class="btn btn-default">Ok</button>
 		</form:form>
