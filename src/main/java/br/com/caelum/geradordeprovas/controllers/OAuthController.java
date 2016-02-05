@@ -2,12 +2,10 @@ package br.com.caelum.geradordeprovas.controllers;
 
 import java.io.IOException;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ObjectNode;
-import org.scribe.builder.ServiceBuilder;
 import org.scribe.model.OAuthRequest;
 import org.scribe.model.Response;
 import org.scribe.model.Token;
@@ -15,7 +13,6 @@ import org.scribe.model.Verb;
 import org.scribe.model.Verifier;
 import org.scribe.oauth.OAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,39 +22,20 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import br.com.caelum.geradordeprovas.configuration.Constantes;
 import br.com.caelum.geradordeprovas.models.Usuario;
-import br.com.caelum.geradordeprovas.oauth.GithubApi;
+
+
 
 @Controller
 @RequestMapping("/oauth")
 public class OAuthController {
 
+	@Autowired
 	private OAuthService service;
 	private Token EMPTY_TOKEN = null;
 	
 	@Autowired
 	private Constantes constantes;
 	
-	@Profile("producao")
-	@PostConstruct
-	public void prepareOAuthServiceProducao() throws IOException {
-		this.service = new ServiceBuilder()
-				.provider(GithubApi.class)
-				.apiKey(constantes.getProperty("apiKeyProducao"))
-				.apiSecret(constantes.getProperty("apiSecretProducao"))
-				.callback(constantes.getProperty("apiUrlCallbackProducao"))
-				.build();
-	}
-	
-	@Profile("dev")
-	@PostConstruct
-	public void prepareOAuthServiceDev() throws IOException {
-		this.service = new ServiceBuilder()
-				.provider(GithubApi.class)
-				.apiKey(constantes.getProperty("apiKeyDev"))
-				.apiSecret(constantes.getProperty("apiSecretDev"))
-				.callback(constantes.getProperty("apiUrlCallbackDev"))
-				.build();
-	}
 
 	@RequestMapping("/github-login")
 	public String redirectToGithub() {
@@ -85,9 +63,9 @@ public class OAuthController {
 		
 
 		if(responseOrg.getCode() == 204){
-			return new ModelAndView(new RedirectView("/GeradorDeProvas/oauth/github-logado"));
+			return new ModelAndView("redirect:/oauth/github-logado");
 		}
-		return new ModelAndView(new RedirectView("/GeradorDeProvas/oauth/github-error"));
+		return new ModelAndView(new RedirectView("github-error"));
 	} 
 
 	@RequestMapping("/github-logado")
@@ -95,7 +73,7 @@ public class OAuthController {
 			Usuario usuario = new Usuario();
 			usuario.setAdmin(true);
 			sessao.setAttribute("usuario", usuario);
-			ModelAndView mv = new ModelAndView(new RedirectView("/GeradorDeProvas/admin/index"));
+			ModelAndView mv = new ModelAndView("redirect:../admin/index");
 			return mv;
 	}
 	
