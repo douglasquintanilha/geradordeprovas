@@ -82,5 +82,4 @@ public class OAuthController {
 			ModelAndView mv = new ModelAndView("login-error");
 			return mv;
 	}
-
 }

@@ -16,13 +16,20 @@
 	<c:import url="header.jsp"></c:import>
 	<div class="container">
 			<h3>Selecione uma prova:</h3>
+			<div class="row">
 			<c:forEach items="${provas}" var="prova">
-					<label for="${prova.id}">
-						<h4><a href="<c:url value='/avaliacao/${prova.id}'/>">${prova.nome}</a></h4>
-					</label>
-					<br>
-					<br>
+			    <div class="col-xs-3">
+			        <a href="<c:url value='/avaliacao/${prova.id}'/>" class="thumbnail">
+			             <img src="http://eliteuniversal.org/wp-content/uploads/2015/11/vestibular_carreiras.jpg" class="img-responsive">
+			             <div class="caption">
+			             	<label for="${prova.id}">
+								${prova.nome}
+							</label>
+			             </div>
+			        </a>
+			    </div>
 			</c:forEach>
+			</div>
 	</div>
 	<c:import url="footer.jsp"></c:import>
 </body>
