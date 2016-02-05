@@ -10,6 +10,7 @@ public class GithubApi extends DefaultApi20 {
 		return "https://github.com/login/oauth/access_token";
 	}
 
+	
 	@Override
 	public String getAuthorizationUrl(OAuthConfig config) {
 		// o param scope define o que queremos acessar

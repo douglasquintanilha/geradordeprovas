@@ -90,15 +90,15 @@ public class OAuthController {
 		return new ModelAndView(new RedirectView("/GeradorDeProvas/oauth/github-error"));
 	} 
 
-	@Profile("producao")
-	@RequestMapping("/github-logado")
-	public ModelAndView logadoProducao(HttpSession sessao) {
-			Usuario usuario = new Usuario();
-			usuario.setAdmin(true);
-			sessao.setAttribute("usuario", usuario);
-			ModelAndView mv = new ModelAndView(new RedirectView("http://caelumprovas-dquintanilha.rhcloud.com/admin/index"));
-			return mv;
-	}
+//	@Profile("producao")
+//	@RequestMapping("/github-logado")
+//	public ModelAndView logadoProducao(HttpSession sessao) {
+//			Usuario usuario = new Usuario();
+//			usuario.setAdmin(true);
+//			sessao.setAttribute("usuario", usuario);
+//			ModelAndView mv = new ModelAndView(new RedirectView("http://caelumprovas-dquintanilha.rhcloud.com/admin/index"));
+//			return mv;
+//	}
 
 	@Profile("dev")
 	@RequestMapping("/github-logado")
