@@ -33,6 +33,7 @@ public class OAuthController {
 
 	private OAuthService service;
 	private Token EMPTY_TOKEN = null;
+	private String redirectUrl;
 	
 	@Autowired
 	private Constantes constantes;
@@ -46,6 +47,7 @@ public class OAuthController {
 				.apiSecret(constantes.getProperty("apiSecretProducao"))
 				.callback(constantes.getProperty("apiUrlCallbackProducao"))
 				.build();
+		this.redirectUrl = "/GeradorDeProvas/oauth/github-logado-producao";
 	}
 	
 	@Profile("dev")
@@ -57,6 +59,7 @@ public class OAuthController {
 				.apiSecret(constantes.getProperty("apiSecretDev"))
 				.callback(constantes.getProperty("apiUrlCallbackDev"))
 				.build();
+		this.redirectUrl = "/GeradorDeProvas/oauth/github-logado-dev";
 	}
 
 	@RequestMapping("/github-login")
@@ -85,23 +88,21 @@ public class OAuthController {
 		
 
 		if(responseOrg.getCode() == 204){
-			return new ModelAndView(new RedirectView("/GeradorDeProvas/oauth/github-logado"));
+			return new ModelAndView(new RedirectView(this.redirectUrl));
 		}
 		return new ModelAndView(new RedirectView("/GeradorDeProvas/oauth/github-error"));
 	} 
 
-//	@Profile("producao")
-//	@RequestMapping("/github-logado")
-//	public ModelAndView logadoProducao(HttpSession sessao) {
-//			Usuario usuario = new Usuario();
-//			usuario.setAdmin(true);
-//			sessao.setAttribute("usuario", usuario);
-//			ModelAndView mv = new ModelAndView(new RedirectView("http://caelumprovas-dquintanilha.rhcloud.com/admin/index"));
-//			return mv;
-//	}
+	@RequestMapping("/github-logado-producao")
+	public ModelAndView logadoProducao(HttpSession sessao) {
+			Usuario usuario = new Usuario();
+			usuario.setAdmin(true);
+			sessao.setAttribute("usuario", usuario);
+			ModelAndView mv = new ModelAndView(new RedirectView("http://caelumprovas-dquintanilha.rhcloud.com/admin/index"));
+			return mv;
+	}
 
-	@Profile("dev")
-	@RequestMapping("/github-logado")
+	@RequestMapping("/github-logado-dev")
 	public ModelAndView logadoDev(HttpSession sessao) {
 			Usuario usuario = new Usuario();
 			usuario.setAdmin(true);
