@@ -28,12 +28,12 @@
 			<input type="hidden" name="prova" value="${prova.id}">
 			<input type="hidden" id="duracao" value="${prova.duracao}">
 				<c:forEach items="${prova.questoes}" var="questao" varStatus="i">
-						<h3><md:render><b>${i.index+1}</b> - ${questao.titulo}</md:render></h3>
+						<h3><md:render  options="FencedCodeBlocks"><b>${i.index+1}</b> - ${questao.titulo}</md:render></h3>
 						<c:forEach items="${questao.alternativa}" var="alternativa">
 						<div class="radio">				
 							<label for="${alternativa.id}">
 								<input type="radio" value="${alternativa.id}" required="required"  id="${alternativa.id}"  name="alternativasMarcadas[${i.index}]">
-								<md:render>${alternativa.descricao}</md:render>
+								<md:render options="FencedCodeBlocks">${alternativa.descricao}</md:render>
 							</label>
 						</div>	
 						</c:forEach>
