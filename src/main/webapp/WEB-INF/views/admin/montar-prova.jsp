@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="<c:url value='/static/css/bootstrap.min.css' />">
 <link rel="stylesheet" href="<c:url value='/static/css/jquery-ui.min.css' />">
 <link rel="stylesheet" href="<c:url value='/static/css/main.css' />">
+<link rel="stylesheet" href="<c:url value='/static/css/github.css' /> ">
 
 </head>
 <body>
@@ -44,12 +45,12 @@
 						<label><input type="checkbox" name="questoes" value="${questao.id}"> Questão ${questao.id}</label>
 					</div>
 					<div class="panel-body">
-						<p><md:render>${questao.titulo}</md:render></p>
+						<p><md:render  options="FencedCodeBlocks">${questao.titulo}</md:render></p>
 						<span>Tags: </span> <span class="tags"><c:forEach items="${questao.tags}" var="tag">${tag},</c:forEach></span> <br>
 						<button class="btn btn-primary botao-exibir-alternativas" type="button" data-toggle="collapse" data-target="#alternativas${questao.id}" aria-expanded="false" aria-controls="alternativas${questao.id}">Exibir alternativas</button>	
 						<ol class="collapse" id="alternativas${questao.id}" type="A">
 							<c:forEach items="${questao.alternativa}" var="alternativa">
-								<li><md:render>${alternativa.descricao}</md:render></li>
+								<li><md:render  options="FencedCodeBlocks">${alternativa.descricao}</md:render></li>
 							</c:forEach>
 						</ol>
 					</div>
@@ -66,5 +67,7 @@
 	<script src="<c:url value='/static/js/troca-texto.js' />"></script>
 	<script src="<c:url value='/static/js/filtra-por-tag.js' />"></script>
 	<script src="<c:url value='/static/js/contador-de-questoes.js' />"></script>
+	<script src="<c:url value='/static/js/highlight.min.js' />"></script>
+	<script src="<c:url value='/static/js/highlight-init.js' />"></script>
 </body>
 </html>
