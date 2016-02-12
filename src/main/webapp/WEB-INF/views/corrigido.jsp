@@ -8,9 +8,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Resultado da Prova</title>
-<link rel="stylesheet" href="../static/css/bootstrap.min.css">
-<link rel="stylesheet" href="../static/css/main.css">
+<link rel="stylesheet" href="<c:url value='/static/css/bootstrap.min.css' /> ">
+<link rel="stylesheet" href="<c:url value='/static/css/main.css' /> ">
 <link rel="stylesheet" href="<c:url value='/static/css/github.css' /> ">
+<link rel="stylesheet" href="<c:url value='/static/css/code.css' /> ">
 </head>
 <body>
 	<c:import url="header.jsp"></c:import>
