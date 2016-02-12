@@ -27,7 +27,7 @@
 			</div>
 			<div class="">
 				<label for="duracao">Coloque a duração da prova em minutos:</label>
-				<input class="form-control" value="${prova.duracao}" id="duracao" min="0" type="number" step="1" name="duracao">
+				<input class="form-control" value="${prova.duracao}" id="duracao" min="0" type="number" step="1" name="duracao" required>
 			</div>
 			<div class="text-questoes-marcadas">
 				<h3>Escolha as questões:</h3>

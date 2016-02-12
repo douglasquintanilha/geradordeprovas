@@ -54,14 +54,6 @@ footer{
 	display:none;
 }
 
-.green{
-	color: green;
-}
-
-.red{
-	color:red;
-}
-
 .login-github{
 	background-color: white;
 	height: 200px;
@@ -96,4 +88,16 @@ footer{
 	height: 40px;
 }
 
+.icone{
+	vertical-align: top;
+	display: inline-block;
+	
+}
 
+.icone.glyphicon-ok{
+	color: green;
+}
+
+.icone.glyphicon-remove{
+	color: red;
+}
