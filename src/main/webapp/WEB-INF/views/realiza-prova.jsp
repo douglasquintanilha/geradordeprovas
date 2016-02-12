@@ -7,9 +7,10 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Boa Sorte</title>
-	<link rel="stylesheet" href="../static/css/bootstrap.min.css">
-	<link rel="stylesheet" href="../static/css/main.css">
-	<link rel="stylesheet" href="<c:url value='/static/css/github.css' /> ">
+	<link rel="stylesheet" href="<c:url value='/static/css/bootstrap.min.css' />" >
+	<link rel="stylesheet" href="<c:url value='/static/css/main.css' />" > 
+	<link rel="stylesheet" href="<c:url value='/static/css/github.css' />" >
+	<link rel="stylesheet" href="<c:url value='/static/css/code.css' />" >
 	
 	<link rel="stylesheet" href="../static/css/clock.css">
 </head>
