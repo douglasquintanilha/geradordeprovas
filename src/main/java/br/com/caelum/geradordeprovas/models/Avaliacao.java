@@ -1,5 +1,6 @@
 package br.com.caelum.geradordeprovas.models;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class Avaliacao {
 	public List<AlternativaMarcada> getAlternativasMarcadas() {
 		return alternativasMarcadas;
 	}
-
+	
 	public void setAlternativasMarcadas(
 			List<AlternativaMarcada> alternativasMarcadas) {
 		this.alternativasMarcadas = alternativasMarcadas;
@@ -136,4 +137,13 @@ public class Avaliacao {
 			return false;
 	}
 
+	public long getDuracao(){
+		long duracao = this.horarioFim.getTimeInMillis() - this.horarioInicio.getTimeInMillis();
+		return (duracao/60)/1000;
+	}
+	
+	public String getDataRealizada(){
+		SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
+		return sdf.format(this.horarioInicio.getTime());
+	}
 }
