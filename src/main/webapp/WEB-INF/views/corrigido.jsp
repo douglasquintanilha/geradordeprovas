@@ -23,7 +23,13 @@
 					<h3><md:render options="FencedCodeBlocks">${i.index+1} - ${questao.titulo}<br></md:render></h3>
 					<c:forEach items="${questao.alternativa}" var="alternativa">
 						<div class="radio">
-							<label for="${alternativa.id}"<c:choose><c:when test="${alternativa.alternativaCorreta == true}">class="green"</c:when><c:otherwise>class="red"</c:otherwise></c:choose>>
+						<c:if test="${alternativa.alternativaCorreta}">
+									<span class="icone glyphicon glyphicon-ok" aria-hidden="true"></span>
+								</c:if>
+						<c:if test="${alternativa.alternativaCorreta == false}">
+									<span class="icone glyphicon glyphicon-remove" aria-hidden="true"></span>
+								</c:if>
+							<label for="${alternativa.id}">
 								<input type="radio" disabled <c:if test="${alternativa.id == avaliacao.alternativasMarcadas[i.index].id }">checked="checked"</c:if>
 								 value="${alternativa.id}"  id="${alternativa.id}" name="alternativas[${i.index}]">
 								<md:render options="FencedCodeBlocks">${alternativa.descricao}</md:render>
