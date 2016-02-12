@@ -19,7 +19,7 @@
 		<h3>${avaliacao.nota}/${avaliacao.prova.quantidadeDeQuestoes}</h3>
 		<h4>Gabarito:</h4>
 			<c:forEach items="${avaliacao.prova.questoes}" var="questao" varStatus = "i">
-					<h3><md:render options="FencedCodeBlocks">${questao.titulo}<br></md:render></h3>
+					<h3><md:render options="FencedCodeBlocks">${i.index+1} - ${questao.titulo}<br></md:render></h3>
 					<c:forEach items="${questao.alternativa}" var="alternativa">
 						<div class="radio">
 							<label for="${alternativa.id}"<c:choose><c:when test="${alternativa.alternativaCorreta == true}">class="green"</c:when>

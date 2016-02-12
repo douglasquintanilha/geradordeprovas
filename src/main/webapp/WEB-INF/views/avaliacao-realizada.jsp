@@ -14,25 +14,27 @@
 <body>
 	<c:import url="header.jsp"></c:import>
 	<div class="container">
-	<h1>Sua nota foi:</h1>
+		<h1>Sua nota foi:</h1>
 		<h3>${avaliacao.nota}/${avaliacao.prova.quantidadeDeQuestoes}</h3>
 		<h4>Gabarito:</h4>
 			<c:forEach items="${avaliacao.prova.questoes}" var="questao" varStatus = "i">
-					<h3><md:render>${questao.titulo}<br></md:render></h3>
+					<h3><md:render options="FencedCodeBlocks">${i.index+1} - ${questao.titulo}<br></md:render></h3>
 					<c:forEach items="${questao.alternativa}" var="alternativa">
 						<div class="radio">
 							<label for="${alternativa.id}"<c:choose><c:when test="${alternativa.alternativaCorreta == true}">class="green"</c:when>
 							 <c:otherwise>class="red"</c:otherwise></c:choose>>
 								<input type="radio" disabled <c:if test="${alternativa.id == avaliacao.alternativasMarcadas[i.index].id }">checked="checked"</c:if>
 								 value="${alternativa.id}"  id="${alternativa.id}" name="alternativas[${i.index}]">
-								<md:render>${alternativa.descricao}</md:render>
+								<md:render options="FencedCodeBlocks">${alternativa.descricao}</md:render>
 							</label>
 						</div>	
 					</c:forEach>
 			</c:forEach>
-		<a href="<c:url value='/'/>">Voltar para o início</a>	
-	
+		<a href="<c:url value='/'/>">Voltar para o início</a>
 	</div>
 	<c:import url="footer.jsp"></c:import>
+	<script src="<c:url value='/static/js/jquery-2.1.4.min.js' />"></script>
+	<script src="<c:url value='/static/js/highlight.min.js' />"></script>
+	<script src="<c:url value='/static/js/highlight-init.js' />"></script>
 </body>
 </html>
