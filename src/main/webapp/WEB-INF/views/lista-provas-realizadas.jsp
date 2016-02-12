@@ -15,13 +15,8 @@
 
 	<c:import url="header.jsp"></c:import>
 	<div class="container">
-			<h3>Tentativas anteriores:</h3>
-			<ul class="nav nav-pills nav-stacked">
-			<c:forEach items="${avaliacoes}" var="avaliacao" varStatus="i">
-						<li role="presentation" class="active"><a href="<c:url value='/avaliacao/realizada/${avaliacao.id}'/>">Tentativa nº${i.index} Nota: ${avaliacao.nota}</a></li>
-						<br>
-			</c:forEach>
-			</ul>
+		
+		<div class="container">
 			<h4>Deseja tentar novamente?</h4>
 			<c:set var="urlPost" value="realiza"/>
 			<form:form action="${urlPost}" method="POST" class="form-horizontal col-xs-2">
@@ -30,6 +25,25 @@
 				<input type="submit" class="btn btn-info" value="Sim">
 			</div>
 			</form:form>
+		</div>
+		
+		<div>
+			<c:forEach items="${avaliacoes}" var="avaliacao" varStatus="i">
+				<div class="col-xs-3">
+				        <a href="<c:url value='/avaliacao/realizada/${avaliacao.id}'/>" class="thumbnail">
+				             <div class="caption">
+				             	<label for="${avaliacao.id}">
+									Nota: ${avaliacao.nota} / ${avaliacao.prova.quantidadeDeQuestoes}<br> 
+									Data: ${avaliacao.dataRealizada}<br>
+									Tempo gasto: ${avaliacao.duracao}min
+								</label>
+				             	<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				             </div>
+				        </a>
+				</div>
+			</c:forEach>
+		</div>
+		
 	</div>
 	<c:import url="footer.jsp"></c:import>
 </body>
