@@ -4,26 +4,43 @@ function getTimeRemaining(endtime){
   var minutes = Math.floor( (t/1000/60) % 60 );
   var hours = Math.floor( (t/(1000*60*60)) % 24 );
   var days = Math.floor( t/(1000*60*60*24) );
-  return {
-    'total': t,
-    'days': days,
-    'hours': hours,
-    'minutes': minutes,
-    'seconds': seconds
-  };
+  
+  var remainingTime = {
+		    'total': t,
+		    'days': days,
+		    'hours': hours,
+		    'minutes': minutes,
+		    'seconds': seconds
+		  };
+  return beatifyDate(remainingTime);
+}
+
+function beatifyDate(date){
+
+	if(date.hours < 10 ){
+		date.hours = ("0" + date.hours)	;
+	}
+	if(date.minutes< 10 ){
+		date.minutes = ("0" + date.minutes)
+	}
+	if(date.seconds < 10 ){
+		date.seconds = ("0" + date.seconds)
+	}
+	return date;
 }
 
 function initializeClock(id, endtime){
   var clock = document.getElementById(id);
   var timeinterval = setInterval(function(){
     var t = getTimeRemaining(endtime);
-    clock.innerHTML =
-    t.hours +
-    ':' + t.minutes + 
-    ':' + t.seconds;
-    if(t.total<=0){
-      $("#command").submit();	
-      clearInterval(timeinterval);
+    if(t.total<=1){
+    	clearInterval(timeinterval);
+    	$("#command").submit();	
+    }else{
+	    clock.innerHTML =
+	    	t.hours +':' 
+	    	+ t.minutes + ':' 
+	    	+ t.seconds;
     }
   },1000);
 }
@@ -32,15 +49,10 @@ Date.prototype.addMinutes = function(minutes) {
   this.setMinutes(this.getMinutes() + minutes);
   return this;
 };
-function formatToClock(minutes){
-  
-}
 
 
 var deadline = new Date();
-console.log(deadline);
 var duracao = document.getElementById('duracao').value;
 
 deadline.setMinutes(deadline.getMinutes() + parseInt(duracao, 10));
-console.log(deadline);
 initializeClock('clock-div', deadline);
