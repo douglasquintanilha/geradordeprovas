@@ -27,7 +27,8 @@
 			</form:form>
 		</div>
 		
-		<div>
+		<div class="container">
+		<h4>Tentativas Anteriores:</h4>
 			<c:forEach items="${avaliacoes}" var="avaliacao" varStatus="i">
 				<div class="col-xs-3">
 				        <a href="<c:url value='/avaliacao/realizada/${avaliacao.id}'/>" class="thumbnail">

@@ -101,3 +101,7 @@ footer{
 .icone.glyphicon-remove{
 	color: red;
 }
+
+.glyphicon-chevron-right{
+	float: right;
+}
