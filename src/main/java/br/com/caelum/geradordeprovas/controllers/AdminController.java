@@ -16,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.caelum.geradordeprovas.dao.EstatisticaQuestaoDao;
 import br.com.caelum.geradordeprovas.dao.QuestaoDao;
 import br.com.caelum.geradordeprovas.dao.UsuarioDao;
-import br.com.caelum.geradordeprovas.models.EstatisticaQuestao;
 import br.com.caelum.geradordeprovas.models.Questao;
 import br.com.caelum.geradordeprovas.models.Usuario;
 import br.com.caelum.geradordeprovas.util.Criptografia;
