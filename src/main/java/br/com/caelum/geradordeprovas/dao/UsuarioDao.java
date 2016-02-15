@@ -69,7 +69,7 @@ public class UsuarioDao {
 	public List<Prova> getProvasDoUsuario(String login) {
 		return manager
 				.createQuery(
-						"select p from provas p JOIN p.Usuario u where u.login =:login",Prova.class)
+						"select p from Provas p JOIN p.Usuario u where u.login =:login",Prova.class)
 				.setParameter("login", login).getResultList();
 
 	}

@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import br.com.caelum.geradordeprovas.models.Prova;
+import br.com.caelum.geradordeprovas.models.Usuario;
 
 @Repository
 public class ProvaDao {
@@ -24,17 +25,25 @@ public class ProvaDao {
 		return manager.createQuery("from Prova p", Prova.class).getResultList();
 	}
 
-	public Prova getProva(Long id){
+	public Prova getProva(Long id) {
 		return manager.find(Prova.class, id);
 	}
-	
+
 	public List<Prova> getProvasPorIds(List<Long> ids) {
-	
+
 		List<Prova> provas = new ArrayList<>();
-		for(Long id : ids){
+		for (Long id : ids) {
 			provas.add(manager.find(Prova.class, id));
 		}
 		return provas;
-	
+
+	}
+
+	public List<Prova> getProvasLiberadasByUsuario(Usuario usuario) {
+		return manager
+				.createQuery(
+						"select p from Provas p JOIN Usuario u where u.id =:usuarioId",
+						Prova.class).setParameter("usuarioId", usuario.getId())
+				.getResultList();
 	}
 }
