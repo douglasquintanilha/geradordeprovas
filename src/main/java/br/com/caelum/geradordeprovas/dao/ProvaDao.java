@@ -42,7 +42,7 @@ public class ProvaDao {
 	public List<Prova> getProvasLiberadasByUsuario(Usuario usuario) {
 		return manager
 				.createQuery(
-						"select p from Provas p JOIN Usuario u where u.id =:usuarioId",
+						"select p from Usuario u JOIN u.provas p where u.id=:usuarioId",
 						Prova.class).setParameter("usuarioId", usuario.getId())
 				.getResultList();
 	}
