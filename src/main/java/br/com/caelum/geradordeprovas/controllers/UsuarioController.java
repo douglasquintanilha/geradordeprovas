@@ -75,7 +75,6 @@ public class UsuarioController {
 	@RequestMapping("/liberadas")
 	public ModelAndView provasLiberadas() {
 
-		List<Prova> provas = new ArrayList<>(usuarioLogado.getProvas());
 		return new ModelAndView("provas-liberadas").addObject("provas",
 				provaDao.getProvasLiberadasByUsuario(usuarioLogado));
 	}
