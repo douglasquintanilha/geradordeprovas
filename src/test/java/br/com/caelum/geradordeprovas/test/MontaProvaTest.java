@@ -18,7 +18,7 @@ import br.com.caelum.geradordeprovas.configuration.TestConfigurator;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { JpaConfigurator.class, TestConfigurator.class })
-@ActiveProfiles("test")
+@ActiveProfiles("dev")
 public class MontaProvaTest {
 
 	private FirefoxDriver driver;
