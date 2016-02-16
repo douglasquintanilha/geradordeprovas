@@ -39,7 +39,7 @@ public class AdicionaQuestaoPage {
 		alternativas.get(0).clear();
 		alternativas.get(0).sendKeys(alternativaCorreta);
 
-//envia o form na qual o Titulo está
+		//envia o form na qual o Titulo está
 		txtTitulo.submit();
 	}
 
