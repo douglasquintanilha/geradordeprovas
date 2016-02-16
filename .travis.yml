@@ -1,5 +1,6 @@
 --- 
-install: -
+install:
+script: /bin/true
 jdk: 
   - oraclejdk7
 language: java
