@@ -165,6 +165,7 @@
 					<configuration>
 						<source>1.7</source>
 						<target>1.7</target>
+						<skipTests>true</skipTests>
 					</configuration>
 				</plugin>
 			</plugins>
