@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.caelum.geradordeprovas.dao.ProvaDao;
 import br.com.caelum.geradordeprovas.dao.QuestaoDao;
 import br.com.caelum.geradordeprovas.dao.UsuarioDao;
+import br.com.caelum.geradordeprovas.models.LiberacaoForm;
 import br.com.caelum.geradordeprovas.models.Prova;
 import br.com.caelum.geradordeprovas.models.Questao;
 import br.com.caelum.geradordeprovas.models.Usuario;
@@ -81,19 +82,17 @@ public class ProvaController {
 
 	@Transactional
 	@RequestMapping("/salvaLiberacao")
-	public ModelAndView salvaLiberacao(
-			@RequestParam("provas") List<Long> provasId,
-			@RequestParam("usuarios") List<Long> usuarios) {
-
-		List<Prova> provas = provaDao.getProvasPorIds(provasId);
-
-		if (provasId.isEmpty() || usuarios.isEmpty()) {
+	public ModelAndView salvaLiberacao(@Valid LiberacaoForm form, BindingResult result) {
+		if(result.hasErrors()){
 			ModelAndView mv = new ModelAndView("redirect:libera");
-			mv.addObject("validacao", false);
 			return mv;
 		}
+		System.out.println("Entrou, não deu nada ");
+		System.out.println(form.getProvas());
+		System.out.println(form.getUsuarios());
+		List<Prova> provas = provaDao.getProvasPorIds(form.getProvas());
 
-		for (Long usuarioId : usuarios) {
+		for (Long usuarioId : form.getUsuarios()) {
 			usuarioDao.salvaProvasLiberadas(usuarioId, provas);
 		}
 		
