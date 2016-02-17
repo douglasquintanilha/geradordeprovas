@@ -17,13 +17,8 @@
 	<div class="container">
 
 		<c:url var="urlPost" value='salvaLiberacao' />
-		<c:if test="${validacao == false}">
-			Insira Pelo menos 1 prova e 1 usuario!
-		</c:if>
 		<form:form method="POST" action="${urlPost}" commandName="provas">
-			<h4>
-				Selecione a prova que será liberada:
-				</h3>
+			<h4>Selecione a prova que será liberada:</h4>			
 				<ul class='list-unstyled'>
 					<c:forEach items="${provas}" var="prova">
 						<div class="checkbox">
@@ -33,9 +28,8 @@
 					</c:forEach>
 					<li role="separator" class="divider"></li>
 				</ul>
-				<h4>
-					Selecione os usuários que podem ter acesso a esta prova:
-					</h3>
+				<h4>Selecione os usuários que podem ter acesso a esta prova:</h4>
+				
 					<ul class='list-unstyled'>
 						<c:forEach items="${usuarios}" var="usuario">
 							<li>
