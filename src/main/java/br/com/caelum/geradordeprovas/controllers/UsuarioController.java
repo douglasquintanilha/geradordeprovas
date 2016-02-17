@@ -66,9 +66,8 @@ public class UsuarioController {
 	}
 
 	@RequestMapping("avaliacao/realizada/{avaliacaoId}")
-	public ModelAndView provaRealizada(
-			@PathVariable("avaliacaoId") Avaliacao avaliacao) {
-		return new ModelAndView("avaliacao-realizada").addObject("avaliacao",
+	public ModelAndView provaRealizada(@PathVariable("avaliacaoId") Avaliacao avaliacao) {
+		return new ModelAndView("corrigido").addObject("avaliacao",
 				avaliacao);
 	}
 
