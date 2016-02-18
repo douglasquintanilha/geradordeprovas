@@ -8,11 +8,12 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.caelum.geradordeprovas.dao.ProvaDao;
 import br.com.caelum.geradordeprovas.dao.QuestaoDao;
@@ -67,32 +68,30 @@ public class ProvaController {
 	}
 
 	@RequestMapping("/libera")
-	public ModelAndView liberaProva() {
+	public String liberaProva(Model model) {
 
 		List<Usuario> usuarios = new ArrayList<>(usuarioDao.list());
 		List<Prova> provas = new ArrayList<>(provaDao.list());
 
-		ModelAndView mv = new ModelAndView("admin/libera-prova");
-		mv.addObject("usuarios", usuarios);
-		mv.addObject("provas", provas);
+		model.addAttribute("usuarios", usuarios);
+		model.addAttribute("provas", provas);
 
-		return mv;
+		return "admin/libera-prova";
 
 	}
 
 	@Transactional
 	@RequestMapping("/salvaLiberacao")
-	public ModelAndView salvaLiberacao(@Valid LiberacaoForm form, BindingResult result) {
+	public ModelAndView salvaLiberacao(@ModelAttribute("liberacaoForm") @Valid LiberacaoForm liberacaoForm, BindingResult result,RedirectAttributes attr) {
 		if(result.hasErrors()){
+			// Wesley
+			attr.addFlashAttribute("org.springframework.validation.BindingResult.liberacaoForm", result);
 			ModelAndView mv = new ModelAndView("redirect:libera");
 			return mv;
 		}
-		System.out.println("Entrou, não deu nada ");
-		System.out.println(form.getProvas());
-		System.out.println(form.getUsuarios());
-		List<Prova> provas = provaDao.getProvasPorIds(form.getProvas());
+		List<Prova> provas = provaDao.getProvasPorIds(liberacaoForm.getProvas());
 
-		for (Long usuarioId : form.getUsuarios()) {
+		for (Long usuarioId : liberacaoForm.getUsuarios()) {
 			usuarioDao.salvaProvasLiberadas(usuarioId, provas);
 		}
 		

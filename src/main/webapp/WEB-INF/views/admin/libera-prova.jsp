@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri='http://ur6lad.co.ua/markdown-taglib' prefix ='md' %>
+<%@ page import="java.util.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,8 +18,9 @@
 	<div class="container">
 
 		<c:url var="urlPost" value='salvaLiberacao' />
-		<form:form method="POST" action="${urlPost}" commandName="provas">
-			<h4>Selecione a prova que será liberada:</h4>			
+		<form:form method="POST" action="${urlPost}" commandName="liberacaoForm">
+			<h4>Selecione a prova que será liberada:</h4>
+				<form:errors path="provas" cssClass="alert alert-danger" element="div" />		
 				<ul class='list-unstyled'>
 					<c:forEach items="${provas}" var="prova">
 						<div class="checkbox">
@@ -29,7 +31,7 @@
 					<li role="separator" class="divider"></li>
 				</ul>
 				<h4>Selecione os usuários que podem ter acesso a esta prova:</h4>
-				
+				<form:errors path="usuarios" cssClass="alert alert-danger" element="div" />
 					<ul class='list-unstyled'>
 						<c:forEach items="${usuarios}" var="usuario">
 							<li>
