@@ -15,12 +15,12 @@ import br.com.caelum.geradordeprovas.services.QuestaoService;
 
 @Controller
 @RequestMapping("/admin/questao")
-public class QuestoesController {
+public class QuestaoController {
 
 	private QuestaoService questaoBo;
 
 	@Autowired
-	public QuestoesController(QuestaoService questaoBo) {
+	public QuestaoController(QuestaoService questaoBo) {
 		this.questaoBo = questaoBo;
 	}
 
