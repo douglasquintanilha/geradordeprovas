@@ -115,6 +115,7 @@ public class Avaliacao {
 		
 		for (AlternativaMarcada alternativaMarcada : alternativasMarcadas) {
 
+			
 			if (alternativaMarcada.isAlternativaCorreta()) {
 				this.nota++;
 				prova.getQuestoes().get(i).atualizaEstatistica(true);

@@ -1,5 +1,6 @@
 package br.com.caelum.geradordeprovas.models;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -26,8 +27,7 @@ public class Prova {
 	@NotEmpty()
 	@ManyToMany()
 	private List<Questao> questoes;
-	
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -48,7 +48,7 @@ public class Prova {
 		this.questoes = questoes;
 	}
 
-	public int getQuantidadeDeQuestoes() {		
+	public int getQuantidadeDeQuestoes() {
 		return questoes.size();
 	}
 
@@ -60,6 +60,19 @@ public class Prova {
 		this.duracao = duracao;
 	}
 
+	public Prova embaralha(){
+		this.embaralhaQuestoes();
+		this.embaralhaAlternativas();
+		return this;
+	}
 
-
+	public void embaralhaAlternativas(){
+		for(Questao questao : this.questoes){
+			Collections.shuffle(questao.getAlternativa());
+		}
+	}
+	
+	public void embaralhaQuestoes(){
+		Collections.shuffle(this.questoes);
+	}
 }
