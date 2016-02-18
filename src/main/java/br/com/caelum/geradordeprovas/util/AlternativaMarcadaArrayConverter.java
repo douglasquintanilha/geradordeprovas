@@ -21,7 +21,6 @@ public class AlternativaMarcadaArrayConverter implements Converter<String[],List
 	@Override
 	public List<AlternativaMarcada> convert(String[] AlternativaMarcadas) {
 		List<AlternativaMarcada> AlternativaMarcadasList = new ArrayList<>();
-		System.out.println(AlternativaMarcadas.length);
 		for (String AlternativaMarcada : AlternativaMarcadas) {
 			AlternativaMarcada AlternativaMarcadaObj = new AlternativaMarcada();
 			AlternativaMarcadaObj.setDescricao(AlternativaMarcada);

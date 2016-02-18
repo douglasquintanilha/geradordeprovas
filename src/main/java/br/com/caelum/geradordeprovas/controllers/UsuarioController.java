@@ -1,6 +1,5 @@
 package br.com.caelum.geradordeprovas.controllers;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -61,8 +60,9 @@ public class UsuarioController {
 	public ModelAndView realizaProva(@RequestParam("provaId") Prova prova,
 			HttpSession session) {
 		session.setAttribute("horarioInicio", Calendar.getInstance());
+		Prova provaEmbaralhada = provaDao.getProva(prova.getId()).embaralha();
 		return new ModelAndView("realiza-prova").addObject("prova",
-				provaDao.getProva(prova.getId()));
+				provaEmbaralhada);
 	}
 
 	@RequestMapping("avaliacao/realizada/{avaliacaoId}")
