@@ -31,7 +31,7 @@
 				<c:forEach items="${prova.questoes}" var="questao" varStatus="i">
 						<h3><md:render  options="FencedCodeBlocks"><b>${i.index+1}</b> - ${questao.titulo}</md:render></h3>
 						<c:forEach items="${questao.alternativa}" var="alternativa">
-						<div class="radio">				
+						<div class="radio" id="alternativa">				
 							<label for="${alternativa.id}">
 								<input type="radio" value="${alternativa.id}" required="required"  id="${alternativa.id}"  name="alternativasMarcadas[${i.index}]">
 								<md:render options="FencedCodeBlocks">${alternativa.descricao}</md:render>
