@@ -28,7 +28,7 @@ public class AdminController {
 	private Criptografia criptografia;
 	private EstatisticaQuestaoDao estatisticaQuestaoDao;
 	private QuestaoDao questaoDao;
-
+	
 	@Autowired
 	public AdminController(QuestaoDao questaoDao, UsuarioDao usuarioDao,
 			Criptografia criptografia, EstatisticaQuestaoDao estatisticaDao) {
@@ -43,8 +43,9 @@ public class AdminController {
 
 		List<Questao> questoes = new ArrayList<>(questaoDao.list());
 
-		return new ModelAndView("admin/estatisticas").addObject("questoes",	questoes);
-		
+		return new ModelAndView("admin/estatisticas").addObject("questoes",
+				questoes);
+
 	}
 
 	@RequestMapping("/usuario/novo/form")
@@ -63,9 +64,14 @@ public class AdminController {
 			@ModelAttribute("usuario") @Valid Usuario usuario,
 			BindingResult result) {
 
-		if (result.hasErrors()) {
+		if (result.hasErrors() || usuarioDao.loginExistente(usuario.getLogin())) {
+			if (usuarioDao.loginExistente(usuario.getLogin())) {
+				result.rejectValue("login", "error.usuario",
+						"Usuário já existente");
+			}
 			return "admin/cria-usuario-form";
 		}
+
 		String senhaCriptografada = criptografia.criptografaSenha(usuario
 				.getSenha());
 		usuario.setSenha(senhaCriptografada);

@@ -17,7 +17,7 @@ public class UsuarioDao {
 
 	@PersistenceContext
 	private EntityManager manager;
-	
+
 	@Autowired
 	private Criptografia crypto;
 
@@ -27,15 +27,14 @@ public class UsuarioDao {
 
 	public Usuario getUsuarioByLogin(String login) {
 		Usuario usuario = manager
-				.createQuery("select u from Usuario u where u.login =:login",Usuario.class)
-				.setParameter("login", login)
+				.createQuery("select u from Usuario u where u.login =:login",
+						Usuario.class).setParameter("login", login)
 				.getSingleResult();
-	
+
 		return usuario;
 	}
-	
 
-	public Usuario validaUsuario(Usuario usuario)  {
+	public Usuario validaUsuario(Usuario usuario) {
 
 		Usuario us = getUsuarioByLogin(usuario.getLogin());
 		if (us != null) {
@@ -62,16 +61,26 @@ public class UsuarioDao {
 
 		Usuario us = manager.find(Usuario.class, id);
 		us.adicionaProvas(provas);
-		
-		
+
 	}
 
 	public List<Prova> getProvasDoUsuario(String login) {
 		return manager
 				.createQuery(
-						"select p from Provas p JOIN p.Usuario u where u.login =:login",Prova.class)
-				.setParameter("login", login).getResultList();
+						"select p from Provas p JOIN p.Usuario u where u.login =:login",
+						Prova.class).setParameter("login", login)
+				.getResultList();
 
 	}
 
+	public boolean loginExistente(String login) {
+		List<Usuario> usuario = manager
+				.createQuery("from Usuario u where u.login=:login",
+						Usuario.class).setParameter("login", login)
+				.getResultList();
+		if (usuario.isEmpty())
+			return false;
+		else
+			return true;
+	}
 }
