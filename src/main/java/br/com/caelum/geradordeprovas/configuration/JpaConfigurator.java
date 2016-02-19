@@ -28,6 +28,7 @@ public class JpaConfigurator {
 	@Autowired
 	private Constantes constantes;
 	
+	
 	@Bean
 	public OAuthService prepareOAuthServiceDev() throws IOException {
 		return new ServiceBuilder()
