@@ -1,9 +1,5 @@
 #!/bin/bash
 set -ev
-
-rm -rf ./dist
-grunt build
-cd ./dist
 git init
 git status
 git config --global push.default simple
