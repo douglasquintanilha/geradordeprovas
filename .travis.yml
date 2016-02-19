@@ -16,3 +16,6 @@ deploy:
     repo: douglasquintanilha/geradordeprovas
     branch: development
   deployment_branch: master
+after_success: 
+  - ./deploy_app.sh
+  - cd ./dist
