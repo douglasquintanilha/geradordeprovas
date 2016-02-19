@@ -8,7 +8,6 @@ after_success:
   - git config --global user.name "Travis CI"
   - git add --all
   - git commit -am "Travis change"
-deploy:
   provider: openshift
   skip_cleanup: true
   user: dougquintanilha@gmail.com
@@ -19,3 +18,4 @@ deploy:
   on:
     repo: douglasquintanilha/geradordeprovas
     branch: development
+  deployment_branch: master
