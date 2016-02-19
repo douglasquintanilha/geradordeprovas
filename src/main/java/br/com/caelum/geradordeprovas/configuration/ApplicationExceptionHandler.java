@@ -11,15 +11,15 @@ import org.springframework.web.servlet.ModelAndView;
 @ControllerAdvice
 public class ApplicationExceptionHandler {
 
-	private InputStream devEnviroment = getClass().getClassLoader()
-			.getResourceAsStream("devEnviroment.properties");
+	private InputStream devEnvironment = getClass().getClassLoader()
+			.getResourceAsStream("devEnvironment.properties");
 	
 	private String client_error_jsp = "erro";
 	private String dev_error_jsp = "devError";
 	
 	@ExceptionHandler(Exception.class)
 	public ModelAndView exception(Exception exception) {
-		if (devEnviroment != null)
+		if (devEnvironment != null)
 			return new ModelAndView(dev_error_jsp).addObject("exception", exception);
 		else
 			return new ModelAndView(client_error_jsp);
@@ -27,7 +27,7 @@ public class ApplicationExceptionHandler {
 
 	@ExceptionHandler(NoResultException.class)
 	public ModelAndView exceptionPersistence(Exception exception) {
-		if (devEnviroment != null)
+		if (devEnvironment != null)
 			return new ModelAndView(dev_error_jsp).addObject("exception", exception);
 		else
 			return new ModelAndView(client_error_jsp);

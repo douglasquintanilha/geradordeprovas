@@ -3,7 +3,6 @@ package br.com.caelum.geradordeprovas.configuration;
 import java.io.IOException;
 import java.util.Properties;
 
-import javax.annotation.PostConstruct;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
@@ -30,65 +29,51 @@ public class JpaConfigurator {
 	private Constantes constantes;
 	
 	@Bean
-	@Profile("dev")
-	public DataSource dataSource() {
-		DriverManagerDataSource dm = new DriverManagerDataSource();
-		dm.setUrl(constantes.getProperty("BdUrlDev"));
-		dm.setUsername(constantes.getProperty("BdUsernameDev"));
-		dm.setPassword(constantes.getProperty("BdUrlPasswordDev"));
-		dm.setDriverClassName(constantes.getProperty("BdDriverDev"));
-
-		return dm;
-	}
-	@Bean
-	@Profile("producao")	
-	public OAuthService prepareOAuthServiceProducao() throws IOException {
-		return new ServiceBuilder()
-				.provider(GithubApi.class)
-				.apiKey(constantes.getProperty("apiKeyProducao"))
-				.apiSecret(constantes.getProperty("apiSecretProducao"))
-				.callback(constantes.getProperty("apiUrlCallbackProducao"))
-				.build();
-	}
-	
-	@Bean
-	@Profile("dev")
 	public OAuthService prepareOAuthServiceDev() throws IOException {
 		return new ServiceBuilder()
 				.provider(GithubApi.class)
-				.apiKey(constantes.getProperty("apiKeyDev"))
-				.apiSecret(constantes.getProperty("apiSecretDev"))
-				.callback(constantes.getProperty("apiUrlCallbackDev"))
+				.apiKey(constantes.getProperty("apiKey"))
+				.apiSecret(constantes.getProperty("apiSecret"))
+				.callback(constantes.getProperty("apiUrlCallback"))
 				.build();
 	}
-	
-	
+
+	@Bean
+	@Profile("local")
+	public DataSource dataSource() {
+		DriverManagerDataSource dm = new DriverManagerDataSource();
+		dm.setUrl(constantes.getProperty("BdUrl"));
+		dm.setUsername(constantes.getProperty("BdUsername"));
+		dm.setPassword(constantes.getProperty("BdUrlPassword"));
+		dm.setDriverClassName(constantes.getProperty("BdDriver"));
+
+		return dm;
+	}
 	
 	@Bean
 	@Profile("producao")
 	public DataSource dataSourceProducao() {
 		DriverManagerDataSource dm = new DriverManagerDataSource();
 		dm.setUrl("jdbc:mysql://" + System.getenv().get("OPENSHIFT_MYSQL_DB_HOST")+":" + System.getenv().get("OPENSHIFT_MYSQL_DB_PORT") + "/" + "caelum_provas");
-		dm.setUsername(constantes.getProperty("BdUsernameProducao"));
-		dm.setPassword(constantes.getProperty("BdPasswordProducao"));
-		dm.setDriverClassName(constantes.getProperty("BdDriverProducao"));
+		dm.setUsername(constantes.getProperty("BdUsername"));
+		dm.setPassword(constantes.getProperty("BdPassword"));
+		dm.setDriverClassName(constantes.getProperty("BdDriver"));
 
 		return dm;
 	}
 	
 	@Bean
-	@Profile("test")
+	@Profile("dev")
 	public DataSource dataSourceTest() {
 		DriverManagerDataSource dm = new DriverManagerDataSource();
-		dm.setUrl(constantes.getProperty("BdUrlTest"));
-		dm.setUsername(constantes.getProperty("BdUsernameTest"));
-		dm.setPassword(constantes.getProperty("BdUrlPasswordTest"));
-		dm.setDriverClassName(constantes.getProperty("BdDriverTest"));
+		dm.setUrl("jdbc:mysql://" + System.getenv().get("OPENSHIFT_MYSQL_DB_HOST")+":" + System.getenv().get("OPENSHIFT_MYSQL_DB_PORT") + "/" + "caelum_provas");
+		dm.setUsername(constantes.getProperty("BdUsername"));
+		dm.setPassword(constantes.getProperty("BdUrlPassword"));
+		dm.setDriverClassName(constantes.getProperty("BdDriver"));
 
 		return dm;
 	}
-
-
+	
 	@Bean
 	public LocalContainerEntityManagerFactoryBean emf(DataSource ds) {
 		LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
