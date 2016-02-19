@@ -14,8 +14,7 @@ import br.com.caelum.geradordeprovas.models.Usuario;
 
 @Controller
 public class LoginController {
-	
-	
+
 	private UsuarioDao usuarioDao;
 
 	@Autowired
