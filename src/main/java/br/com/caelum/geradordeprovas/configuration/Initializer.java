@@ -20,6 +20,7 @@ public class Initializer extends
 	@Override
 	public void onStartup(ServletContext servletContext)
 			throws ServletException {
+		System.out.println(environment);
 		super.onStartup(servletContext);
 		servletContext.setInitParameter("spring.profiles.active", environment);
 	}
