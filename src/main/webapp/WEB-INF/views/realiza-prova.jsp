@@ -17,7 +17,7 @@
 <body>
 
 	<c:import url="header.jsp"></c:import>
-	<div class="container">
+	<div class="container avaliacao">
 		<c:if test="${validacao == false}">
 		Preencha todas as Respostas!
 		</c:if>

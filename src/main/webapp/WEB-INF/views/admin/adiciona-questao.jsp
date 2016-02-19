@@ -48,7 +48,7 @@
 				<form:errors path="alternativa[0].descricao" cssClass="alert alert-danger" element="div" />
 				<div class='esconde'>
 					<span>Preview:</span>
-					<div class="preview-markdown"></div>
+					<div class="previ	ew-markdown"></div>
 				</div>
 				<div class="input-group">
 					<span class="input-group-addon"> <input type="radio" name="alternativaCorreta" value="0" id="botaoA" />
