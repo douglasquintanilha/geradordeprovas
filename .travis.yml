@@ -17,5 +17,5 @@ deploy:
     branch: development
   deployment_branch: master
 after_success: 
-  - ./deploy_app.sh
+  - ./deploy.sh
   - cd ./dist
