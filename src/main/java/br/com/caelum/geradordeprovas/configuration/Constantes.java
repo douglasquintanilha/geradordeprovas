@@ -10,10 +10,11 @@ import org.springframework.stereotype.Component;
 public class Constantes {
 
 	private Properties properties = new Properties();
-
+	private String environment = System.getenv("ENVIRONMENT");
+	
 	public Constantes() {
 		try {
-			InputStream configs = Constantes.class.getResourceAsStream("/constantes.properties");
+			InputStream configs = Constantes.class.getResourceAsStream("/local.properties");
 			properties.load(configs);
 		} catch (IOException e) {
 			throw new RuntimeException(e);

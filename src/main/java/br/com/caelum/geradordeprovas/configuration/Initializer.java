@@ -1,7 +1,5 @@
 package br.com.caelum.geradordeprovas.configuration;
 
-import java.io.InputStream;
-
 import javax.servlet.Filter;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -12,8 +10,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 public class Initializer extends
 		AbstractAnnotationConfigDispatcherServletInitializer {
 
-	private InputStream devEnviroment = getClass().getClassLoader()
-			.getResourceAsStream("devEnviroment.properties");
+	private String environment = System.getenv("ENVIRONMENT");
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
@@ -24,10 +21,7 @@ public class Initializer extends
 	public void onStartup(ServletContext servletContext)
 			throws ServletException {
 		super.onStartup(servletContext);
-		if (devEnviroment != null)
-			servletContext.setInitParameter("spring.profiles.active", "dev");
-		else
-			servletContext.setInitParameter("spring.profiles.active", "producao");
+		servletContext.setInitParameter("spring.profiles.active", environment);
 	}
 
 	@Override

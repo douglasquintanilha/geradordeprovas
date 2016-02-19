@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Profile;
 public class TestConfigurator {
 
 	@Qualifier("rootAplicacao")
-	@Profile("dev")
+	@Profile("local")
 	@Bean
 	public String getContext(){
 		return "http://localhost:8000/GeradorDeProvas/";
