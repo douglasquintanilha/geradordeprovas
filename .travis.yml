@@ -1,14 +1,9 @@
-install: 
+install: /bin/true
 script: /bin/true # Isso serve para ele dar skips nos testes que Maven faz no travis
 jdk:
 - oraclejdk7
 language: java # Não sei por que , mas o Travis parece que precisar dar um commit para que seja detectado alguma mudança e ai sim o deploy vá para o openshift
-after_success:
-  - git config --global user.email "travis@localhost.localdomain"
-  - git config --global user.name "Travis CI"
-  - git add --all
-  - git commit -am "Travis change"
-deploy:
+deploy:  
   provider: openshift
   skip_cleanup: true
   user: dougquintanilha@gmail.com
@@ -19,3 +14,4 @@ deploy:
   on:
     repo: douglasquintanilha/geradordeprovas
     branch: development
+  deployment_branch: master
