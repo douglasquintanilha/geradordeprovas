@@ -30,6 +30,9 @@ header{
 .container{
 	padding: 20px;
 }
+.container.avaliacao{
+	padding-right: 75px;
+}
 
 footer{
 	border-top: 2px solid black;

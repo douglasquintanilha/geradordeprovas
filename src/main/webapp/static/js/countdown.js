@@ -41,7 +41,7 @@ function initializeClock(id, endtime){
 	    	t.hours +':' 
 	    	+ t.minutes + ':' 
 	    	+ t.seconds;
-    }x
+    }
   },1000);
 }
 
