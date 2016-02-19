@@ -14,4 +14,3 @@ deploy:
   on:
     repo: douglasquintanilha/geradordeprovas
     branch: development
-  deployment_branch: master
