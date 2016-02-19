@@ -33,7 +33,7 @@
 					<span>Preview:</span>
 					<div class="preview-markdown"></div>
 				</div>
-				<input type="text" value="${questao.titulo}" placeholder="Digite aqui o título da sua questão" name="titulo" class="form-control entrada" id="titulo">
+				<textarea class="form-control entrada" laceholder="Digite aqui o título da sua questão" name="titulo" id="titulo">${questao.titulo}</textarea>
 			</div>
 
 			<div class="form-group">

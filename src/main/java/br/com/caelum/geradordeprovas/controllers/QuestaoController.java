@@ -29,9 +29,6 @@ public class QuestaoController {
 		return "admin/adiciona-questao";
 	}
 
-	
-	
-	
 	@Transactional
 	@RequestMapping("/salva")
 	public String salva(@ModelAttribute("questao") @Valid Questao questao,
