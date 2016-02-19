@@ -9,8 +9,12 @@ deploy:
   user: dougquintanilha@gmail.com
   password:
     secure: ff9MFLEI6QruoA7PHG2NxIUZnGKUL/edFVceUd1pDXwVV6KcxqCKfg9zF7y/g5csdSqfHXONjac1745Id6b+RKM/I1IYnRFfh4WT6Cb3L7yJa2SNpzb70Zkjkz953xPPOK7GW+oaW4lU5nIJkbL6r6JqJPVHjJ0maVHhjIzE1AqDlUBy0xUgdceE+hrQxKHdzhSwXAETLkSk5iFYG4pbyib+hysSkxj4iCkrbjPv9w2EGnYofAbaz0uos2chaLLEoPQ3criSoR5TPkxRsBqatx32ahikbartOmFgfE7ZuPwdrj9T4KTykxPmHk4Ji4KiLiNyyv8UkiBzFc9h4YHfOpB1lzzrPGRlbRYIqoyVsuQtWJGQH7WIMnR73j7EfPKiQ999SGr4ntdLvwJg2Q02SXJDt8gXkGBBNp8u0FKchSILlQSpL2+x7otcAWx74/03HTffR9u3efRnkJfR/B3yZ1/t2iUZ1ToOAgd+iFqJPmTFngc340sx62cPGkvmIlJ4wGhw39LATG68v0r+/mznKs6UN+lZOCQXJmfas9EiVF7dUOeWIf9HWSJspZ2cMMjSuWJiXhHFjAtRSTBW52gdTiU+v2zQlijIyGa0EuaEB+qbdNJw12r5DFzGR8Bui7fGRMyca+oOJvOMQVXtr7OxiM3rU3MMEK1+JiAmmmoo5WE=
-  app: caelumprovasdev
+  app:
+    development: caelumprovasdev
   domain: dquintanilha
   on:
     repo: douglasquintanilha/geradordeprovas
     branch: development
+  deployment_branch: master
+after_success: 
+  ./deploy.sh
