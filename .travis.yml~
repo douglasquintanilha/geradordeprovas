@@ -1,6 +1,0 @@
---- 
-install: -
-jdk: 
-  - oraclejdk7
-language: java
-
