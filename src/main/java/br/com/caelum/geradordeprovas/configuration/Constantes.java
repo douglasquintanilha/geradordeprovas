@@ -14,7 +14,7 @@ public class Constantes {
 	
 	public Constantes() {
 		try {
-			InputStream configs = Constantes.class.getResourceAsStream("/local.properties");
+			InputStream configs = Constantes.class.getResourceAsStream("/"+environment+".properties");
 			properties.load(configs);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
