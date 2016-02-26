@@ -3,6 +3,7 @@ package br.com.caelum.geradordeprovas.controllers;
 import java.io.IOException;
 
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ObjectNode;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import br.com.caelum.geradordeprovas.configuration.Constantes;
+import br.com.caelum.geradordeprovas.dao.UsuarioDao;
 import br.com.caelum.geradordeprovas.models.Usuario;
 
 
@@ -36,6 +38,9 @@ public class OAuthController {
 	@Autowired
 	private Constantes constantes;
 	
+	@Autowired
+	private UsuarioDao usuarioDao;
+	
 
 	@RequestMapping("/github-login")
 	public String redirectToGithub() {
@@ -44,7 +49,7 @@ public class OAuthController {
 	}
 
 	@RequestMapping("/callback")
-	public ModelAndView callback(@RequestParam("code") String authToken, Model model ) throws IOException  {
+	public ModelAndView callback(@RequestParam("code") String authToken, Model model , HttpSession sessao) throws IOException  {
 		Verifier verifier = new Verifier(authToken);
 		Token accessToken = service.getAccessToken(EMPTY_TOKEN, verifier);
 		
@@ -56,10 +61,12 @@ public class OAuthController {
 		ObjectMapper mapper = new ObjectMapper();
 		ObjectNode myObject = (ObjectNode) mapper.readTree(response.getBody());
 		usuario.setLogin(myObject.get("login").asText()); 
+		sessao.setAttribute("usuario", usuario);
+		
 		
 		OAuthRequest requestOrg = new OAuthRequest(Verb.GET, "https://api.github.com/orgs/caelum/members/"+usuario.getLogin());
 		service.signRequest(accessToken, requestOrg);
-		Response responseOrg = requestOrg.send();		 
+		Response responseOrg = requestOrg.send();
 		
 
 		if(responseOrg.getCode() == 204){
@@ -68,10 +75,12 @@ public class OAuthController {
 		return new ModelAndView(new RedirectView("github-error"));
 	} 
 
+	@Transactional
 	@RequestMapping("/github-logado")
 	public ModelAndView logado(HttpSession sessao) {
-			Usuario usuario = new Usuario();
+			Usuario usuario = (Usuario) sessao.getAttribute("usuario");
 			usuario.setAdmin(true);
+			usuario = usuarioDao.usuarioDoGithub(usuario);
 			sessao.setAttribute("usuario", usuario);
 			ModelAndView mv = new ModelAndView("redirect:../admin/index");
 			return mv;
