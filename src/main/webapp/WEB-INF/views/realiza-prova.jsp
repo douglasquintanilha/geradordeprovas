@@ -40,7 +40,7 @@
 						</c:forEach>
 				</c:forEach>
 			<label><input type="checkbox" required="required">  Estou ciente das opções marcadas e desejo enviar</label><br>
-			<button type="submit" class="btn btn-default">Ok</button>
+			<button type="submit" class="btn btn-default">Enviar</button>
 		</form:form>
 	</div>		
 <c:import url="footer.jsp"></c:import>
