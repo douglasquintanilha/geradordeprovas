@@ -36,8 +36,8 @@ public class UsuarioController {
 		this.avaliacaoDao = avaliacaoDao;
 	}
 
-	@RequestMapping("/avaliacao/{provaId}")
-	public ModelAndView escolheProva(@PathVariable("provaId") Prova prova,
+	@RequestMapping("/avaliacao/{provaUuid}")
+	public ModelAndView escolheProva(@RequestParam("provaId") Prova prova,
 			HttpSession session) {
 
 		List<Avaliacao> avaliacoes = avaliacaoDao.getAvaliacoesPor(
@@ -65,8 +65,8 @@ public class UsuarioController {
 				provaEmbaralhada);
 	}
 
-	@RequestMapping("avaliacao/realizada/{avaliacaoId}")
-	public ModelAndView provaRealizada(@PathVariable("avaliacaoId") Avaliacao avaliacao) {
+	@RequestMapping("avaliacao/realizada/{avaliacaoUuid}")
+	public ModelAndView provaRealizada(@RequestParam("avaliacaoId") Avaliacao avaliacao) {
 		return new ModelAndView("corrigido").addObject("avaliacao",
 				avaliacao);
 	}

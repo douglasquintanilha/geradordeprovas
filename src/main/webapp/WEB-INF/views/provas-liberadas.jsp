@@ -17,9 +17,12 @@
 	<div class="container">
 			<h3>Selecione uma prova:</h3>
 			<div class="row">
+			
 			<c:forEach items="${provas}" var="prova">
 			    <div class="col-xs-3">
-			        <a href="<c:url value='/avaliacao/${prova.id}'/>" class="thumbnail">
+			    <form:form action="avaliacao/${prova.uuid}" method="POST" id="${prova.id}">
+			    	<input type="hidden" value="${prova.id}" name="provaId">
+			        <a onclick="document.getElementById(${prova.id}).submit();" class="thumbnail">
 			             <img src="http://eliteuniversal.org/wp-content/uploads/2015/11/vestibular_carreiras.jpg" class="img-responsive">
 			             <div class="caption">
 			             	<label for="${prova.id}">
@@ -27,8 +30,10 @@
 							</label>
 			             </div>
 			        </a>
+			    </form:form>
 			    </div>
 			</c:forEach>
+			
 			</div>
 	</div>
 	<c:import url="footer.jsp"></c:import>
