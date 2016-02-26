@@ -2,6 +2,7 @@ package br.com.caelum.geradordeprovas.models;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -74,5 +75,9 @@ public class Prova {
 	
 	public void embaralhaQuestoes(){
 		Collections.shuffle(this.questoes);
+	}
+	
+	public String getUuid(){
+		return UUID.randomUUID().toString();
 	}
 }

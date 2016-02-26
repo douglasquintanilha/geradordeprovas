@@ -23,7 +23,6 @@ public class Initializer extends
 		if(environment.isEmpty()){
 			environment = "local";
 		}
-		environment = "dev";
 		super.onStartup(servletContext);
 		servletContext.setInitParameter("spring.profiles.active", environment);
 	}

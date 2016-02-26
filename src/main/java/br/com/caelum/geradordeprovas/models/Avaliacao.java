@@ -3,6 +3,7 @@ package br.com.caelum.geradordeprovas.models;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -146,5 +147,9 @@ public class Avaliacao {
 	public String getDataRealizada(){
 		SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
 		return sdf.format(this.horarioInicio.getTime());
+	}
+	
+	public String getUuid(){
+		return UUID.randomUUID().toString();
 	}
 }

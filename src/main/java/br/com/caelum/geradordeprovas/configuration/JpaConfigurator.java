@@ -68,7 +68,6 @@ public class JpaConfigurator {
 	public DataSource dataSourceTest() {
 		DriverManagerDataSource dm = new DriverManagerDataSource();
 		dm.setUrl("jdbc:mysql://" + System.getenv().get("OPENSHIFT_MYSQL_DB_HOST")+":" + System.getenv().get("OPENSHIFT_MYSQL_DB_PORT") + "/" + "caelum_provas");
-		System.out.println(System.getenv("ENVIRONMENT"));
 		dm.setUsername(constantes.getProperty("BdUsername"));
 		dm.setPassword(constantes.getProperty("BdUrlPassword"));
 		dm.setDriverClassName(constantes.getProperty("BdDriver"));

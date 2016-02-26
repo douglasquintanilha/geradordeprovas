@@ -31,7 +31,9 @@
 		<h4>Tentativas Anteriores:</h4>
 			<c:forEach items="${avaliacoes}" var="avaliacao" varStatus="i">
 				<div class="col-xs-3">
-				        <a href="<c:url value='/avaliacao/realizada/${avaliacao.id}'/>" class="thumbnail">
+				<form:form action="realizada/${avaliacao.uuid}" method="POST" id="${avaliacao.id}">
+						<input type="hidden" value="${avaliacao.id}" name="avaliacaoId">
+				        <a onclick="document.getElementById(${avaliacao.id}).submit();" class="thumbnail">
 				             <div class="caption">
 				             	<label for="${avaliacao.id}">
 									Nota: ${avaliacao.nota} / ${avaliacao.prova.quantidadeDeQuestoes}<br> 
@@ -41,6 +43,7 @@
 				             	<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 				             </div>
 				        </a>
+				</form:form>
 				</div>
 			</c:forEach>
 		</div>
