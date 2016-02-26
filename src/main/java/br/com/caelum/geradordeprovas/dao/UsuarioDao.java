@@ -25,6 +25,15 @@ public class UsuarioDao {
 		manager.persist(usuario);
 	}
 
+	public Usuario usuarioDoGithub(Usuario usuario){
+		if(loginExistente(usuario.getLogin()))
+			return getUsuarioByLogin(usuario.getLogin());
+		else{
+			save(usuario);
+		}
+		return usuario;
+	}
+	
 	public Usuario getUsuarioByLogin(String login) {
 		Usuario usuario = manager
 				.createQuery("select u from Usuario u where u.login =:login",
@@ -83,4 +92,5 @@ public class UsuarioDao {
 		else
 			return true;
 	}
+
 }
