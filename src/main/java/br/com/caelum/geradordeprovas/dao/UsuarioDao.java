@@ -25,10 +25,17 @@ public class UsuarioDao {
 		manager.persist(usuario);
 	}
 
-	public Usuario usuarioDoGithub(Usuario usuario){
-		if(loginExistente(usuario.getLogin()))
+	public Usuario usuarioDoGithub(Usuario usuario, boolean caelumOrg){
+		if(loginExistente(usuario.getLogin())){
 			return getUsuarioByLogin(usuario.getLogin());
+		}
 		else{
+			if(caelumOrg){
+				usuario.setAdmin(true);
+			}
+			else{
+				usuario.setAdmin(false);
+			}
 			save(usuario);
 		}
 		return usuario;

@@ -25,6 +25,9 @@ import br.com.caelum.geradordeprovas.configuration.Constantes;
 import br.com.caelum.geradordeprovas.dao.UsuarioDao;
 import br.com.caelum.geradordeprovas.models.Usuario;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
+
 
 
 @Controller
@@ -61,17 +64,32 @@ public class OAuthController {
 		ObjectMapper mapper = new ObjectMapper();
 		ObjectNode myObject = (ObjectNode) mapper.readTree(response.getBody());
 		usuario.setLogin(myObject.get("login").asText()); 
-		sessao.setAttribute("usuario", usuario);
-		
 		
 		OAuthRequest requestOrg = new OAuthRequest(Verb.GET, "https://api.github.com/orgs/caelum/members/"+usuario.getLogin());
 		service.signRequest(accessToken, requestOrg);
 		Response responseOrg = requestOrg.send();
 		
+		OAuthRequest requestEmail = new OAuthRequest(Verb.GET, "https://api.github.com/user/emails");
+		service.signRequest(accessToken, requestEmail);
+		Response responseEmail = requestEmail.send();
+		
+		String emails = responseEmail.getBody();
+		JsonParser parser = new JsonParser();
+		Object obj = parser.parse(emails);
+		JsonArray arrayEmails = (JsonArray) obj;
+		String login = arrayEmails.get(0).getAsJsonObject().get("email").toString().replace("\"", "");
+		usuario.setLogin(login);
+		sessao.setAttribute("usuario", usuario);
 
 		if(responseOrg.getCode() == 204){
+			sessao.setAttribute("caelumOrg", true);
 			return new ModelAndView("redirect:/oauth/github-logado");
 		}
+		else
+			if(responseOrg.getCode() == 302 || responseOrg.getCode() == 404){
+				sessao.setAttribute("caelumOrg", false);
+				return new ModelAndView("redirect:/oauth/github-logado");
+			}
 		return new ModelAndView(new RedirectView("github-error"));
 	} 
 
@@ -79,11 +97,15 @@ public class OAuthController {
 	@RequestMapping("/github-logado")
 	public ModelAndView logado(HttpSession sessao) {
 			Usuario usuario = (Usuario) sessao.getAttribute("usuario");
-			usuario.setAdmin(true);
-			usuario = usuarioDao.usuarioDoGithub(usuario);
+			boolean caelumOrg = (boolean) sessao.getAttribute("caelumOrg");
+			usuario = usuarioDao.usuarioDoGithub(usuario, caelumOrg);
 			sessao.setAttribute("usuario", usuario);
-			ModelAndView mv = new ModelAndView("redirect:../admin/index");
-			return mv;
+			if(caelumOrg){
+				return new ModelAndView("redirect:../admin/index");
+			}
+			else{
+				return new ModelAndView("redirect:../liberadas");
+			}
 	}
 	
 	@RequestMapping("/github-error")
