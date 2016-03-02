@@ -31,7 +31,7 @@
 						<c:if test="${alternativa.alternativaCorreta == false}">
 							<span class="icone glyphicon glyphicon-remove" aria-hidden="true"></span>
 						</c:if>												
-						<label for="${alternativa.id}"> <input type="radio" disabled value="${alternativa.id}"
+						<label class="alternativa-texto" for="${alternativa.id}"> <input type="radio" disabled value="${alternativa.id}"
 							<c:forEach items="${avaliacao.alternativasMarcadas}" var="alternativaMarcada">
 								<c:if test="${alternativa.id == alternativaMarcada.id}">checked="checked"</c:if>
 							</c:forEach> id="${alternativa.id}" name="alternativas[${i.index}]">

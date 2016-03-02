@@ -118,6 +118,10 @@ footer{
 }
 
 .questao-errada{
-	padding: 0px 10px;
+	padding: 0px 0px 0px 15px;
 	border-left: 3px solid #e2472f;
+}
+
+.alternativa-texto{
+	max-width: 95%;
 }
