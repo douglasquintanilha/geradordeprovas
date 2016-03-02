@@ -31,10 +31,10 @@
 						</c:if>
 							<label for="${alternativa.id}">
 								<input type="radio" disabled value="${alternativa.id}" 
-								<c:forEach items="${avaliacao.alternativasMarcadas}" var="alternativaMarcada">
-								<c:if test="${alternativa.id == alternativaMarcada.id}">checked="checked"</c:if>
-								</c:forEach>
-								id="${alternativa.id}" name="alternativas[${i.index}]">
+									<c:forEach items="${avaliacao.alternativasMarcadas}" var="alternativaMarcada">
+									<c:if test="${alternativa.id == alternativaMarcada.id}">checked="checked"</c:if>
+									</c:forEach>
+									id="${alternativa.id}" name="alternativas[${i.index}]">
 								<md:render options="FencedCodeBlocks">${alternativa.descricao}</md:render>
 							</label>
 						</div>	
