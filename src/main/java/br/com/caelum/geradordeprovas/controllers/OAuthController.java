@@ -80,6 +80,7 @@ public class OAuthController {
 		String login = arrayEmails.get(0).getAsJsonObject().get("email").toString().replace("\"", "");
 		usuario.setLogin(login);
 		sessao.setAttribute("usuario", usuario);
+		System.out.println(login);
 
 		if(responseOrg.getCode() == 204){
 			sessao.setAttribute("caelumOrg", true);
