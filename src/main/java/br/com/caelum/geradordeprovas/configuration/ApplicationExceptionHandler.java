@@ -8,7 +8,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 @ControllerAdvice
 public class ApplicationExceptionHandler {
-
 	private String environment = System.getenv("ENVIRONMENT");
 
 	private String client_error_jsp = "erro";
