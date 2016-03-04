@@ -1,7 +1,5 @@
 package br.com.caelum.geradordeprovas.controllers;
 
-import java.util.UUID;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +37,6 @@ public class LoginController {
 	public ModelAndView efetuaLogin(@ModelAttribute("usuario") Usuario usuario,
 			HttpSession sessao) {
 
-		System.out.println(UUID.randomUUID());
-		
 		Usuario user = usuarioDao.validaUsuario(usuario);
 		if (user != null) {
 

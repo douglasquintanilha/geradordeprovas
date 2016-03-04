@@ -81,15 +81,18 @@ public class OAuthController {
 		usuario.setLogin(login);
 		sessao.setAttribute("usuario", usuario);
 
+		System.out.println(responseOrg.getCode());
+		
 		if(responseOrg.getCode() == 204){
 			sessao.setAttribute("caelumOrg", true);
 			return new ModelAndView("redirect:/oauth/github-logado");
 		}
-		else
+		else{
 			if(responseOrg.getCode() == 302 || responseOrg.getCode() == 404){
 				sessao.setAttribute("caelumOrg", false);
 				return new ModelAndView("redirect:/oauth/github-logado");
 			}
+		}
 		return new ModelAndView(new RedirectView("github-error"));
 	} 
 
@@ -100,12 +103,7 @@ public class OAuthController {
 			boolean caelumOrg = (boolean) sessao.getAttribute("caelumOrg");
 			usuario = usuarioDao.usuarioDoGithub(usuario, caelumOrg);
 			sessao.setAttribute("usuario", usuario);
-			if(caelumOrg){
-				return new ModelAndView("redirect:../admin/index");
-			}
-			else{
-				return new ModelAndView("redirect:../liberadas");
-			}
+			return new ModelAndView("redirect:/");
 	}
 	
 	@RequestMapping("/github-error")
