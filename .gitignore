@@ -4,5 +4,5 @@
 /target/
 bin/
 .tern-project
-rebel.xml
+/src/main/resources/rebel.xml
 devEnviroment.properties
