@@ -24,6 +24,8 @@
 				<label for="nome">Nome da Prova:</label>
 				<form:errors path="nome" cssClass="alert alert-danger" element="div" />
 				<input type="text" value="${prova.nome}" name="nome" class="form-control" id="nomeProva" required>
+				<label for="comentario">Descrição</label>
+				<input type="text" name="descricao" id="descricao" class="form-control" required>
 			</div>
 			<div class="">
 				<label for="duracao">Coloque a duração da prova em minutos:</label>
