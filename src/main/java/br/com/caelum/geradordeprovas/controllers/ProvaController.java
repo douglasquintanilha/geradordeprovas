@@ -1,6 +1,7 @@
 package br.com.caelum.geradordeprovas.controllers;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -60,6 +61,8 @@ public class ProvaController {
 			return mv;
 		}
 
+		prova.setDataCriacao(Calendar.getInstance());
+		
 		provaDao.save(prova);
 
 		ModelAndView mv = new ModelAndView("admin/prova-adicionada");
