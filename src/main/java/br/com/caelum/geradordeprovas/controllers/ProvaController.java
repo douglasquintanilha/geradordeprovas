@@ -53,7 +53,6 @@ public class ProvaController {
 	public ModelAndView salvaProva(@Valid @ModelAttribute("prova") Prova prova,
 			BindingResult result) {
 		if (result.hasErrors()) {
-			System.out.println(result.getAllErrors().get(0));
 			ModelAndView mv = new ModelAndView("admin/montar-prova",
 					result.getModel());
 			List<Questao> questoes = questaoDao.list();
