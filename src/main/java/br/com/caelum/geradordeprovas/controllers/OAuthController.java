@@ -81,7 +81,6 @@ public class OAuthController {
 		usuario.setLogin(login);
 		sessao.setAttribute("usuario", usuario);
 
-		System.out.println(responseOrg.getCode());
 		
 		if(responseOrg.getCode() == 204){
 			sessao.setAttribute("caelumOrg", true);

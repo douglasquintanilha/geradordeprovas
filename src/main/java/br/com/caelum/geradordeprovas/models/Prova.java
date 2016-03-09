@@ -112,5 +112,9 @@ public class Prova {
 	public String getUuid() {
 		return UUID.randomUUID().toString();
 	}
+	
+	public int getQuantidadeDeQuestoes() {		
+		return questoes.size();
+	}
 
 }
