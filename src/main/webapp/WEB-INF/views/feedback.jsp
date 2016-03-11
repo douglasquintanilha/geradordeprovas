@@ -13,8 +13,15 @@
 <link rel="stylesheet" href="<c:url value='/static/css/code.css' /> ">
 </head>
 <body>
+<c:import url="header.jsp"></c:import>
 
-Obrigado.
+	<div class="container">
+		<h3>Obrigado, sua opinião é muito importante.</h3>
+		<a href="<c:url value='/'/>">Voltar para o início</a>
+	</div>
 
+
+
+<c:import url="footer.jsp"></c:import>
 </body>
 </html>
