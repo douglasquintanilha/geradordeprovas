@@ -52,7 +52,7 @@ public class UsuarioController {
 		if (avaliacoes.isEmpty()) {
 			session.setAttribute("horarioInicio", Calendar.getInstance());
 			return new ModelAndView("realiza-prova").addObject("prova",
-					provaDao.getProva(prova.getId()));
+					provaDao.getProva(prova.getId()).embaralha());
 
 		}
 
