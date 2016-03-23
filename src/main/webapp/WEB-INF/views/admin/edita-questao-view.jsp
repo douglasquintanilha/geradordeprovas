@@ -17,9 +17,6 @@
 	
 	<c:import url="../header.jsp"></c:import>
 	
-	
-	
-	
 	<div class="container">
 		<h1>Procure a questão pela prova</h1>
 		
@@ -28,8 +25,8 @@
 			<input type="text" class="form-control" id="busca" placeholder="Nome da prova..." aria-describedby="basic-addon1">
 		</div>
 
-		<div id="provas-list">
 		<c:forEach items="${provas}" var="prova">
+		<div class="prova-element">
 			<div class="panel panel-primary questao">
 				<div class="panel-heading prova">
 					${prova.nome}
@@ -46,6 +43,7 @@
 					</ol>
 				</div>
 			</div>
+		</div>
 		</c:forEach>
 		</div>	
 	
