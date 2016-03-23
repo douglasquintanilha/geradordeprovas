@@ -44,7 +44,11 @@ public class QuestaoController {
 	@RequestMapping("/edita")
 	public ModelAndView editaQuestaoView() {
 		List<Questao> questoes = questaoDao.list();
-		return new ModelAndView("admin/edita-questao-view").addObject("questoes", questoes);
+		List<Prova> provas = provaDao.list();
+		ModelAndView mv = new ModelAndView("admin/edita-questao-view");
+		mv.addObject("questoes", questoes);
+		mv.addObject("provas", provas);
+		return mv;
 	}
 
 	@RequestMapping("/edita/{questaoId}")
@@ -52,7 +56,7 @@ public class QuestaoController {
 		Questao questao = questaoDao.getQuestaoPorId(id);
 		return new ModelAndView("/admin/edita-questao").addObject("questao", questao);
 	}
-	
+
 	@Transactional
 	@RequestMapping("/edita/salva")
 	public String salvaQuestaoEditada(@ModelAttribute("questao") @Valid Questao questaoEditada, BindingResult result,
@@ -65,7 +69,7 @@ public class QuestaoController {
 		Questao questao = questaoDao.getQuestaoPorId(id);
 		questao.edita(questaoEditada);
 		questaoBo.edita(questao);
-		
+
 		return "admin/questao-editada";
 	}
 
