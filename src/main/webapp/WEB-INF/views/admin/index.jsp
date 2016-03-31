@@ -14,6 +14,7 @@
 	<div class="container">
 		<h1>Bem vindo ao geraX!</h1>
 		<a href="<c:url value='questao/adiciona'/>"><h3>Adicionar Questão</h3></a>
+		<a href="<c:url value='questao/edita'/>"><h3>Editar Questão</h3></a>
 		<a href="<c:url value='prova/monta'/>"><h3>Montar Prova</h3></a> 
 		<a href="<c:url value='/liberadas'/>"><h3>Realizar Prova</h3></a>
 		<a href="<c:url value='seleciona-tag'/>"><h3>Procurar Questão por tag</h3></a>

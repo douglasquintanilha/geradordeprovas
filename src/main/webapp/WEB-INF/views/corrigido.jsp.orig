@@ -18,16 +18,21 @@
 		<h1>Sua nota foi:</h1>
 		<h3>${avaliacao.nota}/${avaliacao.prova.quantidadeDeQuestoes}</h3>
 		<h4>Gabarito:</h4>
-			<c:forEach items="${avaliacao.prova.questoes}" var="questao" varStatus = "i">
-					<h3><md:render options="FencedCodeBlocks">${i.index+1} - ${questao.titulo}<br></md:render></h3>
-					<c:forEach items="${questao.alternativa}" var="alternativa">
-						<div class="radio">
+		<c:forEach items="${avaliacao.prova.questoes}" var="questao" varStatus="i">	
+		<div class="questao">				
+				<h3>
+					<md:render options="FencedCodeBlocks">${i.index+1} - ${questao.titulo}<br></md:render>
+				</h3>
+				<c:forEach items="${questao.alternativa}" var="alternativa">
+					<div class="radio alternativa">
 						<c:if test="${alternativa.alternativaCorreta}">
-									<span class="icone glyphicon glyphicon-ok" aria-hidden="true"></span>
-								</c:if>
-<<<<<<< HEAD
-						<c:if test="${alternativa.alternativaCorreta == false}">
+							<span class="icone glyphicon glyphicon-ok" aria-hidden="true"></span>
+						</c:if>
+						<c:forEach items="${avaliacao.alternativasMarcadas}" var="alternativaMarcada">
+							<c:if test="${alternativa.id == alternativaMarcada.id}">
+								<c:if test="${alternativa.alternativaCorreta == false}">
 									<span class="icone glyphicon glyphicon-remove" aria-hidden="true"></span>
+<<<<<<< HEAD
 						</c:if>
 							<label for="${alternativa.id}">
 								<input type="radio" disabled value="${alternativa.id}" 
@@ -41,6 +46,7 @@
 					</c:forEach>
 			</c:forEach>
 =======
+								</c:if>
 							</c:if>
 						</c:forEach>
 						<label class="alternativa-texto" for="${alternativa.id}">
@@ -67,8 +73,8 @@
 			</div>
 		</form:form>
 		
->>>>>>> salvando feedbacks
-		<a href="<c:url value='/'/>">Voltar para o início</a>
+>>>>>>> d6596c3eb2454833a1d3c94332038bd771afd93f
+		<a href="<c:url value='/'/>">Voltar para o inÃ­cio</a>
 	</div>
 	<c:import url="footer.jsp"></c:import>
 	<script src="<c:url value='/static/js/jquery-2.1.4.min.js' />"></script>

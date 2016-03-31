@@ -15,6 +15,9 @@
 	<link rel="stylesheet" href="<c:url value='/static/css/jquery.tagit.css' /> ">
 	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
 </head>
+
+
+</head>
 <body>
 	<c:import url="../header.jsp"></c:import>
 	<span id="json-url" data-baseurl="<c:url value='/json' />"></span>
@@ -22,6 +25,7 @@
 		<c:url var="urlPost" value='salva' />
 		<form:form action="${urlPost}" method="POST" commandName="questao">
 
+			<input type="hidden" name="questaoId" value="${questao.id}">
 			<form:errors path="alternativaCorreta" cssClass="alert alert-danger" element="div" />
 			<div class="form-group grupo-titulo">
 				<label for="titulo">Titulo da Questão:</label>
@@ -36,6 +40,9 @@
 			<div class="form-group">
 				<label for="tags">Escolha as tags da questão:</label> 
 				<ul id="myTags">
+					<c:forEach items="${questao.tags}" var="tag">
+						<li>${tag}</li>
+					</c:forEach>
 				</ul>
 			</div>
 
@@ -45,12 +52,13 @@
 				<form:errors path="alternativa[0].descricao" cssClass="alert alert-danger" element="div" />
 				<div class='esconde'>
 					<span>Preview:</span>
-					<div class="preview-markdown"></div>
+					<div class="previ	ew-markdown"></div>
 				</div>
 				<div class="input-group">
-					<span class="input-group-addon"> <input type="radio" name="alternativaCorreta" value="0" id="botaoA" />
+					<span class="input-group-addon"> 
+						<input type="radio" name="alternativaCorreta" value="0" id="botaoA" <c:if test="${questao.alternativa[0].alternativaCorreta == true}">checked="checked"</c:if>/>
 					</span>
-					<textarea class="form-control entrada" name="alternativa" id="alternativa">${alternativa[0].descricao}</textarea>
+					<textarea class="form-control entrada" name="alternativa" id="alternativa">${questao.alternativa[0].descricao}</textarea>
 				</div>
 			</div>
 
@@ -63,9 +71,9 @@
 					<div class="preview-markdown"></div>
 				</div>
 				<div class="input-group">
-					<span class="input-group-addon"> <input type="radio" name="alternativaCorreta" value="1" />
+					<span class="input-group-addon"> <input type="radio" name="alternativaCorreta" value="1" <c:if test="${questao.alternativa[1].alternativaCorreta == true}">checked="checked"</c:if>/>
 					</span>
-					<textarea class="form-control entrada" name="alternativa" id="alternativa">${alternativa[1].descricao}</textarea>
+					<textarea class="form-control entrada" name="alternativa" id="alternativa">${questao.alternativa[1].descricao}</textarea>
 				</div>
 			</div>
 
@@ -77,9 +85,9 @@
 					<div class="preview-markdown"></div>
 				</div>
 				<div class="input-group">
-					<span class="input-group-addon"> <input type="radio" name="alternativaCorreta" value="2">
+					<span class="input-group-addon"> <input type="radio" name="alternativaCorreta" value="2" <c:if test="${questao.alternativa[2].alternativaCorreta == true}">checked="checked"</c:if>>
 					</span>
-					<textarea class="form-control entrada" name="alternativa" id="alternativa">${alternativa[2].descricao}</textarea>
+					<textarea class="form-control entrada" name="alternativa" id="alternativa">${questao.alternativa[2].descricao}</textarea>
 				</div>
 			</div>
 
@@ -91,9 +99,9 @@
 					<div class="preview-markdown"></div>
 				</div>
 				<div class="input-group">
-					<span class="input-group-addon"> <input type="radio" name="alternativaCorreta" value="3" />
+					<span class="input-group-addon"> <input type="radio" name="alternativaCorreta" value="3" <c:if test="${questao.alternativa[3].alternativaCorreta == true}">checked="checked"</c:if> />
 					</span>
-					<textarea class="form-control entrada" name="alternativa" id="alternativa">${alternativa[3].descricao}</textarea>
+					<textarea class="form-control entrada" name="alternativa" id="alternativa">${questao.alternativa[3].descricao}</textarea>
 				</div>
 			</div>
 
@@ -106,13 +114,13 @@
 					<div class="preview-markdown"></div>
 				</div>
 				<div class="input-group">
-					<span class="input-group-addon"> <input type="radio" name="alternativaCorreta" value="4" />
+					<span class="input-group-addon"> <input type="radio" name="alternativaCorreta" value="4" <c:if test="${questao.alternativa[4].alternativaCorreta == true}">checked="checked"</c:if>/>
 					</span>
-					<textarea class="form-control entrada" name="alternativa" id="alternativa">${alternativa[4].descricao}</textarea>
+					<textarea class="form-control entrada" name="alternativa" id="alternativa">${questao.alternativa[4].descricao}</textarea>
 				</div>
 			</div>
 
-			<button type="submit" class="btn btn-default">Adicionar Questão</button>
+			<button type="submit" class="btn btn-default">Editar Questão</button>
 
 		</form:form>
 
