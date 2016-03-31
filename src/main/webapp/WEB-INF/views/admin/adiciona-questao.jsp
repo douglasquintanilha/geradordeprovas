@@ -15,9 +15,6 @@
 	<link rel="stylesheet" href="<c:url value='/static/css/jquery.tagit.css' /> ">
 	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
 </head>
-
-
-</head>
 <body>
 	<c:import url="../header.jsp"></c:import>
 	<span id="json-url" data-baseurl="<c:url value='/json' />"></span>
