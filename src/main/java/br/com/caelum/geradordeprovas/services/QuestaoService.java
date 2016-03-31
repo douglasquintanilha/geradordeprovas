@@ -69,6 +69,12 @@ public class QuestaoService {
 		questaoDao.save(questao);
 		preencheAlternativaCorreta(questao);
 	}
+
+
+	public void edita(Questao questao) {
+		verificaSeTagJaExisteNoBanco(questao);
+		preencheAlternativaCorreta(questao);
+	}
 	
 	
 }

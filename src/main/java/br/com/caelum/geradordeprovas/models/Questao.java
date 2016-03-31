@@ -104,4 +104,14 @@ public class Questao {
 		this.estatistica = estatistica;
 	}
 
+	public void edita(Questao questaoEditada) {
+		
+		this.alternativa.clear();
+		this.alternativa.addAll(questaoEditada.getAlternativa());
+		this.alternativaCorreta = questaoEditada.getAlternativaCorreta();
+		this.tags = questaoEditada.getTags();
+		this.titulo = questaoEditada.getTitulo();
+		
+	}
+
 }
