@@ -23,7 +23,7 @@
 				<input type="text" name="login" id="login" class="form-control" autofocus>
 			</div>
 			<div class="form-group">
-				<label for="senha">Senha:</label> <input type="password" name="senha" id="senha" class="form-control">
+				<label for="senha">Senha:</label> <input placeholder="senha" type="password" name="senha" id="senha" class="form-control">
 			</div>
 
 			<div class="form-group">
