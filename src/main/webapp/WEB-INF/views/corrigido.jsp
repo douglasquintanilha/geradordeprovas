@@ -40,6 +40,19 @@
 						</label>
 					</div>
 				</c:forEach>
+				
+				<c:url var="urlPost" value='/feedback'/>
+				<form:form method="POST" action="${urlPost}">
+				<hr>
+				<h3>Deixe aqui seu feedback sobre o sistema!</h3>
+					<div class="form-group">
+						<textarea class="form-control entrada"  
+							name="comentario" id="comentario" required>
+						</textarea>
+						<button type="submit" class="btn btn-default">Enviar!</button>
+					</div>
+				</form:form>
+				
 			</div>
 		</c:forEach>
 		<a href="<c:url value='/'/>">Voltar para o início</a>
