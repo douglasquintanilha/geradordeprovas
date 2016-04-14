@@ -22,6 +22,79 @@
 		<c:url var="urlPost" value='salva' />
 		<form:form action="${urlPost}" method="POST" commandName="questao">
 
+			<div id="dropMarkdown" class="dropdown">
+				<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu" 
+					data-toggle="dropdown" aria-expanded="false" onclick="dropdownOpen()">
+					Aprenda mais sobre Markdown!
+				</button>
+				
+				<div class="dropdown-menu container" aria-labelledby="dropdownMenu">
+					<h2>Texto:</h2>
+					<p>
+						É muito fácil deixar palavras em **negrito** e outras em *itálico*. 
+						Dá até pra colocar um [link pro Google](http://google.com)!
+					</p>
+					<p>
+						É muito fácil deixar palavras em <b>negrito</b> e outras em <i>itálico</i>. 
+						Dá até pra colocar um <a href="http://google.com">link para o Google</a>!
+					</p>
+					
+					<hr>
+					
+					<h2>Listas</h2>
+						<p>
+							As vezes queremos listas **numeradas**:<br>
+							<br>
+							1. Um<br>
+							2. Dois<br>
+							3. Três<br>
+							<br>
+							As vezes apenas um **pontinho**:<br>
+							<br>
+							* Potinho 1<br>
+							* Pontinho 2<br>
+							 * Com um espaço **antes** do asterisco<br>
+						</p>
+						<p>
+							As vezes queremos listas <b>numeradas</b>:
+							<ol>
+								<li>Um</li>
+								<li>Dois</li>
+								<li>Três</li>
+							</ol>
+							As vezes apenas um <b>pontinho</b>:
+							<ul>							
+								<li>Pontinho 1</li>
+								<li>Pontinho 2</li>
+								<ul>
+									<li>Com um espaço <b>antes</b> do asterisco</li>
+								</ul>
+							</ul>
+						</p>
+					
+						<hr>
+						
+					<h2>Código</h2>
+						<p>
+							Uma **linha** de código:<br>
+							`var teste = "olá markdown";`
+							<br><br>Um **bloco** de código:<br>
+							```<br>
+							var teste = "olá markdown";<br>
+							console.log(teste);<br>
+							```
+						</p>
+						<p>
+							Uma <b>linha</b> de código:
+							<code>var teste = "olá markdown"</code>
+							<br>Um <b>bloco</b> de código:<br>
+							<pre><code>var teste = "olá markdown";
+console.log(teste);</code></pre>						
+						</p>
+				</div>
+			
+			</div>
+
 			<form:errors path="alternativaCorreta" cssClass="alert alert-danger" element="div" />
 			<div class="form-group grupo-titulo">
 				<label for="titulo">Titulo da Questão:</label>
@@ -118,6 +191,7 @@
 
 		<script src="<c:url value='/static/js/jquery-2.1.4.min.js' />"></script>
 		<script src="<c:url value='/static/js/jquery-ui.min.js' />"></script>
+		<script src="<c:url value='/static/js/adiciona-classe-dropdown.js' />"></script>
 		<script src="<c:url value='/static/js/tag-it.min.js' />"></script>
 		<script src="<c:url value='/static/js/tag-it-init.js' />"></script>
 		<script src="<c:url value='/static/js/showdown.min.js' />"></script>
