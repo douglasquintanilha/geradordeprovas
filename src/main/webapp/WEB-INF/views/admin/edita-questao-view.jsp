@@ -25,6 +25,12 @@
 			<input type="text" class="form-control" id="busca" placeholder="Nome da prova..." aria-describedby="basic-addon1">
 		</div>
 
+		<ol>
+		<c:forEach items="${questoes}" var="questao">
+			<li><md:render  options="FencedCodeBlocks"><a href="<c:url value='edita/${questao.id}'/>">${questao.titulo}</a></md:render></li>
+		</c:forEach>
+		</ol>
+
 		<c:forEach items="${provas}" var="prova">
 		<div class="prova-element">
 			<div class="panel panel-primary questao">
