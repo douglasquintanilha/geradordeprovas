@@ -12,6 +12,9 @@
 <body>
 	<c:import url="../header.jsp"></c:import>
 	<div class="container">
+	<c:if test="${not empty prova.id}">
+		<div class="alert alert-success" role="alert">Prova #${prova.id} foi editada com sucesso!</div>
+	</c:if>
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -28,14 +31,16 @@
 						<td>${prova.nome}</td>
 						<td>${prova.descricao}</td>
 						<td>
-							<span class="glyphicon glyphicon-pencil icone-tabela"></span>
+							<a href="<c:url value='editar/${prova.id}'/>">
+								<span class="glyphicon glyphicon-pencil icone-tabela"></span>
+							</a>
 							<span class="glyphicon glyphicon-remove icone-tabela"></span>							
 						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>	
-	<div class="container">		
+	</div>		
 	<c:import url="../footer.jsp"></c:import>	
 </body>
 </html>

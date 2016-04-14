@@ -5,27 +5,25 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Caelum Provas</title>
-<link rel="stylesheet" href="<c:url value='/static/css/bootstrap.min.css' />">
-<link rel="stylesheet" href="<c:url value='/static/css/jquery-ui.min.css' />">
-<link rel="stylesheet" href="<c:url value='/static/css/main.css' />">
-<link rel="stylesheet" href="<c:url value='/static/css/github.css' /> ">
-
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Caelum Provas</title>
+	<link rel="stylesheet" href="<c:url value='/static/css/bootstrap.min.css' />">
+	<link rel="stylesheet" href="<c:url value='/static/css/jquery-ui.min.css' />">
+	<link rel="stylesheet" href="<c:url value='/static/css/main.css' />">
 </head>
 <body>
 	<c:import url="../header.jsp"></c:import>
-	<div class="container"> 
-		<h1>Monte uma prova:</h1>
+	<div class="container">
+		<h1>Edite a prova:</h1>
 		<br>
-		<c:url var="urlPost" value='salvaProva'/>
+		<c:url var="urlPost" value='${prova.id}'/>
 		<form:form method="POST" action="${urlPost}" commandName="prova" >
 			<div class="form-group">
 				<label for="nome">Nome da Prova:</label>
 				<form:errors path="nome" cssClass="alert alert-danger" element="div" />
 				<input type="text" value="${prova.nome}" name="nome" class="form-control" id="nomeProva" required>
 				<label for="comentario">Descrição</label>
-				<input type="text" name="descricao" value="${prova.descricao}" id="descricao" class="form-control" required>
+				<input type="text" value="${prova.descricao}" name="descricao" id="descricao" class="form-control" required>
 			</div>
 			<div class="">
 				<label for="duracao">Coloque a duração da prova em minutos:</label>
@@ -41,6 +39,23 @@
 				<input type="text" class="form-control" id="busca" placeholder="Filtre por tags..." aria-describedby="basic-addon1">
 			</div>
 			<br>
+			<c:forEach items="${questoesDaProva}" var="questoesDaProva">
+				<div class="panel panel-success questao">
+					<div class="panel-heading">
+						<label><input type="checkbox" checked name="questoes" value="${questoesDaProva.id}"> Questão ${questoesDaProva.id}</label>
+					</div>
+					<div class="panel-body">
+						<p><md:render  options="FencedCodeBlocks">${questoesDaProva.titulo}</md:render></p>
+						<span>Tags: </span> <span class="tags"><c:forEach items="${questoesDaProva.tags}" var="tag">${tag},</c:forEach></span> <br>
+						<button class="btn btn-success botao-exibir-alternativas" type="button" data-toggle="collapse" data-target="#alternativas${questao.id}" aria-expanded="false" aria-controls="alternativas${questao.id}">Exibir alternativas</button>	
+						<ol class="collapse" id="alternativas${questoesDaProva.id}" type="A">
+							<c:forEach items="${questoesDaProva.alternativa}" var="alternativa">
+								<li><md:render  options="FencedCodeBlocks">${alternativa.descricao}</md:render></li>
+							</c:forEach>
+						</ol>
+					</div>
+				</div>
+			</c:forEach>	
 			<c:forEach items="${questoes}" var="questao">
 				<div class="panel panel-primary questao">
 					<div class="panel-heading">
@@ -58,10 +73,11 @@
 					</div>
 				</div>
 			</c:forEach>
-			<button type="submit" class="btn btn-default">Criar Prova</button>
+			<button type="submit" class="btn btn-default">Editar Prova</button>
 		</form:form>
-
-	</div>
+		
+		
+	</div>		
 	<c:import url="../footer.jsp"></c:import>
 	
 	<script src="<c:url value='/static/js/jquery-2.1.4.min.js' />"></script>

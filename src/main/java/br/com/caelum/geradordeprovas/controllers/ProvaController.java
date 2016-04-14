@@ -12,7 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -106,10 +108,60 @@ public class ProvaController {
 
 		List<Prova> provas = provaDao.list();		
 		ModelAndView mv = new ModelAndView("admin/listar-provas");
-		System.out.println(provas);
+
 		mv.addObject("provas",provas);
 		return mv;
 	}
 	
+	@RequestMapping(value="/editar/{id}",method=RequestMethod.GET)
+	public ModelAndView editarForm(@PathVariable long id){
+		Prova prova = provaDao.getProva(id);
+		
+		List<Questao> questoesDaProva = prova.getQuestoes();
+		List<Long> ids = new ArrayList<Long>();
+		
+		for (Questao questao : questoesDaProva) {
+			ids.add(questao.getId());
+		}
+		
+		List<Questao> questoesQueNaoFazParteDaProva = questaoDao.getQuestaoExceto(ids);
+		
+		ModelAndView mv = new ModelAndView("admin/editar-prova");
+		
+		mv.addObject("questoesDaProva", questoesDaProva);
+		mv.addObject("questoes",questoesQueNaoFazParteDaProva);
+		mv.addObject("prova", prova);
+		return mv;	
+	}
+	
+	@Transactional
+	@RequestMapping(value="/editar/{id}",method=RequestMethod.POST)
+	public ModelAndView editarQuestao(@Valid @ModelAttribute("prova") Prova prova,@PathVariable long id, BindingResult result,RedirectAttributes flash){
+		if (result.hasErrors()) {
+			ModelAndView mv = new ModelAndView("admin/editar-prova/"+id,
+					result.getModel());
+			List<Questao> questoesDaProva = prova.getQuestoes();
+			List<Long> ids = new ArrayList<Long>();
+			
+			for (Questao questao : questoesDaProva) {
+				ids.add(questao.getId());
+			}
+			
+			List<Questao> questoesQueNaoFazParteDaProva = questaoDao.getQuestaoExceto(ids);
+			
+			mv.addObject("questoesDaProva", questoesDaProva);
+			mv.addObject("questoes",questoesQueNaoFazParteDaProva);
+			mv.addObject("prova", prova);
+			return mv;
+		}
+		
+		
+		ModelAndView mv = new ModelAndView("redirect:../listar");
+		
+		provaDao.update(prova);
+		flash.addFlashAttribute("prova",prova);
+		
+		return mv;
+	}
 
 }

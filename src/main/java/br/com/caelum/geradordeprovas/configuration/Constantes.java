@@ -25,4 +25,9 @@ public class Constantes {
 		return properties.getProperty(s);
 	}
 
+	public String getEnvironment() {
+		return environment;
+	}
+
+
 }
