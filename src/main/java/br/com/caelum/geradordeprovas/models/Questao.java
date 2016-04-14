@@ -47,8 +47,10 @@ public class Questao {
 	@Transient
 	private String alternativaCorreta;
 
-	public void atualizaEstatistica(boolean acertou) {
-		
+	public void atualizaEstatistica(boolean acertou,Usuario usuario) {
+		if(usuario.isAdmin()){
+			return;
+		}
 		if (acertou)
 			estatistica.incrementaAcertos();
 		else

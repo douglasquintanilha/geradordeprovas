@@ -114,14 +114,12 @@ public class Avaliacao {
 		
 		int i = 0;
 		
-		for (AlternativaMarcada alternativaMarcada : alternativasMarcadas) {
-
-			
+		for (AlternativaMarcada alternativaMarcada : alternativasMarcadas) {			
 			if (alternativaMarcada.isAlternativaCorreta()) {
 				this.nota++;
-				prova.getQuestoes().get(i).atualizaEstatistica(true);
-			} else {
-				prova.getQuestoes().get(i).atualizaEstatistica(false);
+				prova.getQuestoes().get(i).atualizaEstatistica(true,usuario);
+			} else {			
+				prova.getQuestoes().get(i).atualizaEstatistica(false,usuario);
 			}
 			i++;
 		}
