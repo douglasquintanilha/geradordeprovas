@@ -101,5 +101,15 @@ public class ProvaController {
 		return mv;
 	}
 	
+	@RequestMapping("/listar")
+	public ModelAndView listar(){
+
+		List<Prova> provas = provaDao.list();		
+		ModelAndView mv = new ModelAndView("admin/listar-provas");
+		System.out.println(provas);
+		mv.addObject("provas",provas);
+		return mv;
+	}
+	
 
 }

@@ -12,15 +12,29 @@
 <body>
 	<c:import url="../header.jsp"></c:import>
 	<div class="container">
-		<h1>Bem vindo ao geraX!</h1>
+		<h1>Bem vindo ao geraX!</h1>		
+		<hr>
+				
+		<h3>Questão...</h1>	
 		<a href="<c:url value='questao/adiciona'/>"><h3>Adicionar Questão</h3></a>
 		<a href="<c:url value='questao/edita'/>"><h3>Editar Questão</h3></a>
+		<a href="<c:url value='seleciona-tag'/>"><h3>Procurar Questão por tag</h3></a>
+		<hr>
+		
+		<h3>Provas...</h1>	   
 		<a href="<c:url value='prova/monta'/>"><h3>Montar Prova</h3></a> 
 		<a href="<c:url value='/liberadas'/>"><h3>Realizar Prova</h3></a>
-		<a href="<c:url value='seleciona-tag'/>"><h3>Procurar Questão por tag</h3></a>
-		<a href="<c:url value='usuario/novo/form'/>"><h3>Criar Usuário</h3></a>
 		<a href="<c:url value='prova/libera'/>"><h3>Liberar Prova</h3></a>
+		<a href="<c:url value='prova/listar'/>"><h3>Listar/Editar Provas</h3></a>		
+	    <hr>	
+	    
+	    <h3>Usuario...</h3>			
+		<a href="<c:url value='usuario/novo/form'/>"><h3>Criar Usuário</h3></a>
+		<hr>
+				
+		<h3>Outros...</h3>
 		<a href="<c:url value='estatisticas'/>"><h3>Estatísticas</h3></a>
+		
 	</div>
 	<c:import url="../footer.jsp"></c:import>
 	

@@ -28,7 +28,7 @@ public class ProvaDao {
 	public Prova getProva(Long id) {
 		return manager.find(Prova.class, id);
 	}
-
+	
 	public List<Prova> getProvasPorIds(List<Long> ids) {
 
 		List<Prova> provas = new ArrayList<>();

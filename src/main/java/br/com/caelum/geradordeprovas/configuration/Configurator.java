@@ -90,6 +90,12 @@ public class Configurator extends WebMvcConfigurerAdapter {
 		return logado;
 	}
 	
+	@Bean
+	public Constantes getConstantes(){
+		Constantes constantes = new Constantes();
+		return constantes;
+	}
+	
 	
 
 }
