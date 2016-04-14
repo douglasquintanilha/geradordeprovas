@@ -41,6 +41,7 @@ public class Configurator extends WebMvcConfigurerAdapter {
 	@Bean
 	public ViewResolver viewResolver() {
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+		viewResolver.setExposeContextBeansAsAttributes(true);
 		viewResolver.setViewClass(JstlView.class);
 		viewResolver.setPrefix("/WEB-INF/views/");
 		viewResolver.setSuffix(".jsp");
@@ -88,6 +89,13 @@ public class Configurator extends WebMvcConfigurerAdapter {
 		Usuario logado = usuarioDao.getUsuarioByLogin(usuario.getLogin());
 		return logado;
 	}
+	
+	@Bean
+	public Constantes getConstantes(){
+		Constantes constantes = new Constantes();
+		return constantes;
+	}
+	
 	
 
 }
