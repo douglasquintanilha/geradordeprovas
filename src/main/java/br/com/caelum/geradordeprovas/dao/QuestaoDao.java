@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import br.com.caelum.geradordeprovas.models.EstatisticaQuestao;
+import br.com.caelum.geradordeprovas.models.Prova;
 import br.com.caelum.geradordeprovas.models.Questao;
 
 @Repository
@@ -48,5 +49,9 @@ public class QuestaoDao {
 						.getSingleResult();
 
 		return questao;
+	}
+	
+	public List<Questao> getQuestaoExceto(List<Long> ids){			
+		return manager.createQuery("select p from Questao p WHERE p.id NOT IN (:ids)",Questao.class).setParameter("ids",ids).getResultList();
 	}
 }
