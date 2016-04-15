@@ -12,9 +12,10 @@
 <body>
 	<c:import url="../header.jsp"></c:import>
 	<div class="container">
-	<c:if test="${not empty prova.id}">
-		<div class="alert alert-success" role="alert">Prova #${prova.id} foi editada com sucesso!</div>
-	</c:if>
+		<c:if test="${not empty prova.id}">
+			<div class="alert alert-success" role="alert">Prova #${prova.id} foi editada com sucesso!</div>
+		</c:if>
+		
 		<table class="table table-hover">
 			<thead>
 				<tr>
