@@ -18,13 +18,40 @@
 	<c:import url="../header.jsp"></c:import>
 	
 	<div class="container">
-		<h1>Procure a questão pela prova</h1>
 		
-		<div class="input-group col-md-12">
-			<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-tag" aria-hidden="true"></span></span> 
-			<input type="text" class="form-control" id="busca" placeholder="Nome da prova..." aria-describedby="basic-addon1">
+		<c:if test="${not empty questao}">
+			<div class="alert alert-success" role="alert">Questão "${questao.titulo}" foi editada com sucesso!</div>
+		</c:if>
+	
+	
+		<h1 align="center">Procure por...</h1>
+		
+		<div class="btn-group btn-group-justified" role="group" aria-label="...">
+		  <div class="btn-group" role="group">
+		    <button type="button" class="btn btn-default" onclick="mostraQuestoes()">Questão</button>
+		  </div>
+		  <div class="btn-group" role="group">
+		    <button type="button" class="btn btn-default" onclick="mostraProvas()">Prova</button>
+		  </div>
 		</div>
 
+		<div id="questoes">
+		
+			<div class="input-group col-md-12">
+				<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-tag" aria-hidden="true"></span></span> 
+				<input type="text" class="form-control" id="busca" placeholder="Nome da questão..." aria-describedby="basic-addon1">
+			</div>
+		
+		
+			<ol id="lista-questoes">
+				<c:forEach items="${questoes}" var="questao">
+					<li><md:render  options="FencedCodeBlocks"><a href="<c:url value='edita/${questao.id}'/>">${questao.titulo}</a></md:render></li>
+				</c:forEach>
+			</ol>
+			
+		</div>
+
+		<div id="provas">
 		<c:forEach items="${provas}" var="prova">
 		<div class="prova-element">
 			<div class="panel panel-primary questao">
@@ -35,7 +62,7 @@
 					<button class="btn btn-primary botao-exibir-alternativas" type="button" data-toggle="collapse" 
 						data-target="#prova${prova.id}" aria-expanded="false" aria-controls="prova${prova.id}">
 						Exibir Questoes
-					</button>	
+					</button>
 					<ol class="collapse" id="prova${prova.id}" type="1">
 						<c:forEach items="${prova.questoes}" var="questao">
 							<li><md:render  options="FencedCodeBlocks"><a href="<c:url value='edita/${questao.id}'/>">${questao.titulo}</a></md:render></li>
@@ -52,6 +79,8 @@
 
 
 	<script src="<c:url value='/static/js/jquery-2.1.4.min.js' />"></script>
+	<script src="<c:url value='/static/js/edita-questao.js' />"></script>
+	<script src="<c:url value='/static/js/filtra-por-questao.js' />"></script>
 	<script src="<c:url value='/static/js/bootstrap.min.js' />"></script>
 	<script src="<c:url value='/static/js/troca-texto.js' />"></script>
 	<script src="<c:url value='/static/js/filtra-por-tag.js' />"></script>
