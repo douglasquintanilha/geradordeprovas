@@ -41,20 +41,31 @@
 					</div>
 				</c:forEach>
 				
+				
+				
+			</div>
+		</c:forEach>
+		
 				<c:url var="urlPost" value='/feedback'/>
 				<form:form method="POST" action="${urlPost}">
 				<hr>
 				<h3>Deixe aqui seu feedback sobre o sistema!</h3>
 					<div class="form-group">
+						
+						<label class="radio-inline"><input type="radio" name="nota" value="1">Péssimo</label>
+						<label class="radio-inline"><input type="radio" name="nota" value="2">Ruim</label>
+						<label class="radio-inline"><input type="radio" name="nota" value="3">Razoável</label>
+						<label class="radio-inline"><input type="radio" name="nota" value="4">Bom</label>
+						<label class="radio-inline"><input type="radio" name="nota" value="5">Muito Bom</label>
+												
 						<textarea class="form-control entrada"  
-							name="comentario" id="comentario" required>
-						</textarea>
+							name="comentario" id="comentario" 
+							placeholder="Nos ajude a melhorar!" required></textarea>
 						<button type="submit" class="btn btn-default">Enviar!</button>
+						
 					</div>
 				</form:form>
-				
-			</div>
-		</c:forEach>
+		
 		<a href="<c:url value='/'/>">Voltar para o início</a>
 	</div>
 	<c:import url="footer.jsp"></c:import>

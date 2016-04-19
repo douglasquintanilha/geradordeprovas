@@ -19,14 +19,16 @@ public class Feedback {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	@OneToOne()
 	private Usuario usuario;
-	
+
 	@NotEmpty
 	@Column(length = 2048)
 	String comentario;
-	
+
+	int nota;
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar dataCriacao;
 
@@ -36,6 +38,14 @@ public class Feedback {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public int getNota() {
+		return nota;
+	}
+
+	public void setNota(int nota) {
+		this.nota = nota;
 	}
 
 	public Usuario getUsuario() {
@@ -61,10 +71,10 @@ public class Feedback {
 	public void setDataCriacao(Calendar dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
-	
+
 	public String getDataFormatada() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
 		return sdf.format(dataCriacao.getTime());
 	}
-	
+
 }
