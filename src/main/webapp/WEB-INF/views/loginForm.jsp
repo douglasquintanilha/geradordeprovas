@@ -9,10 +9,18 @@
 	<link href="<c:url value='/static/imagens/favicon.ico' />" rel="icon" type="image/x-icon" />
 	<link rel="stylesheet" href="static/css/bootstrap.min.css">
 	<link rel="stylesheet" href="static/css/main.css">
+	<link rel="stylesheet" href="static/css/font-awesome.min.css">
+	<link rel="stylesheet" href="static/css/bootstrap-social.css">
 </head>
 <body>
 	<c:import url="header.jsp"></c:import>
 	<div class="container">
+		
+		<div>
+			<a class="btn btn-block btn-social btn-github btn-lg" href="<c:url value='/oauth/github-login'/>">
+    			<span class="fa fa-github"></span> Login com GitHub!
+  			</a>
+		</div>
 		
 		<form:form action="efetuaLogin" method="POST" commandName="usuario" class="form col-xs-3">
 			<div class="form-group">
@@ -31,11 +39,6 @@
 			</div>
 
 		</form:form>
-		<div class="login-github col-xs-3">
-			<a class="login-github-text" href="<c:url value='/oauth/github-login'/>"><img class="github-icon" src="<c:url value='/static/imagens/github-icon.png' />">
-			Login com GitHub</a>	
-		</div>
-	
 
 	</div>
 	<c:import url="footer.jsp"></c:import>
