@@ -18,6 +18,7 @@
 		<h1>Sua nota foi:</h1>
 		<h3>${avaliacao.nota}/${avaliacao.prova.quantidadeDeQuestoes}</h3>
 		<h4>Gabarito:</h4>
+		
 		<c:forEach items="${avaliacao.prova.questoes}" var="questao" varStatus="i">
 			<div class="questao">
 				<h3>
@@ -25,6 +26,7 @@
 					</md:render>
 				</h3>
 				<c:forEach items="${questao.alternativa}" var="alternativa">
+					<c:set var="alternativaM" value="${false}"/>
 					<div class="radio alternativa">
 						<c:if test="${alternativa.alternativaCorreta}">
 							<span class="icone glyphicon glyphicon-ok" aria-hidden="true"></span>
@@ -32,50 +34,45 @@
 						<c:if test="${alternativa.alternativaCorreta == false}">
 							<span class="icone glyphicon glyphicon-remove" aria-hidden="true"></span>
 						</c:if>
-						
-						<label for="${alternativa.id}"> <input type="radio"  value="${alternativa.id}"
+						<label for="${alternativa.id}"> <input type="radio" value="${alternativa.id}"
 							<c:forEach items="${avaliacao.alternativasMarcadas}" var="alternativaMarcada">
-								<c:choose>
-								    <c:when test="${alternativa.id == alternativaMarcada.id}">
-								        checked="checked"
-								    </c:when>
-								    <c:otherwise>
-								        disabled
-								    </c:otherwise>
-								</c:choose>														
-							</c:forEach>
-							 id="${alternativa.id}" name="alternativas[${i.index}]">																	
+									<c:if test="${alternativa.id == alternativaMarcada.id}">
+										checked="checked"
+										<c:set var="alternativaM" value="${true}"/>										
+									</c:if>
+							</c:forEach> 
+							<c:if test="${alternativaM == false}">
+								disabled
+							</c:if>							
+							id="${alternativa.id}" name="alternativas[${i.index}]"> 
 							<md:render options="FencedCodeBlocks">${alternativa.descricao}</md:render>
 						</label>
 					</div>
-				</c:forEach>
-				
-				
-				
+				</c:forEach>												
 			</div>
 		</c:forEach>
 		
-				<c:url var="urlPost" value='/feedback'/>
-				<form:form method="POST" action="${urlPost}">
-				<hr>
-				<h3>Deixe aqui seu feedback sobre o sistema!</h3>
-					<div class="form-group">
-						
-						<label class="radio-inline"><input type="radio" name="nota" value="1">PÈssimo</label>
-						<label class="radio-inline"><input type="radio" name="nota" value="2">Ruim</label>
-						<label class="radio-inline"><input type="radio" name="nota" value="3">Razo·vel</label>
-						<label class="radio-inline"><input type="radio" name="nota" value="4">Bom</label>
-						<label class="radio-inline"><input type="radio" name="nota" value="5">Muito Bom</label>
-												
-						<textarea class="form-control entrada"  
-							name="comentario" id="comentario" 
-							placeholder="Nos ajude a melhorar!" required></textarea>
-						<button type="submit" class="btn btn-default">Enviar!</button>
-						
-					</div>
-				</form:form>
+		<c:url var="urlPost" value='/feedback'/>
+		<form:form method="POST" action="${urlPost}">
+		<hr>
+		<h3>Deixe aqui seu feedback sobre o sistema!</h3>
+			<div class="form-group">
+				
+				<label class="radio-inline"><input type="radio" name="nota" value="1">P√©ssimo</label>
+				<label class="radio-inline"><input type="radio" name="nota" value="2">Ruim</label>
+				<label class="radio-inline"><input type="radio" name="nota" value="3">Razo√°vel</label>
+				<label class="radio-inline"><input type="radio" name="nota" value="4">Bom</label>
+				<label class="radio-inline"><input type="radio" name="nota" value="5">Muito Bom</label>
+										
+				<textarea class="form-control entrada"  
+					name="comentario" id="comentario" 
+					placeholder="Nos ajude a melhorar!" required></textarea>
+				<button type="submit" class="btn btn-default">Enviar!</button>
+				
+			</div>
+		</form:form>
 		
-		<a href="<c:url value='/'/>">Voltar para o inÌcio</a>
+		<a href="<c:url value='/'/>">Voltar para o in√≠cio</a>
 	</div>
 	<c:import url="footer.jsp"></c:import>
 	<script src="<c:url value='/static/js/jquery-2.1.4.min.js' />"></script>
