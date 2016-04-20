@@ -32,11 +32,20 @@
 						<c:if test="${alternativa.alternativaCorreta == false}">
 							<span class="icone glyphicon glyphicon-remove" aria-hidden="true"></span>
 						</c:if>
-						<label for="${alternativa.id}"> <input type="radio" disabled value="${alternativa.id}"
+						
+						<label for="${alternativa.id}"> <input type="radio"  value="${alternativa.id}"
 							<c:forEach items="${avaliacao.alternativasMarcadas}" var="alternativaMarcada">
-									<c:if test="${alternativa.id == alternativaMarcada.id}">checked="checked"</c:if>
-									</c:forEach> id="${alternativa.id}"
-							name="alternativas[${i.index}]"> <md:render options="FencedCodeBlocks">${alternativa.descricao}</md:render>
+								<c:choose>
+								    <c:when test="${alternativa.id == alternativaMarcada.id}">
+								        checked="checked"
+								    </c:when>
+								    <c:otherwise>
+								        disabled
+								    </c:otherwise>
+								</c:choose>														
+							</c:forEach>
+							 id="${alternativa.id}" name="alternativas[${i.index}]">																	
+							<md:render options="FencedCodeBlocks">${alternativa.descricao}</md:render>
 						</label>
 					</div>
 				</c:forEach>
