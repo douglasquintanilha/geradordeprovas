@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.caelum.geradordeprovas.dao.ProvaDao;
 import br.com.caelum.geradordeprovas.dao.QuestaoDao;
@@ -60,7 +61,7 @@ public class QuestaoController {
 	@Transactional
 	@RequestMapping("/edita/salva")
 	public String salvaQuestaoEditada(@ModelAttribute("questao") @Valid Questao questaoEditada, BindingResult result,
-			Model model, @RequestParam("questaoId") Long id) {
+			Model model, @RequestParam("questaoId") Long id, RedirectAttributes flash) {
 		if (result.hasErrors()) {
 			model.addAttribute("alternativa", questaoEditada.getAlternativa());
 			return "admin/adiciona-questao";
@@ -70,7 +71,9 @@ public class QuestaoController {
 		questao.edita(questaoEditada);
 		questaoBo.edita(questao);
 
-		return "admin/questao-editada";
+		flash.addFlashAttribute("questao", questao);
+		
+		return "redirect:../edita";
 	}
 
 	@Transactional
