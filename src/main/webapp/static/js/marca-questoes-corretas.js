@@ -4,4 +4,4 @@ $(".glyphicon-ok").closest(".alternativa").each(function(){
 	}else{
 		$(this).closest(".questao").addClass("questao-errada");
 	}
-});		
+});
