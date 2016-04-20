@@ -18,34 +18,34 @@
 		<h1>Sua nota foi:</h1>
 		<h3>${avaliacao.nota}/${avaliacao.prova.quantidadeDeQuestoes}</h3>
 		<h4>Gabarito:</h4>
-		<c:forEach items="${avaliacao.prova.questoes}" var="questao" varStatus="i">
-			<div class="questao">
+		<c:forEach items="${avaliacao.prova.questoes}" var="questao" varStatus="i">	
+		<div class="questao">				
 				<h3>
-					<md:render options="FencedCodeBlocks">${i.index+1} - ${questao.titulo}<br>
-					</md:render>
+					<md:render options="FencedCodeBlocks">${i.index+1} - ${questao.titulo}<br></md:render>
 				</h3>
 				<c:forEach items="${questao.alternativa}" var="alternativa">
 					<div class="radio alternativa">
 						<c:if test="${alternativa.alternativaCorreta}">
 							<span class="icone glyphicon glyphicon-ok" aria-hidden="true"></span>
 						</c:if>
-						<c:if test="${alternativa.alternativaCorreta == false}">
-							<span class="icone glyphicon glyphicon-remove" aria-hidden="true"></span>
-						</c:if>
-						<label for="${alternativa.id}"> <input type="radio" disabled value="${alternativa.id}"
+						<c:forEach items="${avaliacao.alternativasMarcadas}" var="alternativaMarcada">
+							<c:if test="${alternativa.id == alternativaMarcada.id}">
+								<c:if test="${alternativa.alternativaCorreta == false}">
+									<span class="icone glyphicon glyphicon-remove" aria-hidden="true"></span>
+								</c:if>
+							</c:if>
+						</c:forEach>
+						<label class="alternativa-texto" for="${alternativa.id}">
+							<input type="radio" disabled value="${alternativa.id}"
 							<c:forEach items="${avaliacao.alternativasMarcadas}" var="alternativaMarcada">
-									<c:if test="${alternativa.id == alternativaMarcada.id}">checked="checked"</c:if>
-									</c:forEach> id="${alternativa.id}"
-							name="alternativas[${i.index}]"> <md:render options="FencedCodeBlocks">${alternativa.descricao}</md:render>
+								<c:if test="${alternativa.id == alternativaMarcada.id}">checked="checked"</c:if>
+							</c:forEach> id="${alternativa.id}" name="alternativas[${i.index}]">
+							<md:render options="FencedCodeBlocks">${alternativa.descricao}</md:render>
 						</label>
 					</div>
 				</c:forEach>
-				
-				
-				
 			</div>
 		</c:forEach>
-		
 				<c:url var="urlPost" value='/feedback'/>
 				<form:form method="POST" action="${urlPost}">
 				<hr>
