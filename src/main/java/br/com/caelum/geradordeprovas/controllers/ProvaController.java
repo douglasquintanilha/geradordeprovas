@@ -20,10 +20,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.caelum.geradordeprovas.dao.ProvaDao;
 import br.com.caelum.geradordeprovas.dao.QuestaoDao;
+import br.com.caelum.geradordeprovas.dao.TurmaDao;
 import br.com.caelum.geradordeprovas.dao.UsuarioDao;
 import br.com.caelum.geradordeprovas.models.LiberacaoForm;
 import br.com.caelum.geradordeprovas.models.Prova;
 import br.com.caelum.geradordeprovas.models.Questao;
+import br.com.caelum.geradordeprovas.models.Turma;
 import br.com.caelum.geradordeprovas.models.Usuario;
 
 @Controller
@@ -33,13 +35,15 @@ public class ProvaController {
 	private QuestaoDao questaoDao;
 	private ProvaDao provaDao;
 	private UsuarioDao usuarioDao;
+	private TurmaDao turmaDao;
 
 	@Autowired
 	public ProvaController(QuestaoDao questaoDao, ProvaDao provaDao,
-			UsuarioDao usuarioDao) {
+			UsuarioDao usuarioDao, TurmaDao turmaDao) {
 		this.questaoDao = questaoDao;
 		this.provaDao = provaDao;
 		this.usuarioDao = usuarioDao;
+		this.turmaDao = turmaDao;
 	}
 
 	@RequestMapping("/monta")
@@ -76,7 +80,9 @@ public class ProvaController {
 
 		List<Usuario> usuarios = new ArrayList<>(usuarioDao.list());
 		List<Prova> provas = new ArrayList<>(provaDao.list());
-
+		List<Turma> turmas = new ArrayList<>(turmaDao.list());
+		
+		model.addAttribute("turmas", turmas);
 		model.addAttribute("usuarios", usuarios);
 		model.addAttribute("provas", provas);
 
