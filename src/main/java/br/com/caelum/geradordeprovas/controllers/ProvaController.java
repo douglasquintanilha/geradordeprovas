@@ -98,11 +98,9 @@ public class ProvaController {
 			ModelAndView mv = new ModelAndView("redirect:libera");
 			return mv;
 		}
-		List<Prova> provas = provaDao.getProvasPorIds(liberacaoForm.getProvas());
 
-		for (Long usuarioId : liberacaoForm.getUsuarios()) {
-			usuarioDao.salvaProvasLiberadas(usuarioId, provas);
-		}
+		List<Prova> provas = provaDao.getProvasPorIds(liberacaoForm.getProvas());
+		liberacaoForm.liberaProvas(usuarioDao, turmaDao, provas);
 		
 		ModelAndView mv = new ModelAndView("admin/provas-liberadas");
 		return mv;

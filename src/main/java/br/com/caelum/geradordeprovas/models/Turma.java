@@ -1,12 +1,13 @@
 package br.com.caelum.geradordeprovas.models;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -19,14 +20,22 @@ public class Turma {
 	@NotNull
 	private String nome;
 
-	@OneToMany
+	@ManyToMany
 	private Set<Usuario> usuarios;
 
-	@OneToMany
+	@ManyToMany
 	private Set<Prova> provas;
 
 	public void adicionaProvas(List<Prova> provas){
 		this.provas.addAll(provas);
+		atualizaProvasUsuarios();
+	}
+	
+	public void atualizaProvasUsuarios(){
+		List<Prova> provasList = new ArrayList<Prova>(provas);
+		for(Usuario usuario : usuarios){
+			usuario.adicionaProvas(provasList);
+		}
 	}
 	
 	public void setNome(String nome) {

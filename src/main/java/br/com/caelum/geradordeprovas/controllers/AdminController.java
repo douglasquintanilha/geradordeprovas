@@ -68,10 +68,8 @@ public class AdminController {
 	@Transactional
 	@RequestMapping("/criaTurma")
 	public String criaTurma(@ModelAttribute("Turma") Turma turma, RedirectAttributes flash) {
-		
+		turma.atualizaProvasUsuarios();
 		turmaDao.save(turma);
-
-		//nao consigo "flashear"
 		return "redirect:turma";
 	}
 

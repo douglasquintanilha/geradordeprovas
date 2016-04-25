@@ -1,7 +1,9 @@
 package br.com.caelum.geradordeprovas.models;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,7 +31,7 @@ public class Usuario {
 	private boolean admin;
 
 	@ManyToMany
-	private List<Prova> provas = new ArrayList<>();
+	private Set<Prova> provas = new HashSet<>();
 
 	public void adicionaProvas(List<Prova> provas) {
 		this.provas.addAll(provas);
@@ -43,12 +45,13 @@ public class Usuario {
 		return provaIds;
 	}
 	
-	public List<Prova> getProvas() {
+	public Set<Prova> getProvas() {
 		return provas;
 	}
 
 	public void setProvas(List<Prova> provas) {
-		this.provas = provas;
+		Set<Prova> provasSet = new HashSet<>(provas);
+		this.provas = provasSet;
 	}
 
 	public boolean isAdmin() {
