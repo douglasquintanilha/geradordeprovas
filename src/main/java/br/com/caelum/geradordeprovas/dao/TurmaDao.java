@@ -19,5 +19,13 @@ public class TurmaDao {
 		return em.createQuery("from Turma t", Turma.class).getResultList();
 	}
 
+	public void save(Turma turma) {
+		em.persist(turma);
+	}
+
+	public Turma getTurma(Long id) {
+		return em.find(Turma.class, id);
+	}
+
 	
 }

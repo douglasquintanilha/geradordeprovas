@@ -11,7 +11,6 @@
 <link rel="stylesheet" href="<c:url value='/static/css/bootstrap.min.css' />">
 <link rel="stylesheet" href="<c:url value='/static/css/jquery-ui.min.css' />">
 <link rel="stylesheet" href="<c:url value='/static/css/main.css' />">
-
 </head>
 <body>
 	<c:import url="../header.jsp"></c:import>

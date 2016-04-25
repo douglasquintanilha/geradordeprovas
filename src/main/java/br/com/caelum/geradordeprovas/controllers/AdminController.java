@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.caelum.geradordeprovas.dao.ProvaDao;
 import br.com.caelum.geradordeprovas.dao.QuestaoDao;
@@ -31,6 +32,7 @@ public class AdminController {
 	private Criptografia criptografia;
 	private QuestaoDao questaoDao;
 	private ProvaDao provaDao;
+	private TurmaDao turmaDao;
 
 	@Autowired
 	public AdminController(ProvaDao provaDao, QuestaoDao questaoDao, UsuarioDao usuarioDao, Criptografia criptografia,
@@ -39,6 +41,7 @@ public class AdminController {
 		this.criptografia = criptografia;
 		this.questaoDao = questaoDao;
 		this.provaDao = provaDao;
+		this.turmaDao = turmaDao;
 	}
 
 	@RequestMapping("/estatisticas")
@@ -51,20 +54,24 @@ public class AdminController {
 
 	@RequestMapping("/turma")
 	public ModelAndView criaTurmaView() {
-		
+
 		List<Prova> provas = new ArrayList<>(provaDao.list());
 		List<Usuario> usuarios = new ArrayList<>(usuarioDao.list());
 		ModelAndView mv = new ModelAndView("admin/cria-turma");
-		
+
 		mv.addObject("provas", provas);
 		mv.addObject("usuarios", usuarios);
-		
-		return new ModelAndView("admin/cria-turma").addObject("");
+
+		return mv;
 	}
 
+	@Transactional
 	@RequestMapping("/criaTurma")
-	public String criaTurma(@ModelAttribute("turma") Turma turma) {
+	public String criaTurma(@ModelAttribute("Turma") Turma turma, RedirectAttributes flash) {
+		
+		turmaDao.save(turma);
 
+		//nao consigo "flashear"
 		return "redirect:turma";
 	}
 

@@ -94,7 +94,6 @@ public class ProvaController {
 	@RequestMapping("/salvaLiberacao")
 	public ModelAndView salvaLiberacao(@ModelAttribute("liberacaoForm") @Valid LiberacaoForm liberacaoForm, BindingResult result,RedirectAttributes attr) {
 		if(result.hasErrors()){
-			// Wesley
 			attr.addFlashAttribute("org.springframework.validation.BindingResult.liberacaoForm", result);
 			ModelAndView mv = new ModelAndView("redirect:libera");
 			return mv;
