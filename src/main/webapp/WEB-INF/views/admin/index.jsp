@@ -15,13 +15,13 @@
 		<h1>Bem vindo ao geraX!</h1>		
 		<hr>
 				
-		<h3>Questão...</h1>	
+		<h3>Questão...</h3>	
 		<a href="<c:url value='questao/adiciona'/>"><h3>Adicionar Questão</h3></a>
 		<a href="<c:url value='questao/edita'/>"><h3>Editar Questão</h3></a>
 		<a href="<c:url value='seleciona-tag'/>"><h3>Procurar Questão por tag</h3></a>
 		<hr>
 		
-		<h3>Provas...</h1>	   
+		<h3>Provas...</h3>	   
 		<a href="<c:url value='prova/monta'/>"><h3>Montar Prova</h3></a> 
 		<a href="<c:url value='/liberadas'/>"><h3>Realizar Prova</h3></a>
 		<a href="<c:url value='prova/libera'/>"><h3>Liberar Prova</h3></a>
@@ -34,6 +34,7 @@
 				
 		<h3>Outros...</h3>
 		<a href="<c:url value='estatisticas'/>"><h3>Estatísticas</h3></a>
+		<a href="<c:url value='turma'/>"><h3>Criar Turma</h3></a>
 		
 	</div>
 	<c:import url="../footer.jsp"></c:import>

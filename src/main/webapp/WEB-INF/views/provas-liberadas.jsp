@@ -15,6 +15,14 @@
 
 	<c:import url="header.jsp"></c:import>
 	<div class="container">
+		<c:if test="${param.existeTurma == true}">
+			<div class="alert alert-success" role="alert">Matriculado em #${nomeTurma} com sucesso!</div>
+		</c:if>
+		<h3>Matricule-se numa turma!</h3>
+		<form:form method="POST" action="matricula">
+			<input type="text" name="nomeTurma"><input type="submit" value="Matricular!">
+		</form:form>
+		<c:if test="${not empty provas}">
 			<h3>Selecione uma prova:</h3>
 			<div class="row">
 			
@@ -35,6 +43,7 @@
 			</c:forEach>
 			
 			</div>
+		</c:if>
 	</div>
 	<c:import url="footer.jsp"></c:import>
 </body>

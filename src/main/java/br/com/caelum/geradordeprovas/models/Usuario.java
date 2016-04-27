@@ -1,7 +1,9 @@
 package br.com.caelum.geradordeprovas.models;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +14,31 @@ import javax.validation.constraints.Size;
 
 @Entity
 public class Usuario {
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
 
 	@Id
 	@GeneratedValue
@@ -29,7 +56,7 @@ public class Usuario {
 	private boolean admin;
 
 	@ManyToMany
-	private List<Prova> provas = new ArrayList<>();
+	private Set<Prova> provas = new HashSet<>();
 
 	public void adicionaProvas(List<Prova> provas) {
 		this.provas.addAll(provas);
@@ -43,12 +70,13 @@ public class Usuario {
 		return provaIds;
 	}
 	
-	public List<Prova> getProvas() {
+	public Set<Prova> getProvas() {
 		return provas;
 	}
 
 	public void setProvas(List<Prova> provas) {
-		this.provas = provas;
+		Set<Prova> provasSet = new HashSet<>(provas);
+		this.provas = provasSet;
 	}
 
 	public boolean isAdmin() {

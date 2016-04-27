@@ -11,7 +11,6 @@
 <link rel="stylesheet" href="<c:url value='/static/css/bootstrap.min.css' />">
 <link rel="stylesheet" href="<c:url value='/static/css/jquery-ui.min.css' />">
 <link rel="stylesheet" href="<c:url value='/static/css/main.css' />">
-
 </head>
 <body>
 	<c:import url="../header.jsp"></c:import>
@@ -32,6 +31,10 @@
 					</c:forEach>
 					<li role="separator" class="divider"></li>
 				</ul>
+				<h4>Selecione as turmas:</h4>
+				<c:forEach items="${turmas}" var="turma">
+					<input type="checkbox" name="turmas" value="${turma.id}">${turma.nome}
+				</c:forEach>
 				<h4>Selecione os usuários que podem ter acesso a esta prova:</h4>
 				<form:errors path="usuarios" cssClass="alert alert-danger" element="div" />
 					<ul class='list-unstyled'>

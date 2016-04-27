@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.caelum.geradordeprovas.dao.EstatisticaQuestaoDao;
 import br.com.caelum.geradordeprovas.dao.QuestaoDao;
 import br.com.caelum.geradordeprovas.dao.UsuarioDao;
 import br.com.caelum.geradordeprovas.models.Questao;
@@ -26,15 +25,12 @@ public class AdminController {
 
 	private UsuarioDao usuarioDao;
 	private Criptografia criptografia;
-	private EstatisticaQuestaoDao estatisticaQuestaoDao;
 	private QuestaoDao questaoDao;
-	
+
 	@Autowired
-	public AdminController(QuestaoDao questaoDao, UsuarioDao usuarioDao,
-			Criptografia criptografia, EstatisticaQuestaoDao estatisticaDao) {
+	public AdminController(QuestaoDao questaoDao, UsuarioDao usuarioDao, Criptografia criptografia) {
 		this.usuarioDao = usuarioDao;
 		this.criptografia = criptografia;
-		this.estatisticaQuestaoDao = estatisticaDao;
 		this.questaoDao = questaoDao;
 	}
 
@@ -42,9 +38,7 @@ public class AdminController {
 	public ModelAndView estatisticas() {
 
 		List<Questao> questoes = new ArrayList<>(questaoDao.list());
-
-		return new ModelAndView("admin/estatisticas").addObject("questoes",
-				questoes);
+		return new ModelAndView("admin/estatisticas").addObject("questoes", questoes);
 
 	}
 
@@ -60,20 +54,16 @@ public class AdminController {
 
 	@Transactional
 	@RequestMapping("/usuario/novo/salva")
-	public String criaUsuario(
-			@ModelAttribute("usuario") @Valid Usuario usuario,
-			BindingResult result) {
+	public String criaUsuario(@ModelAttribute("usuario") @Valid Usuario usuario, BindingResult result) {
 
 		if (result.hasErrors() || usuarioDao.loginExistente(usuario.getLogin())) {
 			if (usuarioDao.loginExistente(usuario.getLogin())) {
-				result.rejectValue("login", "error.usuario",
-						"Usuário já existente");
+				result.rejectValue("login", "error.usuario", "Usuário já existente");
 			}
 			return "admin/cria-usuario-form";
 		}
 
-		String senhaCriptografada = criptografia.criptografaSenha(usuario
-				.getSenha());
+		String senhaCriptografada = criptografia.criptografaSenha(usuario.getSenha());
 		usuario.setSenha(senhaCriptografada);
 		usuarioDao.save(usuario);
 

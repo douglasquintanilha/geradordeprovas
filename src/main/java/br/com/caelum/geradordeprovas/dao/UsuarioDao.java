@@ -25,6 +25,10 @@ public class UsuarioDao {
 		manager.persist(usuario);
 	}
 
+	public Usuario find(Long id){
+		return manager.find(Usuario.class, id);
+	}
+	
 	public Usuario usuarioDoGithub(Usuario usuario, boolean caelumOrg){
 		if(loginExistente(usuario.getLogin())){
 			return getUsuarioByLogin(usuario.getLogin());
@@ -98,6 +102,10 @@ public class UsuarioDao {
 			return false;
 		else
 			return true;
+	}
+
+	public Usuario atualiza(Usuario usuarioLogado) {
+		return manager.merge(usuarioLogado);
 	}
 
 }

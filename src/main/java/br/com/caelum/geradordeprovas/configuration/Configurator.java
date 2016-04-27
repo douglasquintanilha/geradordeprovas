@@ -21,6 +21,7 @@ import org.springframework.web.servlet.view.JstlView;
 import br.com.caelum.geradordeprovas.dao.AlternativaDao;
 import br.com.caelum.geradordeprovas.dao.AvaliacaoDao;
 import br.com.caelum.geradordeprovas.dao.ProvaDao;
+import br.com.caelum.geradordeprovas.dao.TurmaDao;
 import br.com.caelum.geradordeprovas.dao.UsuarioDao;
 import br.com.caelum.geradordeprovas.models.Usuario;
 import br.com.caelum.geradordeprovas.util.AlternativaArrayConverter;
@@ -32,6 +33,9 @@ import br.com.caelum.geradordeprovas.util.AvaliacaoConverter;
 import br.com.caelum.geradordeprovas.util.ProvaConverter;
 import br.com.caelum.geradordeprovas.util.QuestaoConverter;
 import br.com.caelum.geradordeprovas.util.TagConverter;
+import br.com.caelum.geradordeprovas.util.TurmaConverter;
+import br.com.caelum.geradordeprovas.util.UsuarioArrayConverter;
+import br.com.caelum.geradordeprovas.util.UsuarioConverter;
 
 @Configuration
 @EnableWebMvc
@@ -58,14 +62,17 @@ public class Configurator extends WebMvcConfigurerAdapter {
 	
 
 	@Bean
-	public FormattingConversionService mvcConversionService(ProvaDao provaDao,AlternativaDao alternativaDao, AvaliacaoDao avaliacaoDao) {
+	public FormattingConversionService mvcConversionService(UsuarioDao usuarioDao, TurmaDao turmaDao, ProvaDao provaDao,AlternativaDao alternativaDao, AvaliacaoDao avaliacaoDao) {
 		FormattingConversionService servico = new FormattingConversionService();
 		servico.addConverter(new AlternativaConverter());
 		servico.addConverter(new AlternativaArrayConverter());
+		servico.addConverter(new UsuarioConverter(usuarioDao));
 		servico.addConverter(new AlternativaMarcadaConverter(alternativaDao));
+		servico.addConverter(new UsuarioArrayConverter(usuarioDao));
 		servico.addConverter(new AlternativaMarcadaArrayConverter(alternativaDao));
 		servico.addConverter(new TagConverter());
 		servico.addConverter(new AvaliacaoConverter(avaliacaoDao));
+		servico.addConverter(new TurmaConverter(turmaDao));
 		servico.addConverter(new QuestaoConverter());
 		servico.addConverter(new ProvaConverter(provaDao));
 		servico.addFormatter(new AlternativaFormatter(alternativaDao));
@@ -87,6 +94,7 @@ public class Configurator extends WebMvcConfigurerAdapter {
 	public Usuario getUsuarioLogado(HttpSession session, UsuarioDao usuarioDao){
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
 		Usuario logado = usuarioDao.getUsuarioByLogin(usuario.getLogin());
+		System.out.println(usuario.getId()+"HAHAHAHH");
 		return logado;
 	}
 	
