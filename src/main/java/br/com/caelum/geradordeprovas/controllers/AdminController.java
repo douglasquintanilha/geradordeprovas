@@ -12,15 +12,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.caelum.geradordeprovas.dao.ProvaDao;
 import br.com.caelum.geradordeprovas.dao.QuestaoDao;
-import br.com.caelum.geradordeprovas.dao.TurmaDao;
 import br.com.caelum.geradordeprovas.dao.UsuarioDao;
-import br.com.caelum.geradordeprovas.models.Prova;
 import br.com.caelum.geradordeprovas.models.Questao;
-import br.com.caelum.geradordeprovas.models.Turma;
 import br.com.caelum.geradordeprovas.models.Usuario;
 import br.com.caelum.geradordeprovas.util.Criptografia;
 
@@ -31,17 +26,12 @@ public class AdminController {
 	private UsuarioDao usuarioDao;
 	private Criptografia criptografia;
 	private QuestaoDao questaoDao;
-	private ProvaDao provaDao;
-	private TurmaDao turmaDao;
 
 	@Autowired
-	public AdminController(ProvaDao provaDao, QuestaoDao questaoDao, UsuarioDao usuarioDao, Criptografia criptografia,
-			TurmaDao turmaDao) {
+	public AdminController(QuestaoDao questaoDao, UsuarioDao usuarioDao, Criptografia criptografia) {
 		this.usuarioDao = usuarioDao;
 		this.criptografia = criptografia;
 		this.questaoDao = questaoDao;
-		this.provaDao = provaDao;
-		this.turmaDao = turmaDao;
 	}
 
 	@RequestMapping("/estatisticas")
@@ -50,27 +40,6 @@ public class AdminController {
 		List<Questao> questoes = new ArrayList<>(questaoDao.list());
 		return new ModelAndView("admin/estatisticas").addObject("questoes", questoes);
 
-	}
-
-	@RequestMapping("/turma")
-	public ModelAndView criaTurmaView() {
-
-		List<Prova> provas = new ArrayList<>(provaDao.list());
-		List<Usuario> usuarios = new ArrayList<>(usuarioDao.list());
-		ModelAndView mv = new ModelAndView("admin/cria-turma");
-
-		mv.addObject("provas", provas);
-		mv.addObject("usuarios", usuarios);
-
-		return mv;
-	}
-
-	@Transactional
-	@RequestMapping("/criaTurma")
-	public String criaTurma(@ModelAttribute("Turma") Turma turma, RedirectAttributes flash) {
-		turma.atualizaProvasUsuarios();
-		turmaDao.save(turma);
-		return "redirect:turma";
 	}
 
 	@RequestMapping("/usuario/novo/form")

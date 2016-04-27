@@ -94,6 +94,7 @@ public class Configurator extends WebMvcConfigurerAdapter {
 	public Usuario getUsuarioLogado(HttpSession session, UsuarioDao usuarioDao){
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
 		Usuario logado = usuarioDao.getUsuarioByLogin(usuario.getLogin());
+		System.out.println(usuario.getId()+"HAHAHAHH");
 		return logado;
 	}
 	

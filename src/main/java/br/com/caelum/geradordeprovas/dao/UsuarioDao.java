@@ -104,4 +104,8 @@ public class UsuarioDao {
 			return true;
 	}
 
+	public Usuario atualiza(Usuario usuarioLogado) {
+		return manager.merge(usuarioLogado);
+	}
+
 }

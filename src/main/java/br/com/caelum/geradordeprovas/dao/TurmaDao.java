@@ -15,13 +15,23 @@ public class TurmaDao {
 
 	@PersistenceContext
 	private EntityManager em;
-	
-	public void salvaProvasLiberadas(Turma turma, List<Prova> provas){
+
+	public void salvaProvasLiberadas(Turma turma, List<Prova> provas) {
 		turma.adicionaProvas(provas);
 	}
-	
-	public List<Turma> list(){
+
+	public List<Turma> list() {
 		return em.createQuery("from Turma t", Turma.class).getResultList();
+	}
+
+	public Turma procuraTurmaPor(String nome) {
+		try {
+			Turma turma = em.createQuery("select t from Turma t where t.nome=:nome", Turma.class).setParameter("nome", nome)
+					.getSingleResult();
+			return turma;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	public void save(Turma turma) {
@@ -32,5 +42,4 @@ public class TurmaDao {
 		return em.find(Turma.class, id);
 	}
 
-	
 }
