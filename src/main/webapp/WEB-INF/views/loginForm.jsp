@@ -37,6 +37,9 @@
 				<a class="btn btn-block btn-social btn-github btn-lg" href="<c:url value='/oauth/github-login'/>">
 	    			<span class="fa fa-github"></span>Login com Github
 	  			</a>
+	  			<a class="btn btn-block btn-social btn-google btn-lg" href="<c:url value='/oauth/google-login'/>">
+	    			<span class="fa fa-google"></span>Login com Google
+	  			</a>
 			</div>
 		</div>
 	</div>
