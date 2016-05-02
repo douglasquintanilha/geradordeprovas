@@ -38,8 +38,7 @@ public class ProvaController {
 	private TurmaDao turmaDao;
 
 	@Autowired
-	public ProvaController(QuestaoDao questaoDao, ProvaDao provaDao,
-			UsuarioDao usuarioDao, TurmaDao turmaDao) {
+	public ProvaController(QuestaoDao questaoDao, ProvaDao provaDao, UsuarioDao usuarioDao, TurmaDao turmaDao) {
 		this.questaoDao = questaoDao;
 		this.provaDao = provaDao;
 		this.usuarioDao = usuarioDao;
@@ -56,18 +55,16 @@ public class ProvaController {
 
 	@Transactional
 	@RequestMapping("/salvaProva")
-	public ModelAndView salvaProva(@Valid @ModelAttribute("prova") Prova prova,
-			BindingResult result) {
+	public ModelAndView salvaProva(@Valid @ModelAttribute("prova") Prova prova, BindingResult result) {
 		if (result.hasErrors()) {
-			ModelAndView mv = new ModelAndView("admin/montar-prova",
-					result.getModel());
+			ModelAndView mv = new ModelAndView("admin/montar-prova", result.getModel());
 			List<Questao> questoes = questaoDao.list();
 			mv.addObject("questoes", questoes);
 			return mv;
 		}
 
 		prova.setDataCriacao(Calendar.getInstance());
-		
+
 		provaDao.save(prova);
 
 		ModelAndView mv = new ModelAndView("admin/prova-adicionada");
@@ -81,7 +78,7 @@ public class ProvaController {
 		List<Usuario> usuarios = new ArrayList<>(usuarioDao.list());
 		List<Prova> provas = new ArrayList<>(provaDao.list());
 		List<Turma> turmas = new ArrayList<>(turmaDao.list());
-		
+
 		model.addAttribute("turmas", turmas);
 		model.addAttribute("usuarios", usuarios);
 		model.addAttribute("provas", provas);
@@ -92,8 +89,9 @@ public class ProvaController {
 
 	@Transactional
 	@RequestMapping("/salvaLiberacao")
-	public ModelAndView salvaLiberacao(@ModelAttribute("liberacaoForm") @Valid LiberacaoForm liberacaoForm, BindingResult result,RedirectAttributes attr) {
-		if(result.hasErrors()){
+	public ModelAndView salvaLiberacao(@ModelAttribute("liberacaoForm") @Valid LiberacaoForm liberacaoForm,
+			BindingResult result, RedirectAttributes attr) {
+		if (result.hasErrors()) {
 			attr.addFlashAttribute("org.springframework.validation.BindingResult.liberacaoForm", result);
 			ModelAndView mv = new ModelAndView("redirect:libera");
 			return mv;
@@ -101,69 +99,68 @@ public class ProvaController {
 
 		List<Prova> provas = provaDao.getProvasPorIds(liberacaoForm.getProvas());
 		liberacaoForm.liberaProvas(usuarioDao, turmaDao, provas);
-		
+
 		ModelAndView mv = new ModelAndView("admin/provas-liberadas");
 		return mv;
 	}
-	
-	@RequestMapping("/listar")
-	public ModelAndView listar(){
 
-		List<Prova> provas = provaDao.list();		
+	@RequestMapping("/listar")
+	public ModelAndView listar() {
+
+		List<Prova> provas = provaDao.list();
 		ModelAndView mv = new ModelAndView("admin/listar-provas");
 
-		mv.addObject("provas",provas);
+		mv.addObject("provas", provas);
 		return mv;
 	}
-	
-	@RequestMapping(value="/editar/{id}",method=RequestMethod.GET)
-	public ModelAndView editarForm(@PathVariable long id){
+
+	@RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)
+	public ModelAndView editarForm(@PathVariable long id) {
 		Prova prova = provaDao.getProva(id);
-		
+
 		List<Questao> questoesDaProva = prova.getQuestoes();
 		List<Long> ids = new ArrayList<Long>();
-		
+
 		for (Questao questao : questoesDaProva) {
 			ids.add(questao.getId());
 		}
-		
+
 		List<Questao> questoesQueNaoFazParteDaProva = questaoDao.getQuestaoExceto(ids);
-		
+
 		ModelAndView mv = new ModelAndView("admin/editar-prova");
-		
+
 		mv.addObject("questoesDaProva", questoesDaProva);
-		mv.addObject("questoes",questoesQueNaoFazParteDaProva);
+		mv.addObject("questoes", questoesQueNaoFazParteDaProva);
 		mv.addObject("prova", prova);
-		return mv;	
+		return mv;
 	}
-	
+
 	@Transactional
-	@RequestMapping(value="/editar/{id}",method=RequestMethod.POST)
-	public ModelAndView editarQuestao(@Valid @ModelAttribute("prova") Prova prova,@PathVariable long id, BindingResult result,RedirectAttributes flash){
+	@RequestMapping(value = "/editar/{id}", method = RequestMethod.POST)
+	public ModelAndView editarQuestao(@Valid @ModelAttribute("prova") Prova prova, @PathVariable long id,
+			BindingResult result, RedirectAttributes flash) {
 		if (result.hasErrors()) {
-			ModelAndView mv = new ModelAndView("admin/editar-prova/"+id,
-					result.getModel());
+			ModelAndView mv = new ModelAndView("admin/editar-prova/" + id, result.getModel());
 			List<Questao> questoesDaProva = prova.getQuestoes();
 			List<Long> ids = new ArrayList<Long>();
-			
+
 			for (Questao questao : questoesDaProva) {
 				ids.add(questao.getId());
 			}
-			
+
 			List<Questao> questoesQueNaoFazParteDaProva = questaoDao.getQuestaoExceto(ids);
-			
+
 			mv.addObject("questoesDaProva", questoesDaProva);
-			mv.addObject("questoes",questoesQueNaoFazParteDaProva);
+			mv.addObject("questoes", questoesQueNaoFazParteDaProva);
 			mv.addObject("prova", prova);
 			return mv;
 		}
-		
-		
+
 		ModelAndView mv = new ModelAndView("redirect:../listar");
-		
+
 		provaDao.update(prova);
-		flash.addFlashAttribute("prova",prova);
-		
+		flash.addFlashAttribute("prova", prova);
+
 		return mv;
 	}
 

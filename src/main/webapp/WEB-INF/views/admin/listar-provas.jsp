@@ -35,7 +35,7 @@
 							<a href="<c:url value='editar/${prova.id}'/>">
 								<span class="glyphicon glyphicon-pencil icone-tabela"></span>
 							</a>
-							<span class="glyphicon glyphicon-remove icone-tabela"></span>							
+							<span class="glyphicon glyphicon-remove icone-tabela"></span>
 						</td>
 					</tr>
 				</c:forEach>
