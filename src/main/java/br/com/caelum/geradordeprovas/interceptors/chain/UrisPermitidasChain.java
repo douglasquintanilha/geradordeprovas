@@ -15,9 +15,9 @@ public class UrisPermitidasChain implements AutorizadorChain {
 	private List<String> uris = new ArrayList<>();
 
 	public UrisPermitidasChain() {
-		uris = Arrays.asList("login", "efetuaLogin", "github-login",
-				"github-logado", "/github-error", "oauth/callback",
-				"google-login","oauth/callback-google/", "callback-google/");
+		uris = Arrays.asList("login", "efetuaLogin", "github-login", "github-logado", "/github-error",
+				"oauth/callback", "google-login", "oauth/callback-google/", "callback-google/", "cadastro",
+				"efetuaCadastro");
 	}
 
 	@Override

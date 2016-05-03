@@ -3,7 +3,6 @@ package br.com.caelum.geradordeprovas.models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 @Entity
 public class EstatisticaQuestao {

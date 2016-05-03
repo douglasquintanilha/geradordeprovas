@@ -15,6 +15,11 @@
 <body>
 	<c:import url="header.jsp"></c:import>
 	<div class="container">
+	
+		<c:if test="${not empty usuarioCriado}">
+			<div class="alert alert-success" role="alert">Usuario criado com sucesso!</div>
+		</c:if>
+	
 		<div class="form-de-login col-md-4 col-md-offset-4">						
 			<form:form action="efetuaLogin" method="POST" commandName="usuario" class="form">
 				<div class="form-group">
@@ -22,7 +27,7 @@
 					<c:if test="${validacao == false}">
 						<span>Login ou Senha Incorretos!</span>
 					</c:if>
-					<input type="text" name="login" id="login" placeholder="Email ou nome de usuário" class="form-control" autofocus>
+					<input type="text" name="login" id="login" placeholder="Email" class="form-control" autofocus>
 				</div>
 				<div class="form-group">
 					<label for="senha">Senha:</label> <input type="password" placeholder="Senha" name="senha" id="senha" class="form-control">
@@ -30,7 +35,7 @@
 	
 				<div class="form-group col-md-offset-4">
 					<button type="submit" class="btn btn-default btn-lg">Entrar</button>
-				</div>	
+				</div>
 			</form:form>
 			<hr>
 			<div>
@@ -39,6 +44,9 @@
 	  			</a>
 	  			<a class="btn btn-block btn-social btn-google btn-lg" href="<c:url value='/oauth/google-login'/>">
 	    			<span class="fa fa-google"></span>Login com Google
+	  			</a>
+	  			<a class="btn btn-block btn-lg" href="<c:url value='cadastro'/>">
+	    			Cadastrar-se
 	  			</a>
 			</div>
 		</div>
