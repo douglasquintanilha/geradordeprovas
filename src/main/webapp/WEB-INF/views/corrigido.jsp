@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri='http://ur6lad.co.ua/markdown-taglib' prefix='md'%>
+<%@ taglib uri='http://ur6lad.co.ua/markdown-taglib' prefix ='md' %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Resultado da Prova</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Caelum Provas</title>
 	<link rel="stylesheet" href="<c:url value='/static/css/bootstrap.min.css' /> ">
 	<link rel="stylesheet" href="<c:url value='/static/css/main.css' /> ">
 	<link rel="stylesheet" href="<c:url value='/static/css/github.css' /> ">
@@ -26,7 +26,7 @@
 				<c:forEach items="${questao.alternativa}" var="alternativa">
 					<c:set var="alternativaM" value="${false}"/>
 					<div class="radio alternativa">
-						<c:if test="${alternativa.alternativaCorreta}">
+						<c:if test="${alternativa.alternativaCorreta == true}">
 							<span class="icone glyphicon glyphicon-ok" aria-hidden="true"></span>
 						</c:if>
 						<c:forEach items="${avaliacao.alternativasMarcadas}" var="alternativaMarcada">
@@ -60,9 +60,9 @@
 		<h3>Deixe aqui seu feedback sobre o sistema!</h3>
 			<div class="form-group">
 				
-				<label class="radio-inline"><input type="radio" name="nota" value="1">P√©ssimo</label>
+				<label class="radio-inline"><input type="radio" name="nota" value="1">PÈssimo</label>
 				<label class="radio-inline"><input type="radio" name="nota" value="2">Ruim</label>
-				<label class="radio-inline"><input type="radio" name="nota" value="3">Razo√°vel</label>
+				<label class="radio-inline"><input type="radio" name="nota" value="3">Razo·vel</label>
 				<label class="radio-inline"><input type="radio" name="nota" value="4">Bom</label>
 				<label class="radio-inline"><input type="radio" name="nota" value="5">Muito Bom</label>
 										
@@ -74,7 +74,7 @@
 			</div>
 		</form:form>
 		
-		<a href="<c:url value='/'/>">Voltar para o in√≠cio</a>
+		<a href="<c:url value='/'/>">Voltar para o ini≠cio</a>
 	</div>
 	<c:import url="footer.jsp"></c:import>
 	<script src="<c:url value='/static/js/jquery-2.1.4.min.js' />"></script>
