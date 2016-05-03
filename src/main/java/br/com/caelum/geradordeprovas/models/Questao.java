@@ -47,8 +47,8 @@ public class Questao {
 	@Transient
 	private String alternativaCorreta;
 
-	public void atualizaEstatistica(boolean acertou,Usuario usuario) {
-		if(usuario.isAdmin()){
+	public void atualizaEstatistica(boolean acertou, Usuario usuario) {
+		if (usuario.isAdmin()) {
 			return;
 		}
 		if (acertou)
@@ -107,13 +107,16 @@ public class Questao {
 	}
 
 	public void edita(Questao questaoEditada) {
-		
+
 		this.alternativa.clear();
 		this.alternativa.addAll(questaoEditada.getAlternativa());
+
 		this.alternativaCorreta = questaoEditada.getAlternativaCorreta();
-		this.tags = questaoEditada.getTags();
+
+		this.tags.addAll(questaoEditada.getTags());
+
 		this.titulo = questaoEditada.getTitulo();
-		
+
 	}
 
 }
