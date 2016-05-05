@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.caelum.geradordeprovas.dao.AvaliacaoDao;
 import br.com.caelum.geradordeprovas.dao.ProvaDao;
 import br.com.caelum.geradordeprovas.dao.QuestaoDao;
 import br.com.caelum.geradordeprovas.dao.TurmaDao;
@@ -36,9 +37,10 @@ public class ProvaController {
 	private ProvaDao provaDao;
 	private UsuarioDao usuarioDao;
 	private TurmaDao turmaDao;
+	private AvaliacaoDao avaliacaoDao;
 
 	@Autowired
-	public ProvaController(QuestaoDao questaoDao, ProvaDao provaDao, UsuarioDao usuarioDao, TurmaDao turmaDao) {
+	public ProvaController(AvaliacaoDao avaliacaoDao, QuestaoDao questaoDao, ProvaDao provaDao, UsuarioDao usuarioDao, TurmaDao turmaDao) {
 		this.questaoDao = questaoDao;
 		this.provaDao = provaDao;
 		this.usuarioDao = usuarioDao;
@@ -98,10 +100,20 @@ public class ProvaController {
 		}
 
 		List<Prova> provas = provaDao.getProvasPorIds(liberacaoForm.getProvas());
-		liberacaoForm.liberaProvas(usuarioDao, turmaDao, provas);
+		//metodo que vai tbm criar as avaliacoes
+		liberacaoForm.liberaProvas(avaliacaoDao, usuarioDao, turmaDao, provas);
 
 		ModelAndView mv = new ModelAndView("admin/provas-liberadas");
 		return mv;
+	}
+	
+	@Transactional
+	@RequestMapping("/salvaLiberacao2")
+	public ModelAndView salvaLiberacao2(){
+		
+		
+		
+		return null;
 	}
 
 	@RequestMapping("/listar")

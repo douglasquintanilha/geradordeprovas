@@ -3,7 +3,9 @@ package br.com.caelum.geradordeprovas.models;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -39,7 +41,9 @@ public class Prova {
 	@NotEmpty()
 	@ManyToMany()
 	private List<Questao> questoes;
-
+	
+	private Set<Avaliacao> avaliacoes = new HashSet<>();
+	
 	public Long getId() {
 		return id;
 	}
@@ -140,6 +144,11 @@ public class Prova {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public Avaliacao geraAvaliacaoInicial() {
+		Set<Questao> questoesSet = new HashSet<Questao>(this.getQuestoes());
+		return new Avaliacao(this.getNome(), questoesSet);
 	}
 
 }

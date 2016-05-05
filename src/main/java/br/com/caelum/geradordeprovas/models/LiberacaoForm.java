@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import br.com.caelum.geradordeprovas.dao.AvaliacaoDao;
 import br.com.caelum.geradordeprovas.dao.TurmaDao;
 import br.com.caelum.geradordeprovas.dao.UsuarioDao;
 
@@ -41,9 +42,21 @@ public class LiberacaoForm {
 		this.usuarios = usuarios;
 	}
 
-	public void liberaProvas(UsuarioDao usuarioDao, TurmaDao turmaDao, List<Prova> provas) {
+	public void liberaProvas(AvaliacaoDao avaliacaoDao, UsuarioDao usuarioDao, TurmaDao turmaDao, List<Prova> provas) {
 		liberaProvasUsuarios(usuarioDao, provas);
 		liberaProvasTurma(turmaDao, provas);
+		geraAvaliacoesDasProvas(avaliacaoDao, provas);
+	}
+
+	private void geraAvaliacoesDasProvas(AvaliacaoDao avaliacaoDao, List<Prova> provas2) {
+		//assim, a cada liberacao, ta gerando uma nova avaliacao.
+		//tem que verificar se a prova ja tem uma avaliacao gerada,
+		//se tiver, tem q ver se essa avaliacao é a mais atualizada possivel(HOW??)
+		List<Avaliacao> avaliacoes = new ArrayList<Avaliacao>();
+		for(Prova prova : provas2){
+			avaliacoes.add(prova.geraAvaliacaoInicial());
+		}
+//		avaliacaoDao.salvaAvaliacoes();
 	}
 
 	private void liberaProvasUsuarios(UsuarioDao usuarioDao, List<Prova> provas) {

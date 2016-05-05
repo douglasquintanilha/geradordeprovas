@@ -1,8 +1,10 @@
 package br.com.caelum.geradordeprovas.models;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.ElementCollection;
@@ -41,6 +43,23 @@ public class Avaliacao {
 	@ElementCollection
 	private List<AlternativaMarcada> alternativasMarcadas;
 
+	//-------------------------Atributos do refactor
+	
+	private List<RelatorioUsuario> relatoriosUsuario = new ArrayList<>();
+
+	private String nomeProva;
+
+	private Set<Questao> questoesImutaveis;
+
+	public Avaliacao(){
+		
+	}
+	
+	public Avaliacao(String nomeProva, Set<Questao> questoesImutaveis){
+		this.nomeProva = nomeProva;
+		this.questoesImutaveis = questoesImutaveis;
+	}
+	
 	public List<AlternativaMarcada> getAlternativasMarcadas() {
 		return alternativasMarcadas;
 	}
