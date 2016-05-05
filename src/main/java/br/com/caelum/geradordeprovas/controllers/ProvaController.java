@@ -157,7 +157,7 @@ public class ProvaController {
 		}
 
 		ModelAndView mv = new ModelAndView("redirect:../listar");
-
+		prova.setDataCriacao(Calendar.getInstance());
 		provaDao.update(prova);
 		flash.addFlashAttribute("prova", prova);
 

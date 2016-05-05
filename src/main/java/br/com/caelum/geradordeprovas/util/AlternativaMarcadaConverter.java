@@ -13,18 +13,17 @@ public class AlternativaMarcadaConverter implements Converter<String, Alternativ
 	public AlternativaMarcadaConverter(AlternativaDao alternativaDao) {
 		this.alternativaDao = alternativaDao;
 	}
-	
-	
+
 	@Override
 	public AlternativaMarcada convert(String alternativaId) {
 		AlternativaMarcada AlternativaMarcadaObj = new AlternativaMarcada();
-		
+
 		Alternativa alternativa = alternativaDao.getAlternativaPorId(Long.parseLong(alternativaId));
-		
+
 		AlternativaMarcadaObj.setDescricao(alternativa.getDescricao());
 		AlternativaMarcadaObj.setId(alternativa.getId());
 		AlternativaMarcadaObj.setAlternativaCorreta(alternativa.isAlternativaCorreta());
-		
+
 		return AlternativaMarcadaObj;
 	}
 

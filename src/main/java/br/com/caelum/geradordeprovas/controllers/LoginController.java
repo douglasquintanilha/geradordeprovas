@@ -11,7 +11,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import br.com.caelum.geradordeprovas.dao.TesteGmailDao;
 import br.com.caelum.geradordeprovas.dao.UsuarioDao;
+import br.com.caelum.geradordeprovas.models.TesteGmail;
 import br.com.caelum.geradordeprovas.models.Usuario;
 import br.com.caelum.geradordeprovas.util.Criptografia;
 
@@ -20,10 +22,12 @@ public class LoginController {
 
 	private UsuarioDao usuarioDao;
 	private Criptografia criptografia;
+	private TesteGmailDao testeGmailDao;
 
 	@Autowired
-	public LoginController(UsuarioDao usuarioDao, Criptografia criptografia) {
+	public LoginController(UsuarioDao usuarioDao, Criptografia criptografia, TesteGmailDao testeGmailDao) {
 		this.usuarioDao = usuarioDao;
+		this.testeGmailDao = testeGmailDao;
 		this.criptografia = criptografia;
 	}
 
@@ -81,5 +85,14 @@ public class LoginController {
 		}
 
 	}
+	
+	@Transactional
+	@RequestMapping("loginGmail")
+	public ModelAndView testeLoginComGmail(){
+		TesteGmail tg = testeGmailDao.getTeste();
+		tg.incrementaContador();
+		return new ModelAndView("loginForm").addObject("loginComGmail", true);
+	}
+	
 
 }

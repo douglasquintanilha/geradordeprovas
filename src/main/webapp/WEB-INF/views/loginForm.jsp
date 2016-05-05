@@ -20,6 +20,10 @@
 			<div class="alert alert-success" role="alert">Usuario criado com sucesso!</div>
 		</c:if>
 	
+		<c:if test="${not empty loginComGmail}">
+			<div class="alert alert-success" role="alert">Estamos trabalhando nessa funcionalidade!</div>
+		</c:if>
+	
 		<div class="form-de-login col-md-4 col-md-offset-4">						
 			<form:form action="efetuaLogin" method="POST" commandName="usuario" class="form">
 				<div class="form-group">
@@ -42,7 +46,7 @@
 				<a class="btn btn-block btn-social btn-github btn-lg" href="<c:url value='/oauth/github-login'/>">
 	    			<span class="fa fa-github"></span>Login com Github
 	  			</a>
-	  			<a class="btn btn-block btn-social btn-google btn-lg" href="<c:url value='/oauth/google-login'/>">
+	  			<a class="btn btn-block btn-social btn-google btn-lg" href="<c:url value='/loginGmail'/>">
 	    			<span class="fa fa-google"></span>Login com Google
 	  			</a>
 	  			<a class="btn btn-block btn-lg" href="<c:url value='cadastro'/>">

@@ -118,5 +118,19 @@ public class Questao {
 		this.titulo = questaoEditada.getTitulo();
 
 	}
+	
+	//Wesley
+	public boolean corrige(AlternativaMarcada alternativaMarcada){
+		for (Alternativa alter : alternativa) {
+			if(alter.isAlternativaCorreta()){
+				if(alter.getId() == alternativaMarcada.getId()){
+					return true;
+				}else{
+					return false;
+				}
+			}
+		}
+		return false;
+	}
 
 }

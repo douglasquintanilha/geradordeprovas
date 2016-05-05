@@ -40,8 +40,8 @@ public class AdminController {
 		List<Questao> questoes = new ArrayList<>(questaoDao.list());
 		return new ModelAndView("admin/estatisticas").addObject("questoes", questoes);
 
-	}
-
+	}	
+	
 	@RequestMapping("/usuario/novo/form")
 	public String criaUsuarioForm() {
 		return "admin/cria-usuario-form";

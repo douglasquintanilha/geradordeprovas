@@ -26,13 +26,13 @@ import br.com.caelum.geradordeprovas.services.QuestaoService;
 @RequestMapping("/admin/questao")
 public class QuestaoController {
 
-	private QuestaoService questaoBo;
+	private QuestaoService questaoService;
 	private QuestaoDao questaoDao;
 	private ProvaDao provaDao;
 
 	@Autowired
 	public QuestaoController(QuestaoService questaoBo, QuestaoDao questaoDao, ProvaDao provaDao) {
-		this.questaoBo = questaoBo;
+		this.questaoService = questaoBo;
 		this.questaoDao = questaoDao;
 		this.provaDao = provaDao;
 	}
@@ -69,7 +69,7 @@ public class QuestaoController {
 
 		Questao questao = questaoDao.getQuestaoPorId(id);
 		questao.edita(questaoEditada);
-		questaoBo.edita(questao);
+		questaoService.edita(questao);
 
 		flash.addFlashAttribute("questao", questao);
 		
@@ -83,7 +83,7 @@ public class QuestaoController {
 			model.addAttribute("alternativa", questao.getAlternativa());
 			return "admin/adiciona-questao";
 		}
-		questaoBo.salva(questao);
+		questaoService.salva(questao);
 
 		return "admin/questao-adicionada";
 	}
