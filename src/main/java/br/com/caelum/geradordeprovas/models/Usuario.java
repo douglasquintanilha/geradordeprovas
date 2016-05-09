@@ -1,11 +1,13 @@
 package br.com.caelum.geradordeprovas.models;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -31,7 +33,16 @@ public class Usuario {
 
 	@ManyToMany
 	private Set<Prova> provas = new HashSet<>();
+	
+	//--------------Atributos refatoraçáo
+	
+	@ElementCollection(targetClass=Avaliacao.class)
+	private Set<Avaliacao> avaliacoes = new HashSet<>();
 
+	public void adicionaAvaliacoes(Collection<Avaliacao> avaliacoes){
+		this.avaliacoes.addAll(avaliacoes);
+	}
+	
 	public void adicionaProvas(List<Prova> provas) {
 		this.provas.addAll(provas);
 	}

@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -42,6 +43,7 @@ public class Prova {
 	@ManyToMany()
 	private List<Questao> questoes;
 	
+	@ElementCollection(targetClass=Avaliacao.class)
 	private Set<Avaliacao> avaliacoes = new HashSet<>();
 	
 	public Long getId() {

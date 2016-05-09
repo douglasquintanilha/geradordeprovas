@@ -52,4 +52,10 @@ public class AvaliacaoDao {
 		return manager.createQuery("select a from Avaliacao a where a.usuario.id = :usuarioId", Avaliacao.class)
 				.setParameter("usuarioId", usuario.getId()).getResultList();
 	}
+
+	public void salvaAvaliacoes(List<Avaliacao> avaliacoes) {
+		for(Avaliacao avaliacao : avaliacoes){
+			manager.persist(avaliacao);
+		}
+	}
 }

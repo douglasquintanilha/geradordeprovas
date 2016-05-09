@@ -45,18 +45,31 @@ public class LiberacaoForm {
 	public void liberaProvas(AvaliacaoDao avaliacaoDao, UsuarioDao usuarioDao, TurmaDao turmaDao, List<Prova> provas) {
 		liberaProvasUsuarios(usuarioDao, provas);
 		liberaProvasTurma(turmaDao, provas);
-		geraAvaliacoesDasProvas(avaliacaoDao, provas);
+		List<Avaliacao> avaliacoes = geraAvaliacoesDasProvas(avaliacaoDao, provas);
+		liberaAvaliacoesUsuarios(usuarioDao, avaliacoes);
+		liberaAvaliacoesTurmas(turmaDao, avaliacoes);
 	}
 
-	private void geraAvaliacoesDasProvas(AvaliacaoDao avaliacaoDao, List<Prova> provas2) {
+	private void liberaAvaliacoesTurmas(TurmaDao turmaDao, List<Avaliacao> avaliacoes) {
+		if(!turmas.isEmpty()){
+			for(Turma turma : turmas){
+				turmaDao.salvaAvaliacoesLiberadas(turma, avaliacoes);
+			}
+		}
+	}
+
+	private List<Avaliacao> geraAvaliacoesDasProvas(AvaliacaoDao avaliacaoDao, List<Prova> provas) {
 		//assim, a cada liberacao, ta gerando uma nova avaliacao.
 		//tem que verificar se a prova ja tem uma avaliacao gerada,
 		//se tiver, tem q ver se essa avaliacao é a mais atualizada possivel(HOW??)
 		List<Avaliacao> avaliacoes = new ArrayList<Avaliacao>();
-		for(Prova prova : provas2){
+		for(Prova prova : provas){
+			System.out.println("PROVA"+prova);
+			System.out.println("AVALIACAO"+prova.geraAvaliacaoInicial());
 			avaliacoes.add(prova.geraAvaliacaoInicial());
 		}
-//		avaliacaoDao.salvaAvaliacoes();
+		avaliacaoDao.salvaAvaliacoes(avaliacoes);
+		return avaliacoes;
 	}
 
 	private void liberaProvasUsuarios(UsuarioDao usuarioDao, List<Prova> provas) {
@@ -67,6 +80,14 @@ public class LiberacaoForm {
 		}
 	}
 
+	private void liberaAvaliacoesUsuarios(UsuarioDao usuarioDao, List<Avaliacao> avaliacoes) {
+		if(!usuarios.isEmpty()){
+			for(Long usuarioId : usuarios){
+				usuarioDao.salvaAvaliacoesLiberadas(usuarioId, avaliacoes);
+			}
+		}
+	}
+	
 	private void liberaProvasTurma(TurmaDao turmaDao, List<Prova> provas) {
 		if(!turmas.isEmpty()){
 			for(Turma turma : turmas){

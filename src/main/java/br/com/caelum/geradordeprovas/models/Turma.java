@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -29,6 +30,13 @@ public class Turma {
 
 	@ManyToMany
 	private Set<Prova> provas = new HashSet<>();
+
+	//----------------atributos da refatoraçáo
+	
+	@ElementCollection(targetClass=Avaliacao.class)
+	private Set<Avaliacao> avaliacoes = new HashSet<>();
+	
+	
 
 	public void adicionaProvas(List<Prova> provas) {
 		this.provas.addAll(provas);
@@ -79,5 +87,9 @@ public class Turma {
 	public void adicionaUsuario(Usuario usuario) {
 		usuarios.add(usuario);
 		this.atualizaProvasUsuarios();
+	}
+
+	public void adicionaAvaliacoes(List<Avaliacao> avaliacoes) {
+		this.avaliacoes .addAll(avaliacoes);
 	}
 }

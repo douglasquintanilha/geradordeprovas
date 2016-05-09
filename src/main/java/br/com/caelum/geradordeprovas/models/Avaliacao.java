@@ -45,10 +45,12 @@ public class Avaliacao {
 
 	//-------------------------Atributos do refactor
 	
-	private List<RelatorioUsuario> relatoriosUsuario = new ArrayList<>();
+//	@ElementCollection(targetClass=RelatorioUsuario.class)
+//	private List<RelatorioUsuario> relatoriosUsuario = new ArrayList<>();
 
 	private String nomeProva;
 
+	@ElementCollection(targetClass=Questao.class)
 	private Set<Questao> questoesImutaveis;
 
 	public Avaliacao(){
