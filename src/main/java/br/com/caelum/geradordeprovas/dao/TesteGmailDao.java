@@ -15,7 +15,7 @@ public class TesteGmailDao {
 	private EntityManager em;
 	
 	public TesteGmail getTeste(){
-		return em.find(TesteGmail.class, 0);
+		return em.find(TesteGmail.class, 1);
 	}
 	
 }
