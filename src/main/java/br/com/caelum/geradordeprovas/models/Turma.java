@@ -33,7 +33,7 @@ public class Turma {
 
 	//----------------atributos da refatoraçáo
 	
-//	@ElementCollection(targetClass=Avaliacao.class)
+	@ManyToMany
 	private Set<Avaliacao> avaliacoes = new HashSet<>();
 	
 	

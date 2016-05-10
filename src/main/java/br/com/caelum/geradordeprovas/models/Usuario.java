@@ -36,7 +36,7 @@ public class Usuario {
 	
 	//--------------Atributos refatoraçáo
 	
-	@ElementCollection(targetClass=Avaliacao.class)
+	@ManyToMany
 	private Set<Avaliacao> avaliacoes = new HashSet<>();
 
 	public void adicionaAvaliacoes(Collection<Avaliacao> avaliacoes){

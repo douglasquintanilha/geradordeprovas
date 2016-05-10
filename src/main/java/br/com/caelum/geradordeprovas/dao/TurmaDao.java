@@ -7,7 +7,6 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
-import br.com.caelum.geradordeprovas.models.Avaliacao;
 import br.com.caelum.geradordeprovas.models.Prova;
 import br.com.caelum.geradordeprovas.models.Turma;
 
@@ -41,10 +40,6 @@ public class TurmaDao {
 
 	public Turma getTurma(Long id) {
 		return em.find(Turma.class, id);
-	}
-
-	public void salvaAvaliacoesLiberadas(Turma turma, List<Avaliacao> avaliacoes) {
-		turma.adicionaAvaliacoes(avaliacoes);
 	}
 
 }

@@ -11,6 +11,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -43,32 +44,30 @@ public class Avaliacao {
 	@ElementCollection
 	private List<AlternativaMarcada> alternativasMarcadas;
 
-	//-------------------------Atributos do refactor
-	
-//	@ElementCollection(targetClass=RelatorioUsuario.class)
-//	private List<RelatorioUsuario> relatoriosUsuario = new ArrayList<>();
+	// -------------------------Atributos do refactor
+
+	@ManyToMany
+	private List<RelatorioUsuario> relatoriosUsuario = new ArrayList<>();
 
 	private String nomeProva;
 
-//	@ElementCollection(targetClass=Questao.class)
-	
+	@ManyToMany
 	private Set<Questao> questoesImutaveis;
 
-	public Avaliacao(){
-		
+	public Avaliacao() {
+
 	}
-	
-	public Avaliacao(String nomeProva, Set<Questao> questoesImutaveis){
+
+	public Avaliacao(String nomeProva, Set<Questao> questoesImutaveis) {
 		this.nomeProva = nomeProva;
 		this.questoesImutaveis = questoesImutaveis;
 	}
-	
+
 	public List<AlternativaMarcada> getAlternativasMarcadas() {
 		return alternativasMarcadas;
 	}
-	
-	public void setAlternativasMarcadas(
-			List<AlternativaMarcada> alternativasMarcadas) {
+
+	public void setAlternativasMarcadas(List<AlternativaMarcada> alternativasMarcadas) {
 		this.alternativasMarcadas = alternativasMarcadas;
 	}
 
@@ -133,15 +132,15 @@ public class Avaliacao {
 		if (alternativasMarcadas == null) {
 			return;
 		}
-		
+
 		int i = 0;
-		
-		for (AlternativaMarcada alternativaMarcada : alternativasMarcadas) {			
+
+		for (AlternativaMarcada alternativaMarcada : alternativasMarcadas) {
 			if (alternativaMarcada.isAlternativaCorreta()) {
 				this.nota++;
-				prova.getQuestoes().get(i).atualizaEstatistica(true,usuario);
-			} else {			
-				prova.getQuestoes().get(i).atualizaEstatistica(false,usuario);
+				prova.getQuestoes().get(i).atualizaEstatistica(true, usuario);
+			} else {
+				prova.getQuestoes().get(i).atualizaEstatistica(false, usuario);
 			}
 			i++;
 		}
@@ -149,8 +148,7 @@ public class Avaliacao {
 	}
 
 	public boolean validaDuracao() {
-		long duracao = this.horarioFim.getTimeInMillis()
-				- this.horarioInicio.getTimeInMillis();
+		long duracao = this.horarioFim.getTimeInMillis() - this.horarioInicio.getTimeInMillis();
 		long duracaoComTolerancia = this.getProva().getDuracao() + 1;
 		long duracaoComToleranciaEmMilis = duracaoComTolerancia * 60 * 1000;
 		if (duracaoComToleranciaEmMilis >= duracao)
@@ -159,17 +157,17 @@ public class Avaliacao {
 			return false;
 	}
 
-	public long getDuracao(){
+	public long getDuracao() {
 		long duracao = this.horarioFim.getTimeInMillis() - this.horarioInicio.getTimeInMillis();
-		return (duracao/60)/1000;
+		return (duracao / 60) / 1000;
 	}
-	
-	public String getDataRealizada(){
+
+	public String getDataRealizada() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
 		return sdf.format(this.horarioInicio.getTime());
 	}
-	
-	public String getUuid(){
+
+	public String getUuid() {
 		return UUID.randomUUID().toString();
 	}
 }

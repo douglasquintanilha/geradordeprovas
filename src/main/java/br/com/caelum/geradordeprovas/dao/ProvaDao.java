@@ -20,8 +20,8 @@ public class ProvaDao {
 	public void save(Prova prova) {
 		manager.persist(prova);
 	}
-	
-	public void update(Prova prova){
+
+	public void update(Prova prova) {
 		manager.merge(prova);
 	}
 
@@ -32,7 +32,7 @@ public class ProvaDao {
 	public Prova getProva(Long id) {
 		return manager.find(Prova.class, id);
 	}
-	
+
 	public List<Prova> getProvasPorIds(List<Long> ids) {
 
 		List<Prova> provas = new ArrayList<>();
@@ -44,12 +44,8 @@ public class ProvaDao {
 	}
 
 	public List<Prova> getProvasLiberadasByUsuario(Usuario usuario) {
-		return manager
-				.createQuery(
-						"select p from Usuario u JOIN u.provas p where u.id = :usuarioId",
-						Prova.class).setParameter("usuarioId", usuario.getId())
-				.getResultList();
+		return manager.createQuery("select p from Usuario u JOIN u.provas p where u.id = :usuarioId", Prova.class)
+				.setParameter("usuarioId", usuario.getId()).getResultList();
 	}
-	
-	
+
 }

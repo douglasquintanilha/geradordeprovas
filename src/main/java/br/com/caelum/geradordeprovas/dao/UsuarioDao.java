@@ -8,7 +8,6 @@ import javax.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import br.com.caelum.geradordeprovas.models.Avaliacao;
 import br.com.caelum.geradordeprovas.models.Prova;
 import br.com.caelum.geradordeprovas.models.Usuario;
 import br.com.caelum.geradordeprovas.util.Criptografia;
@@ -78,20 +77,6 @@ public class UsuarioDao {
 				.getResultList();
 	}
 
-	public void salvaProvasLiberadas(Long id, List<Prova> provas) {
-
-		Usuario us = manager.find(Usuario.class, id);
-		us.adicionaProvas(provas);
-
-	}
-
-	public void salvaAvaliacoesLiberadas(Long id, List<Avaliacao> avaliacoes) {
-
-		Usuario us = manager.find(Usuario.class, id);
-		us.adicionaAvaliacoes(avaliacoes);
-
-	}
-	
 	public List<Prova> getProvasDoUsuario(String login) {
 		return manager
 				.createQuery(

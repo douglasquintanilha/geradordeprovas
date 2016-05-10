@@ -28,6 +28,7 @@ import br.com.caelum.geradordeprovas.models.Prova;
 import br.com.caelum.geradordeprovas.models.Questao;
 import br.com.caelum.geradordeprovas.models.Turma;
 import br.com.caelum.geradordeprovas.models.Usuario;
+import br.com.caelum.geradordeprovas.services.LiberacaoService;
 
 @Controller
 @RequestMapping("/admin/prova")
@@ -38,10 +39,13 @@ public class ProvaController {
 	private UsuarioDao usuarioDao;
 	private TurmaDao turmaDao;
 	private AvaliacaoDao avaliacaoDao;
+	private LiberacaoService liberacaoService;
 
 	@Autowired
-	public ProvaController(AvaliacaoDao avaliacaoDao, QuestaoDao questaoDao, ProvaDao provaDao, UsuarioDao usuarioDao, TurmaDao turmaDao) {
+	public ProvaController(LiberacaoService liberacaoService, AvaliacaoDao avaliacaoDao, QuestaoDao questaoDao,
+			ProvaDao provaDao, UsuarioDao usuarioDao, TurmaDao turmaDao) {
 		this.questaoDao = questaoDao;
+		this.liberacaoService = liberacaoService;
 		this.provaDao = provaDao;
 		this.usuarioDao = usuarioDao;
 		this.turmaDao = turmaDao;
@@ -99,22 +103,15 @@ public class ProvaController {
 			ModelAndView mv = new ModelAndView("redirect:libera");
 			return mv;
 		}
-
-		List<Prova> provas = provaDao.getProvasPorIds(liberacaoForm.getProvas());
-		//metodo que vai tbm criar as avaliacoes
-		liberacaoForm.liberaProvas(avaliacaoDao, usuarioDao, turmaDao, provas);
-
+		liberacaoService.libera(liberacaoForm);
 		ModelAndView mv = new ModelAndView("admin/provas-liberadas");
-		System.out.println(mv);
 		return mv;
 	}
-	
+
 	@Transactional
 	@RequestMapping("/salvaLiberacao2")
-	public ModelAndView salvaLiberacao2(){
-		
-		
-		
+	public ModelAndView salvaLiberacao2() {
+
 		return null;
 	}
 

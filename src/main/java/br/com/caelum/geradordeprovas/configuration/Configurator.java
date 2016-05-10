@@ -1,4 +1,3 @@
-
 package br.com.caelum.geradordeprovas.configuration;
 
 import javax.servlet.http.HttpSession;
@@ -30,6 +29,7 @@ import br.com.caelum.geradordeprovas.util.AlternativaFormatter;
 import br.com.caelum.geradordeprovas.util.AlternativaMarcadaArrayConverter;
 import br.com.caelum.geradordeprovas.util.AlternativaMarcadaConverter;
 import br.com.caelum.geradordeprovas.util.AvaliacaoConverter;
+import br.com.caelum.geradordeprovas.util.ProvaArrayConverter;
 import br.com.caelum.geradordeprovas.util.ProvaConverter;
 import br.com.caelum.geradordeprovas.util.QuestaoConverter;
 import br.com.caelum.geradordeprovas.util.TagConverter;
@@ -41,7 +41,7 @@ import br.com.caelum.geradordeprovas.util.UsuarioConverter;
 @EnableWebMvc
 @ComponentScan(basePackages = "br.com.caelum.geradordeprovas")
 public class Configurator extends WebMvcConfigurerAdapter {
-	
+
 	@Bean
 	public ViewResolver viewResolver() {
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
@@ -55,14 +55,12 @@ public class Configurator extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/static/**").addResourceLocations(
-				"/static/");
+		registry.addResourceHandler("/static/**").addResourceLocations("/static/");
 	}
-	
-	
 
 	@Bean
-	public FormattingConversionService mvcConversionService(UsuarioDao usuarioDao, TurmaDao turmaDao, ProvaDao provaDao,AlternativaDao alternativaDao, AvaliacaoDao avaliacaoDao) {
+	public FormattingConversionService mvcConversionService(UsuarioDao usuarioDao, TurmaDao turmaDao,
+			ProvaDao provaDao, AlternativaDao alternativaDao, AvaliacaoDao avaliacaoDao) {
 		FormattingConversionService servico = new FormattingConversionService();
 		servico.addConverter(new AlternativaConverter());
 		servico.addConverter(new AlternativaArrayConverter());
@@ -75,35 +73,35 @@ public class Configurator extends WebMvcConfigurerAdapter {
 		servico.addConverter(new TurmaConverter(turmaDao));
 		servico.addConverter(new QuestaoConverter());
 		servico.addConverter(new ProvaConverter(provaDao));
+		servico.addConverter(new ProvaArrayConverter(provaDao));
 		servico.addFormatter(new AlternativaFormatter(alternativaDao));
+
 		return servico;
 	}
-	
+
 	@Bean
-	public MessageSource messageSource(){
+	public MessageSource messageSource() {
 		ReloadableResourceBundleMessageSource bundle = new ReloadableResourceBundleMessageSource();
 		bundle.setBasename("WEB-INF/messages");
 		bundle.setDefaultEncoding("ISO-8859-1");
 		bundle.setCacheSeconds(1);
 		return bundle;
 	}
-	
+
 	@Bean
-	@Scope(value="session")
+	@Scope(value = "session")
 	@Qualifier("usuarioLogado")
-	public Usuario getUsuarioLogado(HttpSession session, UsuarioDao usuarioDao){
+	public Usuario getUsuarioLogado(HttpSession session, UsuarioDao usuarioDao) {
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
 		Usuario logado = usuarioDao.getUsuarioByLogin(usuario.getLogin());
-		System.out.println(usuario.getId()+"HAHAHAHH");
+		System.out.println(usuario.getId() + "HAHAHAHH");
 		return logado;
 	}
-	
+
 	@Bean
-	public Constantes getConstantes(){
+	public Constantes getConstantes() {
 		Constantes constantes = new Constantes();
 		return constantes;
 	}
-	
-	
 
 }

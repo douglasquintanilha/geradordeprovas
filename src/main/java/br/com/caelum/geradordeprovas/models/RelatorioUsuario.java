@@ -1,21 +1,30 @@
 package br.com.caelum.geradordeprovas.models;
 
 import java.util.Calendar;
+import java.util.List;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+@Entity
 public class RelatorioUsuario {
 
 	@Id
 	@GeneratedValue
-	private int id;
+	private Long id;
 
+	@OneToOne
+	@JoinColumn(unique=true)
 	private Usuario usuario;
 
-	private AlternativaMarcada alternativasMarcadas;
+	@ElementCollection
+	private List<AlternativaMarcada> alternativasMarcadas;
 	
 	private int nota;
 
@@ -26,11 +35,11 @@ public class RelatorioUsuario {
 	private Calendar horarioFim;
 
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

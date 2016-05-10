@@ -65,11 +65,8 @@ public class TurmaController {
 	public String matricula(@RequestParam("nomeTurma") String nomeTurma,
 			RedirectAttributes flash) {
 		Turma turma = turmaDao.procuraTurmaPor(nomeTurma);
-		System.out.println(usuarioLogado.getLogin());
-		System.out.println(usuarioLogado.getId());
 		if (turma != null) {
 			Usuario usuario = usuarioDao.atualiza(usuarioLogado);
-			System.out.println(usuario.getId());
 			turma.adicionaUsuario(usuario);
 			flash.addFlashAttribute("existeTurma", true);
 			flash.addFlashAttribute("nomeTurma", nomeTurma);

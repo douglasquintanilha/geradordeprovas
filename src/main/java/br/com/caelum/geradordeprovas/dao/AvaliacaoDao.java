@@ -53,7 +53,7 @@ public class AvaliacaoDao {
 				.setParameter("usuarioId", usuario.getId()).getResultList();
 	}
 
-	public void salvaAvaliacoes(List<Avaliacao> avaliacoes) {
+	public void save(List<Avaliacao> avaliacoes) {
 		for(Avaliacao avaliacao : avaliacoes){
 			manager.persist(avaliacao);
 		}
