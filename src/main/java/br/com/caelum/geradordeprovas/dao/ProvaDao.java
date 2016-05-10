@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import br.com.caelum.geradordeprovas.models.Prova;
+import br.com.caelum.geradordeprovas.models.Questao;
 import br.com.caelum.geradordeprovas.models.Usuario;
 
 @Repository
@@ -46,6 +47,11 @@ public class ProvaDao {
 	public List<Prova> getProvasLiberadasByUsuario(Usuario usuario) {
 		return manager.createQuery("select p from Usuario u JOIN u.provas p where u.id = :usuarioId", Prova.class)
 				.setParameter("usuarioId", usuario.getId()).getResultList();
+	}
+
+	public List<Prova> getProvasPor(Questao questao) {
+		return manager.createQuery("select p from Prova p JOIN p.questoes q where q.id = :questaoId", Prova.class)
+				.setParameter("questaoId", questao.getId()).getResultList();
 	}
 
 }

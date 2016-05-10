@@ -14,6 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -34,6 +36,9 @@ public class Prova {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar dataCriacao;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Calendar updatedAt;
 
 	@Column(length = 2048)
 	private String descricao;
@@ -45,6 +50,12 @@ public class Prova {
 	
 	@ElementCollection(targetClass=Avaliacao.class)
 	private Set<Avaliacao> avaliacoes = new HashSet<>();
+	
+	@PreUpdate
+	@PrePersist
+	public void setUpdatedAt() {
+		this.updatedAt = Calendar.getInstance();
+	}
 	
 	public Long getId() {
 		return id;
