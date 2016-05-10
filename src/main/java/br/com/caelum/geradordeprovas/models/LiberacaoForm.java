@@ -64,8 +64,6 @@ public class LiberacaoForm {
 		//se tiver, tem q ver se essa avaliacao é a mais atualizada possivel(HOW??)
 		List<Avaliacao> avaliacoes = new ArrayList<Avaliacao>();
 		for(Prova prova : provas){
-			System.out.println("PROVA"+prova);
-			System.out.println("AVALIACAO"+prova.geraAvaliacaoInicial());
 			avaliacoes.add(prova.geraAvaliacaoInicial());
 		}
 		avaliacaoDao.salvaAvaliacoes(avaliacoes);

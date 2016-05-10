@@ -45,6 +45,7 @@ public class ProvaController {
 		this.provaDao = provaDao;
 		this.usuarioDao = usuarioDao;
 		this.turmaDao = turmaDao;
+		this.avaliacaoDao = avaliacaoDao;
 	}
 
 	@RequestMapping("/monta")
@@ -104,6 +105,7 @@ public class ProvaController {
 		liberacaoForm.liberaProvas(avaliacaoDao, usuarioDao, turmaDao, provas);
 
 		ModelAndView mv = new ModelAndView("admin/provas-liberadas");
+		System.out.println(mv);
 		return mv;
 	}
 	

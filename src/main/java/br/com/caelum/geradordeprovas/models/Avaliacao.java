@@ -50,7 +50,8 @@ public class Avaliacao {
 
 	private String nomeProva;
 
-	@ElementCollection(targetClass=Questao.class)
+//	@ElementCollection(targetClass=Questao.class)
+	
 	private Set<Questao> questoesImutaveis;
 
 	public Avaliacao(){

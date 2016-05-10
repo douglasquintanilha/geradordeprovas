@@ -33,7 +33,7 @@ public class Turma {
 
 	//----------------atributos da refatoraçáo
 	
-	@ElementCollection(targetClass=Avaliacao.class)
+//	@ElementCollection(targetClass=Avaliacao.class)
 	private Set<Avaliacao> avaliacoes = new HashSet<>();
 	
 	
@@ -90,6 +90,6 @@ public class Turma {
 	}
 
 	public void adicionaAvaliacoes(List<Avaliacao> avaliacoes) {
-		this.avaliacoes .addAll(avaliacoes);
+		this.avaliacoes.addAll(avaliacoes);
 	}
 }
