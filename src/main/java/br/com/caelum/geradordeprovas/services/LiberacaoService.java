@@ -38,12 +38,22 @@ public class LiberacaoService {
 	}
 
 	private List<Avaliacao> geraAvaliacoes(List<Prova> provas) {
-		List<Avaliacao> avaliacoes = new ArrayList<>();
+		List<Avaliacao> avaliacoesASeremLiberadas = new ArrayList<>();
 		for (Prova prova : provas) {
-			avaliacoes.add(prova.geraAvaliacaoInicial());
+			Avaliacao avaliacao = avaliacaoDao.getUltimaAvaliacaoCriada(prova);
+			if(provaFoiAtualizadaDepoisDaUltimaAvaliacao(avaliacao, prova)){
+				avaliacoesASeremLiberadas.add(prova.geraAvaliacaoInicial());
+			}
+			else{
+				avaliacoesASeremLiberadas.add(avaliacao);
+			}
 		}
-		avaliacaoDao.save(avaliacoes);
-		return avaliacoes;
+		avaliacaoDao.save(avaliacoesASeremLiberadas);
+		return avaliacoesASeremLiberadas;
+	}
+
+	private boolean provaFoiAtualizadaDepoisDaUltimaAvaliacao(Avaliacao avaliacao, Prova prova) {
+		return prova.getUpdatedAt().after(avaliacao.getCreatedAt());
 	}
 
 }

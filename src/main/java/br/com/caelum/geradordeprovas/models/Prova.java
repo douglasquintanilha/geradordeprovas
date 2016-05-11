@@ -57,6 +57,10 @@ public class Prova {
 		this.updatedAt = Calendar.getInstance();
 	}
 	
+	public Calendar getUpdatedAt() {
+		return updatedAt;
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -161,7 +165,7 @@ public class Prova {
 
 	public Avaliacao geraAvaliacaoInicial() {
 		Set<Questao> questoesSet = new HashSet<Questao>(this.getQuestoes());
-		return new Avaliacao(this.getNome(), questoesSet);
+		return new Avaliacao(this.getNome(), questoesSet, this.id);
 	}
 
 }

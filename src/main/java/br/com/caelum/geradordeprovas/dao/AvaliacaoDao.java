@@ -54,8 +54,18 @@ public class AvaliacaoDao {
 	}
 
 	public void save(List<Avaliacao> avaliacoes) {
-		for(Avaliacao avaliacao : avaliacoes){
+		for (Avaliacao avaliacao : avaliacoes) {
 			manager.persist(avaliacao);
 		}
+	}
+
+	public Avaliacao getUltimaAvaliacaoCriada(Prova prova) {
+		List<Avaliacao> avaliacoes = manager
+				.createQuery("select a from Avaliacao a where a.provaId = :provaId", Avaliacao.class)
+				.setParameter("provaId", prova.getId()).getResultList();
+		if (avaliacoes.size() == 0)
+			return new Avaliacao();
+		else
+			return avaliacoes.get(avaliacoes.size()-1);
 	}
 }

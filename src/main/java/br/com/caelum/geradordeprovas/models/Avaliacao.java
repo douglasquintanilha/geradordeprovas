@@ -51,16 +51,35 @@ public class Avaliacao {
 
 	private String nomeProva;
 
+	@Temporal(TemporalType.TIMESTAMP)
+	private Calendar createdAt;
+
 	@ManyToMany
 	private Set<Questao> questoesImutaveis;
+
+	private Long provaId;
 
 	public Avaliacao() {
 
 	}
 
-	public Avaliacao(String nomeProva, Set<Questao> questoesImutaveis) {
+	public Avaliacao(String nomeProva, Set<Questao> questoesImutaveis, Long provaId) {
 		this.nomeProva = nomeProva;
 		this.questoesImutaveis = questoesImutaveis;
+		this.provaId = provaId;
+		this.createdAt = Calendar.getInstance();
+	}
+
+	public void setProvaId(Long provaId) {
+		this.provaId = provaId;
+	}
+
+	public Long getProvaId() {
+		return provaId;
+	}
+
+	public Calendar getCreatedAt() {
+		return createdAt;
 	}
 
 	public List<AlternativaMarcada> getAlternativasMarcadas() {
