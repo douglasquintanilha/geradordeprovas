@@ -89,6 +89,7 @@ public class Avaliacao {
 	public void setAlternativasMarcadas(List<AlternativaMarcada> alternativasMarcadas) {
 		this.alternativasMarcadas = alternativasMarcadas;
 	}
+	
 
 	public Calendar getHorarioInicio() {
 		return horarioInicio;
@@ -113,7 +114,21 @@ public class Avaliacao {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	
+	public String getNomeProva() {
+		return nomeProva;
+	}
+	
+	public void setNomeProva(String nomeProva) {
+		this.nomeProva = nomeProva;
+	}
+	public Set<Questao> getQuestoesImutaveis() {
+		return questoesImutaveis;
+	}
+	public void setQuestoesImutaveis(Set<Questao> questoesImutaveis) {
+		this.questoesImutaveis = questoesImutaveis;
+	}
+	
 	public int getNota() {
 		return nota;
 	}
@@ -189,4 +204,9 @@ public class Avaliacao {
 	public String getUuid() {
 		return UUID.randomUUID().toString();
 	}
+
+	public void setCreatedAt(Calendar horario) {
+		this.createdAt = horario;
+	}
+	
 }

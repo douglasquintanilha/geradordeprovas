@@ -51,9 +51,13 @@ public class Prova {
 	@ElementCollection(targetClass=Avaliacao.class)
 	private Set<Avaliacao> avaliacoes = new HashSet<>();
 	
+	public void setUpdatedAt(Calendar horario) {
+		this.updatedAt = horario;
+	}
+
 	@PreUpdate
 	@PrePersist
-	public void setUpdatedAt() {
+	public void atualizaUpdateAt(){
 		this.updatedAt = Calendar.getInstance();
 	}
 	

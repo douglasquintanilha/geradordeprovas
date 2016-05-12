@@ -1,5 +1,6 @@
 package br.com.caelum.geradordeprovas.services;
 
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -78,7 +79,7 @@ public class QuestaoService {
 	private void atualizaUpdatedAtDeProvas(List<Prova> provas) {
 		System.out.println(provas);
 		for (Prova prova : provas) {
-			prova.setUpdatedAt();
+			prova.setUpdatedAt(Calendar.getInstance());
 		}
 	}
 

@@ -17,34 +17,38 @@ import br.com.caelum.geradordeprovas.models.Usuario;
 public class LiberacaoService {
 
 	private AvaliacaoDao avaliacaoDao;
-	
+
 	@Autowired
-	public LiberacaoService(AvaliacaoDao avaliacaoDao){
+	public LiberacaoService(AvaliacaoDao avaliacaoDao) {
 		this.avaliacaoDao = avaliacaoDao;
 	}
-	
+
 	public void libera(LiberacaoForm liberacaoForm) {
 		List<Avaliacao> avaliacoes = geraAvaliacoes(liberacaoForm.getProvas());
-		liberaAvaliacoes(avaliacoes, liberacaoForm.getTurmas(), liberacaoForm.getUsuarios());
+		liberaAvaliacoesParaUsuarios(avaliacoes, liberacaoForm.getUsuarios());
+		liberaAvaliacoesParaTurmas(avaliacoes, liberacaoForm.getTurmas());
+
 	}
 
-	private void liberaAvaliacoes(List<Avaliacao> avaliacoes, List<Turma> turmas, List<Usuario> usuarios) {
-		for(Usuario usuario : usuarios){
-			usuario.adicionaAvaliacoes(avaliacoes);
-		}
-		for(Turma turma : turmas){
+	public void liberaAvaliacoesParaTurmas(List<Avaliacao> avaliacoes, List<Turma> turmas) {
+		for (Turma turma : turmas) {
 			turma.adicionaAvaliacoes(avaliacoes);
 		}
 	}
 
-	private List<Avaliacao> geraAvaliacoes(List<Prova> provas) {
+	public void liberaAvaliacoesParaUsuarios(List<Avaliacao> avaliacoes, List<Usuario> usuarios) {
+		for (Usuario usuario : usuarios) {
+			usuario.adicionaAvaliacoes(avaliacoes);
+		}
+	}
+
+	public List<Avaliacao> geraAvaliacoes(List<Prova> provas) {
 		List<Avaliacao> avaliacoesASeremLiberadas = new ArrayList<>();
 		for (Prova prova : provas) {
 			Avaliacao avaliacao = avaliacaoDao.getUltimaAvaliacaoCriada(prova);
-			if(provaFoiAtualizadaDepoisDaUltimaAvaliacao(avaliacao, prova)){
+			if (provaFoiAtualizadaDepoisDaUltimaAvaliacao(avaliacao, prova)) {
 				avaliacoesASeremLiberadas.add(prova.geraAvaliacaoInicial());
-			}
-			else{
+			} else {
 				avaliacoesASeremLiberadas.add(avaliacao);
 			}
 		}
@@ -52,7 +56,7 @@ public class LiberacaoService {
 		return avaliacoesASeremLiberadas;
 	}
 
-	private boolean provaFoiAtualizadaDepoisDaUltimaAvaliacao(Avaliacao avaliacao, Prova prova) {
+	public boolean provaFoiAtualizadaDepoisDaUltimaAvaliacao(Avaliacao avaliacao, Prova prova) {
 		return prova.getUpdatedAt().after(avaliacao.getCreatedAt());
 	}
 

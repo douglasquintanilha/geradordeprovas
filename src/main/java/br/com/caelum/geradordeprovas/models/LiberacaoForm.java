@@ -10,9 +10,9 @@ public class LiberacaoForm {
 	@NotEmpty
 	private List<Prova> provas;
 
-	private List<Usuario> usuarios;
+	private List<Usuario> usuarios = new ArrayList<>();
 
-	private List<Turma> turmas = new ArrayList<Turma>();
+	private List<Turma> turmas = new ArrayList<>();
 
 	public void setProvas(List<Prova> provas) {
 		this.provas = provas;

@@ -17,6 +17,15 @@ public class Tag {
 	
 	private String nome;
 	
+	public Tag(Long id, String nome) {
+		this.id = id;
+		this.nome = nome;
+	}
+	
+	public Tag() {
+	}
+
+
 	@JsonValue
 	public String getNome() {
 		return nome;

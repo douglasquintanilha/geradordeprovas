@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.caelum.geradordeprovas.dao.AvaliacaoDao;
 import br.com.caelum.geradordeprovas.dao.ProvaDao;
 import br.com.caelum.geradordeprovas.dao.QuestaoDao;
 import br.com.caelum.geradordeprovas.dao.TurmaDao;
@@ -38,18 +37,16 @@ public class ProvaController {
 	private ProvaDao provaDao;
 	private UsuarioDao usuarioDao;
 	private TurmaDao turmaDao;
-	private AvaliacaoDao avaliacaoDao;
 	private LiberacaoService liberacaoService;
 
 	@Autowired
-	public ProvaController(LiberacaoService liberacaoService, AvaliacaoDao avaliacaoDao, QuestaoDao questaoDao,
+	public ProvaController(LiberacaoService liberacaoService, QuestaoDao questaoDao,
 			ProvaDao provaDao, UsuarioDao usuarioDao, TurmaDao turmaDao) {
 		this.questaoDao = questaoDao;
 		this.liberacaoService = liberacaoService;
 		this.provaDao = provaDao;
 		this.usuarioDao = usuarioDao;
 		this.turmaDao = turmaDao;
-		this.avaliacaoDao = avaliacaoDao;
 	}
 
 	@RequestMapping("/monta")
@@ -108,12 +105,6 @@ public class ProvaController {
 		return mv;
 	}
 
-	@Transactional
-	@RequestMapping("/salvaLiberacao2")
-	public ModelAndView salvaLiberacao2() {
-
-		return null;
-	}
 
 	@RequestMapping("/listar")
 	public ModelAndView listar() {

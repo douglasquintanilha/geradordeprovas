@@ -72,6 +72,10 @@ public class Usuario {
 		this.admin = admin;
 	}
 
+	public Set<Avaliacao> getAvaliacoes() {
+		return avaliacoes;
+	}
+	
 	public String getLogin() {
 		return login;
 	}
