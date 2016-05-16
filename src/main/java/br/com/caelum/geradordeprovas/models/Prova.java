@@ -172,4 +172,8 @@ public class Prova {
 		return new Avaliacao(this.getNome(), questoesSet, this.id);
 	}
 
+	public void setAvaliacoes(Set<Avaliacao> avaliacoes) {
+		this.avaliacoes = avaliacoes;		
+	}
+
 }

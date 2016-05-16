@@ -15,6 +15,7 @@ import java.util.Set;
 import org.junit.Test;
 
 import br.com.caelum.geradordeprovas.dao.AvaliacaoDao;
+import br.com.caelum.geradordeprovas.databuilder.ProvaBuilder;
 import br.com.caelum.geradordeprovas.databuilder.QuestaoBuilder;
 import br.com.caelum.geradordeprovas.models.Avaliacao;
 import br.com.caelum.geradordeprovas.models.Prova;
@@ -75,14 +76,12 @@ public class LiberacaoServiceTest {
 
 		List<Questao> questoes = questaoBuilder.geraListaDeQuestoes();
 
-		Prova prova1 = new Prova();
-		prova1.setNome("Prova Teste");
-		prova1.setId(1l);
-		prova1.setQuestoes(questoes);
+		ProvaBuilder provaBuilder = new ProvaBuilder();
+		Prova prova = provaBuilder.geraProvaPadrao();
+		
 		Calendar horario = Calendar.getInstance();
-		prova1.setUpdatedAt(horario);
 
-		List<Prova> provas = Arrays.asList(prova1);
+		List<Prova> provas = Arrays.asList(prova);
 
 		Avaliacao avaliacaoEsperada = new Avaliacao();
 		avaliacaoEsperada.setNomeProva("Prova Teste");
@@ -91,7 +90,7 @@ public class LiberacaoServiceTest {
 		avaliacaoEsperada.setCreatedAt(horario);
 
 		AvaliacaoDao avaliacaoDaoFalso = mock(AvaliacaoDao.class);
-		when(avaliacaoDaoFalso.getUltimaAvaliacaoCriada(prova1)).thenReturn(avaliacaoEsperada);
+		when(avaliacaoDaoFalso.getUltimaAvaliacaoCriada(prova)).thenReturn(avaliacaoEsperada);
 
 		LiberacaoService ls = new LiberacaoService(avaliacaoDaoFalso);
 		List<Avaliacao> avaliacoesGeradas = ls.geraAvaliacoes(provas);
