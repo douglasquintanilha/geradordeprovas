@@ -47,7 +47,7 @@ public class Avaliacao {
 	// -------------------------Atributos do refactor
 
 	@ManyToMany
-	private List<RelatorioUsuario> relatoriosUsuario = new ArrayList<>();
+	private List<RelatorioUsuario> relatorioUsuarios = new ArrayList<>();
 
 	private String nomeProva;
 
@@ -207,6 +207,10 @@ public class Avaliacao {
 
 	public void setCreatedAt(Calendar horario) {
 		this.createdAt = horario;
+	}
+
+	public void setRelatorioUsuarios(List<RelatorioUsuario> relatorioUsuarios) {
+		this.relatorioUsuarios = relatorioUsuarios;
 	}
 	
 }
