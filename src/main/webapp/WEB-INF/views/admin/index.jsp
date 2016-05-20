@@ -30,6 +30,7 @@
 	    
 	    <h3>Usuario...</h3>			
 		<a href="<c:url value='usuario/novo/form'/>"><h3>Criar Usuário</h3></a>
+		<a href="<c:url value='usuario/listar'/>"><h3>Listar/Editar Usuários</h3></a>
 		<hr>
 				
 		<h3>Outros...</h3>
