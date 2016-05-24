@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.caelum.geradordeprovas.dao.AvaliacaoDao;
 import br.com.caelum.geradordeprovas.dao.FeedbackDao;
@@ -131,18 +132,27 @@ public class UsuarioController {
 	
 	@Transactional
 	@RequestMapping(value = "admin/usuario/editar/{id}", method = RequestMethod.POST)
-	public ModelAndView editarUsuario(@Valid @ModelAttribute("usuario") Usuario usuario, 
-			@PathVariable long id,BindingResult result) {
+	public ModelAndView editarUsuario(@Valid @ModelAttribute("usuario") Usuario usuarioAlterado, 
+			@PathVariable long id,@RequestParam(value = "senhaAlterada",required = false) String senhaAlterada,
+			BindingResult result, RedirectAttributes flash) {
 		if (result.hasErrors()) {
 			ModelAndView mv = new ModelAndView("admin/editar-usuario/" + id, result.getModel());
 			return mv;
 		}	
 		ModelAndView mv = new ModelAndView("redirect:../listar");
+				
+		Usuario usuario = usuarioDao.find(usuarioAlterado.getId());
 		
-		String senhaCriptografada = criptografia.criptografaSenha(usuario.getSenha());
-		usuario.setSenha(senhaCriptografada);
+		if(senhaAlterada != null){
+			String senhaCriptografada = criptografia.criptografaSenha(usuarioAlterado.getSenha());
+			usuario.setSenha(senhaCriptografada);	
+		}
+		
+		usuario.setAdmin(usuarioAlterado.isAdmin());
+		usuario.setLogin(usuarioAlterado.getLogin());
+		
 		usuarioDao.atualiza(usuario);
-		mv.addObject("usuario", usuario);
+		flash.addFlashAttribute("usuarioEditado", usuario);
 		return mv;
 	}
 	

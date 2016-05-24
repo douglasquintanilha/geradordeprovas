@@ -12,8 +12,8 @@
 <body>
 	<c:import url="../header.jsp"></c:import>
 	<div class="container">
-		<c:if test="${not empty usuario.id}">
-			<div class="alert alert-success" role="alert">Usuario #${usuario.id} foi editada com sucesso!</div>
+		<c:if test="${not empty usuarioEditado.id}">
+			<div class="alert alert-success" role="alert">Usuario #${usuarioEditado.id} foi editado com sucesso!</div>
 		</c:if>
 		
 		<table class="table table-hover">

@@ -13,17 +13,19 @@
 	<c:import url="../header.jsp"></c:import>
 	<div class="container">
 		
-		<c:url var="urlPost" value='${prova.id}'/>	
+		<c:url var="urlPost" value='${usuario.id}'/>	
 		<form:form action="${urlPost}" method="POST" commandName="usuario" class="form-horizontal col-xs-2">
+			<input type="hidden" value="${usuario.id}" name="id">
 			<div class="form-group">
 				<label for="nome">Nome:</label>
 				<form:errors path="login" cssClass="alert alert-danger" element="div" />
 				<input type="text" value="${usuario.login}" class="form-control" name="login" id="nome">
 			</div>
 			<div class="form-group">	
-				<label for="senha">Senha:</label>
+				<label for="senha">Senha:</label><br>
+				<input type="checkbox" name="senhaAlterada" id="habilita-senha"><label for="habilita-senha"> Marque para habilitar</label>				
 				<form:errors path="senha" cssClass="alert alert-danger" element="div" />
-				<input type="password" class="form-control" name="senha" id="senha">
+				<input type="password" disabled class="form-control" name="senha" id="senha">
 			</div>
 			<div class="form-group">	 
 					<span>Admin? </span><br>
@@ -42,5 +44,13 @@
 		</form:form>
 	</div>
 	<c:import url="../footer.jsp"></c:import>
+	<script src="<c:url value='/static/js/jquery-2.1.4.min.js' />"></script>	
+	<script>
+		var estado = true;
+		$("#habilita-senha").on("change",function(){
+			estado = !estado;
+			$("#senha").prop("disabled", estado);
+		});
+	</script>
 </body>
 </html>
