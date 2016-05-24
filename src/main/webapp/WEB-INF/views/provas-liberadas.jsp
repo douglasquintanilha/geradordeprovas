@@ -22,10 +22,10 @@
 		<form:form method="POST" action="matricula">
 			<input type="text" name="nomeTurma"><input type="submit" value="Matricular!">
 		</form:form>
+
 		<c:if test="${not empty provas}">
 			<h3>Selecione uma prova:</h3>
 			<div class="row">
-			
 			<c:forEach items="${provas}" var="prova">
 			    <div class="col-xs-3">
 			    <form:form action="avaliacao/${prova.uuid}" method="POST" id="${prova.id}">

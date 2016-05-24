@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import br.com.caelum.geradordeprovas.models.Avaliacao;
 import br.com.caelum.geradordeprovas.models.Prova;
 import br.com.caelum.geradordeprovas.models.Usuario;
 import br.com.caelum.geradordeprovas.util.Criptografia;
@@ -25,31 +26,27 @@ public class UsuarioDao {
 		manager.persist(usuario);
 	}
 
-	public Usuario find(Long id){
+	public Usuario find(Long id) {
 		return manager.find(Usuario.class, id);
 	}
-	
-	public Usuario usuarioDoGithub(Usuario usuario, boolean caelumOrg){
-		if(loginExistente(usuario.getLogin())){
+
+	public Usuario usuarioDoGithub(Usuario usuario, boolean caelumOrg) {
+		if (loginExistente(usuario.getLogin())) {
 			return getUsuarioByLogin(usuario.getLogin());
-		}
-		else{
-			if(caelumOrg){
+		} else {
+			if (caelumOrg) {
 				usuario.setAdmin(true);
-			}
-			else{
+			} else {
 				usuario.setAdmin(false);
 			}
 			save(usuario);
 		}
 		return usuario;
 	}
-	
+
 	public Usuario getUsuarioByLogin(String login) {
-		Usuario usuario = manager
-				.createQuery("select u from Usuario u where u.login =:login",
-						Usuario.class).setParameter("login", login)
-				.getSingleResult();
+		Usuario usuario = manager.createQuery("select u from Usuario u where u.login =:login", Usuario.class)
+				.setParameter("login", login).getSingleResult();
 
 		return usuario;
 	}
@@ -73,24 +70,18 @@ public class UsuarioDao {
 	}
 
 	public List<Usuario> list() {
-		return manager.createQuery("from Usuario u", Usuario.class)
-				.getResultList();
+		return manager.createQuery("from Usuario u", Usuario.class).getResultList();
 	}
 
-	public List<Prova> getProvasDoUsuario(String login) {
-		return manager
-				.createQuery(
-						"select p from Provas p JOIN p.Usuario u where u.login =:login",
-						Prova.class).setParameter("login", login)
-				.getResultList();
+	public List<Prova> getProvasDoUsuario(Usuario usuario) {
+		return manager.createQuery("select p from Usuario u JOIN u.provas p where u.id =:usuarioId", Prova.class)
+				.setParameter("usuarioId", usuario.getId()).getResultList();
 
 	}
 
 	public boolean loginExistente(String login) {
-		List<Usuario> usuario = manager
-				.createQuery("from Usuario u where u.login=:login",
-						Usuario.class).setParameter("login", login)
-				.getResultList();
+		List<Usuario> usuario = manager.createQuery("from Usuario u where u.login=:login", Usuario.class)
+				.setParameter("login", login).getResultList();
 		if (usuario.isEmpty())
 			return false;
 		else
@@ -101,4 +92,8 @@ public class UsuarioDao {
 		return manager.merge(usuarioLogado);
 	}
 
+	public List<Avaliacao> getAvaliacoesDoUsuario(Usuario usuario) {
+		return manager.createQuery("select a from Usuario u JOIN u.avaliacoes a where u.id =:usuarioId", Avaliacao.class)
+				.setParameter("usuarioId", usuario.getId()).getResultList();
+	}
 }

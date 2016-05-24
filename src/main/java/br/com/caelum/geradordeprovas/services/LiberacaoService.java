@@ -1,6 +1,7 @@
 package br.com.caelum.geradordeprovas.services;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,6 @@ public class LiberacaoService {
 		List<Avaliacao> avaliacoes = geraAvaliacoes(liberacaoForm.getProvas());
 		liberaAvaliacoesParaUsuarios(avaliacoes, liberacaoForm.getUsuarios());
 		liberaAvaliacoesParaTurmas(avaliacoes, liberacaoForm.getTurmas());
-
 	}
 
 	public void liberaAvaliacoesParaTurmas(List<Avaliacao> avaliacoes, List<Turma> turmas) {
@@ -42,6 +42,11 @@ public class LiberacaoService {
 		}
 	}
 
+	public void realizouProva(Prova prova, Usuario usuario){
+		List<Avaliacao> avaliacao = geraAvaliacoes(Arrays.asList(prova));
+		liberaAvaliacoesParaUsuarios(avaliacao, Arrays.asList(usuario));
+	}
+	
 	public List<Avaliacao> geraAvaliacoes(List<Prova> provas) {
 		List<Avaliacao> avaliacoesASeremLiberadas = new ArrayList<>();
 		for (Prova prova : provas) {

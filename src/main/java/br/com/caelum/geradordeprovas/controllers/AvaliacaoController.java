@@ -16,7 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.caelum.geradordeprovas.dao.AvaliacaoDao;
 import br.com.caelum.geradordeprovas.models.Avaliacao;
+import br.com.caelum.geradordeprovas.models.Prova;
 import br.com.caelum.geradordeprovas.models.Usuario;
+import br.com.caelum.geradordeprovas.services.LiberacaoService;
 
 @Controller
 @RequestMapping("/avaliacao/")
@@ -25,30 +27,34 @@ public class AvaliacaoController {
 
 	private Usuario usuarioLogado;
 	private AvaliacaoDao avaliacaoDao;
+	private LiberacaoService liberacaoService;
 
 	@Autowired
-	public AvaliacaoController(
-			@Qualifier("usuarioLogado") Usuario usuarioLogado,
+	public AvaliacaoController(@Qualifier("usuarioLogado") Usuario usuarioLogado, LiberacaoService liberacaoService,
 			AvaliacaoDao avaliacaoDao) {
+		this.liberacaoService = liberacaoService;
 		this.usuarioLogado = usuarioLogado;
 		this.avaliacaoDao = avaliacaoDao;
 	}
 
 	@Transactional
 	@RequestMapping(value = "correcao", method = { RequestMethod.POST })
-	public ModelAndView corrigePost(
-			@ModelAttribute("avaliacao") Avaliacao avaliacao,
-			HttpSession session) {
+	public ModelAndView corrigePost(@ModelAttribute("avaliacao") Avaliacao avaliacao, HttpSession session,
+			@ModelAttribute("prova") Prova prova) {
 		if (session.getAttribute("avaliacao") != null) {
 			return new ModelAndView("redirect:refaz");
 		} else {
-			avaliacao.setHorarioInicio((Calendar) session
-					.getAttribute("horarioInicio"));
-			avaliacao.setHorarioFim(Calendar.getInstance());
-			avaliacao.setUsuario(usuarioLogado);
-			avaliacao.validaDuracao();
-			avaliacao.corrige();
-			avaliacaoDao.save(avaliacao);
+			
+			System.out.println("NOME " + prova.getNome());
+			System.out.println(avaliacao.getId());
+			liberacaoService.realizouProva(prova, usuarioLogado);
+			
+//			avaliacao.setHorarioInicio((Calendar) session.getAttribute("horarioInicio"));
+//			avaliacao.setHorarioFim(Calendar.getInstance());
+//			avaliacao.setUsuario(usuarioLogado);
+//			avaliacao.validaDuracao();
+//			avaliacao.corrige();
+//			avaliacaoDao.save(avaliacao);
 			session.setAttribute("avaliacao", avaliacao);
 			return new ModelAndView("redirect:correcao");
 		}
@@ -56,9 +62,7 @@ public class AvaliacaoController {
 
 	@Transactional
 	@RequestMapping(value = "correcao", method = { RequestMethod.GET })
-	public ModelAndView corrigeGet(
-			@ModelAttribute("avaliacao") Avaliacao avaliacao,
-			HttpSession session) {
+	public ModelAndView corrigeGet(@ModelAttribute("avaliacao") Avaliacao avaliacao, HttpSession session) {
 		avaliacao = (Avaliacao) session.getAttribute("avaliacao");
 		avaliacao = avaliacaoDao.atualiza(avaliacao);
 		return new ModelAndView("corrigido").addObject("avaliacao", avaliacao);
