@@ -14,18 +14,28 @@
 
 	<c:import url="header.jsp"></c:import>
 	<div class="container">
-		<c:if test="${not empty usuarioExistente}">
-			<div class="alert alert-danger" role="alert">Usuário existente!</div>
-		</c:if>
-		
-		<div class="form-group">
-			<form:form method="POST" action="efetuaCadastro">
+		<div class="form-de-login col-md-4 col-md-offset-4">
+			<c:if test="${not empty usuarioExistente}">
+				<div class="alert alert-danger" role="alert">Usuário existente!</div>
+			</c:if>
 			
-				<input type="email" name="login" class="form-control" placeholder="Email" required="required">
-				<input type="password" name="senha" class="form-control" placeholder="Senha" required="required">
-				<input type="submit" class="btn btn-default"value="Cadastrar">		
-			
-			</form:form>
+			<div class="form-group">
+				<form:form method="POST" action="efetuaCadastro">
+					
+					<div class="form-group">
+						<label for="name">Email:</label>
+						<input type="email" name="login" class="form-control" placeholder="Email" required="required">
+					</div>
+					<div class="form-group">
+					<label for="senha">Senha:</label>					
+						<input type="password" name="senha" class="form-control" placeholder="Senha" required="required">
+					</div>
+
+					<div class="form-group col-md-offset-4">
+						<button type="submit" class="btn btn-default btn-lg">Cadastrar</button>
+					</div>				
+				</form:form>
+			</div>
 		</div>
 	</div>
 	<c:import url="footer.jsp"></c:import>
