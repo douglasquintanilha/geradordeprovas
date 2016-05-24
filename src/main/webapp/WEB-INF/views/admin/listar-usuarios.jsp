@@ -21,13 +21,16 @@
 				<tr>
 					<th>#</th>
 					<th>Email</th>
+					<th>É admin ?</th>
+					<th>Editar/Deletar</th>
 				<tr>
 			</thead>
 			<tbody>
 				<c:forEach var="usuario" items="${usuarios}">
 					<tr>
 						<td>${usuario.id}</td>
-						<td>${usuario.email}</td>
+						<td>${usuario.login}</td>
+						<td>${usuario.admin}</td>
 						<td>
 							<a href="<c:url value='editar/${usuario.id}'/>">
 								<span class="glyphicon glyphicon-pencil icone-tabela"></span>

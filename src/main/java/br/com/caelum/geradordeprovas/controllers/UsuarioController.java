@@ -109,7 +109,7 @@ public class UsuarioController {
 		return new ModelAndView("feedback");
 	}
 	
-	@RequestMapping("usuario/listar")
+	@RequestMapping("admin/usuario/listar")
 	public ModelAndView listar() {
 
 		List<Usuario> usuarios = usuarioDao.list();
@@ -119,7 +119,7 @@ public class UsuarioController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "usuario/editar/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "admin/usuario/editar/{id}", method = RequestMethod.GET)
 	public ModelAndView editarForm(@PathVariable long id) {
 		Usuario usuario = usuarioDao.find(id);
 
@@ -129,7 +129,8 @@ public class UsuarioController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "usuario/editar/{id}", method = RequestMethod.POST)
+	@Transactional
+	@RequestMapping(value = "admin/usuario/editar/{id}", method = RequestMethod.POST)
 	public ModelAndView editarUsuario(@Valid @ModelAttribute("usuario") Usuario usuario, 
 			@PathVariable long id,BindingResult result) {
 		if (result.hasErrors()) {
