@@ -11,6 +11,7 @@ import br.com.caelum.geradordeprovas.models.AlternativaMarcada;
 import br.com.caelum.geradordeprovas.models.Avaliacao;
 import br.com.caelum.geradordeprovas.models.Prova;
 import br.com.caelum.geradordeprovas.models.Questao;
+import br.com.caelum.geradordeprovas.models.QuestaoImutavel;
 import br.com.caelum.geradordeprovas.models.RelatorioUsuario;
 import br.com.caelum.geradordeprovas.models.Usuario;
 
@@ -38,7 +39,7 @@ public class AvaliacaoBuilder {
 
 	private Calendar createdAt;
 
-	private Set<Questao> questoesImutaveis;
+	private Set<QuestaoImutavel> questoesImutaveis;
 
 	private Long provaId;
 
@@ -99,7 +100,6 @@ public class AvaliacaoBuilder {
 		avaliacao.setHorarioFim(this.horarioFim);
 		avaliacao.setHorarioInicio(this.horarioInicio);
 		avaliacao.setAlternativasMarcadas(this.alternativasMarcadas);
-		avaliacao.setProva(this.prova);
 		avaliacao.setProvaId(this.provaId);
 		avaliacao.setQuestoesImutaveis(this.questoesImutaveis);
 		avaliacao.setUsuario(this.usuario);
@@ -113,7 +113,12 @@ public class AvaliacaoBuilder {
 	}
 
 	public AvaliacaoBuilder comQuestoesImutaveis(Set<Questao> questoes) {
-		this.questoesImutaveis = questoes;
+		QuestaoImutavel qi = new QuestaoImutavel();
+		Set<QuestaoImutavel> qis = new HashSet<>();
+		for (Questao questao : questoes) {
+			qis.add(qi.geraQuestaoImutavelAPartirDe(questao));
+		}
+		this.questoesImutaveis = qis;
 		return this;
 	}
 

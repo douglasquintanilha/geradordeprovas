@@ -20,6 +20,7 @@ import br.com.caelum.geradordeprovas.databuilder.QuestaoBuilder;
 import br.com.caelum.geradordeprovas.models.Avaliacao;
 import br.com.caelum.geradordeprovas.models.Prova;
 import br.com.caelum.geradordeprovas.models.Questao;
+import br.com.caelum.geradordeprovas.models.QuestaoImutavel;
 import br.com.caelum.geradordeprovas.models.Turma;
 import br.com.caelum.geradordeprovas.models.Usuario;
 
@@ -28,7 +29,7 @@ public class LiberacaoServiceTest {
 	@Test
 	public void retornaTrueSeProvaFoiAtulizadaDepoisDaUltimaAvaliacao() {
 
-		Set<Questao> questoesImutaveis = new HashSet<Questao>();
+		Set<QuestaoImutavel> questoesImutaveis = new HashSet<>();
 		Prova prova = new Prova();
 
 		Calendar diaDepois = Calendar.getInstance();
@@ -50,7 +51,7 @@ public class LiberacaoServiceTest {
 	@Test
 	public void retornaFalsoSeProvaNaoFoiAtulizadaDepoisDaUltimaAvaliacao() {
 
-		Set<Questao> questoesImutaveis = new HashSet<Questao>();
+		Set<QuestaoImutavel> questoesImutaveis = new HashSet<>();
 		Prova prova = new Prova();
 
 		Calendar diaDepois = Calendar.getInstance();
@@ -75,17 +76,22 @@ public class LiberacaoServiceTest {
 		QuestaoBuilder questaoBuilder = new QuestaoBuilder();
 
 		List<Questao> questoes = questaoBuilder.geraListaDeQuestoes();
+		Set<QuestaoImutavel> questoesImutaveis = new HashSet<>();
+		QuestaoImutavel qi = new QuestaoImutavel();
+		for (Questao questao : questoes) {
+			questoesImutaveis.add(qi.geraQuestaoImutavelAPartirDe(questao));
+		}
 
 		ProvaBuilder provaBuilder = new ProvaBuilder();
 		Prova prova = provaBuilder.geraProvaPadrao();
-		
+
 		Calendar horario = Calendar.getInstance();
 
 		List<Prova> provas = Arrays.asList(prova);
 
 		Avaliacao avaliacaoEsperada = new Avaliacao();
 		avaliacaoEsperada.setNomeProva("Prova Teste");
-		avaliacaoEsperada.setQuestoesImutaveis(new HashSet<Questao>(questoes));
+		avaliacaoEsperada.setQuestoesImutaveis(questoesImutaveis);
 		avaliacaoEsperada.setProvaId(1l);
 		avaliacaoEsperada.setCreatedAt(horario);
 
@@ -107,6 +113,12 @@ public class LiberacaoServiceTest {
 
 		QuestaoBuilder questaoBuilder = new QuestaoBuilder();
 		List<Questao> questoes = questaoBuilder.geraListaDeQuestoes();
+		Set<QuestaoImutavel> questoesImutaveis = new HashSet<>();
+		QuestaoImutavel qi = new QuestaoImutavel();
+		for (Questao questao : questoes) {
+			questoesImutaveis.add(qi.geraQuestaoImutavelAPartirDe(questao));
+		}
+
 		Prova prova1 = new Prova();
 		prova1.setNome("Prova Teste");
 		prova1.setId(1l);
@@ -117,19 +129,21 @@ public class LiberacaoServiceTest {
 
 		Avaliacao avaliacaoEsperada = new Avaliacao();
 		avaliacaoEsperada.setNomeProva("Prova Teste");
-		avaliacaoEsperada.setQuestoesImutaveis(new HashSet<Questao>(questoes));
+		avaliacaoEsperada.setQuestoesImutaveis(questoesImutaveis);
 		avaliacaoEsperada.setProvaId(1l);
 		avaliacaoEsperada.setCreatedAt(Calendar.getInstance());
 
 		Questao questao1 = questaoBuilder.geraQuestaoDefault();
 		questao1.setTitulo("Titulo Fake");
+		QuestaoImutavel questaoImutavel1 = qi.geraQuestaoImutavelAPartirDe(questao1);
 		Questao questao2 = questaoBuilder.geraQuestaoDefault();
 		questao2.setTitulo("Titulo Fake");
-		List<Questao> questoesFake = Arrays.asList(questao1, questao2);
+		QuestaoImutavel questaoImutavel2 = qi.geraQuestaoImutavelAPartirDe(questao1);
+		List<QuestaoImutavel> questoesFake = Arrays.asList(questaoImutavel1, questaoImutavel2);
 
 		Avaliacao avaliacaoFake = new Avaliacao();
 		avaliacaoFake.setNomeProva("Prova Antiga");
-		avaliacaoFake.setQuestoesImutaveis(new HashSet<Questao>(questoesFake));
+		avaliacaoFake.setQuestoesImutaveis(new HashSet<QuestaoImutavel>(questoesFake));
 		avaliacaoFake.setProvaId(1l);
 		Calendar antigao = Calendar.getInstance();
 		antigao.set(1999, 1, 20);
@@ -141,8 +155,6 @@ public class LiberacaoServiceTest {
 		LiberacaoService ls = new LiberacaoService(avaliacaoDaoFalso);
 		List<Avaliacao> avaliacoesGeradas = ls.geraAvaliacoes(provas);
 
-		System.out.println(avaliacoesGeradas.get(0).getNomeProva());
-
 		assertEquals(1, avaliacoesGeradas.size());
 		assertEquals(avaliacaoEsperada.getQuestoesImutaveis(), avaliacoesGeradas.get(0).getQuestoesImutaveis());
 		assertEquals(avaliacaoEsperada.getNomeProva(), avaliacoesGeradas.get(0).getNomeProva());
@@ -150,7 +162,7 @@ public class LiberacaoServiceTest {
 
 	}
 
-	@Test(expected=NullPointerException.class)
+	@Test(expected = NullPointerException.class)
 	public void naoLiberaAvaliacoesSeListaDeUsuariosEhNula() {
 		List<Usuario> usuarios = null;
 

@@ -48,9 +48,6 @@ public class Prova {
 	@ManyToMany()
 	private List<Questao> questoes;
 	
-	@ElementCollection(targetClass=Avaliacao.class)
-	private Set<Avaliacao> avaliacoes = new HashSet<>();
-	
 	public void setUpdatedAt(Calendar horario) {
 		this.updatedAt = horario;
 	}
@@ -168,12 +165,16 @@ public class Prova {
 	}
 
 	public Avaliacao geraAvaliacaoInicial() {
-		Set<Questao> questoesSet = new HashSet<Questao>(this.getQuestoes());
-		return new Avaliacao(this.getNome(), questoesSet, this.id);
+		QuestaoImutavel questaoImutavel = new QuestaoImutavel();
+		Set<QuestaoImutavel> questoesImutaveis = new HashSet<>();
+		for(Questao questao : questoes){
+			questoesImutaveis.add(questaoImutavel.geraQuestaoImutavelAPartirDe(questao));
+		}
+		return new Avaliacao(this.getNome(), questoesImutaveis, this.id);
 	}
 
-	public void setAvaliacoes(Set<Avaliacao> avaliacoes) {
-		this.avaliacoes = avaliacoes;		
-	}
+//	public void setAvaliacoes(Set<Avaliacao> avaliacoes) {
+//		this.avaliacoes = avaliacoes;		
+//	}
 
 }

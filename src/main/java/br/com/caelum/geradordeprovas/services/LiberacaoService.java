@@ -62,6 +62,7 @@ public class LiberacaoService {
 	}
 
 	public boolean provaFoiAtualizadaDepoisDaUltimaAvaliacao(Avaliacao avaliacao, Prova prova) {
+		if(avaliacao.getCreatedAt() == null) return true;
 		return prova.getUpdatedAt().after(avaliacao.getCreatedAt());
 	}
 

@@ -19,9 +19,9 @@ public class RelatorioUsuario {
 	@GeneratedValue
 	private Long id;
 
-	@OneToOne
-	@JoinColumn(unique=true)
-	private Usuario usuario;
+//	@OneToOne
+//	@JoinColumn(unique=true)
+//	private Usuario usuario;
 
 	@ElementCollection
 	private List<AlternativaMarcada> alternativasMarcadas;
@@ -43,13 +43,13 @@ public class RelatorioUsuario {
 		this.id = id;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
+//	public Usuario getUsuario() {
+//		return usuario;
+//	}
+//
+//	public void setUsuario(Usuario usuario) {
+//		this.usuario = usuario;
+//	}
 
 	public int getNota() {
 		return nota;

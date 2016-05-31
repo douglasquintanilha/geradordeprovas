@@ -13,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -30,11 +29,8 @@ public class Avaliacao {
 
 	private int nota;
 
-	@OneToOne()
-	private Usuario usuario;
-
 	@ManyToOne()
-	private Prova prova;
+	private Usuario usuario;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar horarioInicio;
@@ -55,18 +51,21 @@ public class Avaliacao {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar createdAt;
 
-	@ElementCollection
-	private Set<Questao> questoesImutaveis;
+//	@ElementCollection
+//	private Set<QuestaoImutavel> questoesImutaveis;
 
 	private Long provaId;
+
+	@ManyToOne
+	private Prova prova;
 
 	public Avaliacao() {
 
 	}
 
-	public Avaliacao(String nomeProva, Set<Questao> questoesImutaveis, Long provaId) {
+	public Avaliacao(String nomeProva, Set<QuestaoImutavel> questoesImutaveis, Long provaId) {
 		this.nomeProva = nomeProva;
-		this.questoesImutaveis = questoesImutaveis;
+//		this.questoesImutaveis = questoesImutaveis;
 		this.provaId = provaId;
 		this.createdAt = Calendar.getInstance();
 	}
@@ -90,7 +89,6 @@ public class Avaliacao {
 	public void setAlternativasMarcadas(List<AlternativaMarcada> alternativasMarcadas) {
 		this.alternativasMarcadas = alternativasMarcadas;
 	}
-	
 
 	public Calendar getHorarioInicio() {
 		return horarioInicio;
@@ -115,21 +113,23 @@ public class Avaliacao {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public String getNomeProva() {
 		return nomeProva;
 	}
-	
+
 	public void setNomeProva(String nomeProva) {
 		this.nomeProva = nomeProva;
 	}
-	public Set<Questao> getQuestoesImutaveis() {
-		return questoesImutaveis;
-	}
-	public void setQuestoesImutaveis(Set<Questao> questoesImutaveis) {
-		this.questoesImutaveis = questoesImutaveis;
-	}
-	
+
+//	public Set<QuestaoImutavel> getQuestoesImutaveis() {
+//		return questoesImutaveis;
+//	}
+//
+//	public void setQuestoesImutaveis(Set<QuestaoImutavel> questoesImutaveis) {
+//		this.questoesImutaveis = questoesImutaveis;
+//	}
+
 	public int getNota() {
 		return nota;
 	}
@@ -144,14 +144,6 @@ public class Avaliacao {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
-	}
-
-	public Prova getProva() {
-		return prova;
-	}
-
-	public void setProva(Prova prova) {
-		this.prova = prova;
 	}
 
 	public List<Long> getAlternativasIds() {
@@ -192,6 +184,10 @@ public class Avaliacao {
 			return false;
 	}
 
+	private Prova getProva() {
+		return this.prova;
+	}
+
 	public long getDuracao() {
 		long duracao = this.horarioFim.getTimeInMillis() - this.horarioInicio.getTimeInMillis();
 		return (duracao / 60) / 1000;
@@ -213,5 +209,5 @@ public class Avaliacao {
 	public void setRelatorioUsuarios(List<RelatorioUsuario> relatorioUsuarios) {
 		this.relatorioUsuarios = relatorioUsuarios;
 	}
-	
+
 }

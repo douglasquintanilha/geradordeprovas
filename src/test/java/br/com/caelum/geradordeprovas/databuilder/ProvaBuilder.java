@@ -45,7 +45,7 @@ public class ProvaBuilder {
 		prova.setUpdatedAt(this.updatedAt);
 		prova.setDescricao(this.descricao);
 		prova.setQuestoes(this.questoes);
-		prova.setAvaliacoes(this.avaliacoes);
+//		prova.setAvaliacoes(this.avaliacoes);
 		return prova;
 	}
 
