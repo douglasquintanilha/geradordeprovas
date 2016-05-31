@@ -25,7 +25,6 @@
 						<div class="checkbox">
 							<label> <input type="checkbox" name="provas" value="${prova.id}">
 								<b>${prova.nome}</b><i>(${prova.descricao})</i>
-								<b>Criada em: </b>${prova.dataFormatada}
 							</label>
 						</div>
 					</c:forEach>

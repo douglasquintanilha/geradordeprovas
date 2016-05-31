@@ -99,7 +99,6 @@ public class AvaliacaoBuilder {
 		avaliacao.setHorarioFim(this.horarioFim);
 		avaliacao.setHorarioInicio(this.horarioInicio);
 		avaliacao.setAlternativasMarcadas(this.alternativasMarcadas);
-		avaliacao.setProva(this.prova);
 		avaliacao.setProvaId(this.provaId);
 		avaliacao.setQuestoesImutaveis(this.questoesImutaveis);
 		avaliacao.setUsuario(this.usuario);

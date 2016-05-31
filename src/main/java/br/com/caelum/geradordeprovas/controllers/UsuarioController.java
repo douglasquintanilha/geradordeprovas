@@ -46,21 +46,7 @@ public class UsuarioController {
 		this.avaliacaoDao = avaliacaoDao;
 	}
 
-	@RequestMapping("/avaliacao/{provaUuid}")
-	public ModelAndView escolheProva(@RequestParam("provaId") Prova prova, HttpSession session) {
-
-		List<Avaliacao> avaliacoes = avaliacaoDao.getAvaliacoesPor(usuarioLogado, prova);
-		if (avaliacoes.isEmpty()) {
-			session.setAttribute("horarioInicio", Calendar.getInstance());
-			return new ModelAndView("realiza-prova").addObject("prova", provaDao.getProva(prova.getId()).embaralha());
-
-		}
-
-		ModelAndView mv = new ModelAndView("lista-provas-realizadas").addObject("avaliacoes", avaliacoes);
-		mv.addObject("idProva", prova.getId());
-
-		return mv;
-	}
+	
 
 	@RequestMapping("avaliacao/realiza")
 	public ModelAndView realizaProva(@RequestParam("provaId") Prova prova, HttpSession session) {
@@ -76,7 +62,7 @@ public class UsuarioController {
 
 	@RequestMapping("/liberadas")
 	public ModelAndView provasLiberadas() {
-		return new ModelAndView("provas-liberadas").addObject("provas",
+		return new ModelAndView("avaliacoes-liberadas").addObject("avaliacoes",
 				usuarioDao.getAvaliacoesDoUsuario(usuarioLogado));
 	}
 

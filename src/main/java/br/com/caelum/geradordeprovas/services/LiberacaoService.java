@@ -1,7 +1,6 @@
 package br.com.caelum.geradordeprovas.services;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,11 +40,6 @@ public class LiberacaoService {
 			usuario.adicionaAvaliacoes(avaliacoes);
 		}
 	}
-
-	public void realizouProva(Prova prova, Usuario usuario){
-		List<Avaliacao> avaliacao = geraAvaliacoes(Arrays.asList(prova));
-		liberaAvaliacoesParaUsuarios(avaliacao, Arrays.asList(usuario));
-	}
 	
 	public List<Avaliacao> geraAvaliacoes(List<Prova> provas) {
 		List<Avaliacao> avaliacoesASeremLiberadas = new ArrayList<>();
@@ -57,11 +51,15 @@ public class LiberacaoService {
 				avaliacoesASeremLiberadas.add(avaliacao);
 			}
 		}
+		System.out.println(avaliacoesASeremLiberadas.get(0).getNomeProva()+"ahahhhh");
 		avaliacaoDao.save(avaliacoesASeremLiberadas);
 		return avaliacoesASeremLiberadas;
 	}
 
 	public boolean provaFoiAtualizadaDepoisDaUltimaAvaliacao(Avaliacao avaliacao, Prova prova) {
+		if(avaliacao.getCreatedAt() == null){
+			return true;
+		}
 		return prova.getUpdatedAt().after(avaliacao.getCreatedAt());
 	}
 

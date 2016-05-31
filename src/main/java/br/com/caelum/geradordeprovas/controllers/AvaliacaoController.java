@@ -1,6 +1,7 @@
 package br.com.caelum.geradordeprovas.controllers;
 
 import java.util.Calendar;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,29 +13,49 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.caelum.geradordeprovas.dao.AvaliacaoDao;
+import br.com.caelum.geradordeprovas.dao.ProvaDao;
 import br.com.caelum.geradordeprovas.models.Avaliacao;
 import br.com.caelum.geradordeprovas.models.Prova;
 import br.com.caelum.geradordeprovas.models.Usuario;
 import br.com.caelum.geradordeprovas.services.LiberacaoService;
 
 @Controller
-@RequestMapping("/avaliacao/")
+@RequestMapping("/avaliacao")
 @Scope("request")
 public class AvaliacaoController {
 
 	private Usuario usuarioLogado;
 	private AvaliacaoDao avaliacaoDao;
 	private LiberacaoService liberacaoService;
+	private ProvaDao provaDao;
 
 	@Autowired
 	public AvaliacaoController(@Qualifier("usuarioLogado") Usuario usuarioLogado, LiberacaoService liberacaoService,
-			AvaliacaoDao avaliacaoDao) {
+			AvaliacaoDao avaliacaoDao, ProvaDao provaDao) {
 		this.liberacaoService = liberacaoService;
+		this.provaDao = provaDao;
 		this.usuarioLogado = usuarioLogado;
 		this.avaliacaoDao = avaliacaoDao;
+	}
+
+	@RequestMapping("/")
+	public ModelAndView escolheProva(@RequestParam("avalicaoId") Prova avaliacao, HttpSession session) {
+
+		List<Avaliacao> avaliacoes = avaliacaoDao.getAvaliacoesPor(usuarioLogado, avaliacao);
+		if (avaliacoes.isEmpty()) {
+			session.setAttribute("horarioInicio", Calendar.getInstance());
+			return new ModelAndView("realiza-prova").addObject("prova", provaDao.getProva(avaliacao.getId()).embaralha());
+
+		}
+
+		ModelAndView mv = new ModelAndView("lista-provas-realizadas").addObject("avaliacoes", avaliacoes);
+		mv.addObject("idProva", avaliacao.getId());
+
+		return mv;
 	}
 
 	@Transactional
@@ -44,17 +65,17 @@ public class AvaliacaoController {
 		if (session.getAttribute("avaliacao") != null) {
 			return new ModelAndView("redirect:refaz");
 		} else {
-			
+
 			System.out.println("NOME " + prova.getNome());
 			System.out.println(avaliacao.getId());
-			liberacaoService.realizouProva(prova, usuarioLogado);
-			
-//			avaliacao.setHorarioInicio((Calendar) session.getAttribute("horarioInicio"));
-//			avaliacao.setHorarioFim(Calendar.getInstance());
-//			avaliacao.setUsuario(usuarioLogado);
-//			avaliacao.validaDuracao();
-//			avaliacao.corrige();
-//			avaliacaoDao.save(avaliacao);
+
+			// avaliacao.setHorarioInicio((Calendar)
+			// session.getAttribute("horarioInicio"));
+			// avaliacao.setHorarioFim(Calendar.getInstance());
+			// avaliacao.setUsuario(usuarioLogado);
+			// avaliacao.validaDuracao();
+			// avaliacao.corrige();
+			// avaliacaoDao.save(avaliacao);
 			session.setAttribute("avaliacao", avaliacao);
 			return new ModelAndView("redirect:correcao");
 		}

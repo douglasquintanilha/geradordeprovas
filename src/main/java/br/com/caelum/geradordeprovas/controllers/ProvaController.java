@@ -100,9 +100,6 @@ public class ProvaController {
 			ModelAndView mv = new ModelAndView("redirect:libera");
 			return mv;
 		}
-		for(Usuario usuario : liberacaoForm.getUsuarios()){
-			usuario.adicionaProvas(liberacaoForm.getProvas());
-		}
 		liberacaoService.libera(liberacaoForm);
 		ModelAndView mv = new ModelAndView("admin/provas-liberadas");
 		return mv;

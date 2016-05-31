@@ -12,7 +12,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -32,9 +31,6 @@ public class Avaliacao {
 
 	@OneToOne()
 	private Usuario usuario;
-
-	@ManyToOne()
-	private Prova prova;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar horarioInicio;
@@ -146,14 +142,6 @@ public class Avaliacao {
 		this.usuario = usuario;
 	}
 
-	public Prova getProva() {
-		return prova;
-	}
-
-	public void setProva(Prova prova) {
-		this.prova = prova;
-	}
-
 	public List<Long> getAlternativasIds() {
 		return alternativasIds;
 	}
@@ -162,35 +150,35 @@ public class Avaliacao {
 		this.alternativasIds = alternativasIds;
 	}
 
-	public void corrige() {
-		this.nota = 0;
-		if (alternativasMarcadas == null) {
-			return;
-		}
-
-		int i = 0;
-
-		for (AlternativaMarcada alternativaMarcada : alternativasMarcadas) {
-			if (alternativaMarcada.isAlternativaCorreta()) {
-				this.nota++;
-				prova.getQuestoes().get(i).atualizaEstatistica(true, usuario);
-			} else {
-				prova.getQuestoes().get(i).atualizaEstatistica(false, usuario);
-			}
-			i++;
-		}
-
-	}
-
-	public boolean validaDuracao() {
-		long duracao = this.horarioFim.getTimeInMillis() - this.horarioInicio.getTimeInMillis();
-		long duracaoComTolerancia = this.getProva().getDuracao() + 1;
-		long duracaoComToleranciaEmMilis = duracaoComTolerancia * 60 * 1000;
-		if (duracaoComToleranciaEmMilis >= duracao)
-			return true;
-		else
-			return false;
-	}
+//	public void corrige() {
+//		this.nota = 0;
+//		if (alternativasMarcadas == null) {
+//			return;
+//		}
+//
+//		int i = 0;
+//
+//		for (AlternativaMarcada alternativaMarcada : alternativasMarcadas) {
+//			if (alternativaMarcada.isAlternativaCorreta()) {
+//				this.nota++;
+//				prova.getQuestoes().get(i).atualizaEstatistica(true, usuario);
+//			} else {
+//				prova.getQuestoes().get(i).atualizaEstatistica(false, usuario);
+//			}
+//			i++;
+//		}
+//
+//	}
+//
+//	public boolean validaDuracao() {
+//		long duracao = this.horarioFim.getTimeInMillis() - this.horarioInicio.getTimeInMillis();
+//		long duracaoComTolerancia = this.getProva().getDuracao() + 1;
+//		long duracaoComToleranciaEmMilis = duracaoComTolerancia * 60 * 1000;
+//		if (duracaoComToleranciaEmMilis >= duracao)
+//			return true;
+//		else
+//			return false;
+//	}
 
 	public long getDuracao() {
 		long duracao = this.horarioFim.getTimeInMillis() - this.horarioInicio.getTimeInMillis();
