@@ -69,6 +69,25 @@ public class LiberacaoServiceTest {
 		boolean resultado = ls.provaFoiAtualizadaDepoisDaUltimaAvaliacao(avaliacao, prova);
 		assertFalse(resultado);
 	}
+	
+	@Test
+	public void retornaTrueSeDataAvaliacaoEhNula() {
+
+		Set<Questao> questoesImutaveis = new HashSet<Questao>();
+		Prova prova = new Prova();
+
+		Calendar diaDepois = Calendar.getInstance();
+		diaDepois.set(2016, 04, 04, 12, 00, 00);
+		prova.setUpdatedAt(diaDepois);
+
+		Avaliacao avaliacao = new Avaliacao("Prova Teste", questoesImutaveis, 1l);
+		avaliacao.setCreatedAt(null);
+
+		LiberacaoService ls = new LiberacaoService(new AvaliacaoDao());
+
+		boolean resultado = ls.provaFoiAtualizadaDepoisDaUltimaAvaliacao(avaliacao, prova);
+		assertTrue(resultado);
+	}
 
 	@Test
 	public void geraAvaliacaoDeProvasQueNuncaForamAtualizadas() {

@@ -1,5 +1,6 @@
 package br.com.caelum.geradordeprovas.dao;
 
+import java.util.HashSet;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import br.com.caelum.geradordeprovas.models.Avaliacao;
 import br.com.caelum.geradordeprovas.models.Prova;
+import br.com.caelum.geradordeprovas.models.Questao;
 import br.com.caelum.geradordeprovas.models.Usuario;
 
 @Repository

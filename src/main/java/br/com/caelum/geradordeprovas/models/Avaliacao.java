@@ -29,7 +29,7 @@ public class Avaliacao {
 
 	private int nota;
 
-	@ManyToOne()
+	@ManyToMany
 	private Usuario usuario;
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -51,8 +51,8 @@ public class Avaliacao {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar createdAt;
 
-//	@ElementCollection
-//	private Set<QuestaoImutavel> questoesImutaveis;
+	// @ElementCollection
+	// private Set<QuestaoImutavel> questoesImutaveis;
 
 	private Long provaId;
 
@@ -65,7 +65,7 @@ public class Avaliacao {
 
 	public Avaliacao(String nomeProva, Set<QuestaoImutavel> questoesImutaveis, Long provaId) {
 		this.nomeProva = nomeProva;
-//		this.questoesImutaveis = questoesImutaveis;
+		// this.questoesImutaveis = questoesImutaveis;
 		this.provaId = provaId;
 		this.createdAt = Calendar.getInstance();
 	}
@@ -122,13 +122,14 @@ public class Avaliacao {
 		this.nomeProva = nomeProva;
 	}
 
-//	public Set<QuestaoImutavel> getQuestoesImutaveis() {
-//		return questoesImutaveis;
-//	}
-//
-//	public void setQuestoesImutaveis(Set<QuestaoImutavel> questoesImutaveis) {
-//		this.questoesImutaveis = questoesImutaveis;
-//	}
+	// public Set<QuestaoImutavel> getQuestoesImutaveis() {
+	// return questoesImutaveis;
+	// }
+	//
+	// public void setQuestoesImutaveis(Set<QuestaoImutavel> questoesImutaveis)
+	// {
+	// this.questoesImutaveis = questoesImutaveis;
+	// }
 
 	public int getNota() {
 		return nota;
@@ -154,35 +155,36 @@ public class Avaliacao {
 		this.alternativasIds = alternativasIds;
 	}
 
-	public void corrige() {
-		this.nota = 0;
-		if (alternativasMarcadas == null) {
-			return;
-		}
-
-		int i = 0;
-
-		for (AlternativaMarcada alternativaMarcada : alternativasMarcadas) {
-			if (alternativaMarcada.isAlternativaCorreta()) {
-				this.nota++;
-				prova.getQuestoes().get(i).atualizaEstatistica(true, usuario);
-			} else {
-				prova.getQuestoes().get(i).atualizaEstatistica(false, usuario);
-			}
-			i++;
-		}
-
-	}
-
-	public boolean validaDuracao() {
-		long duracao = this.horarioFim.getTimeInMillis() - this.horarioInicio.getTimeInMillis();
-		long duracaoComTolerancia = this.getProva().getDuracao() + 1;
-		long duracaoComToleranciaEmMilis = duracaoComTolerancia * 60 * 1000;
-		if (duracaoComToleranciaEmMilis >= duracao)
-			return true;
-		else
-			return false;
-	}
+	// public void corrige() {
+	// this.nota = 0;
+	// if (alternativasMarcadas == null) {
+	// return;
+	// }
+	//
+	// int i = 0;
+	//
+	// for (AlternativaMarcada alternativaMarcada : alternativasMarcadas) {
+	// if (alternativaMarcada.isAlternativaCorreta()) {
+	// this.nota++;
+	// prova.getQuestoes().get(i).atualizaEstatistica(true, usuario);
+	// } else {
+	// prova.getQuestoes().get(i).atualizaEstatistica(false, usuario);
+	// }
+	// i++;
+	// }
+	//
+	// }
+	//
+	// public boolean validaDuracao() {
+	// long duracao = this.horarioFim.getTimeInMillis() -
+	// this.horarioInicio.getTimeInMillis();
+	// long duracaoComTolerancia = this.getProva().getDuracao() + 1;
+	// long duracaoComToleranciaEmMilis = duracaoComTolerancia * 60 * 1000;
+	// if (duracaoComToleranciaEmMilis >= duracao)
+	// return true;
+	// else
+	// return false;
+	// }
 
 	private Prova getProva() {
 		return this.prova;
