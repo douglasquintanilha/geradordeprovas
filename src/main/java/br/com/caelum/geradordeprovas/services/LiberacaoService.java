@@ -51,7 +51,6 @@ public class LiberacaoService {
 				avaliacoesASeremLiberadas.add(avaliacao);
 			}
 		}
-		System.out.println(avaliacoesASeremLiberadas.get(0).getNomeProva() + "ahahhhh");
 		avaliacaoDao.save(avaliacoesASeremLiberadas);
 		return avaliacoesASeremLiberadas;
 	}

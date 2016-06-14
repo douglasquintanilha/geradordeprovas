@@ -30,7 +30,7 @@ public class Avaliacao {
 	private int nota;
 
 	@ManyToMany
-	private Usuario usuario;
+	private List<Usuario> usuarios;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar horarioInicio;
@@ -139,12 +139,12 @@ public class Avaliacao {
 		this.nota = nota;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public List<Usuario> getUsuario() {
+		return usuarios;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setUsuario(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
 	}
 
 	public List<Long> getAlternativasIds() {

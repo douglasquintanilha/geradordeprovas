@@ -42,7 +42,7 @@ public class AvaliacaoController {
 		this.avaliacaoDao = avaliacaoDao;
 	}
 
-	@RequestMapping("/")
+	@RequestMapping("")
 	public ModelAndView escolheProva(@RequestParam("avalicaoId") Prova avaliacao, HttpSession session) {
 
 		List<Avaliacao> avaliacoes = avaliacaoDao.getAvaliacoesPor(usuarioLogado, avaliacao);

@@ -101,7 +101,6 @@ public class AvaliacaoBuilder {
 		avaliacao.setHorarioInicio(this.horarioInicio);
 		avaliacao.setAlternativasMarcadas(this.alternativasMarcadas);
 		avaliacao.setProvaId(this.provaId);
-		avaliacao.setQuestoesImutaveis(this.questoesImutaveis);
 		avaliacao.setUsuario(this.usuario);
 		avaliacao.setRelatorioUsuarios(this.relatoriosUsuario);
 		return avaliacao;
