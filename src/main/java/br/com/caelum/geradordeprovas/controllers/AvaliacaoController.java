@@ -1,8 +1,5 @@
 package br.com.caelum.geradordeprovas.controllers;
 
-import java.util.Calendar;
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.caelum.geradordeprovas.dao.AvaliacaoDao;
@@ -43,19 +39,8 @@ public class AvaliacaoController {
 	}
 
 	@RequestMapping("")
-	public ModelAndView escolheProva(@RequestParam("avalicaoId") Prova avaliacao, HttpSession session) {
-
-		List<Avaliacao> avaliacoes = avaliacaoDao.getAvaliacoesPor(usuarioLogado, avaliacao);
-		if (avaliacoes.isEmpty()) {
-			session.setAttribute("horarioInicio", Calendar.getInstance());
-			return new ModelAndView("realiza-prova").addObject("prova", provaDao.getProva(avaliacao.getId()).embaralha());
-
-		}
-
-		ModelAndView mv = new ModelAndView("lista-provas-realizadas").addObject("avaliacoes", avaliacoes);
-		mv.addObject("idProva", avaliacao.getId());
-
-		return mv;
+	public ModelAndView escolheAvaliacao(@ModelAttribute("avaliacao") Avaliacao avaliacao) {
+		return new ModelAndView("realiza-avaliacao").addObject("avaliacao", avaliacao);
 	}
 
 	@Transactional

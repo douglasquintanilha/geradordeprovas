@@ -43,13 +43,15 @@ public class Avaliacao {
 
 	// -------------------------Atributos do refactor
 
-	@ManyToMany
+	@Transient
 	private List<RelatorioUsuario> relatorioUsuarios = new ArrayList<>();
 
 	private String nomeProva;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar createdAt;
+
+	private Long duracao;
 
 	// @ElementCollection
 	// private Set<QuestaoImutavel> questoesImutaveis;
@@ -69,7 +71,7 @@ public class Avaliacao {
 		this.provaId = provaId;
 		this.createdAt = Calendar.getInstance();
 	}
-
+	
 	public void setProvaId(Long provaId) {
 		this.provaId = provaId;
 	}

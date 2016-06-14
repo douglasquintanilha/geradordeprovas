@@ -28,8 +28,8 @@
 			<div class="row">
 			<c:forEach items="${avaliacoes}" var="avaliacao">
 			    <div class="col-xs-3">
-			    <form:form action="avaliacao" method="POST" id="${avaliacao.id}">
-			    	<input type="hidden" value="${avaliacao.id}" name="avaliacaoId">
+			    <form:form action="avaliacao" method="POST" id="${avaliacao.id}" command="avaliacao">
+			        <input type="hidden" name="avaliacao" value="${avaliacao.id}">
 			        <a onclick="document.getElementById(${avaliacao.id}).submit();" class="thumbnail">
 			             <img src="<c:url value='/static/imagens/prova-miniatura.jpg' />" class="img-responsive">
 			             <div class="caption">
