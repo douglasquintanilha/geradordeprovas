@@ -24,9 +24,6 @@ public class Avaliacao {
 	@GeneratedValue
 	private Long id;
 
-	@Transient
-	private List<Long> alternativasIds;
-
 	private int nota;
 
 	@ManyToMany
@@ -38,13 +35,16 @@ public class Avaliacao {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar horarioFim;
 
-	@ElementCollection
+	@Transient
 	private List<AlternativaMarcada> alternativasMarcadas;
 
 	// -------------------------Atributos do refactor
 
-	@Transient
+	@ManyToMany
 	private List<RelatorioUsuario> relatorioUsuarios = new ArrayList<>();
+
+	@ManyToMany()
+	private Set<Questao> questoes;
 
 	private String nomeProva;
 
@@ -53,27 +53,28 @@ public class Avaliacao {
 
 	private Long duracao;
 
-	// @ElementCollection
-	// private Set<QuestaoImutavel> questoesImutaveis;
-
 	private Long provaId;
 
 	@ManyToOne
 	private Prova prova;
 
 	public Avaliacao() {
-
 	}
 
-	public Avaliacao(String nomeProva, Set<QuestaoImutavel> questoesImutaveis, Long provaId) {
+	public Avaliacao(String nomeProva, Set<Questao> questoes, Long provaId, Long duracao) {
 		this.nomeProva = nomeProva;
-		// this.questoesImutaveis = questoesImutaveis;
+		this.duracao = duracao;
+		this.questoes = questoes;
 		this.provaId = provaId;
 		this.createdAt = Calendar.getInstance();
 	}
-	
+
 	public void setProvaId(Long provaId) {
 		this.provaId = provaId;
+	}
+
+	public Set<Questao> getQuestoes() {
+		return questoes;
 	}
 
 	public Long getProvaId() {
@@ -124,15 +125,6 @@ public class Avaliacao {
 		this.nomeProva = nomeProva;
 	}
 
-	// public Set<QuestaoImutavel> getQuestoesImutaveis() {
-	// return questoesImutaveis;
-	// }
-	//
-	// public void setQuestoesImutaveis(Set<QuestaoImutavel> questoesImutaveis)
-	// {
-	// this.questoesImutaveis = questoesImutaveis;
-	// }
-
 	public int getNota() {
 		return nota;
 	}
@@ -149,34 +141,6 @@ public class Avaliacao {
 		this.usuarios = usuarios;
 	}
 
-	public List<Long> getAlternativasIds() {
-		return alternativasIds;
-	}
-
-	public void setAlternativasIds(List<Long> alternativasIds) {
-		this.alternativasIds = alternativasIds;
-	}
-
-	// public void corrige() {
-	// this.nota = 0;
-	// if (alternativasMarcadas == null) {
-	// return;
-	// }
-	//
-	// int i = 0;
-	//
-	// for (AlternativaMarcada alternativaMarcada : alternativasMarcadas) {
-	// if (alternativaMarcada.isAlternativaCorreta()) {
-	// this.nota++;
-	// prova.getQuestoes().get(i).atualizaEstatistica(true, usuario);
-	// } else {
-	// prova.getQuestoes().get(i).atualizaEstatistica(false, usuario);
-	// }
-	// i++;
-	// }
-	//
-	// }
-	//
 	// public boolean validaDuracao() {
 	// long duracao = this.horarioFim.getTimeInMillis() -
 	// this.horarioInicio.getTimeInMillis();
@@ -197,6 +161,10 @@ public class Avaliacao {
 		return (duracao / 60) / 1000;
 	}
 
+	public Long getDuracaoProva() {
+		return this.duracao;
+	}
+
 	public String getDataRealizada() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
 		return sdf.format(this.horarioInicio.getTime());
@@ -212,6 +180,17 @@ public class Avaliacao {
 
 	public void setRelatorioUsuarios(List<RelatorioUsuario> relatorioUsuarios) {
 		this.relatorioUsuarios = relatorioUsuarios;
+	}
+
+	public RelatorioUsuario corrige(Usuario usuario) {
+		Long nota = 0l;
+		for (AlternativaMarcada alternativaMarcada : alternativasMarcadas) {
+			if (alternativaMarcada.isAlternativaCorreta())
+				nota++;
+		}
+		RelatorioUsuario relatorio = new RelatorioUsuario(usuario, alternativasMarcadas, nota);
+		this.relatorioUsuarios.add(relatorio);
+		return relatorio;
 	}
 
 }

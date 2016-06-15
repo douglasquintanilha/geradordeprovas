@@ -5,11 +5,9 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -36,7 +34,7 @@ public class Prova {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar dataCriacao;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar updatedAt;
 
@@ -47,21 +45,21 @@ public class Prova {
 	@NotEmpty()
 	@ManyToMany()
 	private List<Questao> questoes;
-	
+
 	public void setUpdatedAt(Calendar horario) {
 		this.updatedAt = horario;
 	}
 
 	@PreUpdate
 	@PrePersist
-	public void atualizaUpdateAt(){
+	public void atualizaUpdateAt() {
 		this.updatedAt = Calendar.getInstance();
 	}
-	
+
 	public Calendar getUpdatedAt() {
 		return updatedAt;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -165,16 +163,7 @@ public class Prova {
 	}
 
 	public Avaliacao geraAvaliacaoInicial() {
-		QuestaoImutavel questaoImutavel = new QuestaoImutavel();
-		Set<QuestaoImutavel> questoesImutaveis = new HashSet<>();
-		for(Questao questao : questoes){
-			questoesImutaveis.add(questaoImutavel.geraQuestaoImutavelAPartirDe(questao));
-		}
-		return new Avaliacao(this.getNome(), questoesImutaveis, this.id);
+		return new Avaliacao(this.getNome(), new HashSet<Questao>(questoes), this.id, duracao);
 	}
-
-//	public void setAvaliacoes(Set<Avaliacao> avaliacoes) {
-//		this.avaliacoes = avaliacoes;		
-//	}
 
 }

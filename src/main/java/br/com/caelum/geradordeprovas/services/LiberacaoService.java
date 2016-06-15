@@ -27,6 +27,21 @@ public class LiberacaoService {
 		List<Avaliacao> avaliacoes = geraAvaliacoes(liberacaoForm.getProvas());
 		liberaAvaliacoesParaUsuarios(avaliacoes, liberacaoForm.getUsuarios());
 		liberaAvaliacoesParaTurmas(avaliacoes, liberacaoForm.getTurmas());
+		
+		liberaProvaParaTurmas(liberacaoForm.getProvas(), liberacaoForm.getTurmas());
+		liberaProvaParaUsuarios(liberacaoForm.getProvas(), liberacaoForm.getUsuarios());
+	}
+
+	private void liberaProvaParaTurmas(List<Prova> provas, List<Turma> turmas) {
+		for(Turma turma : turmas){
+			turma.adicionaProvas(provas);
+		}
+	}
+
+	private void liberaProvaParaUsuarios(List<Prova> provas, List<Usuario> usuarios) {
+		for(Usuario usuario : usuarios){
+			usuario.adicionaProvas(provas);
+		}
 	}
 
 	public void liberaAvaliacoesParaTurmas(List<Avaliacao> avaliacoes, List<Turma> turmas) {

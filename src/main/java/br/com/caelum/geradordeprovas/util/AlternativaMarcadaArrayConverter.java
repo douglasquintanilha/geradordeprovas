@@ -6,27 +6,27 @@ import java.util.List;
 import org.springframework.core.convert.converter.Converter;
 
 import br.com.caelum.geradordeprovas.dao.AlternativaDao;
+import br.com.caelum.geradordeprovas.models.Alternativa;
 import br.com.caelum.geradordeprovas.models.AlternativaMarcada;
 
-public class AlternativaMarcadaArrayConverter implements Converter<String[],List<AlternativaMarcada>>{
+public class AlternativaMarcadaArrayConverter implements Converter<String[], List<AlternativaMarcada>> {
 
 	private AlternativaDao alternativaDao;
-
 
 	public AlternativaMarcadaArrayConverter(AlternativaDao alternativaDao) {
 		this.alternativaDao = alternativaDao;
 	}
-	
-	
+
 	@Override
-	public List<AlternativaMarcada> convert(String[] AlternativaMarcadas) {
+	public List<AlternativaMarcada> convert(String[] AlternativaMarcadasIds) {
 		List<AlternativaMarcada> AlternativaMarcadasList = new ArrayList<>();
-		for (String AlternativaMarcada : AlternativaMarcadas) {
-			AlternativaMarcada AlternativaMarcadaObj = new AlternativaMarcada();
-			AlternativaMarcadaObj.setDescricao(AlternativaMarcada);
-			AlternativaMarcadasList.add(AlternativaMarcadaObj);
+		for (String id : AlternativaMarcadasIds) {
+			Alternativa alternativa = alternativaDao.getAlternativaPorId(Long.parseLong(id));
+			AlternativaMarcada alternativaMarcada = new AlternativaMarcada(alternativa.getId(),
+					alternativa.getDescricao(), alternativa.isAlternativaCorreta());
+			AlternativaMarcadasList.add(alternativaMarcada);
 		}
-		
+
 		return AlternativaMarcadasList;
 	}
 }

@@ -6,7 +6,8 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -17,8 +18,10 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import br.com.caelum.geradordeprovas.validation.Size;
 
+@Entity
 public class QuestaoImutavel {
 
+	@Id
 	private Long id;
 
 	@Column(length = 2048)

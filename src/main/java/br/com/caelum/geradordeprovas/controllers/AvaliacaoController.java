@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.caelum.geradordeprovas.dao.AvaliacaoDao;
 import br.com.caelum.geradordeprovas.dao.ProvaDao;
+import br.com.caelum.geradordeprovas.dao.RelatorioUsuarioDao;
 import br.com.caelum.geradordeprovas.models.Avaliacao;
 import br.com.caelum.geradordeprovas.models.Prova;
 import br.com.caelum.geradordeprovas.models.Usuario;
@@ -28,11 +29,13 @@ public class AvaliacaoController {
 	private AvaliacaoDao avaliacaoDao;
 	private LiberacaoService liberacaoService;
 	private ProvaDao provaDao;
+	private RelatorioUsuarioDao relatorioUsuarioDao;
 
 	@Autowired
-	public AvaliacaoController(@Qualifier("usuarioLogado") Usuario usuarioLogado, LiberacaoService liberacaoService,
+	public AvaliacaoController(RelatorioUsuarioDao relatorioUsuarioDao,@Qualifier("usuarioLogado") Usuario usuarioLogado, LiberacaoService liberacaoService,
 			AvaliacaoDao avaliacaoDao, ProvaDao provaDao) {
 		this.liberacaoService = liberacaoService;
+		this.relatorioUsuarioDao = relatorioUsuarioDao;
 		this.provaDao = provaDao;
 		this.usuarioLogado = usuarioLogado;
 		this.avaliacaoDao = avaliacaoDao;
@@ -44,16 +47,18 @@ public class AvaliacaoController {
 	}
 
 	@Transactional
+	@RequestMapping("/corrige")
+	public void corrigeAvaliacao(Avaliacao avaliacao) {
+		relatorioUsuarioDao.save(avaliacao.corrige(usuarioLogado));
+	}
+
+	@Transactional
 	@RequestMapping(value = "correcao", method = { RequestMethod.POST })
 	public ModelAndView corrigePost(@ModelAttribute("avaliacao") Avaliacao avaliacao, HttpSession session,
 			@ModelAttribute("prova") Prova prova) {
 		if (session.getAttribute("avaliacao") != null) {
 			return new ModelAndView("redirect:refaz");
 		} else {
-
-			System.out.println("NOME " + prova.getNome());
-			System.out.println(avaliacao.getId());
-
 			// avaliacao.setHorarioInicio((Calendar)
 			// session.getAttribute("horarioInicio"));
 			// avaliacao.setHorarioFim(Calendar.getInstance());

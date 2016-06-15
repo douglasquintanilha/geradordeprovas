@@ -24,9 +24,12 @@
 		
 		<div id="clock-div"></div>
 		
-		<c:url var="urlPost" value='correcao' />
+		
+		<c:url var="urlPost" value='avaliacao/corrige' />
 		<form:form method="POST" action="${urlPost}" id="command" command="avaliacao" >
-				<c:forEach items="${prova.questoes}" var="questao" varStatus="i">
+				<input type="hidden" name="id" value="${avaliacao.id}">
+				<input type="hidden" id="duracao" value="${avaliacao.duracaoProva}">
+				<c:forEach items="${avaliacao.questoes}" var="questao" varStatus="i">
 						<h3><md:render  options="FencedCodeBlocks"><b>${i.index+1}</b> - ${questao.titulo}</md:render></h3>
 						<c:forEach items="${questao.alternativa}" var="alternativa">
 						<div class="radio" id="alternativa">				
