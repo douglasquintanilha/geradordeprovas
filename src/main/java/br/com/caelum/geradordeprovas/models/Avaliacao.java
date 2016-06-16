@@ -7,12 +7,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -41,7 +39,7 @@ public class Avaliacao {
 	// -------------------------Atributos do refactor
 
 	@ManyToMany
-	private List<RelatorioUsuario> relatorioUsuarios = new ArrayList<>();
+	private List<RelatorioUsuario> relatoriosUsuarios = new ArrayList<>();
 
 	@ManyToMany()
 	private Set<Questao> questoes;
@@ -54,9 +52,6 @@ public class Avaliacao {
 	private Long duracao;
 
 	private Long provaId;
-
-	@ManyToOne
-	private Prova prova;
 
 	public Avaliacao() {
 	}
@@ -141,21 +136,6 @@ public class Avaliacao {
 		this.usuarios = usuarios;
 	}
 
-	// public boolean validaDuracao() {
-	// long duracao = this.horarioFim.getTimeInMillis() -
-	// this.horarioInicio.getTimeInMillis();
-	// long duracaoComTolerancia = this.getProva().getDuracao() + 1;
-	// long duracaoComToleranciaEmMilis = duracaoComTolerancia * 60 * 1000;
-	// if (duracaoComToleranciaEmMilis >= duracao)
-	// return true;
-	// else
-	// return false;
-	// }
-
-	private Prova getProva() {
-		return this.prova;
-	}
-
 	public long getDuracao() {
 		long duracao = this.horarioFim.getTimeInMillis() - this.horarioInicio.getTimeInMillis();
 		return (duracao / 60) / 1000;
@@ -179,7 +159,7 @@ public class Avaliacao {
 	}
 
 	public void setRelatorioUsuarios(List<RelatorioUsuario> relatorioUsuarios) {
-		this.relatorioUsuarios = relatorioUsuarios;
+		this.relatoriosUsuarios = relatorioUsuarios;
 	}
 
 	public RelatorioUsuario corrige(Usuario usuario) {
@@ -189,8 +169,12 @@ public class Avaliacao {
 				nota++;
 		}
 		RelatorioUsuario relatorio = new RelatorioUsuario(usuario, alternativasMarcadas, nota);
-		this.relatorioUsuarios.add(relatorio);
+		this.relatoriosUsuarios.add(relatorio);
 		return relatorio;
+	}
+	
+	public int getQuantidadeDeQuestoes(){
+		return questoes.size();
 	}
 
 }

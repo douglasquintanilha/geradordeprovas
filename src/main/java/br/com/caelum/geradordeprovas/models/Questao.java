@@ -82,8 +82,8 @@ public class Questao {
 		return alternativa;
 	}
 
-	public void setAlternativa(List<Alternativa> alternativa) {
-		this.alternativa = alternativa;
+	public void setAlternativa(List<Alternativa> alternativas) {
+		this.alternativa = alternativas;
 	}
 
 	public void setTitulo(String titulo) {
@@ -118,14 +118,14 @@ public class Questao {
 		this.titulo = questaoEditada.getTitulo();
 
 	}
-	
-	//Wesley
-	public boolean corrige(AlternativaMarcada alternativaMarcada){
+
+	// Wesley
+	public boolean corrige(AlternativaMarcada alternativaMarcada) {
 		for (Alternativa alter : alternativa) {
-			if(alter.isAlternativaCorreta()){
-				if(alter.getId() == alternativaMarcada.getId()){
+			if (alter.isAlternativaCorreta()) {
+				if (alter.getId() == alternativaMarcada.getId()) {
 					return true;
-				}else{
+				} else {
 					return false;
 				}
 			}

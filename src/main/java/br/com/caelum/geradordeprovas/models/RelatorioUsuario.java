@@ -6,8 +6,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class RelatorioUsuario {
@@ -16,14 +15,17 @@ public class RelatorioUsuario {
 	@GeneratedValue
 	private Long id;
 
-	@OneToOne
-	@JoinColumn(unique = true)
+	@ManyToOne
 	private Usuario usuario;
 
 	@ElementCollection
 	private List<AlternativaMarcada> alternativasMarcadas;
 
 	private Long nota;
+
+	public RelatorioUsuario() {
+
+	}
 
 	public RelatorioUsuario(Usuario usuario, List<AlternativaMarcada> alternativasMarcadas, Long nota) {
 		this.usuario = usuario;

@@ -17,6 +17,7 @@ import br.com.caelum.geradordeprovas.dao.ProvaDao;
 import br.com.caelum.geradordeprovas.dao.RelatorioUsuarioDao;
 import br.com.caelum.geradordeprovas.models.Avaliacao;
 import br.com.caelum.geradordeprovas.models.Prova;
+import br.com.caelum.geradordeprovas.models.RelatorioUsuario;
 import br.com.caelum.geradordeprovas.models.Usuario;
 import br.com.caelum.geradordeprovas.services.LiberacaoService;
 
@@ -32,7 +33,8 @@ public class AvaliacaoController {
 	private RelatorioUsuarioDao relatorioUsuarioDao;
 
 	@Autowired
-	public AvaliacaoController(RelatorioUsuarioDao relatorioUsuarioDao,@Qualifier("usuarioLogado") Usuario usuarioLogado, LiberacaoService liberacaoService,
+	public AvaliacaoController(RelatorioUsuarioDao relatorioUsuarioDao,
+			@Qualifier("usuarioLogado") Usuario usuarioLogado, LiberacaoService liberacaoService,
 			AvaliacaoDao avaliacaoDao, ProvaDao provaDao) {
 		this.liberacaoService = liberacaoService;
 		this.relatorioUsuarioDao = relatorioUsuarioDao;
@@ -48,8 +50,15 @@ public class AvaliacaoController {
 
 	@Transactional
 	@RequestMapping("/corrige")
-	public void corrigeAvaliacao(Avaliacao avaliacao) {
-		relatorioUsuarioDao.save(avaliacao.corrige(usuarioLogado));
+	public ModelAndView corrigeAvaliacao(Avaliacao avaliacao) {
+		RelatorioUsuario relatorio = avaliacao.corrige(usuarioLogado);
+		relatorioUsuarioDao.save(relatorio);
+
+		ModelAndView mv = new ModelAndView("avaliacao-corrigida");
+		mv.addObject("relatorio", relatorio);
+		mv.addObject("avaliacao", avaliacaoDao.getAvaliacao(avaliacao.getId()));
+
+		return mv;
 	}
 
 	@Transactional

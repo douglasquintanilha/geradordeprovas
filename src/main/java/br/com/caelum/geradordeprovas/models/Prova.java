@@ -133,10 +133,6 @@ public class Prova {
 		return UUID.randomUUID().toString();
 	}
 
-	public int getQuantidadeDeQuestoes() {
-		return questoes.size();
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
