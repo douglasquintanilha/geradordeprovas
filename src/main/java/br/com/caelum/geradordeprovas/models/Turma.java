@@ -1,7 +1,6 @@
 package br.com.caelum.geradordeprovas.models;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -30,15 +29,6 @@ public class Turma {
 
 	@ManyToMany
 	private Set<Prova> provas = new HashSet<>();
-
-	//----------------atributos da refatoraçáo
-	
-	@ManyToMany
-	private Set<Avaliacao> avaliacoes = new HashSet<>();
-	
-	public Set<Avaliacao> getAvaliacoes() {
-		return avaliacoes;
-	}
 
 	public void adicionaProvas(List<Prova> provas) {
 		this.provas.addAll(provas);
@@ -91,7 +81,4 @@ public class Turma {
 		this.atualizaProvasUsuarios();
 	}
 
-	public void adicionaAvaliacoes(Collection<Avaliacao> avaliacoes) {
-		this.avaliacoes.addAll(avaliacoes);
-	}
 }

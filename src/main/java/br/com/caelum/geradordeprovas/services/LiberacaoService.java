@@ -1,13 +1,11 @@
 package br.com.caelum.geradordeprovas.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.caelum.geradordeprovas.dao.AvaliacaoDao;
-import br.com.caelum.geradordeprovas.models.Avaliacao;
 import br.com.caelum.geradordeprovas.models.LiberacaoForm;
 import br.com.caelum.geradordeprovas.models.Prova;
 import br.com.caelum.geradordeprovas.models.Turma;
@@ -24,57 +22,23 @@ public class LiberacaoService {
 	}
 
 	public void libera(LiberacaoForm liberacaoForm) {
-		List<Avaliacao> avaliacoes = geraAvaliacoes(liberacaoForm.getProvas());
-		liberaAvaliacoesParaUsuarios(avaliacoes, liberacaoForm.getUsuarios());
-		liberaAvaliacoesParaTurmas(avaliacoes, liberacaoForm.getTurmas());
-		
-		liberaProvaParaTurmas(liberacaoForm.getProvas(), liberacaoForm.getTurmas());
-		liberaProvaParaUsuarios(liberacaoForm.getProvas(), liberacaoForm.getUsuarios());
+		liberaProvasEAvaliacoesParaUsuarios(liberacaoForm.getProvas(), liberacaoForm.getUsuarios());
+		liberaProvasParaTurmas(liberacaoForm.getProvas(), liberacaoForm.getTurmas());
 	}
 
-	private void liberaProvaParaTurmas(List<Prova> provas, List<Turma> turmas) {
-		for(Turma turma : turmas){
-			turma.adicionaProvas(provas);
-		}
-	}
-
-	private void liberaProvaParaUsuarios(List<Prova> provas, List<Usuario> usuarios) {
-		for(Usuario usuario : usuarios){
-			usuario.adicionaProvas(provas);
-		}
-	}
-
-	public void liberaAvaliacoesParaTurmas(List<Avaliacao> avaliacoes, List<Turma> turmas) {
-		for (Turma turma : turmas) {
-			turma.adicionaAvaliacoes(avaliacoes);
-		}
-	}
-
-	public void liberaAvaliacoesParaUsuarios(List<Avaliacao> avaliacoes, List<Usuario> usuarios) {
+	private void liberaProvasEAvaliacoesParaUsuarios(List<Prova> provas, List<Usuario> usuarios) {
 		for (Usuario usuario : usuarios) {
-			usuario.adicionaAvaliacoes(avaliacoes);
-		}
-	}
-
-	public List<Avaliacao> geraAvaliacoes(List<Prova> provas) {
-		List<Avaliacao> avaliacoesASeremLiberadas = new ArrayList<>();
-		for (Prova prova : provas) {
-			Avaliacao avaliacao = avaliacaoDao.getUltimaAvaliacaoCriada(prova);
-			if (provaFoiAtualizadaDepoisDaUltimaAvaliacao(avaliacao, prova)) {
-				avaliacoesASeremLiberadas.add(prova.geraAvaliacaoInicial());
-			} else {
-				avaliacoesASeremLiberadas.add(avaliacao);
+			usuario.adicionaProvas(provas);
+			for (Prova prova : provas) {
+				usuario.addAvaliacao(avaliacaoDao.getAvaliacaoMaisRecente(prova));
 			}
 		}
-		avaliacaoDao.save(avaliacoesASeremLiberadas);
-		return avaliacoesASeremLiberadas;
 	}
 
-	public boolean provaFoiAtualizadaDepoisDaUltimaAvaliacao(Avaliacao avaliacao, Prova prova) {
-		if (avaliacao.getCreatedAt() == null) {
-			return true;
+	private void liberaProvasParaTurmas(List<Prova> provas, List<Turma> turmas) {
+		for (Turma turma : turmas) {
+			turma.adicionaProvas(provas);
 		}
-		return prova.getUpdatedAt().after(avaliacao.getCreatedAt());
 	}
 
 }

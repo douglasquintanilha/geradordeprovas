@@ -62,8 +62,8 @@ public class UsuarioController {
 
 	@RequestMapping("/liberadas")
 	public ModelAndView provasLiberadas() {
-		return new ModelAndView("avaliacoes-liberadas").addObject("avaliacoes",
-				usuarioDao.getAvaliacoesDoUsuario(usuarioLogado));
+		return new ModelAndView("avaliacoes-liberadas").addObject("provas",
+				usuarioDao.getProvasDoUsuario(usuarioLogado));
 	}
 
 	@Transactional

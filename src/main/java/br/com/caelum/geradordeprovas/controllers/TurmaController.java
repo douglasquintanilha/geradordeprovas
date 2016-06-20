@@ -66,7 +66,7 @@ public class TurmaController {
 			RedirectAttributes flash) {
 		Turma turma = turmaDao.procuraTurmaPor(nomeTurma);
 		if (turma != null) {
-			Usuario usuario = usuarioDao.atualiza(usuarioLogado);
+			Usuario usuario = usuarioDao.merge(usuarioLogado);
 			turma.adicionaUsuario(usuario);
 			flash.addFlashAttribute("existeTurma", true);
 			flash.addFlashAttribute("nomeTurma", nomeTurma);

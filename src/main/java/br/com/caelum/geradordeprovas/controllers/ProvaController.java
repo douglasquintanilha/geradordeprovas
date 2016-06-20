@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.caelum.geradordeprovas.dao.AvaliacaoDao;
 import br.com.caelum.geradordeprovas.dao.ProvaDao;
 import br.com.caelum.geradordeprovas.dao.QuestaoDao;
 import br.com.caelum.geradordeprovas.dao.TurmaDao;
 import br.com.caelum.geradordeprovas.dao.UsuarioDao;
+import br.com.caelum.geradordeprovas.models.Avaliacao;
 import br.com.caelum.geradordeprovas.models.LiberacaoForm;
 import br.com.caelum.geradordeprovas.models.Prova;
 import br.com.caelum.geradordeprovas.models.Questao;
@@ -38,11 +40,13 @@ public class ProvaController {
 	private UsuarioDao usuarioDao;
 	private TurmaDao turmaDao;
 	private LiberacaoService liberacaoService;
+	private AvaliacaoDao avaliacaoDao;
 
 	@Autowired
-	public ProvaController(LiberacaoService liberacaoService, QuestaoDao questaoDao, ProvaDao provaDao,
+	public ProvaController(AvaliacaoDao avaliacaoDao, LiberacaoService liberacaoService, QuestaoDao questaoDao, ProvaDao provaDao,
 			UsuarioDao usuarioDao, TurmaDao turmaDao) {
 		this.questaoDao = questaoDao;
+		this.avaliacaoDao = avaliacaoDao;
 		this.liberacaoService = liberacaoService;
 		this.provaDao = provaDao;
 		this.usuarioDao = usuarioDao;
@@ -68,9 +72,11 @@ public class ProvaController {
 		}
 
 		prova.setDataCriacao(Calendar.getInstance());
-
+		
 		provaDao.save(prova);
-
+		Avaliacao avaliacao = prova.geraAvaliacaoInicial();
+		avaliacaoDao.save(avaliacao);
+		
 		ModelAndView mv = new ModelAndView("admin/prova-adicionada");
 
 		return mv;

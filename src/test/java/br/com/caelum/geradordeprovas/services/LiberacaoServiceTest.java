@@ -115,7 +115,7 @@ public class LiberacaoServiceTest {
 		avaliacaoEsperada.setCreatedAt(horario);
 
 		AvaliacaoDao avaliacaoDaoFalso = mock(AvaliacaoDao.class);
-		when(avaliacaoDaoFalso.getUltimaAvaliacaoCriada(prova)).thenReturn(avaliacaoEsperada);
+		when(avaliacaoDaoFalso.getAvaliacaoMaisRecente(prova)).thenReturn(avaliacaoEsperada);
 
 		LiberacaoService ls = new LiberacaoService(avaliacaoDaoFalso);
 		List<Avaliacao> avaliacoesGeradas = ls.geraAvaliacoes(provas);
@@ -169,7 +169,7 @@ public class LiberacaoServiceTest {
 		avaliacaoFake.setCreatedAt(antigao);
 
 		AvaliacaoDao avaliacaoDaoFalso = mock(AvaliacaoDao.class);
-		when(avaliacaoDaoFalso.getUltimaAvaliacaoCriada(prova1)).thenReturn(avaliacaoFake);
+		when(avaliacaoDaoFalso.getAvaliacaoMaisRecente(prova1)).thenReturn(avaliacaoFake);
 
 		LiberacaoService ls = new LiberacaoService(avaliacaoDaoFalso);
 		List<Avaliacao> avaliacoesGeradas = ls.geraAvaliacoes(provas);

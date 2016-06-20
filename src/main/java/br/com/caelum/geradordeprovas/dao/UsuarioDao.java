@@ -88,8 +88,8 @@ public class UsuarioDao {
 			return true;
 	}
 
-	public Usuario atualiza(Usuario usuarioLogado) {
-		return manager.merge(usuarioLogado);
+	public Usuario merge(Usuario usuario) {
+		return manager.merge(usuario);
 	}
 
 	public List<Avaliacao> getAvaliacoesDoUsuario(Usuario usuario) {

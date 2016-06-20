@@ -124,4 +124,14 @@ public class Usuario {
 		return true;
 	}
 
+	public void addAvaliacao(Avaliacao avaliacao) {
+		this.avaliacoes.add(avaliacao);
+	}
+
+	public void liberaAvaliacaoMaisRecente(Avaliacao avaliacao) {
+		if(!this.avaliacoes.contains(avaliacao)){
+			this.avaliacoes.add(avaliacao);
+		}
+	}
+
 }

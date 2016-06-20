@@ -1,6 +1,5 @@
 package br.com.caelum.geradordeprovas.dao;
 
-import java.util.HashSet;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import br.com.caelum.geradordeprovas.models.Avaliacao;
 import br.com.caelum.geradordeprovas.models.Prova;
-import br.com.caelum.geradordeprovas.models.Questao;
 import br.com.caelum.geradordeprovas.models.Usuario;
 
 @Repository
@@ -61,13 +59,14 @@ public class AvaliacaoDao {
 		}
 	}
 
-	public Avaliacao getUltimaAvaliacaoCriada(Prova prova) {
+	public Avaliacao getAvaliacaoMaisRecente(Prova prova) {
 		List<Avaliacao> avaliacoes = manager
 				.createQuery("select a from Avaliacao a where a.provaId = :provaId", Avaliacao.class)
 				.setParameter("provaId", prova.getId()).getResultList();
 		if (avaliacoes.size() == 0)
 			return new Avaliacao();
 		else
-			return avaliacoes.get(avaliacoes.size()-1);
+			return avaliacoes.get(avaliacoes.size() - 1);
 	}
+
 }

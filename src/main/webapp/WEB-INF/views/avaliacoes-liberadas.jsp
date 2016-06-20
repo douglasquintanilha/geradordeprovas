@@ -23,18 +23,18 @@
 			<input type="text" name="nomeTurma"><input type="submit" value="Matricular!">
 		</form:form>
 
-		<c:if test="${not empty avaliacoes}">
+		<c:if test="${not empty provas}">
 			<h3>Selecione uma prova:</h3>
 			<div class="row">
-			<c:forEach items="${avaliacoes}" var="avaliacao">
+			<c:forEach items="${provas}" var="prova">
 			    <div class="col-xs-3">
-			    <form:form action="avaliacao" method="POST" id="${avaliacao.id}" command="avaliacao">
-			        <input type="hidden" name="avaliacao" value="${avaliacao.id}">
-			        <a onclick="document.getElementById(${avaliacao.id}).submit();" class="thumbnail">
+			    <form:form action="avaliacao" method="POST" id="${prova.id}" command="avaliacao">
+			        <input type="hidden" name="id" value="${prova.id}">
+			        <a onclick="document.getElementById(${prova.id}).submit();" class="thumbnail">
 			             <img src="<c:url value='/static/imagens/prova-miniatura.jpg' />" class="img-responsive">
 			             <div class="caption">
-			             	<label for="${avaliacao.id}">
-								${avaliacao.nomeProva}
+			             	<label for="${prova.id}">
+								${prova.nome}
 							</label>
 			             </div>
 			        </a>
