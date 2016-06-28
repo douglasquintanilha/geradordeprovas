@@ -1,5 +1,7 @@
 package br.com.caelum.geradordeprovas.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -11,10 +13,19 @@ import br.com.caelum.geradordeprovas.models.RelatorioUsuario;
 public class RelatorioUsuarioDao {
 
 	@PersistenceContext
-	private EntityManager manager;	
-	
-	public void save(RelatorioUsuario relatorioUsuario){
+	private EntityManager manager;
+
+	public void save(RelatorioUsuario relatorioUsuario) {
 		manager.persist(relatorioUsuario);
 	}
-	
+
+	public List<RelatorioUsuario> getRelatorioDeUma(Long provaId) {
+
+		List<RelatorioUsuario> relatorios = manager
+				.createQuery("select r from Avaliacao a JOIN a.relatoriosUsuarios r where a.provaId =:provaId", RelatorioUsuario.class)
+				.setParameter("provaId", provaId).getResultList();
+
+		return relatorios;
+	}
+
 }

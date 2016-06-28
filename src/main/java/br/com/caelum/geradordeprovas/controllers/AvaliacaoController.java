@@ -51,7 +51,8 @@ public class AvaliacaoController {
 	public ModelAndView corrigeAvaliacao(Avaliacao avaliacao) {
 		RelatorioUsuario relatorio = avaliacao.corrige(usuarioLogado);
 		relatorioUsuarioDao.save(relatorio);
-
+		avaliacaoDao.getAvaliacao(avaliacao.getId()).addRelatorio(relatorio);
+		
 		ModelAndView mv = new ModelAndView("avaliacao-corrigida");
 		mv.addObject("relatorio", relatorio);
 		mv.addObject("avaliacao", avaliacaoDao.getAvaliacao(avaliacao.getId()));

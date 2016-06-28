@@ -36,8 +36,6 @@ public class Avaliacao {
 	@Transient
 	private List<AlternativaMarcada> alternativasMarcadas;
 
-	// -------------------------Atributos do refactor
-
 	@ManyToMany
 	private List<RelatorioUsuario> relatoriosUsuarios = new ArrayList<>();
 
@@ -172,9 +170,13 @@ public class Avaliacao {
 		this.relatoriosUsuarios.add(relatorio);
 		return relatorio;
 	}
-	
-	public int getQuantidadeDeQuestoes(){
+
+	public int getQuantidadeDeQuestoes() {
 		return questoes.size();
+	}
+
+	public void addRelatorio(RelatorioUsuario relatorio) {
+		this.relatoriosUsuarios.add(relatorio);
 	}
 
 }

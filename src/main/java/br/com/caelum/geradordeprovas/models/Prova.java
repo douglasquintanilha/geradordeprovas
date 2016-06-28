@@ -41,7 +41,6 @@ public class Prova {
 	@Column(length = 2048)
 	private String descricao;
 
-	// Mudar a List para Set , e mandar mensagem pro properties
 	@NotEmpty()
 	@ManyToMany()
 	private List<Questao> questoes;

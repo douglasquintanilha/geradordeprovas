@@ -21,7 +21,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import br.com.caelum.geradordeprovas.validation.Size;
 
 @Entity
-public class Questao {
+public class Questao{
 
 	@Id
 	@GeneratedValue

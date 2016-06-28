@@ -44,8 +44,8 @@ public class AvaliacaoDao {
 	}
 
 	public Avaliacao atualiza(Avaliacao avaliacao) {
-		avaliacao = manager.merge(avaliacao);
-		return avaliacao;
+		Avaliacao av = manager.merge(avaliacao);
+		return av;
 	}
 
 	public List<Avaliacao> getAvaliacoesDo(Usuario usuario) {

@@ -1,6 +1,5 @@
 package br.com.caelum.geradordeprovas.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -14,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.caelum.geradordeprovas.dao.QuestaoDao;
+import br.com.caelum.geradordeprovas.dao.RelatorioUsuarioDao;
 import br.com.caelum.geradordeprovas.dao.UsuarioDao;
-import br.com.caelum.geradordeprovas.models.Questao;
+import br.com.caelum.geradordeprovas.models.RelatorioUsuario;
 import br.com.caelum.geradordeprovas.models.Usuario;
 import br.com.caelum.geradordeprovas.util.Criptografia;
 
@@ -26,21 +26,28 @@ public class AdminController {
 	private UsuarioDao usuarioDao;
 	private Criptografia criptografia;
 	private QuestaoDao questaoDao;
+	private RelatorioUsuarioDao relatorioUsuarioDao;
 
 	@Autowired
-	public AdminController(QuestaoDao questaoDao, UsuarioDao usuarioDao, Criptografia criptografia) {
+	public AdminController(QuestaoDao questaoDao, UsuarioDao usuarioDao, Criptografia criptografia, RelatorioUsuarioDao relatorioUsuarioDao) {
 		this.usuarioDao = usuarioDao;
 		this.criptografia = criptografia;
 		this.questaoDao = questaoDao;
+		this.relatorioUsuarioDao = relatorioUsuarioDao;
 	}
 
 	@RequestMapping("/estatisticas")
-	public ModelAndView estatisticas() {
+	public String estatisticas() {
+		return "admin/estatisticas";
+	}
 
-		List<Questao> questoes = new ArrayList<>(questaoDao.list());
-		return new ModelAndView("admin/estatisticas").addObject("questoes", questoes);
-
-	}	
+	@RequestMapping("/relatorios")
+	public ModelAndView relatorios() {
+		List<RelatorioUsuario> relatorios = relatorioUsuarioDao.getRelatorioDeUma(1l);
+		if(relatorios.isEmpty())
+			System.out.println("ta empty");
+		return new ModelAndView("admin/relatorios").addObject("relatorios", relatorios);
+	}
 	
 	@RequestMapping("/usuario/novo/form")
 	public String criaUsuarioForm() {
