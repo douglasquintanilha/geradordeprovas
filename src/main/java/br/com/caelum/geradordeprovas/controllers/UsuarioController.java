@@ -1,7 +1,6 @@
 package br.com.caelum.geradordeprovas.controllers;
 
 import java.util.Calendar;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.caelum.geradordeprovas.dao.AvaliacaoDao;
 import br.com.caelum.geradordeprovas.dao.FeedbackDao;
 import br.com.caelum.geradordeprovas.dao.ProvaDao;
 import br.com.caelum.geradordeprovas.dao.UsuarioDao;
@@ -32,26 +30,22 @@ public class UsuarioController {
 
 	private ProvaDao provaDao;
 	private Usuario usuarioLogado;
-	private AvaliacaoDao avaliacaoDao;
 	private FeedbackDao feedbackDao;
 	private UsuarioDao usuarioDao;
 
 	@Autowired
 	public UsuarioController(@Qualifier("usuarioLogado") Usuario usuarioLogado, ProvaDao provaDao,
-			AvaliacaoDao avaliacaoDao, FeedbackDao feedbackDao, UsuarioDao usuarioDao) {
+			FeedbackDao feedbackDao, UsuarioDao usuarioDao) {
 		this.provaDao = provaDao;
 		this.usuarioDao = usuarioDao;
 		this.feedbackDao = feedbackDao;
 		this.usuarioLogado = usuarioLogado;
-		this.avaliacaoDao = avaliacaoDao;
 	}
-
-	
 
 	@RequestMapping("avaliacao/realiza")
 	public ModelAndView realizaProva(@RequestParam("provaId") Prova prova, HttpSession session) {
 		session.setAttribute("horarioInicio", Calendar.getInstance());
-		Prova provaEmbaralhada = provaDao.getProva(prova.getId()).embaralha();
+		Prova provaEmbaralhada = provaDao.find(prova.getId()).embaralha();
 		return new ModelAndView("realiza-prova").addObject("prova", provaEmbaralhada);
 	}
 

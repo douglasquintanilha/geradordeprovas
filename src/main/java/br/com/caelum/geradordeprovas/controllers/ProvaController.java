@@ -54,7 +54,7 @@ public class ProvaController {
 	}
 
 	@RequestMapping("/monta")
-	public ModelAndView montarProvaView() {
+	public ModelAndView montaProvaView() {
 		ModelAndView mv = new ModelAndView("admin/montar-prova");
 		List<Questao> questoes = questaoDao.list();
 		mv.addObject("questoes", questoes);
@@ -83,7 +83,7 @@ public class ProvaController {
 	}
 
 	@RequestMapping("/libera")
-	public String liberaProva(Model model) {
+	public String liberaProvaView(Model model) {
 
 		List<Usuario> usuarios = new ArrayList<>(usuarioDao.list());
 		List<Prova> provas = new ArrayList<>(provaDao.list());
@@ -112,7 +112,7 @@ public class ProvaController {
 	}
 
 	@RequestMapping("/listar")
-	public ModelAndView listar() {
+	public ModelAndView listaProvaView() {
 
 		List<Prova> provas = provaDao.list();
 		ModelAndView mv = new ModelAndView("admin/listar-provas");
@@ -122,8 +122,8 @@ public class ProvaController {
 	}
 
 	@RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)
-	public ModelAndView editarForm(@PathVariable long id) {
-		Prova prova = provaDao.getProva(id);
+	public ModelAndView editaProvaView(@PathVariable long id) {
+		Prova prova = provaDao.find(id);
 
 		List<Questao> questoesDaProva = prova.getQuestoes();
 		List<Long> ids = new ArrayList<Long>();
@@ -144,7 +144,7 @@ public class ProvaController {
 
 	@Transactional
 	@RequestMapping(value = "/editar/{id}", method = RequestMethod.POST)
-	public ModelAndView editarQuestao(@Valid @ModelAttribute("prova") Prova prova, @PathVariable long id,
+	public ModelAndView salvaEdicaoDeProva(@Valid @ModelAttribute("prova") Prova prova, @PathVariable long id,
 			BindingResult result, RedirectAttributes flash) {
 		if (result.hasErrors()) {
 			ModelAndView mv = new ModelAndView("admin/editar-prova/" + id, result.getModel());
@@ -165,7 +165,7 @@ public class ProvaController {
 
 		ModelAndView mv = new ModelAndView("redirect:../listar");
 		prova.setDataCriacao(Calendar.getInstance());
-		provaDao.update(prova);
+		provaDao.merge(prova);
 		flash.addFlashAttribute("prova", prova);
 
 		return mv;

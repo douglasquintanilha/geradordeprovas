@@ -18,7 +18,7 @@
 		<h3>Questão...</h3>	
 		<a href="<c:url value='questao/adiciona'/>"><h3>Adicionar Questão</h3></a>
 		<a href="<c:url value='questao/edita'/>"><h3>Editar Questão</h3></a>
-		<a href="<c:url value='seleciona-tag'/>"><h3>Procurar Questão por tag</h3></a>
+		<a href="<c:url value='questao/seleciona-tag'/>"><h3>Procurar Questão por tag</h3></a>
 		<hr>
 		
 		<h3>Provas...</h3>	   

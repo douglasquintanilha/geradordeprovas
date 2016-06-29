@@ -18,7 +18,7 @@ public class AlternativaMarcadaConverter implements Converter<String, Alternativ
 	public AlternativaMarcada convert(String alternativaId) {
 		AlternativaMarcada AlternativaMarcadaObj = new AlternativaMarcada();
 
-		Alternativa alternativa = alternativaDao.getAlternativaPorId(Long.parseLong(alternativaId));
+		Alternativa alternativa = alternativaDao.find(Long.parseLong(alternativaId));
 
 		AlternativaMarcadaObj.setDescricao(alternativa.getDescricao());
 		AlternativaMarcadaObj.setId(alternativa.getId());

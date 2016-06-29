@@ -16,6 +16,6 @@ public class ProvaConverter implements Converter<String,Prova> {
 
 	@Override
 	public Prova convert(String provaId) {
-		return provaDao.getProva(Long.parseLong(provaId));
+		return provaDao.find(Long.parseLong(provaId));
 	}
 }

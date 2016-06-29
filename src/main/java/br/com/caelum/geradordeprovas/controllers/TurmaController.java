@@ -53,7 +53,7 @@ public class TurmaController {
 
 	@Transactional
 	@RequestMapping("/admin/criaTurma")
-	public String criaTurma(@ModelAttribute("Turma") Turma turma, RedirectAttributes flash) {
+	public String salvaTurma(@ModelAttribute("Turma") Turma turma, RedirectAttributes flash) {
 		turma.atualizaProvasUsuarios();
 		flash.addFlashAttribute("turma", turma);
 		turmaDao.save(turma);

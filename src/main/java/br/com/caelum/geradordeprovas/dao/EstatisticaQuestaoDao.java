@@ -8,24 +8,22 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import br.com.caelum.geradordeprovas.models.EstatisticaQuestao;
-import br.com.caelum.geradordeprovas.models.Questao;
 
 @Repository
 public class EstatisticaQuestaoDao {
 
 	@PersistenceContext
-	private EntityManager manager;
+	private EntityManager em;
 
 	public void save(EstatisticaQuestao eQuestao) {
-		manager.persist(eQuestao);
+		em.persist(eQuestao);
 	}
 
 	public List<EstatisticaQuestao> list() {
-		return manager.createQuery("from EstatisticaQuestao e",
-				EstatisticaQuestao.class).getResultList();
+		return em.createQuery("from EstatisticaQuestao e", EstatisticaQuestao.class).getResultList();
 	}
 
-	public EstatisticaQuestao getEstatisticaQuestaoPorId(Long id) {
-		return manager.find(EstatisticaQuestao.class, id);
+	public EstatisticaQuestao find(Long id) {
+		return em.find(EstatisticaQuestao.class, id);
 	}
 }

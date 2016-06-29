@@ -11,10 +11,10 @@ import br.com.caelum.geradordeprovas.models.Feedback;
 public class FeedbackDao {
 
 	@PersistenceContext
-	private EntityManager manager;
+	private EntityManager em;
 
 	public void save(Feedback feedback) {
-		manager.persist(feedback);
+		em.persist(feedback);
 	}
 
 	

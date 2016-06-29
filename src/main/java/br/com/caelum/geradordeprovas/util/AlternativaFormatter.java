@@ -24,7 +24,7 @@ public class AlternativaFormatter implements Formatter<Alternativa> {
 	@Override
 	public Alternativa parse(String id, Locale locale) throws ParseException {
 		Long idLong = Long.valueOf(id);
-		return alternativaDao.getAlternativaPorId(idLong);
+		return alternativaDao.find(idLong);
 	}
 
 	

@@ -13,17 +13,21 @@ import br.com.caelum.geradordeprovas.models.Alternativa;
 public class AlternativaDao {
 
 	@PersistenceContext
-	private EntityManager manager;
+	private EntityManager em;
 
 	public void save(Alternativa alternativa) {
-		manager.persist(alternativa);
+		em.persist(alternativa);
 	}
 
-	public Alternativa getAlternativaPorId(long id){
-		return manager.find(Alternativa.class, id);
+	public Alternativa find(Alternativa alternativa) {
+		return em.find(Alternativa.class, alternativa.getId());
 	}
-	
-	public List<Alternativa> list() { 
-		return manager.createQuery("from Alternativa", Alternativa.class).getResultList();
+
+	public Alternativa find(long id) {
+		return em.find(Alternativa.class, id);
+	}
+
+	public List<Alternativa> list() {
+		return em.createQuery("from Alternativa", Alternativa.class).getResultList();
 	}
 }

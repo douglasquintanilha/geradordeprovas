@@ -53,13 +53,12 @@ public class OAuthController {
 	}
 
 	@RequestMapping("/callback")
-	public ModelAndView callback(@RequestParam("code") String authToken,
-			Model model, HttpSession sessao) throws IOException {
+	public ModelAndView callback(@RequestParam("code") String authToken, Model model, HttpSession sessao)
+			throws IOException {
 		Verifier verifier = new Verifier(authToken);
 		Token accessToken = service.getAccessToken(EMPTY_TOKEN, verifier);
 
-		OAuthRequest request = new OAuthRequest(Verb.GET,
-				"https://api.github.com/user");
+		OAuthRequest request = new OAuthRequest(Verb.GET, "https://api.github.com/user");
 		service.signRequest(accessToken, request);
 		Response response = request.send();
 
@@ -68,14 +67,12 @@ public class OAuthController {
 		ObjectNode myObject = (ObjectNode) mapper.readTree(response.getBody());
 		usuario.setLogin(myObject.get("login").asText());
 
-		OAuthRequest requestOrg = new OAuthRequest(Verb.GET,
-				"https://api.github.com/orgs/caelum/members/"
-						+ usuario.getLogin());
+		OAuthRequest requestOrg = new OAuthRequest(Verb.GET, "https://api.github.com/orgs/caelum/members/"
+				+ usuario.getLogin());
 		service.signRequest(accessToken, requestOrg);
 		Response responseOrg = requestOrg.send();
 
-		OAuthRequest requestEmail = new OAuthRequest(Verb.GET,
-				"https://api.github.com/user/emails");
+		OAuthRequest requestEmail = new OAuthRequest(Verb.GET, "https://api.github.com/user/emails");
 		service.signRequest(accessToken, requestEmail);
 		Response responseEmail = requestEmail.send();
 
@@ -83,8 +80,7 @@ public class OAuthController {
 		JsonParser parser = new JsonParser();
 		Object obj = parser.parse(emails);
 		JsonArray arrayEmails = (JsonArray) obj;
-		String login = arrayEmails.get(0).getAsJsonObject().get("email")
-				.toString().replace("\"", "");
+		String login = arrayEmails.get(0).getAsJsonObject().get("email").toString().replace("\"", "");
 		usuario.setLogin(login);
 		sessao.setAttribute("usuario", usuario);
 
@@ -122,9 +118,8 @@ public class OAuthController {
 		String apiSecret = "UZFA6qGwYVAjgPTan1aZWBAg";
 		String callbackUrl = "http://localhost:8000/GeradorDeProvas/oauth/callback-google/";
 
-		OAuth20Service oauthService = new ServiceBuilder().apiKey(apiKey)
-				.apiSecret(apiSecret).callback(callbackUrl).scope("profile")
-				.build(GoogleApi20.instance());
+		OAuth20Service oauthService = new ServiceBuilder().apiKey(apiKey).apiSecret(apiSecret).callback(callbackUrl)
+				.scope("profile").build(GoogleApi20.instance());
 
 		String authUrl = oauthService.getAuthorizationUrl();
 		return "redirect:" + authUrl;
@@ -132,24 +127,19 @@ public class OAuthController {
 
 	@RequestMapping("/callback-google")
 	public ModelAndView callbackGoogle(@RequestParam("code") String authToken) {
-			String apiKey = "120353188813-r7gukk2sa6d01db99utmhq2v8dt99kcp.apps.googleusercontent.com";
-			String apiSecret = "UZFA6qGwYVAjgPTan1aZWBAg";
-			String callbackUrl = "http://localhost:8000/GeradorDeProvas/oauth/callback-google/";
-		
-		
-			OAuth20Service oauthService = new ServiceBuilder()
-											.apiKey(apiKey)
-											.apiSecret(apiSecret)
-											.callback(callbackUrl)
-											.scope("profile")
-											.build(GoogleApi20.instance());	
-		
-			System.out.println("Consegui o AuthToken:" + authToken);
-			OAuth2AccessToken accessToken = oauthService.getAccessToken(authToken);
-	        
-	        System.out.println(accessToken);
-	        
-			ModelAndView mv = new ModelAndView("login-error");
-			return mv;
+		String apiKey = "120353188813-r7gukk2sa6d01db99utmhq2v8dt99kcp.apps.googleusercontent.com";
+		String apiSecret = "UZFA6qGwYVAjgPTan1aZWBAg";
+		String callbackUrl = "http://localhost:8000/GeradorDeProvas/oauth/callback-google/";
+
+		OAuth20Service oauthService = new ServiceBuilder().apiKey(apiKey).apiSecret(apiSecret).callback(callbackUrl)
+				.scope("profile").build(GoogleApi20.instance());
+
+		System.out.println("Consegui o AuthToken:" + authToken);
+		OAuth2AccessToken accessToken = oauthService.getAccessToken(authToken);
+
+		System.out.println(accessToken);
+
+		ModelAndView mv = new ModelAndView("login-error");
+		return mv;
 	}
 }

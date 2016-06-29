@@ -20,7 +20,7 @@ public class ProvaArrayConverter implements Converter<String[], List<Prova>> {
 	public List<Prova> convert(String[] provasIds) {
 		List<Prova> provas = new ArrayList<>();
 		for (String provaId : provasIds) {
-			provas.add(provaDao.getProva(Long.parseLong(provaId)));
+			provas.add(provaDao.find(Long.parseLong(provaId)));
 		}
 		return provas;
 	}

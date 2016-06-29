@@ -15,27 +15,33 @@ import br.com.caelum.geradordeprovas.models.Usuario;
 public class AvaliacaoDao {
 
 	@PersistenceContext
-	private EntityManager manager;
+	private EntityManager em;
 
 	public void save(Avaliacao avaliacao) {
-		manager.persist(avaliacao);
+		em.persist(avaliacao);
 	}
 
-	public Avaliacao getAvaliacaoPorId(long id) {
-		return manager.find(Avaliacao.class, id);
+	public void save(List<Avaliacao> avaliacoes) {
+		for (Avaliacao avaliacao : avaliacoes) {
+			em.persist(avaliacao);
+		}
+	}
+
+	public Avaliacao getAvaliacao(Avaliacao avaliacao) {
+		return em.find(Avaliacao.class, avaliacao.getId());
 	}
 
 	public Avaliacao getAvaliacao(Long id) {
-		return manager.find(Avaliacao.class, id);
+		return em.find(Avaliacao.class, id);
 	}
 
 	public List<Avaliacao> list() {
-		return manager.createQuery("from Avaliacao", Avaliacao.class).getResultList();
+		return em.createQuery("from Avaliacao", Avaliacao.class).getResultList();
 	}
 
-	public List<Avaliacao> getAvaliacoesPor(Usuario usuario, Prova prova) {
+	public List<Avaliacao> findBy(Usuario usuario, Prova prova) {
 
-		List<Avaliacao> avaliacoes = manager
+		List<Avaliacao> avaliacoes = em
 				.createQuery("select a from Avaliacao a where a.usuario.id = :usuarioId AND a.prova.id = :provaId",
 						Avaliacao.class).setParameter("usuarioId", usuario.getId())
 				.setParameter("provaId", prova.getId()).getResultList();
@@ -43,24 +49,18 @@ public class AvaliacaoDao {
 
 	}
 
-	public Avaliacao atualiza(Avaliacao avaliacao) {
-		Avaliacao av = manager.merge(avaliacao);
+	public Avaliacao merge(Avaliacao avaliacao) {
+		Avaliacao av = em.merge(avaliacao);
 		return av;
 	}
 
-	public List<Avaliacao> getAvaliacoesDo(Usuario usuario) {
-		return manager.createQuery("select a from Avaliacao a where a.usuario.id = :usuarioId", Avaliacao.class)
+	public List<Avaliacao> findBy(Usuario usuario) {
+		return em.createQuery("select a from Avaliacao a where a.usuario.id = :usuarioId", Avaliacao.class)
 				.setParameter("usuarioId", usuario.getId()).getResultList();
 	}
 
-	public void save(List<Avaliacao> avaliacoes) {
-		for (Avaliacao avaliacao : avaliacoes) {
-			manager.persist(avaliacao);
-		}
-	}
-
 	public Avaliacao getAvaliacaoMaisRecente(Prova prova) {
-		List<Avaliacao> avaliacoes = manager
+		List<Avaliacao> avaliacoes = em
 				.createQuery("select a from Avaliacao a where a.provaId = :provaId", Avaliacao.class)
 				.setParameter("provaId", prova.getId()).getResultList();
 		if (avaliacoes.size() == 0)

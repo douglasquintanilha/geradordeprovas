@@ -32,19 +32,19 @@ public class LoginController {
 	}
 
 	@RequestMapping("login")
-	public String loginForm() {
+	public String loginView() {
 		return "loginForm";
 	}
-	
+
 	@RequestMapping("cadastro")
-	public String cadastroView(){
+	public String cadastroView() {
 		return "cadastro";
 	}
-	
+
 	@Transactional
 	@RequestMapping("efetuaCadastro")
-	public String efetuaCadastro(@ModelAttribute("Usuario") Usuario usuario, RedirectAttributes flash){
-		if(usuarioDao.loginExistente(usuario.getLogin())){
+	public String salvaCadastro(@ModelAttribute("Usuario") Usuario usuario, RedirectAttributes flash) {
+		if (usuarioDao.loginExistente(usuario.getLogin())) {
 			flash.addFlashAttribute("usuarioExistente", true);
 			return "redirect:cadastro";
 		}
@@ -61,8 +61,7 @@ public class LoginController {
 	}
 
 	@RequestMapping("efetuaLogin")
-	public ModelAndView efetuaLogin(@ModelAttribute("usuario") Usuario usuario,
-			HttpSession sessao) {
+	public ModelAndView efetuaLogin(@ModelAttribute("usuario") Usuario usuario, HttpSession sessao) {
 
 		Usuario user = usuarioDao.validaUsuario(usuario);
 		if (user != null) {
@@ -70,12 +69,10 @@ public class LoginController {
 			sessao.setAttribute("usuario", user);
 
 			if (user.isAdmin()) {
-				ModelAndView mv = new ModelAndView(new RedirectView(
-						"admin/index"));
+				ModelAndView mv = new ModelAndView(new RedirectView("admin/index"));
 				return mv;
 			} else {
-				ModelAndView mv = new ModelAndView(
-						new RedirectView("liberadas"));
+				ModelAndView mv = new ModelAndView(new RedirectView("liberadas"));
 				return mv;
 			}
 		} else {
@@ -85,14 +82,13 @@ public class LoginController {
 		}
 
 	}
-	
+
 	@Transactional
 	@RequestMapping("loginGmail")
-	public ModelAndView testeLoginComGmail(){
+	public ModelAndView testeLoginComGmail() {
 		TesteGmail tg = testeGmailDao.getTeste();
 		tg.incrementaContador();
 		return new ModelAndView("loginForm").addObject("loginComGmail", true);
 	}
-	
 
 }

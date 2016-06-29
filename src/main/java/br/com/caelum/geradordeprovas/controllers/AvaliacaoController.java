@@ -41,7 +41,7 @@ public class AvaliacaoController {
 	@Transactional
 	@RequestMapping("")
 	public ModelAndView realizaAvaliacao(@RequestParam("id") Long id) {
-		Avaliacao avaliacao = avaliacaoDao.getAvaliacaoMaisRecente(provaDao.getProva(id));
+		Avaliacao avaliacao = avaliacaoDao.getAvaliacaoMaisRecente(provaDao.find(id));
 		usuarioDao.merge(usuarioLogado).liberaAvaliacaoMaisRecente(avaliacao);
 		return new ModelAndView("realiza-avaliacao").addObject("avaliacao", avaliacao);
 	}
@@ -52,7 +52,7 @@ public class AvaliacaoController {
 		RelatorioUsuario relatorio = avaliacao.corrige(usuarioLogado);
 		relatorioUsuarioDao.save(relatorio);
 		avaliacaoDao.getAvaliacao(avaliacao.getId()).addRelatorio(relatorio);
-		
+
 		ModelAndView mv = new ModelAndView("avaliacao-corrigida");
 		mv.addObject("relatorio", relatorio);
 		mv.addObject("avaliacao", avaliacaoDao.getAvaliacao(avaliacao.getId()));

@@ -21,7 +21,7 @@ public class AlternativaMarcadaArrayConverter implements Converter<String[], Lis
 	public List<AlternativaMarcada> convert(String[] AlternativaMarcadasIds) {
 		List<AlternativaMarcada> AlternativaMarcadasList = new ArrayList<>();
 		for (String id : AlternativaMarcadasIds) {
-			Alternativa alternativa = alternativaDao.getAlternativaPorId(Long.parseLong(id));
+			Alternativa alternativa = alternativaDao.find(Long.parseLong(id));
 			AlternativaMarcada alternativaMarcada = new AlternativaMarcada(alternativa.getId(),
 					alternativa.getDescricao(), alternativa.isAlternativaCorreta());
 			AlternativaMarcadasList.add(alternativaMarcada);
