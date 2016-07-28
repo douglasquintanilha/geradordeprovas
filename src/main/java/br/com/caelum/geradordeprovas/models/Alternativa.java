@@ -21,6 +21,11 @@ public class Alternativa {
 	
 	private boolean alternativaCorreta;
 
+	public Alternativa(String descricao, boolean alternativaCorreta) {
+		this.descricao = descricao;
+		this.alternativaCorreta = alternativaCorreta;
+	}
+	
 	public Alternativa(Long id, String descricao, boolean alternativaCorreta) {
 		this.id = id;
 		this.descricao = descricao;

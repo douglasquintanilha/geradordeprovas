@@ -26,6 +26,10 @@ public class Tag {
 	}
 
 
+	public Tag(String nome) {
+		this.nome = nome;
+	}
+
 	@JsonValue
 	public String getNome() {
 		return nome;

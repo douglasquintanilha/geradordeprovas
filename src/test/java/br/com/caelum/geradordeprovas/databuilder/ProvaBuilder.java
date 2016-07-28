@@ -1,11 +1,8 @@
 package br.com.caelum.geradordeprovas.databuilder;
 
 import java.util.Calendar;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import br.com.caelum.geradordeprovas.models.Avaliacao;
 import br.com.caelum.geradordeprovas.models.Prova;
 import br.com.caelum.geradordeprovas.models.Questao;
 
@@ -25,14 +22,12 @@ public class ProvaBuilder {
 
 	private List<Questao> questoes;
 
-	private Set<Avaliacao> avaliacoes = new HashSet<>();
-
 	public Prova geraProvaPadrao() {
 		QuestaoBuilder questaoBuilder = new QuestaoBuilder();
 		ProvaBuilder provaBuilder = new ProvaBuilder();
 		Calendar hora = Calendar.getInstance();
 		provaBuilder.comId(1l).comDescricao("Descricao").comNome("Prova Builder").comDuracao(10l).comDataCriacao(hora)
-				.comUpdatedAt(hora).comQuestoes(questaoBuilder.geraListaDeQuestoes()).comAvaliacoes(avaliacoes);
+				.comUpdatedAt(hora).comQuestoes(questaoBuilder.geraListaDeQuestoes());
 		return provaBuilder.geraProva();
 	}
 
@@ -45,7 +40,6 @@ public class ProvaBuilder {
 		prova.setUpdatedAt(this.updatedAt);
 		prova.setDescricao(this.descricao);
 		prova.setQuestoes(this.questoes);
-//		prova.setAvaliacoes(this.avaliacoes);
 		return prova;
 	}
 
@@ -84,8 +78,9 @@ public class ProvaBuilder {
 		return this;
 	}
 
-	public ProvaBuilder comAvaliacoes(Set<Avaliacao> avaliacoes) {
-		this.avaliacoes = avaliacoes;
-		return this;
+	public Prova geraProvaAPartirDeQuestoes(List<Questao> questoes) {
+		this.comNome("Prova de Teste").comQuestoes(questoes).comDataCriacao(Calendar.getInstance())
+				.comUpdatedAt(Calendar.getInstance()).comDuracao(10l);
+		return geraProva();
 	}
 }

@@ -12,7 +12,10 @@
 <body>
 	<c:import url="../header.jsp"></c:import>
 	<div class="container">
-		<a href="<c:url value='relatorios'/>"><h3>Relatorio de Provas</h3></a>
+		<c:forEach items="provas" var="prova">
+			<a href="<c:url value='relatorios/${prova.id}'/>"><h3>${prova.nome}</h3></a>
+		</c:forEach>
+	
 	</div>
 	<c:import url="../footer.jsp"></c:import>
 </body>

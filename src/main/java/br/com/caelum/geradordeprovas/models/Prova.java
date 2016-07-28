@@ -44,6 +44,19 @@ public class Prova {
 	@NotEmpty()
 	@ManyToMany()
 	private List<Questao> questoes;
+	
+	public Prova(){
+		
+	}
+	
+	public Prova(List<Questao> questoes, String descricao, Calendar updatedAt, Calendar dataCriacao, Long duracao, String nome){
+		this.questoes = questoes;
+		this.descricao = descricao;
+		this.updatedAt = updatedAt;
+		this.dataCriacao = dataCriacao;
+		this.duracao = duracao;
+		this.nome = nome;
+	}
 
 	public void setUpdatedAt(Calendar horario) {
 		this.updatedAt = horario;

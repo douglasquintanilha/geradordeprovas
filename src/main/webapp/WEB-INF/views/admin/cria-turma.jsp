@@ -20,36 +20,29 @@
 		<c:if test="${not empty turma.id}">
 			<div class="alert alert-success" role="alert">Turma #${turma.nome} foi criada com sucesso!</div>
 		</c:if>
-		
-		<div class="row">
-			<div class="col-md-3">
-				Alunos:
-			</div>
-			
-			<div class="col-md-6">
-				<form:form action="criaTurma" method="POST" commandName="Turma">
-					<input type="text" name="nome" placeholder="Nome">
-					<c:forEach items="${usuarios}" var="usuario">
-						<p>
-							<input type="checkbox" name="usuarios" value="${usuario.id}">${usuario.login}
-						</p>
-					</c:forEach>
-					<hr>
-					<c:forEach items="${provas}" var="prova">
-						<p>
-							<input type="checkbox" name="provas" value="${prova.id}">${prova.nome}
-						</p>
-					</c:forEach>
-					<input type="submit" value="Criar">
-				</form:form>
-			</div>
-			
-			<div class="col-md-3">
-				Provas:
-			</div>
+	
+		<div class="col-md-6">
+			<form:form action="criaTurma" method="POST" commandName="Turma">
+				<input type="text" name="nome" placeholder="Nome da Turma">
+				<hr>
+				<p>Usuarios dentro da turma:</p>
+				<c:forEach items="${usuarios}" var="usuario">
+					<p>
+						<input type="checkbox" name="usuarios" value="${usuario.id}">${usuario.login}
+					</p>
+				</c:forEach>
+				<hr>
+				<p>Provas liberadas para turma:</p>
+				<c:forEach items="${provas}" var="prova">
+					<p>
+						<input type="checkbox" name="provas" value="${prova.id}">${prova.nome}
+					</p>
+				</c:forEach>
+				<input type="submit" value="Criar">
+			</form:form>
 		</div>
-			
 	</div>
+		
 	<c:import url="../footer.jsp"></c:import>
 </body>
 </html>

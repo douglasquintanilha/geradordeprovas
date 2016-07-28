@@ -39,7 +39,7 @@ public class QuestaoBuilder {
 		Set<Tag> tags = new HashSet<Tag>();
 		tags.add(new Tag(1l,"Java"));
 		tags.add(new Tag(2l,"C"));
-		
+
 		Alternativa alternativa1 = new Alternativa(1l, "Uma alternativa", true);
 		Alternativa alternativa2 = new Alternativa(2l, "Uma alternativa", false);
 		Alternativa alternativa3 = new Alternativa(3l, "Uma alternativa", false);
@@ -55,6 +55,26 @@ public class QuestaoBuilder {
 		return builder.geraQuestao();
 	}
 	
+	public Questao geraQuestaoDefaultSemId(){	
+		Set<Tag> tags = new HashSet<Tag>();
+		tags.add(new Tag("Java"));
+		tags.add(new Tag("C"));
+
+		Alternativa alternativa1 = new Alternativa("Uma alternativa", true);
+		Alternativa alternativa2 = new Alternativa("Uma alternativa", false);
+		Alternativa alternativa3 = new Alternativa("Uma alternativa", false);
+		Alternativa alternativa4 = new Alternativa("Uma alternativa", false);
+		Alternativa alternativa5 = new Alternativa("Uma alternativa", false);
+		
+		List<Alternativa> alternativas = Arrays.asList(alternativa1,alternativa2,alternativa3
+												,alternativa4,alternativa5);
+		
+		QuestaoBuilder builder =  new QuestaoBuilder();
+		builder.comTitulo("Questao Teste").comTags(tags).comEstatiscaQuestao(null)
+						.comAlternativas(alternativas).comAlternativaCorreta("1");
+		return builder.geraQuestao();
+	}
+	
 	public List<Questao> geraListaDeQuestoes(){
 		QuestaoBuilder builder =  new QuestaoBuilder();
 		Questao q1 = builder.geraQuestaoDefault();
@@ -64,6 +84,15 @@ public class QuestaoBuilder {
 		return Arrays.asList(q1,q2,q3);
 	}
 
+	public List<Questao> geraListaDeQuestoesSemId(){
+		QuestaoBuilder builder =  new QuestaoBuilder();
+		Questao q1 = builder.geraQuestaoDefaultSemId();
+		Questao q2 = builder.geraQuestaoDefaultSemId();
+		Questao q3 = builder.geraQuestaoDefaultSemId();
+		
+		return Arrays.asList(q1,q2,q3);
+	}
+	
 	public QuestaoBuilder comId(Long id) {
 		this.id = id;
 		return this;

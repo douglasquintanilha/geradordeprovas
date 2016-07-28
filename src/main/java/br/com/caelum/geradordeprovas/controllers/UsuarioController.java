@@ -42,6 +42,7 @@ public class UsuarioController {
 		this.usuarioLogado = usuarioLogado;
 	}
 
+	// deprecated(metodo realizaAvaliacao em AvaliacaoController)
 	@RequestMapping("avaliacao/realiza")
 	public ModelAndView realizaProva(@RequestParam("provaId") Prova prova, HttpSession session) {
 		session.setAttribute("horarioInicio", Calendar.getInstance());
@@ -49,6 +50,7 @@ public class UsuarioController {
 		return new ModelAndView("realiza-prova").addObject("prova", provaEmbaralhada);
 	}
 
+	// deprecated(metodo corrigeAvaliacao em AvaliacaoController)
 	@RequestMapping("avaliacao/realizada/{avaliacaoUuid}")
 	public ModelAndView provaRealizada(@RequestParam("avaliacaoId") Avaliacao avaliacao) {
 		return new ModelAndView("corrigido").addObject("avaliacao", avaliacao);

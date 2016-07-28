@@ -18,7 +18,8 @@
 	
 	<div class="container"> 
 		<c:forEach items="${relatorios}" var="relatorio">
-			${relatorio.usuario.login} ${relatorio.nota}<br>
+			Usuario: ${relatorio.usuario.login}<br>
+			Nota: ${relatorio.nota}<br>
 		</c:forEach>
 	</div>
 	

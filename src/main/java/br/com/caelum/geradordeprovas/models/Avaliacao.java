@@ -179,4 +179,10 @@ public class Avaliacao {
 		this.relatoriosUsuarios.add(relatorio);
 	}
 
+	public void embaralha() {
+		for (Questao questao : this.questoes) {
+			
+		}
+	}
+
 }

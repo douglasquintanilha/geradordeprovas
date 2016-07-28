@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,6 +20,7 @@ import br.com.caelum.geradordeprovas.dao.UsuarioDao;
 import br.com.caelum.geradordeprovas.models.Prova;
 import br.com.caelum.geradordeprovas.models.RelatorioUsuario;
 import br.com.caelum.geradordeprovas.models.Usuario;
+import br.com.caelum.geradordeprovas.services.PopulaBancoService;
 import br.com.caelum.geradordeprovas.util.Criptografia;
 
 @Controller
@@ -29,23 +31,32 @@ public class AdminController {
 	private Criptografia criptografia;
 	private RelatorioUsuarioDao relatorioUsuarioDao;
 	private ProvaDao provaDao;
+	private PopulaBancoService populador;
 
 	@Autowired
-	public AdminController(UsuarioDao usuarioDao, Criptografia criptografia, RelatorioUsuarioDao relatorioUsuarioDao,
-			ProvaDao provaDao) {
+	public AdminController(PopulaBancoService populador, UsuarioDao usuarioDao, Criptografia criptografia,
+			RelatorioUsuarioDao relatorioUsuarioDao, ProvaDao provaDao) {
 		this.usuarioDao = usuarioDao;
+		this.populador = populador;
 		this.criptografia = criptografia;
 		this.relatorioUsuarioDao = relatorioUsuarioDao;
 		this.provaDao = provaDao;
 	}
 
-	@RequestMapping("/estatisticas")
-	public String estatisticas() {
-		return "admin/estatisticas";
+	@Transactional
+	@RequestMapping("/populaBanco")
+	public void populaBanco() {
+		populador.popula();
 	}
 
-	@RequestMapping("/relatorios")
-	public ModelAndView relatorios() {
+	@RequestMapping("/estatisticas")
+	public ModelAndView estatisticas() {
+		List<Prova> provas = provaDao.list();
+		return new ModelAndView("admin/estatisticas").addObject("provas", provas);
+	}
+
+	@RequestMapping("/relatorios/{id}")
+	public ModelAndView relatorios(@PathVariable Long id) {
 		List<Prova> provas = provaDao.list();
 		List<RelatorioUsuario> relatorios = new ArrayList<>();
 		for (Prova prova : provas) {

@@ -43,6 +43,7 @@ public class AvaliacaoController {
 	public ModelAndView realizaAvaliacao(@RequestParam("id") Long id) {
 		Avaliacao avaliacao = avaliacaoDao.getAvaliacaoMaisRecente(provaDao.find(id));
 		usuarioDao.merge(usuarioLogado).liberaAvaliacaoMaisRecente(avaliacao);
+		avaliacao.embaralha();
 		return new ModelAndView("realiza-avaliacao").addObject("avaliacao", avaliacao);
 	}
 
